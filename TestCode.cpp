@@ -214,7 +214,7 @@ int main()
 
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.BorderWdth = 5;
-	gfxInfo.FillClr = YELLOW;
+	gfxInfo.FillClr = GRAY;
 	gfxInfo.isFilled = true;
 	pOut->DrawingCircle(P1, P2, gfxInfo, false);
 
