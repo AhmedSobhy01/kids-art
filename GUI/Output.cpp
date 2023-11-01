@@ -188,6 +188,24 @@ void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected)const	//D
 
 }
 
+void Output::DrawingTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected) const	//Drawing Triangle
+{
+	color drawcolor;
+	drawstyle style;
+	if (selected) 
+		drawcolor = UI.HighlightColor;
+	else
+		drawcolor = TriangleGfxInfo.DrawClr;
+	pWind->SetPen(drawcolor, 1);
+	if (TriangleGfxInfo.isFilled) {
+		pWind->SetBrush(TriangleGfxInfo.FillClr);
+		style = FILLED;
+	}
+	else
+		style = FRAME;
+	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
+}
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output()
