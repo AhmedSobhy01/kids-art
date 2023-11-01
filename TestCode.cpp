@@ -49,7 +49,7 @@ int main()
 	pIn->GetPointClicked(P2.x, P2.y);
 
 	gfxInfo.BorderWdth = 5;
-	gfxInfo.DrawClr = BLACK;	//any color for border
+	gfxInfo.DrawClr = BLUE;	//any color for border
 	gfxInfo.isFilled = false;	//Figure is NOT filled
 	pOut->DrawRect(P1, P2, gfxInfo, false);
 
@@ -66,7 +66,7 @@ int main()
 
 	gfxInfo.BorderWdth = 6;
 	gfxInfo.DrawClr = BLUE;	//any color for border
-	gfxInfo.FillClr = GREEN;//any color for filling
+	gfxInfo.FillClr = GREENYELLOW;//any color for filling
 	gfxInfo.isFilled = true;//Figure is filled
 	pOut->DrawRect(P1, P2, gfxInfo, false);
 
@@ -88,6 +88,38 @@ int main()
 	pIn->GetPointClicked(x,y);	//Wait for any click
 
 	///TODO: Add code to draw Square, Normal and Highlighted
+
+	// 2.2.1 - Drawing a Square non-filled
+	pOut->PrintMessage("Drawing a Square ==> non-filled,  Click one point");
+	pIn->GetPointClicked(P1.x, P1.y);
+
+	gfxInfo.BorderWdth = 5;
+	gfxInfo.DrawClr = BLUE;
+	gfxInfo.isFilled = false;
+	pOut->DrawSquare(P1, gfxInfo, false);
+
+	// 2.2.2 - Drawing highlighted non-filled Square
+	pOut->PrintMessage("Drawing a highlighted non-filled Square, Click to highlight");
+	pIn->GetPointClicked(x, y);
+	pOut->DrawSquare(P1, gfxInfo, true);
+
+
+	// 2.2.3 - Drawing a filled Square
+	pOut->PrintMessage("Drawing a Square ==> Filled, Click one point");
+	pIn->GetPointClicked(P1.x, P1.y);
+	
+	gfxInfo.DrawClr = BLUE;
+	gfxInfo.BorderWdth = 5;
+	gfxInfo.FillClr = GOLD;
+	gfxInfo.isFilled = true;
+	pOut->DrawSquare(P1, gfxInfo, false);
+
+	// 2.2.4 - Drawing highlighted filled Square
+	pOut->PrintMessage("Drawing a highlighted filled Square, Click to highlight");
+	pIn->GetPointClicked(x, y);
+	
+	pOut->DrawSquare(P1, gfxInfo, true);
+
 
 	pOut->PrintMessage("Drawing a Square Test ==> OK,  Click anywhere to continue");
 	pIn->GetPointClicked(x,y);	//Wait for any click

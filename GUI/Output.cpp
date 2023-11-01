@@ -162,6 +162,32 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	
 }
 
+void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected)const	//Drawing square
+{
+	color DrawingColor;
+	if (selected)
+		DrawingColor = UI.HighlightColor;
+	else
+		DrawingColor = SquareGfxInfo.DrawClr;
+	pWind->SetPen(DrawingColor, 1);
+	drawstyle style;
+	if (SquareGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(SquareGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+	Point p1, p2;
+	SquareGfxInfo.size = 150;
+	p1.x = P1.x + SquareGfxInfo.size / 2;
+	p1.y = P1.y + SquareGfxInfo.size / 2;
+	p2.x = P1.x - SquareGfxInfo.size / 2;
+	p2.y = P1.y - SquareGfxInfo.size / 2;
+	pWind->DrawRectangle(p1.x, p1.y, p2.x, p2.y, style);
+
+}
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output()
