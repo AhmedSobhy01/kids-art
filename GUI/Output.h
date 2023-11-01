@@ -23,7 +23,7 @@ public:
 	void DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected = false) const;	//Draw a square
 	void DrawingTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected = false)const;	//Draw a triangle
 	void DrawHexagon(Point P1, GfxInfo HexagonGfxInfo, bool selected = false) const;	//Draw a hexagon
-	void DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected = false) const;	//Draw a Circle
+	void DrawingCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected = false) const;	//Draw a Circle
 	///Make similar functions for drawing all other figure types.
 	
 	void PrintMessage(string msg) const;	//Print a message on Status bar

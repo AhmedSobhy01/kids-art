@@ -1,5 +1,5 @@
 #include "Output.h"
-
+#include <cmath>
 
 Output::Output()
 {
@@ -206,7 +206,25 @@ void Output::DrawingTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxIn
 	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
 }
 
-
+void Output::DrawingCircle(Point P1, Point P2,GfxInfo CircleGfxInfo, bool selected)const
+{
+	color drawcolor;
+	drawstyle style;
+	if (selected)
+		drawcolor = UI.HighlightColor;
+	else
+		drawcolor = CircleGfxInfo.DrawClr;
+	pWind->SetPen(drawcolor, 1);
+	if (CircleGfxInfo.isFilled) {
+		style = FILLED;
+		pWind->SetBrush(CircleGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+	int radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
+		pWind->DrawCircle(P1.x, P1.y, radius, style);
+	
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output()
 {

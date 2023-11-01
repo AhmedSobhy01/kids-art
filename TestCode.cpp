@@ -190,11 +190,44 @@ int main()
 	pIn->GetPointClicked(x,y);	//Wait for any click
 
 	///TODO: Add code to draw Circle in all possible states
+	// 2.4.1 - Drawing a Triangle non-filled
+	pOut->PrintMessage("Drawing a Circle ==> non-filled,  Click two points");
+	pIn->GetPointClicked(P1.x, P1.y);
+	pIn->GetPointClicked(P2.x, P2.y);
 
+	gfxInfo.BorderWdth = 5;
+	gfxInfo.DrawClr = BLUE;
+	gfxInfo.isFilled = false;
+	pOut->DrawingCircle(P1, P2, gfxInfo, false);
+
+	// 2.4.2 - Drawing highlighted non-filled Triangle
+	pOut->PrintMessage("Drawing a highlighted non-filled Circle, Click to highlight");
+	pIn->GetPointClicked(x, y);
+	pOut->DrawingCircle(P1, P2, gfxInfo, true);
+
+
+	// 2.4.3 - Drawing a filled Circle
+	pOut->PrintMessage("Drawing a Circle ==> Filled, Click two points");
+	pIn->GetPointClicked(P1.x, P1.y);
+	pIn->GetPointClicked(P2.x, P2.y);
+
+
+	gfxInfo.DrawClr = BLUE;
+	gfxInfo.BorderWdth = 5;
+	gfxInfo.FillClr = YELLOW;
+	gfxInfo.isFilled = true;
+	pOut->DrawingCircle(P1, P2, gfxInfo, false);
+
+	// 2.4.4 - Drawing highlighted filled Circle
+	pOut->PrintMessage("Drawing a highlighted filled Circle, Click to highlight");
+	pIn->GetPointClicked(x, y);
+
+	pOut->DrawingCircle(P1, P2, gfxInfo, true);
 	pOut->PrintMessage("Drawing a Circle Test ==> OK,  Click anywhere to continue");
 	pIn->GetPointClicked(x,y);	//Wait for any click
 	pOut->ClearDrawArea();
 	
+
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 3: 
 	//			Input Class: Read strings from the user
