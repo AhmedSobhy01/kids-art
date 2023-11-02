@@ -205,5 +205,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 Output::~Output()
 {
 	delete pWind;
+
+	if (colorMenuWind) delete colorMenuWind;
 }
 
