@@ -61,11 +61,14 @@ window* Output::CreateWind(int w, int h, int x, int y) const
 	return pW;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-void Output::OpenColorMenuWind(int x)
+void Output::CreateColorMenuWind(int x)
 {
 	colorMenuWind = new window(UI.ColorMenuWidth, UI.ColorMenuHeight, (UI.wx + x) < UI.width ? (UI.wx + x) : (UI.width - 10), UI.wy + UI.ToolBarHeight + 35);
 	colorMenuWind->ChangeTitle("Colors");
-	
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+void Output::DrawColorMenuItems() const
+{
 	string ColorMenuItemImages[COLOR_MENU_ITM_COUNT];
 	ColorMenuItemImages[COLOR_MENU_ITM_BLACK] = "images\\Colors\\Black.jpg";
 	ColorMenuItemImages[COLOR_MENU_ITM_RED] = "images\\Colors\\Red.jpg";
@@ -82,14 +85,21 @@ void Output::OpenColorMenuWind(int x)
 		colorMenuWind->DrawImage(ColorMenuItemImages[i], i * UI.ColorMenuItemWidth, 0, UI.ColorMenuItemWidth, UI.ColorMenuItemWidth);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-window* Output::GetColorMenuWind() const {
-	return colorMenuWind;
+void Output::OpenColorMenuWind(int x)
+{
+	CreateColorMenuWind(x); // Intializes a new window and sets data memeber to that pointer 
+
+	DrawColorMenuItems(); // Draws color images to color menu window
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CloseColorMenuWind()
 {
 	delete colorMenuWind;
 	colorMenuWind = nullptr;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+window* Output::GetColorMenuWind() const {
+	return colorMenuWind;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateStatusBar() const

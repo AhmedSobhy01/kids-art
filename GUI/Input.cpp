@@ -88,27 +88,25 @@ color Input::GetSelectedColor() const
 {
 	if (colorMenuWind) {
 		int x, y;
-		colorMenuWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
+		colorMenuWind->WaitMouseClick(x, y);	// Get the coordinates of the user click
 
 		if (y >= 0 && y < UI.ColorMenuHeight)
 		{
 			int ClickedColorOrder = (x / UI.ColorMenuItemWidth);
 
-			printf("%d", ClickedColorOrder);
-
 			switch (ClickedColorOrder)
 			{
-			case COLOR_MENU_ITM_BLACK: return BLACK;
-			case COLOR_MENU_ITM_RED: return RED;
-			case COLOR_MENU_ITM_BLUE: return BLUE;
-			case COLOR_MENU_ITM_GREEN: return GREEN;
-			case COLOR_MENU_ITM_MAGENTA: return MAGENTA;
-			case COLOR_MENU_ITM_ORANGE: return ORANGE;
-			case COLOR_MENU_ITM_BROWN: return BROWN;
-			case COLOR_MENU_ITM_CYAN: return CYAN;
-			case COLOR_MENU_ITM_YELLOW: return YELLOW;
+				case COLOR_MENU_ITM_BLACK: return BLACK;
+				case COLOR_MENU_ITM_RED: return RED;
+				case COLOR_MENU_ITM_BLUE: return BLUE;
+				case COLOR_MENU_ITM_GREEN: return GREEN;
+				case COLOR_MENU_ITM_MAGENTA: return MAGENTA;
+				case COLOR_MENU_ITM_ORANGE: return ORANGE;
+				case COLOR_MENU_ITM_BROWN: return BROWN;
+				case COLOR_MENU_ITM_CYAN: return CYAN;
+				case COLOR_MENU_ITM_YELLOW: return YELLOW;
 
-			default: return TRANSPARENT_COLOR;
+				default: return TRANSPARENT_COLOR;
 			}
 		}
 	}

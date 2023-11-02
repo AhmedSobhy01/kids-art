@@ -15,7 +15,7 @@ private:
 public:
 	Input(window *pW);		//Consturctor
 
-	void SetColorMenuWind(window*);
+	void SetColorMenuWind(window*); // Set pointer of color menu window
 
 	void GetPointClicked(int &x, int &y) const;//Get coordinate where user clicks
 	color GetSelectedColor() const;
