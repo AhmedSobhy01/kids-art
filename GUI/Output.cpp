@@ -164,6 +164,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 
 void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected)const	//Drawing square
 {
+	int squareSize = 150;
 	color DrawingColor;
 	if (selected)
 		DrawingColor = UI.HighlightColor;
@@ -179,11 +180,11 @@ void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected)const	//D
 	else
 		style = FRAME;
 	Point p1, p2;
-	SquareGfxInfo.size = 150;
-	p1.x = P1.x + SquareGfxInfo.size / 2;
-	p1.y = P1.y + SquareGfxInfo.size / 2;
-	p2.x = P1.x - SquareGfxInfo.size / 2;
-	p2.y = P1.y - SquareGfxInfo.size / 2;
+	
+	p1.x = P1.x + squareSize / 2;
+	p1.y = P1.y + squareSize / 2;
+	p2.x = P1.x - squareSize / 2;
+	p2.y = P1.y - squareSize / 2;
 	pWind->DrawRectangle(p1.x, p1.y, p2.x, p2.y, style);
 
 }
@@ -228,6 +229,7 @@ void Output::DrawingCircle(Point P1, Point P2,GfxInfo CircleGfxInfo, bool select
 
 void Output::DrawingHexagon(Point P1, GfxInfo HexagonGfxInfo, bool selected) const
 {
+	int hexagonSize = 100;
 	color drawcolor;
 	drawstyle style;
 	if (selected)
@@ -242,20 +244,20 @@ void Output::DrawingHexagon(Point P1, GfxInfo HexagonGfxInfo, bool selected) con
 	else
 		style = FRAME;
 
-	int l = 100;
+	
 	Point p1, p2, p3, p4, p5, p6;
-	p1.x = P1.x + l / sqrt(3);
+	p1.x = P1.x + hexagonSize / sqrt(3);
 	p1.y = P1.y;
-	p4.x = P1.x - l / sqrt(3);
+	p4.x = P1.x - hexagonSize / sqrt(3);
 	p4.y = P1.y;
-	p2.x = P1.x + sqrt(3) * l / 6;
-	p2.y = P1.y + 0.5 *l;
-	p3.x = P1.x - sqrt(3) * l / 6;
-	p3.y = P1.y + 0.5 *l;
-	p5.x = P1.x - sqrt(3) * l / 6;
-	p5.y = P1.y - 0.5*l;
-	p6.x = P1.x + sqrt(3) * l / 6;
-	p6.y = P1.y - 0.5 *l;
+	p2.x = P1.x + sqrt(3) * hexagonSize / 6;
+	p2.y = P1.y + 0.5 * hexagonSize;
+	p3.x = P1.x - sqrt(3) * hexagonSize / 6;
+	p3.y = P1.y + 0.5 * hexagonSize;
+	p5.x = P1.x - sqrt(3) * hexagonSize / 6;
+	p5.y = P1.y - 0.5 * hexagonSize;
+	p6.x = P1.x + sqrt(3) * hexagonSize / 6;
+	p6.y = P1.y - 0.5 * hexagonSize;
 	int arrayxpoints[6] = { p1.x, p2.x, p3.x, p4.x, p5.x, p6.x };
 	int arrayYpoints[6] = { p1.y, p2.y, p3.y, p4.y, p5.y, p6.y };
 	pWind->DrawPolygon(arrayxpoints, arrayYpoints, 6, style);

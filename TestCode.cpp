@@ -84,7 +84,7 @@ int main()
 
 	/// 2.2- Square Test ///
 	/// ============== 
-	pOut->PrintMessage("Drawing a Square, normal and Highlighted, Click to continue");
+	pOut->PrintMessage("Drawing a Square, filled/non-filled and Highlighted filled/non-filled,  Click to continue");
 	pIn->GetPointClicked(x,y);	//Wait for any click
 
 	///TODO: Add code to draw Square, Normal and Highlighted
@@ -212,7 +212,7 @@ int main()
 	
 	/// 2.5- Circle Test ///
 	/// =================== 
-	pOut->PrintMessage("Drawing an Circle, filled/non-filled and Highlighted filled/non-filled,  Click to continue");
+	pOut->PrintMessage("Drawing a Circle, filled/non-filled and Highlighted filled/non-filled,  Click to continue");
 	pIn->GetPointClicked(x,y);	//Wait for any click
 
 	///TODO: Add code to draw Circle in all possible states
