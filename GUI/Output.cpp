@@ -225,6 +225,41 @@ void Output::DrawingCircle(Point P1, Point P2,GfxInfo CircleGfxInfo, bool select
 		pWind->DrawCircle(P1.x, P1.y, radius, style);
 	
 }
+
+void Output::DrawingHexagon(Point P1, GfxInfo HexagonGfxInfo, bool selected) const
+{
+	color drawcolor;
+	drawstyle style;
+	if (selected)
+		drawcolor = UI.HighlightColor;
+	else
+		drawcolor = HexagonGfxInfo.DrawClr;
+	pWind->SetPen(drawcolor, 1);
+	if (HexagonGfxInfo.isFilled) {
+		style = FILLED;
+		pWind->SetBrush(HexagonGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+
+	int l = 100;
+	Point p1, p2, p3, p4, p5, p6;
+	p1.x = P1.x + l / sqrt(3);
+	p1.y = P1.y;
+	p4.x = P1.x - l / sqrt(3);
+	p4.y = P1.y;
+	p2.x = P1.x + sqrt(3) * l / 6;
+	p2.y = P1.y + 0.5 *l;
+	p3.x = P1.x - sqrt(3) * l / 6;
+	p3.y = P1.y + 0.5 *l;
+	p5.x = P1.x - sqrt(3) * l / 6;
+	p5.y = P1.y - 0.5*l;
+	p6.x = P1.x + sqrt(3) * l / 6;
+	p6.y = P1.y - 0.5 *l;
+	int arrayxpoints[6] = { p1.x, p2.x, p3.x, p4.x, p5.x, p6.x };
+	int arrayYpoints[6] = { p1.y, p2.y, p3.y, p4.y, p5.y, p6.y };
+	pWind->DrawPolygon(arrayxpoints, arrayYpoints, 6, style);
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output()
 {

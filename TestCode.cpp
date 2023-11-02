@@ -179,6 +179,32 @@ int main()
 	pIn->GetPointClicked(x,y);	//Wait for any click
 
 	///TODO: Add code to draw Hexagon in all possible states
+	pOut->PrintMessage("Drawing a Hexagon ==> Non-filled, click one point");
+	pIn->GetPointClicked(P1.x, P1.y);
+
+	gfxInfo.DrawClr = BLUE;
+	gfxInfo.BorderWdth = 5;
+	gfxInfo.isFilled = false;
+	pOut->DrawingHexagon(P1, gfxInfo, false);
+
+	pOut->PrintMessage("Drawing a highlighted non-filled Hexagon, click to highlight");
+	pIn->GetPointClicked(x, y);
+	
+	pOut->DrawingHexagon(P1, gfxInfo, true);
+
+	pOut->PrintMessage("Drawing a Hexagon ==> Filled, click one point");
+	pIn->GetPointClicked(P1.x, P1.y);
+
+	gfxInfo.DrawClr = BLUE;
+	gfxInfo.BorderWdth = 5;
+	gfxInfo.isFilled = true;
+	gfxInfo.FillClr = WHITE;
+	pOut->DrawingHexagon(P1, gfxInfo, false);
+
+	pOut->PrintMessage("Drawing a highlighted filled Hexagon, click to highlight");
+	pIn->GetPointClicked(x, y);
+
+	pOut->DrawingHexagon(P1, gfxInfo, true);
 
 	pOut->PrintMessage("Drawing a Hexagon Test ==> OK,  Click anywhere to continue");
 	pIn->GetPointClicked(x,y);	//Wait for any click
