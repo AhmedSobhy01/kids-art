@@ -9,12 +9,12 @@ Output::Output()
 	UI.width = 1250;
 	UI.height = 650;
 	UI.wx = 5;
-	UI.wy =5;
+	UI.wy = 5;
 
 	
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 80;
+	UI.MenuItemWidth = 50;
 	
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
@@ -80,8 +80,8 @@ void Output::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
-	MenuItemImages[ITM_RECT] = "images\\MenuItems\\Menu_Rect.jpg";
-	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Rectangle.jpg";
+	MenuItemImages[ITM_EXIT] = "images\\DrawMode\\Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
 
