@@ -15,6 +15,22 @@ int main()
 	pOut->PrintMessage("This demo is to test input and output classes, Click anywhere to start the test");
 	pIn->GetPointClicked(x,y);	//Wait for any click
 
+	///////////////////////////////////////////////////////////////////////////////////
+	// TEST 0:	
+	//			Creates color menu in the center of main window and closes after selection of color	
+	//			Selected color is sorted in the variable of name "selectedColor"
+	///////////////////////////////////////////////////////////////////////////////////
+
+	pOut->PrintMessage("TEST0: Color Menu Window, Click anywhere to open color menu window");
+	pIn->GetPointClicked(x, y);	//Wait for any click
+
+	pOut->OpenColorMenuWind((UI.width - UI.ColorMenuWidth)/ 2);
+	pIn->SetColorMenuWind(pOut->GetColorMenuWind());
+
+	color selectedColor = pIn->GetSelectedColor();
+
+	pOut->CloseColorMenuWind();
+	pIn->SetColorMenuWind(pOut->GetColorMenuWind());
 
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 1:	
