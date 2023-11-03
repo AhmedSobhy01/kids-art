@@ -80,6 +80,7 @@ void Output::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];						 
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\PlayMode.jpg";
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Rectangle.jpg";
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Circle.jpg";
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Square.jpg";
@@ -100,9 +101,9 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\StartRecording.jpg";
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\StopRecording.jpg";
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\PlayRecording.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\ArtBoardBackground.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Open.jpg";
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Save.jpg";
-	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Load.jpg";
-	MenuItemImages[ITM_RECT] = "images\\DrawMode\\PlayMode.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\DrawMode\\Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
