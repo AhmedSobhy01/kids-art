@@ -81,7 +81,7 @@ void Output::CreateDrawToolBar() const
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];						 
 	MenuItemImages[PlayMode] = "images\\DrawMode\\PlayMode.jpg";
-	MenuItemImages[Rectangle] = "images\\DrawMode\\Rectangle.jpg";
+	MenuItemImages[Rect] = "images\\DrawMode\\Rectangle.jpg";
 	MenuItemImages[Circle] = "images\\DrawMode\\Circle.jpg";
 	MenuItemImages[Square] = "images\\DrawMode\\Square.jpg";
 	MenuItemImages[Triangle] = "images\\DrawMode\\Triangle.jpg";
@@ -129,7 +129,7 @@ void Output::CreatePlayToolBar() const
 	// array to store play menu images
 	string PlayMenuItemImages[PLAY_ITM_COUNT];
 	PlayMenuItemImages[DrawMode] = "images\\PlayMode\\draw-mode.jpg";
-	PlayMenuItemImages[Exit] = "images\\DrawMode\\Exit.jpg";
+	PlayMenuItemImages[ExitPlay] = "images\\DrawMode\\Exit.jpg";
 
 
 	// loop to display play menu images

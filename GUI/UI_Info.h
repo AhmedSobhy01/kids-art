@@ -18,7 +18,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	//Note: Items are **(ordered)** here as they appear in menu
 	//If you want to change the menu items order, change the order here
 	PlayMode,
-	Rectangle,
+	Rect,
 	Circle,
 	Square,
 	Triangle,
@@ -54,6 +54,7 @@ enum PlayMenuItem //The items of the Play menu (you should add more items)
 	
 	//TODO: Add more items names here
 	DrawMode,
+	ExitPlay,
 	PLAY_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
 	
 };
