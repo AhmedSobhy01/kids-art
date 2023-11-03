@@ -12,9 +12,9 @@ Output::Output()
 	UI.wy = 5;
 
 	
-	UI.StatusBarHeight = 50;
-	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 50;
+	UI.StatusBarHeight = 45;
+	UI.ToolBarHeight = 45;
+	UI.MenuItemWidth = 45;
 	
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
@@ -96,7 +96,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[Move] = "images\\DrawMode\\Move.jpg";
 	MenuItemImages[Resize] = "images\\DrawMode\\Resize.jpg";
 	MenuItemImages[DragMove] = "images\\DrawMode\\DragMove.jpg";
-	MenuItemImages[DragResize] = "images\\DrawMode\\DragMove.jpg";
+	MenuItemImages[DragResize] = "images\\DrawMode\\DragResize.jpg";
 	MenuItemImages[Undo] = "images\\DrawMode\\Undo.jpg";
 	MenuItemImages[Redo] = "images\\DrawMode\\Redo.jpg";
 	MenuItemImages[ClearAll] = "images\\DrawMode\\ClearAll.jpg";
