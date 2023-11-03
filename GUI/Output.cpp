@@ -91,7 +91,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\ForegroundColor.jpg";
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Fill.jpg";
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Select.jpg";
-	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Delete.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Remove.jpg";
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Move.jpg";
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\DragMove.jpg";
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\DragResize.jpg";
