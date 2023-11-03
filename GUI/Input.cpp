@@ -7,6 +7,10 @@ Input::Input(window* pW)
 	pWind = pW; //point to the passed window
 }
 
+void Input::SetColorMenuWind(window* ptr) {
+	colorMenuWind = ptr;
+}
+
 void Input::GetPointClicked(int &x, int &y) const
 {
 	pWind->WaitMouseClick(x, y);	//Wait for mouse click
@@ -75,6 +79,39 @@ ActionType Input::GetUserAction() const
 		return TO_PLAY;	//just for now. This should be updated
 	}	
 
+}
+/////////////////////////////////
+
+
+//This function reads the position where the user clicks to determine the selected color
+color Input::GetSelectedColor() const
+{
+	if (colorMenuWind) {
+		int x, y;
+		colorMenuWind->WaitMouseClick(x, y);	// Get the coordinates of the user click
+
+		if (y >= 0 && y < UI.ColorMenuHeight)
+		{
+			int ClickedColorOrder = (x / UI.ColorMenuItemWidth);
+
+			switch (ClickedColorOrder)
+			{
+				case COLOR_MENU_ITM_BLACK: return BLACK;
+				case COLOR_MENU_ITM_RED: return RED;
+				case COLOR_MENU_ITM_BLUE: return BLUE;
+				case COLOR_MENU_ITM_GREEN: return GREEN;
+				case COLOR_MENU_ITM_MAGENTA: return MAGENTA;
+				case COLOR_MENU_ITM_ORANGE: return ORANGE;
+				case COLOR_MENU_ITM_BROWN: return BROWN;
+				case COLOR_MENU_ITM_CYAN: return CYAN;
+				case COLOR_MENU_ITM_YELLOW: return YELLOW;
+
+				default: return TRANSPARENT_COLOR;
+			}
+		}
+	}
+
+	return TRANSPARENT_COLOR;
 }
 /////////////////////////////////
 	

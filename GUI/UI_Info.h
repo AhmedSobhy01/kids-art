@@ -49,6 +49,21 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 
 };
 
+enum ColorMenuItem
+{
+	COLOR_MENU_ITM_BLACK,
+	COLOR_MENU_ITM_RED,
+	COLOR_MENU_ITM_BLUE,
+	COLOR_MENU_ITM_GREEN,
+	COLOR_MENU_ITM_MAGENTA,
+	COLOR_MENU_ITM_ORANGE,
+	COLOR_MENU_ITM_BROWN,
+	COLOR_MENU_ITM_CYAN,
+	COLOR_MENU_ITM_YELLOW,
+	COLOR_MENU_ITM_TRANSPARENT,
+	COLOR_MENU_ITM_COUNT,
+};
+
 enum PlayMenuItem //The items of the Play menu (you should add more items)
 {
 	//Note: Items are **(ordered)** here as they appear in menu
@@ -77,6 +92,7 @@ struct UI_Info	//User Interface Info.
 		ToolBarHeight,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
 		MenuItemWidth;		//Width of each item in toolbar menu
 
+	int ColorMenuWidth, ColorMenuHeight, ColorMenuItemWidth;
 
 	color DrawColor;		//Drawing color
 	color FillColor;		//Filling color
