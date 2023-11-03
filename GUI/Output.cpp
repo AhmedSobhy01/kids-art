@@ -80,31 +80,33 @@ void Output::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];						 
-	MenuItemImages[PlayMode] = "images\\DrawMode\\PlayMode.jpg";
-	MenuItemImages[Rect] = "images\\DrawMode\\Rectangle.jpg";
-	MenuItemImages[Circle] = "images\\DrawMode\\Circle.jpg";
-	MenuItemImages[Square] = "images\\DrawMode\\Square.jpg";
-	MenuItemImages[Triangle] = "images\\DrawMode\\Triangle.jpg";
-	MenuItemImages[Hexagon] = "images\\DrawMode\\Hexagon.jpg";
-	MenuItemImages[Outline] = "images\\DrawMode\\Outline.jpg";
-	MenuItemImages[BorderWidth] = "images\\DrawMode\\BorderWidth.jpg";
-	MenuItemImages[ForegroundColor] = "images\\DrawMode\\ForegroundColor.jpg";
-	MenuItemImages[Fill] = "images\\DrawMode\\Fill.jpg";
-	MenuItemImages[Select] = "images\\DrawMode\\Select.jpg";
-	MenuItemImages[Remove] = "images\\DrawMode\\Remove.jpg";
-	MenuItemImages[Move] = "images\\DrawMode\\Move.jpg";
-	MenuItemImages[DragMove] = "images\\DrawMode\\DragMove.jpg";
-	MenuItemImages[DragResize] = "images\\DrawMode\\DragResize.jpg";
-	MenuItemImages[Undo] = "images\\DrawMode\\Undo.jpg";
-	MenuItemImages[ClearAll] = "images\\DrawMode\\ClearAll.jpg";
-	MenuItemImages[BackgroundColor] = "images\\DrawMode\\BackgroundColor.jpg";
-	MenuItemImages[StartRecording] = "images\\DrawMode\\StartRecording.jpg";
-	MenuItemImages[StopRecording] = "images\\DrawMode\\StopRecording.jpg";
-	MenuItemImages[PlayRecording] = "images\\DrawMode\\PlayRecording.jpg";
-	MenuItemImages[ArtBoardBackground] = "images\\DrawMode\\ArtBoardBackground.jpg";
-	MenuItemImages[Open] = "images\\DrawMode\\Open.jpg";
-	MenuItemImages[Save] = "images\\DrawMode\\Save.jpg";
-	MenuItemImages[Exit] = "images\\DrawMode\\Exit.jpg";
+	MenuItemImages[PlayMode] = "images\\DrawMode\\PlayMode.jpeg";
+	MenuItemImages[Rect] = "images\\DrawMode\\Rectangle.jpeg";
+	MenuItemImages[Circle] = "images\\DrawMode\\Circle.jpeg";
+	MenuItemImages[Square] = "images\\DrawMode\\Square.jpeg";
+	MenuItemImages[Triangle] = "images\\DrawMode\\Triangle.jpeg";
+	MenuItemImages[Hexagon] = "images\\DrawMode\\Hexagon.jpeg";
+	MenuItemImages[Outline] = "images\\DrawMode\\Outline.jpeg";
+	MenuItemImages[BorderWidth] = "images\\DrawMode\\BorderWidth.jpeg";
+	MenuItemImages[ForegroundColor] = "images\\DrawMode\\ForegroundColor.jpeg";
+	MenuItemImages[Fill] = "images\\DrawMode\\Fill.jpeg";
+	MenuItemImages[Select] = "images\\DrawMode\\Select.jpeg";
+	MenuItemImages[Remove] = "images\\DrawMode\\Remove.jpeg";
+	MenuItemImages[Move] = "images\\DrawMode\\Move.jpeg";
+	MenuItemImages[Resize] = "images\\DrawMode\\Resize.jpeg";
+	MenuItemImages[DragMove] = "images\\DrawMode\\DragMove.jpeg";
+	MenuItemImages[DragResize] = "images\\DrawMode\\DragResize.jpeg";
+	MenuItemImages[Undo] = "images\\DrawMode\\Undo.jpeg";
+	MenuItemImages[Redo] = "images\\DrawMode\\Redo.jpeg";
+	MenuItemImages[ClearAll] = "images\\DrawMode\\ClearAll.jpeg";
+	MenuItemImages[BackgroundColor] = "images\\DrawMode\\BackgroundColor.jpeg";
+	MenuItemImages[StartRecording] = "images\\DrawMode\\StartRecording.jpeg";
+	MenuItemImages[StopRecording] = "images\\DrawMode\\StopRecording.jpeg";
+	MenuItemImages[PlayRecording] = "images\\DrawMode\\PlayRecording.jpeg";
+	MenuItemImages[ArtBoardBackground] = "images\\DrawMode\\ArtboardBackground.jpeg";
+	MenuItemImages[Open] = "images\\DrawMode\\Open.jpeg";
+	MenuItemImages[Save] = "images\\DrawMode\\Save.jpeg";
+	MenuItemImages[Exit] = "images\\DrawMode\\Exit.jpeg";
 
 	//TODO: Prepare images for each menu item and add it to the list
 
@@ -128,8 +130,8 @@ void Output::CreatePlayToolBar() const
 
 	// array to store play menu images
 	string PlayMenuItemImages[PLAY_ITM_COUNT];
-	PlayMenuItemImages[DrawMode] = "images\\PlayMode\\draw-mode.jpg";
-	PlayMenuItemImages[ExitPlay] = "images\\DrawMode\\Exit.jpg";
+	PlayMenuItemImages[DrawMode] = "images\\PlayMode\\draw-mode.jpeg";
+	PlayMenuItemImages[ExitPlay] = "images\\DrawMode\\Exit.jpeg";
 
 
 	// loop to display play menu images
