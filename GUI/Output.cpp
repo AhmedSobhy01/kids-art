@@ -79,8 +79,30 @@ void Output::CreateDrawToolBar() const
 	//First prepare List of images for each menu item
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
-	string MenuItemImages[DRAW_ITM_COUNT];
+	string MenuItemImages[DRAW_ITM_COUNT];						 
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Rectangle.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Circle.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Square.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Triangle.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Hexagon.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Outline.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\BorderWidth.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\ForegroundColor.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Fill.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Select.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Delete.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Move.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\DragMove.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\DragResize.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Undo.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\ClearAll.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\BackgroundColor.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\StartRecording.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\StopRecording.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\PlayRecording.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Save.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Load.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\PlayMode.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\DrawMode\\Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
@@ -102,6 +124,14 @@ void Output::CreatePlayToolBar() const
 {
 	UI.InterfaceMode = MODE_PLAY;
 	///TODO: write code to create Play mode menu
+
+	// array to store play menu images
+	string PlayMenuItemImages[PLAY_ITM_COUNT];
+	PlayMenuItemImages[ITM_EXIT] = "images\\PlayMode\\draw-mode.jpg";
+
+	// loop to display play menu images
+	for (int i = 0; i < PLAY_ITM_COUNT; i++)
+		pWind->DrawImage(PlayMenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
