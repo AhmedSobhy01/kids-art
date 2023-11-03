@@ -15,6 +15,10 @@ Output::Output()
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
 	UI.MenuItemWidth = 50;
+
+	UI.ColorMenuItemWidth = 40;
+	UI.ColorMenuWidth = COLOR_MENU_ITM_COUNT * UI.ColorMenuItemWidth + 20;
+	UI.ColorMenuHeight = 60;
 	
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
@@ -29,6 +33,9 @@ Output::Output()
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 	//Change the title
 	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
+
+	// Initialize Color Menu Window Pointer
+	colorMenuWind = nullptr;
 	
 	CreateDrawToolBar();
 	CreateStatusBar();
@@ -52,6 +59,47 @@ window* Output::CreateWind(int w, int h, int x, int y) const
 	pW->SetPen(UI.BkGrndColor, 1);
 	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);	
 	return pW;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+void Output::CreateColorMenuWind(int x)
+{
+	colorMenuWind = new window(UI.ColorMenuWidth, UI.ColorMenuHeight, (UI.wx + x) < UI.width ? (UI.wx + x) : (UI.width - 10), UI.wy + UI.ToolBarHeight + 35);
+	colorMenuWind->ChangeTitle("Colors");
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+void Output::DrawColorMenuItems() const
+{
+	string ColorMenuItemImages[COLOR_MENU_ITM_COUNT];
+	ColorMenuItemImages[COLOR_MENU_ITM_BLACK] = "images\\Colors\\Black.jpg";
+	ColorMenuItemImages[COLOR_MENU_ITM_RED] = "images\\Colors\\Red.jpg";
+	ColorMenuItemImages[COLOR_MENU_ITM_BLUE] = "images\\Colors\\Blue.jpg";
+	ColorMenuItemImages[COLOR_MENU_ITM_GREEN] = "images\\Colors\\Green.jpg";
+	ColorMenuItemImages[COLOR_MENU_ITM_MAGENTA] = "images\\Colors\\Magenta.jpg";
+	ColorMenuItemImages[COLOR_MENU_ITM_ORANGE] = "images\\Colors\\Orange.jpg";
+	ColorMenuItemImages[COLOR_MENU_ITM_BROWN] = "images\\Colors\\Brown.jpg";
+	ColorMenuItemImages[COLOR_MENU_ITM_CYAN] = "images\\Colors\\Cyan.jpg";
+	ColorMenuItemImages[COLOR_MENU_ITM_YELLOW] = "images\\Colors\\Yellow.jpg";
+	ColorMenuItemImages[COLOR_MENU_ITM_TRANSPARENT] = "images\\Colors\\Transparent.jpg";
+
+	for (int i = 0; i < COLOR_MENU_ITM_COUNT; i++)
+		colorMenuWind->DrawImage(ColorMenuItemImages[i], i * UI.ColorMenuItemWidth, 0, UI.ColorMenuItemWidth, UI.ColorMenuItemWidth);
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+void Output::OpenColorMenuWind(int x)
+{
+	CreateColorMenuWind(x); // Intializes a new window and sets data memeber to that pointer 
+
+	DrawColorMenuItems(); // Draws color images to color menu window
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+void Output::CloseColorMenuWind()
+{
+	delete colorMenuWind;
+	colorMenuWind = nullptr;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+window* Output::GetColorMenuWind() const {
+	return colorMenuWind;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateStatusBar() const
@@ -167,5 +215,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 Output::~Output()
 {
 	delete pWind;
+
+	if (colorMenuWind) delete colorMenuWind;
 }
 

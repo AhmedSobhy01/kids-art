@@ -37,6 +37,7 @@ bool operator!=(color a, color b);
 
 */
 
+const color TRANSPARENT_COLOR = color(-1, -1, -1);
 const color SNOW = color(255, 250, 250);
 const color GHOSTWHITE = color(248, 248, 255);
 const color WHITESMOKE = color(245, 245, 245);
