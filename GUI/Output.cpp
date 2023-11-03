@@ -139,7 +139,7 @@ int Output::getCrntPenWidth() const		//get current pen width
 //								Figures Drawing Functions								//
 //======================================================================================//
 
-void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
+void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const		//Drawing Rectangle
 {
 	color DrawingClr;
 	if(selected)	
@@ -159,18 +159,18 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 
 	
 	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
-	
 }
 
 void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected)const	//Drawing square
 {
 	int squareSize = 150;
-	color DrawingColor;
+	color DrawingClr;
 	if (selected)
-		DrawingColor = UI.HighlightColor;
+		DrawingClr = UI.HighlightColor;
 	else
-		DrawingColor = SquareGfxInfo.DrawClr;
-	pWind->SetPen(DrawingColor, 1);
+		DrawingClr = SquareGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, 1);
 	drawstyle style;
 	if (SquareGfxInfo.isFilled)
 	{
@@ -179,35 +179,40 @@ void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected)const	//D
 	}
 	else
 		style = FRAME;
+
+
 	Point p1, p2;
-	
 	p1.x = P1.x + squareSize / 2;
 	p1.y = P1.y + squareSize / 2;
 	p2.x = P1.x - squareSize / 2;
 	p2.y = P1.y - squareSize / 2;
-	pWind->DrawRectangle(p1.x, p1.y, p2.x, p2.y, style);
 
+
+	pWind->DrawRectangle(p1.x, p1.y, p2.x, p2.y, style);
 }
 
-void Output::DrawingTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected) const	//Drawing Triangle
+void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected) const	//Drawing Triangle
 {
-	color drawcolor;
+	color DrawingClr;
 	drawstyle style;
 	if (selected) 
-		drawcolor = UI.HighlightColor;
+		DrawingClr = UI.HighlightColor;
 	else
-		drawcolor = TriangleGfxInfo.DrawClr;
-	pWind->SetPen(drawcolor, 1);
+		DrawingClr = TriangleGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, 1);
 	if (TriangleGfxInfo.isFilled) {
 		pWind->SetBrush(TriangleGfxInfo.FillClr);
 		style = FILLED;
 	}
 	else
 		style = FRAME;
+
+
 	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
 }
 
-void Output::DrawingCircle(Point P1, Point P2,GfxInfo CircleGfxInfo, bool selected)const
+void Output::DrawCircle(Point P1, Point P2,GfxInfo CircleGfxInfo, bool selected)const
 {
 	color drawcolor;
 	drawstyle style;
@@ -215,6 +220,7 @@ void Output::DrawingCircle(Point P1, Point P2,GfxInfo CircleGfxInfo, bool select
 		drawcolor = UI.HighlightColor;
 	else
 		drawcolor = CircleGfxInfo.DrawClr;
+
 	pWind->SetPen(drawcolor, 1);
 	if (CircleGfxInfo.isFilled) {
 		style = FILLED;
@@ -222,20 +228,22 @@ void Output::DrawingCircle(Point P1, Point P2,GfxInfo CircleGfxInfo, bool select
 	}
 	else
 		style = FRAME;
+
+
 	int radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
-		pWind->DrawCircle(P1.x, P1.y, radius, style);
-	
+	pWind->DrawCircle(P1.x, P1.y, radius, style);
 }
 
-void Output::DrawingHexagon(Point P1, GfxInfo HexagonGfxInfo, bool selected) const
+void Output::DrawHexagon(Point P1, GfxInfo HexagonGfxInfo, bool selected) const
 {
-	int hexagonSize = 100;
+	int hexagonSize = 80;
 	color drawcolor;
 	drawstyle style;
 	if (selected)
 		drawcolor = UI.HighlightColor;
 	else
 		drawcolor = HexagonGfxInfo.DrawClr;
+
 	pWind->SetPen(drawcolor, 1);
 	if (HexagonGfxInfo.isFilled) {
 		style = FILLED;
@@ -245,23 +253,20 @@ void Output::DrawingHexagon(Point P1, GfxInfo HexagonGfxInfo, bool selected) con
 		style = FRAME;
 
 	
-	Point p1, p2, p3, p4, p5, p6;
-	p1.x = P1.x + hexagonSize / sqrt(3);
-	p1.y = P1.y;
-	p4.x = P1.x - hexagonSize / sqrt(3);
-	p4.y = P1.y;
-	p2.x = P1.x + sqrt(3) * hexagonSize / 6;
-	p2.y = P1.y + 0.5 * hexagonSize;
-	p3.x = P1.x - sqrt(3) * hexagonSize / 6;
-	p3.y = P1.y + 0.5 * hexagonSize;
-	p5.x = P1.x - sqrt(3) * hexagonSize / 6;
-	p5.y = P1.y - 0.5 * hexagonSize;
-	p6.x = P1.x + sqrt(3) * hexagonSize / 6;
-	p6.y = P1.y - 0.5 * hexagonSize;
-	int arrayxpoints[6] = { p1.x, p2.x, p3.x, p4.x, p5.x, p6.x };
-	int arrayYpoints[6] = { p1.y, p2.y, p3.y, p4.y, p5.y, p6.y };
-	pWind->DrawPolygon(arrayxpoints, arrayYpoints, 6, style);
+	int xPointsArray[6];
+	int yPointsArray[6];
+
+	double angle = 2.0 * cdPi / 6.0; // Angle between each side of the hexagon in radians
+
+	for (int i = 0; i < 6; i++) {
+		xPointsArray[i] = P1.x + hexagonSize * cos(i * angle);
+		yPointsArray[i] = P1.y + hexagonSize * sin(i * angle);
+	}
+
+
+	pWind->DrawPolygon(xPointsArray, yPointsArray, 6, style);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output()
 {
