@@ -17,25 +17,48 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 {
 	//Note: Items are **(ordered)** here as they appear in menu
 	//If you want to change the menu items order, change the order here
-	ITM_RECT,		//Recangle item in menu
-	
-	//TODO: Add more items names here
+	PlayMode,
+	Rect,
+	Circle,
+	Square,
+	Triangle,
+	Hexagon,
+	Outline,
+	BorderWidth,
+	ForegroundColor,
+	BackgroundColor,
+	Fill,
+	Select,
+	Remove,
+	Move,
+	Resize,
+	DragMove,
+	DragResize,
+	Undo,
+	Redo,
+	ClearAll,
+	StartRecording,
+	StopRecording,
+	PlayRecording,
+	ArtBoardBackground,
+	Open,
+	Save,
+	Exit,
 
-	ITM_EXIT,		//Exit item
-	
 	DRAW_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
-	
+
 };
 
 enum PlayMenuItem //The items of the Play menu (you should add more items)
 {
 	//Note: Items are **(ordered)** here as they appear in menu
 	//If you want to change the menu items order, change the order here
-	
-	//TODO: Add more items names here
 
+	//TODO: Add more items names here
+	DrawMode,
+	ExitPlay,
 	PLAY_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
-	
+
 };
 
 

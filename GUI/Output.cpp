@@ -80,8 +80,33 @@ void Output::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
-	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Rectangle.jpg";
-	MenuItemImages[ITM_EXIT] = "images\\DrawMode\\Exit.jpg";
+	MenuItemImages[PlayMode] = "images\\DrawMode\\PlayMode.jpg";
+	MenuItemImages[Rect] = "images\\DrawMode\\Rectangle.jpg";
+	MenuItemImages[Circle] = "images\\DrawMode\\Circle.jpg";
+	MenuItemImages[Square] = "images\\DrawMode\\Square.jpg";
+	MenuItemImages[Triangle] = "images\\DrawMode\\Triangle.jpg";
+	MenuItemImages[Hexagon] = "images\\DrawMode\\Hexagon.jpg";
+	MenuItemImages[Outline] = "images\\DrawMode\\Outline.jpg";
+	MenuItemImages[BorderWidth] = "images\\DrawMode\\BorderWidth.jpg";
+	MenuItemImages[ForegroundColor] = "images\\DrawMode\\ForegroundColor.jpg";
+	MenuItemImages[BackgroundColor] = "images\\DrawMode\\BackgroundColor.jpg";
+	MenuItemImages[Fill] = "images\\DrawMode\\Fill.jpg";
+	MenuItemImages[Select] = "images\\DrawMode\\Select.jpg";
+	MenuItemImages[Remove] = "images\\DrawMode\\Remove.jpg";
+	MenuItemImages[Move] = "images\\DrawMode\\Move.jpg";
+	MenuItemImages[Resize] = "images\\DrawMode\\Resize.jpg";
+	MenuItemImages[DragMove] = "images\\DrawMode\\DragMove.jpg";
+	MenuItemImages[DragResize] = "images\\DrawMode\\DragMove.jpg";
+	MenuItemImages[Undo] = "images\\DrawMode\\Undo.jpg";
+	MenuItemImages[Redo] = "images\\DrawMode\\Redo.jpg";
+	MenuItemImages[ClearAll] = "images\\DrawMode\\ClearAll.jpg";
+	MenuItemImages[StartRecording] = "images\\DrawMode\\StartRecording.jpg";
+	MenuItemImages[StopRecording] = "images\\DrawMode\\StopRecording.jpg";
+	MenuItemImages[PlayRecording] = "images\\DrawMode\\PlayRecording.jpg";
+	MenuItemImages[ArtBoardBackground] = "images\\DrawMode\\ArtboardBackground.jpg";
+	MenuItemImages[Open] = "images\\DrawMode\\Open.jpg";
+	MenuItemImages[Save] = "images\\DrawMode\\Save.jpg";
+	MenuItemImages[Exit] = "images\\DrawMode\\Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
 
