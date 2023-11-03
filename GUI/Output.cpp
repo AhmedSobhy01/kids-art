@@ -129,6 +129,8 @@ void Output::CreatePlayToolBar() const
 	// array to store play menu images
 	string PlayMenuItemImages[PLAY_ITM_COUNT];
 	PlayMenuItemImages[DrawMode] = "images\\PlayMode\\draw-mode.jpg";
+	PlayMenuItemImages[Exit] = "images\\DrawMode\\Exit.jpg";
+
 
 	// loop to display play menu images
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)
