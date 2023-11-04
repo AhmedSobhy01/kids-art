@@ -17,33 +17,33 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 {
 	//Note: Items are **(ordered)** here as they appear in menu
 	//If you want to change the menu items order, change the order here
-	PlayMode,
-	Rect,
-	Circle,
-	Square,
-	Triangle,
-	Hexagon,
-	Outline,
-	Select,
-	BorderWidth,
-	ForegroundColor,
-	BackgroundColor,
-	Fill,
-	Remove,
-	Move,
-	Resize,
-	DragMove,
-	DragResize,
-	Undo,
-	Redo,
-	ClearAll,
-	StartRecording,
-	StopRecording,
-	PlayRecording,
-	ArtBoardBackground,
-	Open,
-	Save,
-	Exit,
+	ITM_PLAY_MODE,
+	ITM_RECT,
+	ITM_CIRCLE,
+	ITM_SQUARE,
+	ITM_TRIANGLE,
+	ITM_HEXAGON,
+	ITM_OUTLINE,
+	ITM_SELECT,
+	ITM_BORDER_WIDTH,
+	ITM_OUTLINE_COLOR,
+	ITM_FILL_COLOR,
+	ITM_FILL,
+	ITM_REMOVE,
+	ITM_MOVE,
+	ITM_RESIZE,
+	ITM_DRAG_MOVE,
+	ITM_DRAG_RESIZE,
+	ITM_UNDO,
+	ITM_REDO,
+	ITM_CLEAR_ALL,
+	ITM_START_RECORDING,
+	ITM_STOP_RECORDING,
+	ITM_PLAY_RECORDING,
+	ITM_BACKGROUND_COLOR,
+	ITM_OPEN,
+	ITM_SAVE,
+	ITM_EXIT,
 
 	DRAW_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
 
@@ -70,8 +70,8 @@ enum PlayMenuItem //The items of the Play menu (you should add more items)
 	//If you want to change the menu items order, change the order here
 
 	//TODO: Add more items names here
-	DrawMode,
-	ExitPlay,
+	ITM_DRAW_MODE,
+	ITM_EXIT_PLAY,
 	PLAY_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
 
 };

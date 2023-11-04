@@ -119,6 +119,9 @@ void Output::ClearStatusBar() const
 void Output::CreateDrawToolBar() const
 {
 	UI.InterfaceMode = MODE_DRAW;
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 
 	//You can draw the tool bar icons in any way you want.
 	//Below is one possible way
@@ -127,33 +130,33 @@ void Output::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
-	MenuItemImages[PlayMode] = "images\\DrawMode\\PlayMode.jpg";
-	MenuItemImages[Rect] = "images\\DrawMode\\Rectangle.jpg";
-	MenuItemImages[Circle] = "images\\DrawMode\\Circle.jpg";
-	MenuItemImages[Square] = "images\\DrawMode\\Square.jpg";
-	MenuItemImages[Triangle] = "images\\DrawMode\\Triangle.jpg";
-	MenuItemImages[Hexagon] = "images\\DrawMode\\Hexagon.jpg";
-	MenuItemImages[Outline] = "images\\DrawMode\\Outline.jpg";
-	MenuItemImages[BorderWidth] = "images\\DrawMode\\BorderWidth.jpg";
-	MenuItemImages[ForegroundColor] = "images\\DrawMode\\ForegroundColor.jpg";
-	MenuItemImages[BackgroundColor] = "images\\DrawMode\\BackgroundColor.jpg";
-	MenuItemImages[Fill] = "images\\DrawMode\\Fill.jpg";
-	MenuItemImages[Select] = "images\\DrawMode\\Select.jpg";
-	MenuItemImages[Remove] = "images\\DrawMode\\Remove.jpg";
-	MenuItemImages[Move] = "images\\DrawMode\\Move.jpg";
-	MenuItemImages[Resize] = "images\\DrawMode\\Resize.jpg";
-	MenuItemImages[DragMove] = "images\\DrawMode\\DragMove.jpg";
-	MenuItemImages[DragResize] = "images\\DrawMode\\DragResize.jpg";
-	MenuItemImages[Undo] = "images\\DrawMode\\Undo.jpg";
-	MenuItemImages[Redo] = "images\\DrawMode\\Redo.jpg";
-	MenuItemImages[ClearAll] = "images\\DrawMode\\ClearAll.jpg";
-	MenuItemImages[StartRecording] = "images\\DrawMode\\StartRecording.jpg";
-	MenuItemImages[StopRecording] = "images\\DrawMode\\StopRecording.jpg";
-	MenuItemImages[PlayRecording] = "images\\DrawMode\\PlayRecording.jpg";
-	MenuItemImages[ArtBoardBackground] = "images\\DrawMode\\ArtboardBackground.jpg";
-	MenuItemImages[Open] = "images\\DrawMode\\Open.jpg";
-	MenuItemImages[Save] = "images\\DrawMode\\Save.jpg";
-	MenuItemImages[Exit] = "images\\DrawMode\\Exit.jpg";
+	MenuItemImages[ITM_PLAY_MODE] = "images\\DrawMode\\PlayMode.jpg";
+	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Rectangle.jpg";
+	MenuItemImages[ITM_CIRCLE] = "images\\DrawMode\\Circle.jpg";
+	MenuItemImages[ITM_SQUARE] = "images\\DrawMode\\Square.jpg";
+	MenuItemImages[ITM_TRIANGLE] = "images\\DrawMode\\Triangle.jpg";
+	MenuItemImages[ITM_HEXAGON] = "images\\DrawMode\\Hexagon.jpg";
+	MenuItemImages[ITM_OUTLINE] = "images\\DrawMode\\Outline.jpg";
+	MenuItemImages[ITM_BORDER_WIDTH] = "images\\DrawMode\\BorderWidth.jpg";
+	MenuItemImages[ITM_OUTLINE_COLOR] = "images\\DrawMode\\ForegroundColor.jpg";
+	MenuItemImages[ITM_FILL_COLOR] = "images\\DrawMode\\BackgroundColor.jpg";
+	MenuItemImages[ITM_FILL] = "images\\DrawMode\\Fill.jpg";
+	MenuItemImages[ITM_SELECT] = "images\\DrawMode\\Select.jpg";
+	MenuItemImages[ITM_REMOVE] = "images\\DrawMode\\Remove.jpg";
+	MenuItemImages[ITM_MOVE] = "images\\DrawMode\\Move.jpg";
+	MenuItemImages[ITM_RESIZE] = "images\\DrawMode\\Resize.jpg";
+	MenuItemImages[ITM_DRAG_MOVE] = "images\\DrawMode\\DragMove.jpg";
+	MenuItemImages[ITM_DRAG_RESIZE] = "images\\DrawMode\\DragResize.jpg";
+	MenuItemImages[ITM_UNDO] = "images\\DrawMode\\Undo.jpg";
+	MenuItemImages[ITM_REDO] = "images\\DrawMode\\Redo.jpg";
+	MenuItemImages[ITM_CLEAR_ALL] = "images\\DrawMode\\ClearAll.jpg";
+	MenuItemImages[ITM_START_RECORDING] = "images\\DrawMode\\StartRecording.jpg";
+	MenuItemImages[ITM_STOP_RECORDING] = "images\\DrawMode\\StopRecording.jpg";
+	MenuItemImages[ITM_PLAY_RECORDING] = "images\\DrawMode\\PlayRecording.jpg";
+	MenuItemImages[ITM_BACKGROUND_COLOR] = "images\\DrawMode\\ArtboardBackground.jpg";
+	MenuItemImages[ITM_OPEN] = "images\\DrawMode\\Open.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\DrawMode\\Save.jpg";
+	MenuItemImages[ITM_EXIT] = "images\\DrawMode\\Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
 
@@ -162,30 +165,33 @@ void Output::CreateDrawToolBar() const
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 
-
+	//Ahmed: removed the ugly red border :)
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
-	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+	//pWind->SetPen(RED, 3);
+	//pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::CreatePlayToolBar() const
 {
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0,0,UI.width,UI.ToolBarHeight);
 	UI.InterfaceMode = MODE_PLAY;
 	///TODO: write code to create Play mode menu
 	string PlayMenuItems[PLAY_ITM_COUNT];
-	PlayMenuItem[DrawMode] = "images\\PlayMode\\draw-mode.jpg";
-	PlayMenuItem[ExitPlay] = "images\\DrawMode\\Exit.jpg";
+	PlayMenuItems[ITM_DRAW_MODE] = "images\\PlayMode\\draw-mode.jpg";
+	PlayMenuItems[ITM_EXIT_PLAY] = "images\\DrawMode\\Exit.jpg";
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)
-		pWind->DrawImage(PlayMenuItem[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+		pWind->DrawImage(PlayMenuItems[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
-	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+	//pWind->SetPen(RED, 3);
+	//pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
