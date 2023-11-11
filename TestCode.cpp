@@ -60,7 +60,6 @@ int main()
 	pIn->GetPointClicked(x, y);	//Wait for any click
 
 	// 2.1.1 - Drawing non-filled rectangle
-	pOut->PrintMessage("Drawing a Rectangle ==> non-filled,  Click two points");
 	do {
 		pOut->PrintMessage("Drawing a Rectangle ==> Non-filled, Click two points");
 		pIn->GetPointClicked(P1.x, P1.y);
@@ -83,7 +82,6 @@ int main()
 
 
 	// 2.1.3 - Drawing a filled rectangle
-	pOut->PrintMessage("Drawing a Rectangle ==> filled,  Click two points");
 	do {
 		pOut->PrintMessage("Drawing a Rectangle ==> Filled, Click two points");
 		pIn->GetPointClicked(P1.x, P1.y);
@@ -197,7 +195,6 @@ int main()
 
 
 	// 2.3.3 - Drawing a filled Triangle
-	pOut->PrintMessage("Drawing a Triangle ==> Filled, Click three point");
 	do {
 		pOut->PrintMessage("Drawing a Triangle ==> Filled, Click three points");
 		pIn->GetPointClicked(P1.x, P1.y);
