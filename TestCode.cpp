@@ -37,7 +37,7 @@ int main()
 
 	GfxInfo gfxInfo;//to be used with draw function of the class Ouput
 	Point P1, P2, P3;
-
+	
 	/// 2.1- Rectangle Test ///
 	/// =================== 
 	pOut->PrintMessage("Drawing a Rectangle, filled/non-filled and Highlighted filled/non-filled,  Click to continue");
@@ -80,7 +80,7 @@ int main()
 
 	pOut->PrintMessage("Drawing a Rectangle Test ==> OK,  Click anywhere to continue");
 	pIn->GetPointClicked(x,y);	//Wait for any click
-	pOut->ClearDrawArea();
+	pOut->ClearDrawArea(); 
 
 	/// 2.2- Square Test ///
 	/// ============== 
@@ -88,9 +88,16 @@ int main()
 	pIn->GetPointClicked(x,y);	//Wait for any click
 
 	// 2.2.1 - Drawing a Square non-filled
-	pOut->PrintMessage("Drawing a Square ==> non-filled,  Click one point");
-	pIn->GetPointClicked(P1.x, P1.y);
+	int squareSize = 150;
+	do {
+		pOut->PrintMessage("Drawing a Square ==> non-filled,  Click one point");
+		pIn->GetPointClicked(P1.x, P1.y);
 
+		if (P1.y - squareSize / 2 < UI.ToolBarHeight) {
+			pOut->PrintMessage("[OUT OF RANGE] The square is too big, click to continue");
+			pIn->GetPointClicked(x, y);
+		}
+	} while (P1.y-squareSize/2 <UI.ToolBarHeight);
 	gfxInfo.BorderWdth = 5;
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.isFilled = false;
@@ -100,11 +107,17 @@ int main()
 	pOut->PrintMessage("Drawing a highlighted non-filled Square, Click to highlight");
 	pIn->GetPointClicked(x, y);
 	pOut->DrawSquare(P1, gfxInfo, true);
-
+	
 
 	// 2.2.3 - Drawing a filled Square
-	pOut->PrintMessage("Drawing a Square ==> Filled, Click one point");
-	pIn->GetPointClicked(P1.x, P1.y);
+	do {
+		pOut->PrintMessage("Drawing a Square ==> Filled, Click one point");
+		pIn->GetPointClicked(P1.x, P1.y);
+		if (P1.y - squareSize / 2 < UI.ToolBarHeight) {
+			pOut->PrintMessage("[OUT OF RANGE] The square is too big, click to continue");
+			pIn->GetPointClicked(x, y);
+		}
+	} while (P1.y - squareSize / 2 < UI.ToolBarHeight);
 	
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.BorderWdth = 5;
@@ -173,9 +186,16 @@ int main()
 	/// =================== 
 	pOut->PrintMessage("Drawing a Hexagon, filled/non-filled and Highlighted filled/non-filled,  Click to continue");
 	pIn->GetPointClicked(x,y);	//Wait for any click
-
-	pOut->PrintMessage("Drawing a Hexagon ==> Non-filled, click one point");
-	pIn->GetPointClicked(P1.x, P1.y);
+	
+	int hexagonSize = 80;
+	do {
+		pOut->PrintMessage("Drawing a Hexagon ==> Non-filled, click one point");
+		pIn->GetPointClicked(P1.x, P1.y);
+		if (P1.y - hexagonSize / 2 * sqrt(3) < UI.ToolBarHeight) {
+			pOut->PrintMessage("[OUT OF RANGE] The hexagon is too big, click to continue");
+			pIn->GetPointClicked(x, y);
+		}
+	} while (P1.y - hexagonSize/2*sqrt(3) < UI.ToolBarHeight);
 
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.BorderWdth = 5;
@@ -187,8 +207,14 @@ int main()
 	
 	pOut->DrawHexagon(P1, gfxInfo, true);
 
-	pOut->PrintMessage("Drawing a Hexagon ==> Filled, click one point");
-	pIn->GetPointClicked(P1.x, P1.y);
+	do {
+		pOut->PrintMessage("Drawing a Hexagon ==> Filled, click one point");
+		pIn->GetPointClicked(P1.x, P1.y);
+		if (P1.y - hexagonSize / 2 * sqrt(3) < UI.ToolBarHeight) {
+			pOut->PrintMessage("[OUT OF RANGE] The hexagon is too big, click to continue");
+			pIn->GetPointClicked(x, y);
+		}
+	} while (P1.y - hexagonSize / 2 * sqrt(3) < UI.ToolBarHeight);
 
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.BorderWdth = 5;
@@ -211,9 +237,18 @@ int main()
 	pIn->GetPointClicked(x,y);	//Wait for any click
 
 	// 2.4.1 - Drawing a Circle non-filled
+	int radius = 0;
+	do{
 	pOut->PrintMessage("Drawing a Circle ==> non-filled,  Click two points");
 	pIn->GetPointClicked(P1.x, P1.y);
 	pIn->GetPointClicked(P2.x, P2.y);
+	radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
+
+	if (P1.y - radius <= UI.ToolBarHeight) {
+		pOut->PrintMessage("[OUT OF RANGE] The circle is too big, click to continue");
+		pIn->GetPointClicked(x, y);
+	}
+	} while (P1.y - radius <= UI.ToolBarHeight);
 
 	gfxInfo.BorderWdth = 5;
 	gfxInfo.DrawClr = BLUE;
@@ -227,9 +262,17 @@ int main()
 
 
 	// 2.4.3 - Drawing a filled Circle
-	pOut->PrintMessage("Drawing a Circle ==> Filled, Click two points");
-	pIn->GetPointClicked(P1.x, P1.y);
-	pIn->GetPointClicked(P2.x, P2.y);
+	do {
+		pOut->PrintMessage("Drawing a Circle ==> Filled, Click two points");
+		pIn->GetPointClicked(P1.x, P1.y);
+		pIn->GetPointClicked(P2.x, P2.y);
+		radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
+
+		if (P1.y - radius <= UI.ToolBarHeight) {
+			pOut->PrintMessage("[OUT OF RANGE] The circle is too big, click to continue");
+			pIn->GetPointClicked(x, y);
+		}
+	} while (P1.y - radius <= UI.ToolBarHeight);
 
 
 	gfxInfo.DrawClr = BLUE;
