@@ -451,6 +451,15 @@ int main()
 		case SAVE_GRAPH:
 			pOut->PrintMessage("Action: Save graph , Type the graph name to save");
 			break;
+		case PICK_BY_SHAPE:
+			pOut->PrintMessage("Action: Pick by shape gamemode , Click on the similar shapes");
+			break; 
+		case PICK_BY_COLOR:
+			pOut->PrintMessage("Action: Pick by color gamemode , Click on the similar color");
+			break; 
+		case PICK_BY_SHAPE_COLOR:
+			pOut->PrintMessage("Action: Pick by shape and color gamemode , Click on simiar shapes with similar color");
+			break;
 		case DRAWING_AREA:
 			pOut->PrintMessage("Action: a click on the Drawing Area, Click anywhere");
 			break;

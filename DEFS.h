@@ -33,6 +33,9 @@ enum ActionType //The actions supported (you can add more if needed)
 	BACKGROUND_COLOR,
 	OPEN_GRAPH,
 	SAVE_GRAPH,
+	PICK_BY_COLOR,
+	PICK_BY_SHAPE,
+	PICK_BY_SHAPE_COLOR,
 	DRAWING_AREA,	//A click on the drawing area
 	STATUS,			//A click on the status bar
 	EMPTY,			//A click on empty place in the toolbar
