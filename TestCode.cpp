@@ -60,9 +60,15 @@ int main()
 	pIn->GetPointClicked(x, y);	//Wait for any click
 
 	// 2.1.1 - Drawing non-filled rectangle
-	pOut->PrintMessage("Drawing a Rectangle ==> non-filled,  Click two points");
-	pIn->GetPointClicked(P1.x, P1.y);
-	pIn->GetPointClicked(P2.x, P2.y);
+	do {
+		pOut->PrintMessage("Drawing a Rectangle ==> Non-filled, Click two points");
+		pIn->GetPointClicked(P1.x, P1.y);
+		pIn->GetPointClicked(P2.x, P2.y);
+		if (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight) {
+			pOut->PrintMessage("[OUT OF RANGE] The rectangle can't be drawn over the toolbar, click to continue");
+			pIn->GetPointClicked(x, y);
+		}
+	} while (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight);
 
 	gfxInfo.BorderWdth = 5;
 	gfxInfo.DrawClr = BLUE;	//any color for border
@@ -76,9 +82,15 @@ int main()
 
 
 	// 2.1.3 - Drawing a filled rectangle
-	pOut->PrintMessage("Drawing a Rectangle ==> filled,  Click two points");
-	pIn->GetPointClicked(P1.x, P1.y);
-	pIn->GetPointClicked(P2.x, P2.y);
+	do {
+		pOut->PrintMessage("Drawing a Rectangle ==> Filled, Click two points");
+		pIn->GetPointClicked(P1.x, P1.y);
+		pIn->GetPointClicked(P2.x, P2.y);
+		if (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight) {
+			pOut->PrintMessage("[OUT OF RANGE] The rectangle can't be drawn over the toolbar, click to continue");
+			pIn->GetPointClicked(x, y);
+		}
+	} while (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight);
 
 	gfxInfo.BorderWdth = 6;
 	gfxInfo.DrawClr = BLUE;	//any color for border
@@ -104,8 +116,16 @@ int main()
 	pIn->GetPointClicked(x, y);	//Wait for any click
 
 	// 2.2.1 - Drawing a Square non-filled
-	pOut->PrintMessage("Drawing a Square ==> non-filled,  Click one point");
-	pIn->GetPointClicked(P1.x, P1.y);
+	int squareSize = 150;
+	do {
+		pOut->PrintMessage("Drawing a Square ==> non-filled,  Click one point");
+		pIn->GetPointClicked(P1.x, P1.y);
+
+		if (P1.y - squareSize / 2 < UI.ToolBarHeight) {
+			pOut->PrintMessage("[OUT OF RANGE] The square is too big, click to continue");
+			pIn->GetPointClicked(x, y);
+		}
+	} while (P1.y - squareSize / 2 < UI.ToolBarHeight);
 
 	gfxInfo.BorderWdth = 5;
 	gfxInfo.DrawClr = BLUE;
@@ -119,8 +139,14 @@ int main()
 
 
 	// 2.2.3 - Drawing a filled Square
-	pOut->PrintMessage("Drawing a Square ==> Filled, Click one point");
-	pIn->GetPointClicked(P1.x, P1.y);
+	do {
+		pOut->PrintMessage("Drawing a Square ==> Filled, Click one point");
+		pIn->GetPointClicked(P1.x, P1.y);
+		if (P1.y - squareSize / 2 < UI.ToolBarHeight) {
+			pOut->PrintMessage("[OUT OF RANGE] The square is too big, click to continue");
+			pIn->GetPointClicked(x, y);
+		}
+	} while (P1.y - squareSize / 2 < UI.ToolBarHeight);
 
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.BorderWdth = 5;
@@ -146,10 +172,16 @@ int main()
 
 
 	// 2.3.1 - Drawing a Triangle non-filled
-	pOut->PrintMessage("Drawing a Triangle ==> non-filled,  Click three points");
-	pIn->GetPointClicked(P1.x, P1.y);
-	pIn->GetPointClicked(P2.x, P2.y);
-	pIn->GetPointClicked(P3.x, P3.y);
+	do {
+		pOut->PrintMessage("Drawing a Triangle ==> non-filled, Click three points");
+		pIn->GetPointClicked(P1.x, P1.y);
+		pIn->GetPointClicked(P2.x, P2.y);
+		pIn->GetPointClicked(P3.x, P3.y);
+		if (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight || P3.y < UI.ToolBarHeight) {
+			pOut->PrintMessage("[OUT OF RANGE] The triangle can't be drawn over the toolbar, click to continue");
+			pIn->GetPointClicked(x, y);
+		}
+	} while (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight || P3.y < UI.ToolBarHeight);
 
 	gfxInfo.BorderWdth = 5;
 	gfxInfo.DrawClr = BLUE;
@@ -163,10 +195,16 @@ int main()
 
 
 	// 2.3.3 - Drawing a filled Triangle
-	pOut->PrintMessage("Drawing a Triangle ==> Filled, Click three point");
-	pIn->GetPointClicked(P1.x, P1.y);
-	pIn->GetPointClicked(P2.x, P2.y);
-	pIn->GetPointClicked(P3.x, P3.y);
+	do {
+		pOut->PrintMessage("Drawing a Triangle ==> Filled, Click three points");
+		pIn->GetPointClicked(P1.x, P1.y);
+		pIn->GetPointClicked(P2.x, P2.y);
+		pIn->GetPointClicked(P3.x, P3.y);
+		if (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight || P3.y < UI.ToolBarHeight) {
+			pOut->PrintMessage("[OUT OF RANGE] The triangle can't be drawn over the toolbar, click to continue");
+			pIn->GetPointClicked(x, y);
+		}
+	} while (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight || P3.y < UI.ToolBarHeight);
 
 
 	gfxInfo.DrawClr = BLUE;
@@ -190,21 +228,36 @@ int main()
 	pOut->PrintMessage("Drawing a Hexagon, filled/non-filled and Highlighted filled/non-filled,  Click to continue");
 	pIn->GetPointClicked(x, y);	//Wait for any click
 
-	pOut->PrintMessage("Drawing a Hexagon ==> Non-filled, click one point");
-	pIn->GetPointClicked(P1.x, P1.y);
+	///	2.4.1 - Drawing a Hexagon non-filled
+	int hexagonSize = 80;
+	do {
+		pOut->PrintMessage("Drawing a Hexagon ==> Non-filled, click one point");
+		pIn->GetPointClicked(P1.x, P1.y);
+		if (P1.y - hexagonSize / 2 * sqrt(3) < UI.ToolBarHeight) {
+			pOut->PrintMessage("[OUT OF RANGE] The hexagon is too big, click to continue");
+			pIn->GetPointClicked(x, y);
+		}
+	} while (P1.y - hexagonSize / 2 * sqrt(3) < UI.ToolBarHeight);
 
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.BorderWdth = 5;
 	gfxInfo.isFilled = false;
 	pOut->DrawHexagon(P1, gfxInfo, false);
 
+	/// 2.4.2 - Drawing a highlighted non-filled Hexagon
 	pOut->PrintMessage("Drawing a highlighted non-filled Hexagon, click to highlight");
 	pIn->GetPointClicked(x, y);
-
 	pOut->DrawHexagon(P1, gfxInfo, true);
 
-	pOut->PrintMessage("Drawing a Hexagon ==> Filled, click one point");
-	pIn->GetPointClicked(P1.x, P1.y);
+	///	2.4.3 - Drawing a Hexagon filled
+	do {
+		pOut->PrintMessage("Drawing a Hexagon ==> Filled, click one point");
+		pIn->GetPointClicked(P1.x, P1.y);
+		if (P1.y - hexagonSize / 2 * sqrt(3) < UI.ToolBarHeight) {
+			pOut->PrintMessage("[OUT OF RANGE] The hexagon is too big, click to continue");
+			pIn->GetPointClicked(x, y);
+		}
+	} while (P1.y - hexagonSize / 2 * sqrt(3) < UI.ToolBarHeight);
 
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.BorderWdth = 5;
@@ -212,6 +265,7 @@ int main()
 	gfxInfo.FillClr = WHITE;
 	pOut->DrawHexagon(P1, gfxInfo, false);
 
+	/// 2.4.4 - Drawing a highlighted filled Hexagon
 	pOut->PrintMessage("Drawing a highlighted filled Hexagon, click to highlight");
 	pIn->GetPointClicked(x, y);
 
@@ -227,9 +281,18 @@ int main()
 	pIn->GetPointClicked(x, y);	//Wait for any click
 
 	// 2.4.1 - Drawing a Circle non-filled
-	pOut->PrintMessage("Drawing a Circle ==> non-filled,  Click two points");
-	pIn->GetPointClicked(P1.x, P1.y);
-	pIn->GetPointClicked(P2.x, P2.y);
+	int radius = 0;
+	do {
+		pOut->PrintMessage("Drawing a Circle ==> non-filled,  Click two points");
+		pIn->GetPointClicked(P1.x, P1.y);
+		pIn->GetPointClicked(P2.x, P2.y);
+		radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
+
+		if (P1.y - radius <= UI.ToolBarHeight) {
+			pOut->PrintMessage("[OUT OF RANGE] The circle is too big, click to continue");
+			pIn->GetPointClicked(x, y);
+		}
+	} while (P1.y - radius <= UI.ToolBarHeight);
 
 	gfxInfo.BorderWdth = 5;
 	gfxInfo.DrawClr = BLUE;
@@ -243,9 +306,17 @@ int main()
 
 
 	// 2.4.3 - Drawing a filled Circle
-	pOut->PrintMessage("Drawing a Circle ==> Filled, Click two points");
-	pIn->GetPointClicked(P1.x, P1.y);
-	pIn->GetPointClicked(P2.x, P2.y);
+	do {
+		pOut->PrintMessage("Drawing a Circle ==> Filled, Click two points");
+		pIn->GetPointClicked(P1.x, P1.y);
+		pIn->GetPointClicked(P2.x, P2.y);
+		radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
+
+		if (P1.y - radius <= UI.ToolBarHeight) {
+			pOut->PrintMessage("[OUT OF RANGE] The circle is too big, click to continue");
+			pIn->GetPointClicked(x, y);
+		}
+	} while (P1.y - radius <= UI.ToolBarHeight);
 
 
 	gfxInfo.DrawClr = BLUE;

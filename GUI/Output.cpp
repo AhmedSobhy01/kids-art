@@ -264,7 +264,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 
 void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected)const	//Drawing square
 {
-	int squareSize = 150;
+	int squareSize = 150; //	If changed here, make sure to also change it in the TestCode.cpp call
 	color DrawingClr;
 	if (selected)
 		DrawingClr = UI.HighlightColor;
