@@ -11,7 +11,7 @@ Output::Output()
 	UI.wx = 5;
 	UI.wy = 5;
 
-	UI.StatusBarHeight = 45;
+	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 45;
 	UI.MenuItemWidth = 45;
 
@@ -214,7 +214,7 @@ void Output::PrintMessage(string msg) const	//Prints a message on status bar
 
 	pWind->SetPen(UI.MsgColor, 50);
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
-	pWind->DrawString(10, UI.height - int(UI.StatusBarHeight / 1.15), msg);
+	pWind->DrawString(10, UI.height - int(UI.StatusBarHeight / 1.2), msg);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
