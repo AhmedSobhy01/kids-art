@@ -11,7 +11,7 @@ Output::Output()
 	UI.wx = 5;
 	UI.wy = 5;
 
-	UI.StatusBarHeight = 45;
+	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 45;
 	UI.MenuItemWidth = 45;
 
@@ -165,7 +165,7 @@ void Output::CreateDrawToolBar() const
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 
-	//Ahmed: removed the ugly red border :)
+	//Ahmed: removed the red border :)
 	//Draw a line under the toolbar
 	//pWind->SetPen(RED, 3);
 	//pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
@@ -214,7 +214,7 @@ void Output::PrintMessage(string msg) const	//Prints a message on status bar
 
 	pWind->SetPen(UI.MsgColor, 50);
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
-	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.5), msg);
+	pWind->DrawString(10, UI.height - int(UI.StatusBarHeight / 1.2), msg);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 

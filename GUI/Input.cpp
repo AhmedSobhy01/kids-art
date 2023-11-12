@@ -110,6 +110,9 @@ ActionType Input::GetUserAction() const
 			switch (ClickedItemOrder)
 			{
 				case ITM_DRAW_MODE: return TO_DRAW;
+				case ITM_PICKBYSHAPE: return PICK_BY_SHAPE;
+				case ITM_PICKBYCOLOR: return PICK_BY_COLOR;
+				case ITM_PICKBYSHAPEANDCOLOR: return PICK_BY_SHAPE_COLOR;
 				case ITM_EXIT_PLAY: return  EXIT;
 				default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
