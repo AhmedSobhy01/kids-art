@@ -3,7 +3,7 @@
 
 // This is a test code to test the Input and Output classes
 
-void printSelectedColor(Output* output, color color);
+void printSelectedColor(Output *, const color&); // Prints status message in status bar for selected color
 
 int main()
 {
@@ -14,122 +14,130 @@ int main()
 	Input *pIn = pOut->CreateInput();
 
 	// Starting the test
-	pOut->PrintMessage("This demo is to test input and output classes, Click anywhere to start the test");
+	pOut->PrintMessage("This demo is to test input and output classes, click anywhere to start the test");
 	pIn->GetPointClicked(x, y); // Wait for any click
 
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 0:
 	//			Creates color menu in the center of main window and closes after selection of color
-	//			Selected color is sorted in the variable of name "selectedColor"
+	//			Selected color is stored in a variable of name "selectedColor"
 	///////////////////////////////////////////////////////////////////////////////////
 
-	pOut->PrintMessage("TEST0: Color Menu Window, Click anywhere to open color menu window");
+	pOut->PrintMessage("TEST0: Color menu window, click anywhere to open color menu window");
 	pIn->GetPointClicked(x, y); // Wait for any click
 
-	pOut->OpenColorMenuWind((UI.width - UI.ColorMenuWidth) / 2);
-	pIn->SetColorMenuWind(pOut->GetColorMenuWind());
+	pOut->OpenColorMenuWind((UI.width - UI.ColorMenuWidth) / 2); // Creates color window instance
+	pIn->SetColorMenuWind(pOut->GetColorMenuWind()); // Updates Input class with color window object pointer
 
-	color selectedColor = pIn->GetSelectedColor();
+	pOut->PrintMessage("Select a color from color menu");
+	color selectedColor = pIn->GetSelectedColor(); // Gets user selection of the color
 
-	pOut->CloseColorMenuWind();
-	pIn->SetColorMenuWind(pOut->GetColorMenuWind());
+	pOut->CloseColorMenuWind(); // Destroys color window instance
+	pIn->SetColorMenuWind(pOut->GetColorMenuWind()); // Updates Input class with color window object pointer
 
-	printSelectedColor(pOut, selectedColor);
-	pIn->GetPointClicked(x, y);
+	printSelectedColor(pOut, selectedColor);  // Prints selected color to the status bar
+	pIn->GetPointClicked(x, y); // Wait for any click
 
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 1:
-	//			Create The FULL Tool bar, the drawing area and the status bar
+	//			Creates the toolbar, drawing area, and status bar
 	//			This has already been done through the constrcutor of class Output
 	///////////////////////////////////////////////////////////////////////////////////
 
-	pOut->PrintMessage("TEST1: Drawing Tool bar and Status bar, Click anywhere to continue");
+	pOut->PrintMessage("TEST1: Drawing toolbar, status bar and drawing area, click anywhere to continue");
 	pIn->GetPointClicked(x, y); // Wait for any click
 
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 2:
-	//			Drawing all the Figures with all possible states:
-	//			Non-filled, Filled, and highlighted in both cases
+	//			Drawing all the figures with all possible states:
+	//			unfilled, filled, and highlighted in both cases
 	///////////////////////////////////////////////////////////////////////////////////
 
-	pOut->PrintMessage("TEST2: Now we will show that Output class can draw any figure in any state, Click anywhere to continue");
+	pOut->PrintMessage("TEST2: Drawing all the figures with all possible states, click anywhere to continue");
 	pIn->GetPointClicked(x, y); // Wait for any click
 
-	GfxInfo gfxInfo; // to be used with draw function of the class Ouput
+	GfxInfo gfxInfo; // To be used with draw function of the class Ouput
 	Point P1, P2, P3;
 
-	/// 2.1- Rectangle Test ///
-	/// ===================
-	pOut->PrintMessage("Drawing a Rectangle, filled/non-filled and Highlighted filled/non-filled,  Click to continue");
+	/// 2.1 - Rectangle Test ///
+	/// ====================
+	pOut->PrintMessage("Drawing a rectangle with all possible states, click anywhere to continue");
 	pIn->GetPointClicked(x, y); // Wait for any click
 
-	// 2.1.1 - Drawing non-filled rectangle
+	// 2.1.1 - Drawing unhighlighted, unfilled rectangle
+	// =================================================
 	do
 	{
-		pOut->PrintMessage("Drawing a Rectangle ==> Non-filled, Click two points");
+		pOut->PrintMessage("Drawing a rectangle => unhighlighted and unfilled, click two points");
 		pIn->GetPointClicked(P1.x, P1.y);
 		pIn->GetPointClicked(P2.x, P2.y);
+
 		if (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight)
 		{
-			pOut->PrintMessage("[OUT OF RANGE] The rectangle can't be drawn over the toolbar, click to continue");
-			pIn->GetPointClicked(x, y);
+			pOut->PrintMessage("[OUT OF RANGE] The rectangle can't be drawn over the toolbar, click anywhere to continue");
+			pIn->GetPointClicked(x, y); // Wait for any click
 		}
 	} while (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight);
 
 	gfxInfo.BorderWdth = 5;
-	gfxInfo.DrawClr = BLUE;	  // any color for border
-	gfxInfo.isFilled = false; // Figure is NOT filled
+	gfxInfo.DrawClr = BLUE;
+	gfxInfo.isFilled = false;
 	pOut->DrawRect(P1, P2, gfxInfo, false);
 
-	// 2.1.2 - Drawing highlighted non-filled rectangle
-	pOut->PrintMessage("Drawing a Rectangle ==> Highlighted non-filled, Click to Highlight");
+	// 2.1.2 - Drawing highlighted, unfilled rectangle
+	// ===============================================
+	pOut->PrintMessage("Drawing a rectangle => highlighted and unfilled, click anywhere to highlight");
 	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->DrawRect(P1, P2, gfxInfo, true);
 
-	// 2.1.3 - Drawing a filled rectangle
+	// 2.1.3 - Drawing unhighlighted, filled rectangle
+	// ===============================================
 	do
 	{
-		pOut->PrintMessage("Drawing a Rectangle ==> Filled, Click two points");
+		pOut->PrintMessage("Drawing a rectangle => unhighlighted and filled, click two points");
 		pIn->GetPointClicked(P1.x, P1.y);
 		pIn->GetPointClicked(P2.x, P2.y);
 		if (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight)
 		{
-			pOut->PrintMessage("[OUT OF RANGE] The rectangle can't be drawn over the toolbar, click to continue");
-			pIn->GetPointClicked(x, y);
+			pOut->PrintMessage("[OUT OF RANGE] The rectangle can't be drawn over the toolbar, click anywhere to continue");
+			pIn->GetPointClicked(x, y); // Wait for any click
 		}
 	} while (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight);
 
 	gfxInfo.BorderWdth = 6;
-	gfxInfo.DrawClr = BLUE;		   // any color for border
-	gfxInfo.FillClr = GREENYELLOW; // any color for filling
-	gfxInfo.isFilled = true;	   // Figure is filled
+	gfxInfo.DrawClr = BLUE;
+	gfxInfo.FillClr = YELLOW;
+	gfxInfo.isFilled = true;
 	pOut->DrawRect(P1, P2, gfxInfo, false);
 
-	// 2.1.4 - Drawing a highlighted filled rectangle
-	pOut->PrintMessage("Drawing a Rectangle ==> Highlighted filled, Click to Highlight");
+	// 2.1.4 - Drawing highlighted, filled rectangle
+	// =============================================
+	pOut->PrintMessage("Drawing a rectangle => highlighted and filled, click anywhere to highlight");
 	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->DrawRect(P1, P2, gfxInfo, true);
 
-	pOut->PrintMessage("Drawing a Rectangle Test ==> OK,  Click anywhere to continue");
+	pOut->PrintMessage("Drawing a rectangle test is done, click anywhere to continue");
 	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->ClearDrawArea();
 
-	/// 2.2- Square Test ///
-	/// ==============
-	pOut->PrintMessage("Drawing a Square, filled/non-filled and Highlighted filled/non-filled,  Click to continue");
+	/// 2.2 - Square Test ///
+	/// =================
+	const int squareSize = 150;
+
+	pOut->PrintMessage("Drawing a square with all possible states, click anywhere to continue");
 	pIn->GetPointClicked(x, y); // Wait for any click
 
-	// 2.2.1 - Drawing a Square non-filled
-	int squareSize = 150;
+	// 2.2.1 - Drawing unhighlighted, unfilled square
+	// ==============================================
 	do
 	{
-		pOut->PrintMessage("Drawing a Square ==> non-filled,  Click one point");
+		pOut->PrintMessage("Drawing a square => unhighlighted and unfilled, click one point");
 		pIn->GetPointClicked(P1.x, P1.y);
 
 		if (P1.y - squareSize / 2 < UI.ToolBarHeight)
 		{
-			pOut->PrintMessage("[OUT OF RANGE] The square is too big, click to continue");
-			pIn->GetPointClicked(x, y);
+			pOut->PrintMessage("[OUT OF RANGE] The square can't be drawn over the toolbar, click anywhere to continue");
+			pIn->GetPointClicked(x, y); // Wait for any click
 		}
 	} while (P1.y - squareSize / 2 < UI.ToolBarHeight);
 
@@ -138,55 +146,59 @@ int main()
 	gfxInfo.isFilled = false;
 	pOut->DrawSquare(P1, gfxInfo, false);
 
-	// 2.2.2 - Drawing highlighted non-filled Square
-	pOut->PrintMessage("Drawing a highlighted non-filled Square, Click to highlight");
-	pIn->GetPointClicked(x, y);
+	// 2.2.2 - Drawing highlighted, unfilled square
+	// ============================================
+	pOut->PrintMessage("Drawing a square => highlighted and unfilled, click anywhere to highlight");
+	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->DrawSquare(P1, gfxInfo, true);
 
-	// 2.2.3 - Drawing a filled Square
+	// 2.2.3 - Drawing unhighlighted, filled square
+	// ============================================
 	do
 	{
-		pOut->PrintMessage("Drawing a Square ==> Filled, Click one point");
+		pOut->PrintMessage("Drawing a square => unhighlighted and filled, click one point");
 		pIn->GetPointClicked(P1.x, P1.y);
 		if (P1.y - squareSize / 2 < UI.ToolBarHeight)
 		{
-			pOut->PrintMessage("[OUT OF RANGE] The square is too big, click to continue");
-			pIn->GetPointClicked(x, y);
+			pOut->PrintMessage("[OUT OF RANGE] The square can't be drawn over the toolbar, click anywhere to continue");
+			pIn->GetPointClicked(x, y); // Wait for any click
 		}
 	} while (P1.y - squareSize / 2 < UI.ToolBarHeight);
 
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.BorderWdth = 5;
-	gfxInfo.FillClr = GOLD;
+	gfxInfo.FillClr = YELLOW;
 	gfxInfo.isFilled = true;
 	pOut->DrawSquare(P1, gfxInfo, false);
 
-	// 2.2.4 - Drawing highlighted filled Square
-	pOut->PrintMessage("Drawing a highlighted filled Square, Click to highlight");
-	pIn->GetPointClicked(x, y);
+	// 2.2.4 - Drawing highlighted, filled square
+	// ==========================================
+	pOut->PrintMessage("Drawing a square => highlighted and filled, click anywhere to highlight");
+	pIn->GetPointClicked(x, y); // Wait for any click
 
 	pOut->DrawSquare(P1, gfxInfo, true);
 
-	pOut->PrintMessage("Drawing a Square Test ==> OK,  Click anywhere to continue");
+	pOut->PrintMessage("Drawing a square test is done, click anywhere to continue");
 	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->ClearDrawArea();
 
 	/// 2.3- Triangle Test ///
-	/// ===================
-	pOut->PrintMessage("Drawing a Triangle, filled/non-filled and Highlighted filled/non-filled,  Click to continue");
+	/// ==================
+	pOut->PrintMessage("Drawing a triangle with all possible states, click anywhere to continue");
 	pIn->GetPointClicked(x, y); // Wait for any click
 
-	// 2.3.1 - Drawing a Triangle non-filled
+	// 2.3.1 - Drawing unhighlighted, unfilled triangle
+	// ================================================
 	do
 	{
-		pOut->PrintMessage("Drawing a Triangle ==> non-filled, Click three points");
+		pOut->PrintMessage("Drawing a triangle => unhighlighted and unfilled, click three point");
 		pIn->GetPointClicked(P1.x, P1.y);
 		pIn->GetPointClicked(P2.x, P2.y);
 		pIn->GetPointClicked(P3.x, P3.y);
 		if (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight || P3.y < UI.ToolBarHeight)
 		{
-			pOut->PrintMessage("[OUT OF RANGE] The triangle can't be drawn over the toolbar, click to continue");
-			pIn->GetPointClicked(x, y);
+			pOut->PrintMessage("[OUT OF RANGE] The triangle can't be drawn over the toolbar, click anywhere to continue");
+			pIn->GetPointClicked(x, y); // Wait for any click
 		}
 	} while (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight || P3.y < UI.ToolBarHeight);
 
@@ -195,22 +207,24 @@ int main()
 	gfxInfo.isFilled = false;
 	pOut->DrawTriangle(P1, P2, P3, gfxInfo, false);
 
-	// 2.3.2 - Drawing highlighted non-filled Triangle
-	pOut->PrintMessage("Drawing a highlighted non-filled Triangle, Click to highlight");
-	pIn->GetPointClicked(x, y);
+	// 2.3.2 - Drawing highlighted, unfilled triangle
+	// ==============================================
+	pOut->PrintMessage("Drawing a triangle => highlighted and unfilled, click anywhere to highlight");
+	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->DrawTriangle(P1, P2, P3, gfxInfo, true);
 
-	// 2.3.3 - Drawing a filled Triangle
+	// 2.3.3 - Drawing unhighlighted, filled triangle
+	// ==============================================
 	do
 	{
-		pOut->PrintMessage("Drawing a Triangle ==> Filled, Click three points");
+		pOut->PrintMessage("Drawing a triangle => unhighlighted and filled, click three point");
 		pIn->GetPointClicked(P1.x, P1.y);
 		pIn->GetPointClicked(P2.x, P2.y);
 		pIn->GetPointClicked(P3.x, P3.y);
 		if (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight || P3.y < UI.ToolBarHeight)
 		{
-			pOut->PrintMessage("[OUT OF RANGE] The triangle can't be drawn over the toolbar, click to continue");
-			pIn->GetPointClicked(x, y);
+			pOut->PrintMessage("[OUT OF RANGE] The triangle can't be drawn over the toolbar, click anywhere to continue");
+			pIn->GetPointClicked(x, y); // Wait for any click
 		}
 	} while (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight || P3.y < UI.ToolBarHeight);
 
@@ -220,90 +234,98 @@ int main()
 	gfxInfo.isFilled = true;
 	pOut->DrawTriangle(P1, P2, P3, gfxInfo, false);
 
-	// 2.3.4 - Drawing highlighted filled Triangle
-	pOut->PrintMessage("Drawing a highlighted filled Triangle, Click to highlight");
-	pIn->GetPointClicked(x, y);
+	// 2.3.4 - Drawing highlighted, filled triangle
+	// ============================================
+	pOut->PrintMessage("Drawing a triangle => highlighted and filled, click anywhere to highlight");
+	pIn->GetPointClicked(x, y); // Wait for any click
 
 	pOut->DrawTriangle(P1, P2, P3, gfxInfo, true);
 
-	pOut->PrintMessage("Drawing a Triangle Test ==> OK,  Click anywhere to continue");
+	pOut->PrintMessage("Drawing a triangle test is done, click anywhere to continue");
 	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->ClearDrawArea();
 
-	/// 2.4- Hexagon Test ///
-	/// ===================
-	pOut->PrintMessage("Drawing a Hexagon, filled/non-filled and Highlighted filled/non-filled,  Click to continue");
+	/// 2.4 - Hexagon Test ///
+	/// ==================
+	const int hexagonSize = 80;
+
+	pOut->PrintMessage("Drawing a hexagon with all possible states, click anywhere to continue");
 	pIn->GetPointClicked(x, y); // Wait for any click
 
-	///	2.4.1 - Drawing a Hexagon non-filled
-	int hexagonSize = 80;
+	// 2.4.1 - Drawing unhighlighted, unfilled hexagon
+	// ===============================================
 	do
 	{
-		pOut->PrintMessage("Drawing a Hexagon ==> Non-filled, click one point");
+		pOut->PrintMessage("Drawing a hexagon => unhighlighted and unfilled, click one point");
 		pIn->GetPointClicked(P1.x, P1.y);
-		if (P1.y - hexagonSize / 2 * sqrt(3) < UI.ToolBarHeight)
+		if (P1.y - hexagonSize / 2.0 * sqrt(3) < UI.ToolBarHeight)
 		{
-			pOut->PrintMessage("[OUT OF RANGE] The hexagon is too big, click to continue");
-			pIn->GetPointClicked(x, y);
+			pOut->PrintMessage("[OUT OF RANGE] The hexagon can't be drawn over the toolbar, click anywhere to continue");
+			pIn->GetPointClicked(x, y); // Wait for any click
 		}
-	} while (P1.y - hexagonSize / 2 * sqrt(3) < UI.ToolBarHeight);
+	} while (P1.y - hexagonSize / 2.0 * sqrt(3) < UI.ToolBarHeight);
 
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.BorderWdth = 5;
 	gfxInfo.isFilled = false;
 	pOut->DrawHexagon(P1, gfxInfo, false);
 
-	/// 2.4.2 - Drawing a highlighted non-filled Hexagon
-	pOut->PrintMessage("Drawing a highlighted non-filled Hexagon, click to highlight");
-	pIn->GetPointClicked(x, y);
+	// 2.4.2 - Drawing highlighted, unfilled hexagon
+	// =============================================
+	pOut->PrintMessage("Drawing a hexagon => highlighted and unfilled, click anywhere to highlight");
+	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->DrawHexagon(P1, gfxInfo, true);
 
-	///	2.4.3 - Drawing a Hexagon filled
+	// 2.4.3 - Drawing unhighlighted, filled hexagon
+	// =============================================
 	do
 	{
-		pOut->PrintMessage("Drawing a Hexagon ==> Filled, click one point");
+		pOut->PrintMessage("Drawing a hexagon => unhighlighted and filled, click one point");
 		pIn->GetPointClicked(P1.x, P1.y);
-		if (P1.y - hexagonSize / 2 * sqrt(3) < UI.ToolBarHeight)
+		if (P1.y - hexagonSize / 2.0 * sqrt(3) < UI.ToolBarHeight)
 		{
-			pOut->PrintMessage("[OUT OF RANGE] The hexagon is too big, click to continue");
-			pIn->GetPointClicked(x, y);
+			pOut->PrintMessage("[OUT OF RANGE] The hexagon can't be drawn over the toolbar, click anywhere to continue");
+			pIn->GetPointClicked(x, y); // Wait for any click
 		}
-	} while (P1.y - hexagonSize / 2 * sqrt(3) < UI.ToolBarHeight);
+	} while (P1.y - hexagonSize / 2.0 * sqrt(3) < UI.ToolBarHeight);
 
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.BorderWdth = 5;
 	gfxInfo.isFilled = true;
-	gfxInfo.FillClr = WHITE;
+	gfxInfo.FillClr = YELLOW;
 	pOut->DrawHexagon(P1, gfxInfo, false);
 
-	/// 2.4.4 - Drawing a highlighted filled Hexagon
-	pOut->PrintMessage("Drawing a highlighted filled Hexagon, click to highlight");
-	pIn->GetPointClicked(x, y);
+	// 2.4.4 - Drawing highlighted, filled hexagon
+	// ===========================================
+	pOut->PrintMessage("Drawing a hexagon => highlighted and filled, click anywhere to highlight");
+	pIn->GetPointClicked(x, y); // Wait for any click
 
 	pOut->DrawHexagon(P1, gfxInfo, true);
 
-	pOut->PrintMessage("Drawing a Hexagon Test ==> OK,  Click anywhere to continue");
+	pOut->PrintMessage("Drawing a hexagon test is done, click anywhere to continue");
 	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->ClearDrawArea();
 
-	/// 2.5- Circle Test ///
-	/// ===================
-	pOut->PrintMessage("Drawing a Circle, filled/non-filled and Highlighted filled/non-filled,  Click to continue");
+	/// 2.5 - Circle Test ///
+	/// ==================
+	pOut->PrintMessage("Drawing a circle with all possible states, click anywhere to continue");
 	pIn->GetPointClicked(x, y); // Wait for any click
 
-	// 2.4.1 - Drawing a Circle non-filled
+	// 2.5.1 - Drawing unhighlighted, unfilled circle
+	// ==============================================
 	int radius = 0;
+
 	do
 	{
-		pOut->PrintMessage("Drawing a Circle ==> non-filled,  Click two points");
+		pOut->PrintMessage("Drawing a circle => unhighlighted and unfilled, click two point");
 		pIn->GetPointClicked(P1.x, P1.y);
 		pIn->GetPointClicked(P2.x, P2.y);
 		radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
 
 		if (P1.y - radius <= UI.ToolBarHeight)
 		{
-			pOut->PrintMessage("[OUT OF RANGE] The circle is too big, click to continue");
-			pIn->GetPointClicked(x, y);
+			pOut->PrintMessage("[OUT OF RANGE] The circle can't be drawn over the toolbar, click anywhere to continue");
+			pIn->GetPointClicked(x, y); // Wait for any click
 		}
 	} while (P1.y - radius <= UI.ToolBarHeight);
 
@@ -312,55 +334,55 @@ int main()
 	gfxInfo.isFilled = false;
 	pOut->DrawCircle(P1, P2, gfxInfo, false);
 
-	// 2.4.2 - Drawing highlighted non-filled Circle
-	pOut->PrintMessage("Drawing a highlighted non-filled Circle, Click to highlight");
-	pIn->GetPointClicked(x, y);
+	// 2.5.2 - Drawing highlighted, unfilled circle
+	// ============================================
+	pOut->PrintMessage("Drawing a circle => highlighted and unfilled, click anywhere to highlight");
+	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->DrawCircle(P1, P2, gfxInfo, true);
 
-	// 2.4.3 - Drawing a filled Circle
+	// 2.5.3 - Drawing unhighlighted, filled circle
+	// ============================================
 	do
 	{
-		pOut->PrintMessage("Drawing a Circle ==> Filled, Click two points");
+		pOut->PrintMessage("Drawing a circle => unhighlighted and filled, click two point");
 		pIn->GetPointClicked(P1.x, P1.y);
 		pIn->GetPointClicked(P2.x, P2.y);
 		radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
 
 		if (P1.y - radius <= UI.ToolBarHeight)
 		{
-			pOut->PrintMessage("[OUT OF RANGE] The circle is too big, click to continue");
-			pIn->GetPointClicked(x, y);
+			pOut->PrintMessage("[OUT OF RANGE] The circle can't be drawn over the toolbar, click anywhere to continue");
+			pIn->GetPointClicked(x, y); // Wait for any click
 		}
 	} while (P1.y - radius <= UI.ToolBarHeight);
 
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.BorderWdth = 5;
-	gfxInfo.FillClr = GRAY;
+	gfxInfo.FillClr = YELLOW;
 	gfxInfo.isFilled = true;
 	pOut->DrawCircle(P1, P2, gfxInfo, false);
 
-	// 2.4.4 - Drawing highlighted filled Circle
-	pOut->PrintMessage("Drawing a highlighted filled Circle, Click to highlight");
-	pIn->GetPointClicked(x, y);
+	// 2.5.4 - Drawing highlighted, filled circle
+	// ==========================================
+	pOut->PrintMessage("Drawing a circle => highlighted and filled, click anywhere to highlight");
+	pIn->GetPointClicked(x, y); // Wait for any click
 
 	pOut->DrawCircle(P1, P2, gfxInfo, true);
-	pOut->PrintMessage("Drawing a Circle Test ==> OK,  Click anywhere to continue");
+	pOut->PrintMessage("Drawing a circle test is done, click anywhere to continue");
 	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->ClearDrawArea();
-
+	
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 3:
 	//			Input Class: Read strings from the user
 	///////////////////////////////////////////////////////////////////////////////////
-	pOut->PrintMessage("TEST3: Now Time to test class Input, Click anywhere to continue");
+	pOut->PrintMessage("TEST3: Input class for reading strings, click anywhere to continue");
 	pIn->GetPointClicked(x, y); // Wait for any click
 
-	pOut->PrintMessage("Testing Input ability to read strings");
+	pOut->PrintMessage("Testing Input ability to read strings, type using your keyboard and click enter at the end");
 
-	// 1- Read a string from the user on the status bar
-	// 2- After reading the string clear the status bar
-	// 3- print on the status bar "You Entered" then print the string
 	string userInput = pIn->GetString(pOut);
-	pOut->PrintMessage("You Entered " + userInput);
+	pOut->PrintMessage("You Entered: " + userInput);
 	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->ClearDrawArea();
 
@@ -368,52 +390,49 @@ int main()
 	// TEST 4:
 	//			Input Class : Check for the user action
 	///////////////////////////////////////////////////////////////////////////////////
-	pOut->PrintMessage("TEST4: Testing Input ability to detect User Action, click anywhere");
+	pOut->PrintMessage("TEST4: Input class for detecting user action, click anywhere");
 
-	ActionType ActType;
+	ActionType actionType;
 
-	/// TODO:
-	// You must add a case for each action (both Draw mode and Play mode actions)
-	// Add cases for the missing actions below
 	do
 	{
-		ActType = pIn->GetUserAction();
-		switch (ActType)
+		actionType = pIn->GetUserAction();
+		switch (actionType)
 		{
 		case TO_DRAW:
-			pOut->PrintMessage("Action: Switch to Draw Mode, creating simualtion tool bar");
+			pOut->PrintMessage("Action: Switched to draw mode, click anywhere");
 			pOut->CreateDrawToolBar();
 			break;
 		case TO_PLAY:
-			pOut->PrintMessage("Action: Switch to Play Mode, creating Design tool bar");
+			pOut->PrintMessage("Action: Switched to play mode, click anywhere");
 			pOut->CreatePlayToolBar();
 			break;
 		case DRAW_RECT:
-			pOut->PrintMessage("Action: Draw a Rectangle , Click anywhere");
+			pOut->PrintMessage("Action: Draw a rectangle, click anywhere");
 			break;
 		case DRAW_CIRCLE:
-			pOut->PrintMessage("Action: Draw a Circle , Click anywhere");
+			pOut->PrintMessage("Action: Draw a circle, click anywhere");
 			break;
 		case DRAW_SQUARE:
-			pOut->PrintMessage("Action: Draw a Square , Click anywhere");
+			pOut->PrintMessage("Action: Draw a square, click anywhere");
 			break;
 		case DRAW_TRIANGLE:
-			pOut->PrintMessage("Action: Draw a Triangle , Click anywhere");
+			pOut->PrintMessage("Action: Draw a triangle, click anywhere");
 			break;
 		case DRAW_HEXAGON:
-			pOut->PrintMessage("Action: Draw a Hexagon , Click anywhere");
+			pOut->PrintMessage("Action: Draw a hexagon, click anywhere");
 			break;
 		case OUTLINE:
-			pOut->PrintMessage("Action: Outline a Shape , Select a shape to outline");
+			pOut->PrintMessage("Action: Outline selected shape, click anywhere");
 			break;
 		case SELECT:
-			pOut->PrintMessage("Action: Select a Shape , Click on a shape");
+			pOut->PrintMessage("Action: Select a shape, click anywhere");
 			break;
 		case BORDER_WIDTH:
-			pOut->PrintMessage("Action: Border Width , Click on a size");
+			pOut->PrintMessage("Action: Border width, click anywhere");
 			break;
 		case OUTLINE_COLOR:
-			pOut->PrintMessage("Action: Ouline Color , Click to choose a color");
+			pOut->PrintMessage("Action: Ouline color, select a color");
 
 			pOut->OpenColorMenuWind((UI.width - UI.ColorMenuWidth) / 2, false);
 			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
@@ -424,7 +443,7 @@ int main()
 			printSelectedColor(pOut, selectedColor);
 			break;
 		case FILL_COLOR:
-			pOut->PrintMessage("Action: Fill Color , Click to choose a color");
+			pOut->PrintMessage("Action: Fill color, select a color");
 
 			pOut->OpenColorMenuWind((UI.width - UI.ColorMenuWidth) / 2);
 			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
@@ -435,102 +454,102 @@ int main()
 			printSelectedColor(pOut, selectedColor);
 			break;
 		case FILL:
-			pOut->PrintMessage("Action: Fill a Shape , Select a shape to fill");
+			pOut->PrintMessage("Action: Fill selected shape, click anywhere");
 			break;
 		case REMOVE:
-			pOut->PrintMessage("Action: Remove a Shape , Select a shape to remove");
+			pOut->PrintMessage("Action: remove selected shape, click anywhere");
 			break;
 		case MOVE:
-			pOut->PrintMessage("Action: Move a Shape , Select a shape to move");
+			pOut->PrintMessage("Action: Move selected shape, click anywhere");
 			break;
 		case RESIZE:
-			pOut->PrintMessage("Action: Resize a Shape , Select a shape to resize");
+			pOut->PrintMessage("Action: Resize selected shape, click anywhere");
 			break;
 		case DRAG_MOVE:
-			pOut->PrintMessage("Action: Move a Shape , Drag the shape to move");
+			pOut->PrintMessage("Action: Move selected shape by dragging, click anywhere");
 			break;
 		case DRAG_RESIZE:
-			pOut->PrintMessage("Action: Resize a Shape , Drag the corners of a shape to resize");
+			pOut->PrintMessage("Action: Resize selected shape by dragging, click anywhere");
 			break;
 		case UNDO:
-			pOut->PrintMessage("Action: Undo");
+			pOut->PrintMessage("Action: Undo, click anywhere");
 			break;
 		case REDO:
-			pOut->PrintMessage("Action: Redo");
+			pOut->PrintMessage("Action: Redo, click anywhere");
 			break;
 		case CLEAR_ALL:
-			pOut->PrintMessage("Action: Clear the canvas");
+			pOut->PrintMessage("Action: Clear the canvas, click anywhere");
 			break;
 		case START_RECORDING:
-			pOut->PrintMessage("Action: Start Recording");
+			pOut->PrintMessage("Action: Start recording, click anywhere");
 			break;
 		case STOP_RECORDING:
-			pOut->PrintMessage("Action: Stop Recording");
+			pOut->PrintMessage("Action: Stop recording, click anywhere");
 			break;
 		case PLAY_RECORDING:
-			pOut->PrintMessage("Action: Play Recording");
+			pOut->PrintMessage("Action: Play recording, click anywhere");
 			break;
 		case BACKGROUND_COLOR:
-			pOut->PrintMessage("Action: Background color , Click to choose a color");
+			pOut->PrintMessage("Action: Background color, select a color");
 			break;
 		case OPEN_GRAPH:
-			pOut->PrintMessage("Action: Open graph , Type the graph name to open");
+			pOut->PrintMessage("Action: Open graph, click anywhere");
 			break;
 		case SAVE_GRAPH:
-			pOut->PrintMessage("Action: Save graph , Type the graph name to save");
+			pOut->PrintMessage("Action: Save graph, click anywhere");
 			break;
 		case PICK_BY_SHAPE:
-			pOut->PrintMessage("Action: Pick by shape gamemode , Click on the similar shapes");
+			pOut->PrintMessage("Action: Pick by shape gamemode, click anywhere");
 			break;
 		case PICK_BY_COLOR:
-			pOut->PrintMessage("Action: Pick by color gamemode , Click on the similar color");
+			pOut->PrintMessage("Action: Pick by color gamemode, click anywhere");
 			break;
 		case PICK_BY_SHAPE_COLOR:
-			pOut->PrintMessage("Action: Pick by shape and color gamemode , Click on simiar shapes with similar color");
+			pOut->PrintMessage("Action: Pick by shape and color gamemode, click anywhere");
 			break;
 		case DRAWING_AREA:
-			pOut->PrintMessage("Action: a click on the Drawing Area, Click anywhere");
+			pOut->PrintMessage("Action: Drawing Area, click anywhere");
 			break;
 		case STATUS:
-			pOut->PrintMessage("Action: a click on the Status Bar, Click anywhere");
+			pOut->PrintMessage("Action: Status Bar, click anywhere");
 			break;
 		case EMPTY:
-			pOut->PrintMessage("Action: a click on empty area in the Design Tool Bar, Click anywhere");
+			pOut->PrintMessage("Action: Empty area in the toolbar, click anywhere");
 			break;
 		case EXIT:
 			break;
 		}
-
-	} while (ActType != EXIT);
+	} while (actionType != EXIT);
 
 	/// Exiting
-	pOut->PrintMessage("Action: EXIT, test is finished, click anywhere to exit");
-	pIn->GetPointClicked(x, y);
+	pOut->PrintMessage("Action: Exit, click anywhere to exit");
+	pIn->GetPointClicked(x, y);  // Wait for any click
 
 	delete pIn;
 	delete pOut;
 	return 0;
 }
 
-void printSelectedColor(Output* outputPtr, color color) {
+void printSelectedColor(Output *outputPtr, const color &color)
+{
 	if (color == BLACK)
-		outputPtr->PrintMessage("You choose Black, Click anywhere to continue");
+		outputPtr->PrintMessage("You selected Black, click anywhere to continue");
 	else if (color == RED)
-		outputPtr->PrintMessage("You choose Red, Click anywhere to continue");
+		outputPtr->PrintMessage("You selected Red, click anywhere to continue");
 	else if (color == BLUE)
-		outputPtr->PrintMessage("You choose Blue, Click anywhere to continue");
+		outputPtr->PrintMessage("You selected Blue, click anywhere to continue");
 	else if (color == GREEN)
-		outputPtr->PrintMessage("You choose Green, Click anywhere to continue");
+		outputPtr->PrintMessage("You selected Green, click anywhere to continue");
 	else if (color == MAGENTA)
-		outputPtr->PrintMessage("You choose Magenta, Click anywhere to continue");
+		outputPtr->PrintMessage("You selected Magenta, click anywhere to continue");
 	else if (color == ORANGE)
-		outputPtr->PrintMessage("You choose Orange, Click anywhere to continue");
+		outputPtr->PrintMessage("You selected Orange, click anywhere to continue");
 	else if (color == BROWN)
-		outputPtr->PrintMessage("You choose Brown, Click anywhere to continue");
+		outputPtr->PrintMessage("You selected Brown, click anywhere to continue");
 	else if (color == CYAN)
-		outputPtr->PrintMessage("You choose Cyan, Click anywhere to continue");
+		outputPtr->PrintMessage("You selected Cyan, click anywhere to continue");
 	else if (color == YELLOW)
-		outputPtr->PrintMessage("You choose Yellow, Click anywhere to continue");
+		outputPtr->PrintMessage("You selected Yellow, click anywhere to continue");
 	else if (color == TRANSPARENT_COLOR)
-		outputPtr->PrintMessage("You choose Transparent, Click anywhere to continue");
+		outputPtr->PrintMessage("You selected Transparent, click anywhere to continue");
 }

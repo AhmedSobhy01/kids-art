@@ -5,7 +5,7 @@
 
 // User Interface information file.
 // This file contains info that is needed by Input and Output classes to
-// handle the user interface
+// Handle the user interface
 
 enum GUI_MODE // Graphical user interface mode
 {
@@ -13,75 +13,67 @@ enum GUI_MODE // Graphical user interface mode
 	MODE_PLAY  // Playing mode
 };
 
-enum DrawMenuItem // The items of the Draw menu (you should add more items)
+enum DrawMenuItem // The items of the draw menu
 {
-	// Note: Items are **(ordered)** here as they appear in menu
-	// If you want to change the menu items order, change the order here
-	ITM_PLAY_MODE,
-	ITM_RECT,
-	ITM_CIRCLE,
-	ITM_SQUARE,
-	ITM_TRIANGLE,
-	ITM_HEXAGON,
-	ITM_OUTLINE,
-	ITM_SELECT,
-	ITM_BORDER_WIDTH,
-	ITM_OUTLINE_COLOR,
-	ITM_FILL_COLOR,
-	ITM_FILL,
-	ITM_REMOVE,
-	ITM_MOVE,
-	ITM_RESIZE,
-	ITM_DRAG_MOVE,
-	ITM_DRAG_RESIZE,
-	ITM_UNDO,
-	ITM_REDO,
-	ITM_CLEAR_ALL,
-	ITM_START_RECORDING,
-	ITM_STOP_RECORDING,
-	ITM_PLAY_RECORDING,
-	ITM_BACKGROUND_COLOR,
-	ITM_OPEN,
-	ITM_SAVE,
-	ITM_EXIT,
+	ITM_PLAY_MODE,			// Swith To Play Mode
+	ITM_RECT,				// Draw Rectangle
+	ITM_CIRCLE,				// Draw Circle
+	ITM_SQUARE,				// Draw Square
+	ITM_TRIANGLE,			// Draw Triangle
+	ITM_HEXAGON,			// Draw Hexagon
+	ITM_OUTLINE,			// Outline Selected Shape
+	ITM_SELECT,				// Select Shape
+	ITM_BORDER_WIDTH,		// Change Selected Shape Border Width
+	ITM_OUTLINE_COLOR,		// Outline Color Menu
+	ITM_FILL_COLOR,			// Fill Color Menu
+	ITM_FILL,				// Fill Selected Shape
+	ITM_REMOVE,				// Remove Selected Shape
+	ITM_MOVE,				// Move Selected Shape
+	ITM_RESIZE,				// Resize Selected Shape
+	ITM_DRAG_MOVE,			// Move Selected Shape By Dragging
+	ITM_DRAG_RESIZE,		// Resize Selected Shape By Dragging
+	ITM_UNDO,				// Undo Last Action
+	ITM_REDO,				// Redo Last Action
+	ITM_CLEAR_ALL,			// Clear Canvas
+	ITM_START_RECORDING,	// Start Recording
+	ITM_STOP_RECORDING,		// Stop Recording
+	ITM_PLAY_RECORDING,		// Play Recording
+	ITM_BACKGROUND_COLOR,	// Canvas Background Color Menu
+	ITM_OPEN,				// Open Graph
+	ITM_SAVE,				// Save Graph
+	ITM_EXIT,				// Exit
 
-	DRAW_ITM_COUNT // no. of menu items ==> This should be the last line in this enum
-
+	DRAW_ITM_COUNT,			// No of menu items
 };
 
 enum ColorMenuItem
 {
-	COLOR_MENU_ITM_BLACK,
-	COLOR_MENU_ITM_RED,
-	COLOR_MENU_ITM_BLUE,
-	COLOR_MENU_ITM_GREEN,
-	COLOR_MENU_ITM_MAGENTA,
-	COLOR_MENU_ITM_ORANGE,
-	COLOR_MENU_ITM_BROWN,
-	COLOR_MENU_ITM_CYAN,
-	COLOR_MENU_ITM_YELLOW,
-	COLOR_MENU_ITM_TRANSPARENT,
-	COLOR_MENU_ITM_COUNT,
+	COLOR_MENU_ITM_BLACK,			// Black
+	COLOR_MENU_ITM_RED,				// Red
+	COLOR_MENU_ITM_BLUE,			// Blue
+	COLOR_MENU_ITM_GREEN,			// Green
+	COLOR_MENU_ITM_MAGENTA,			// Magenta
+	COLOR_MENU_ITM_ORANGE,			// Orange
+	COLOR_MENU_ITM_BROWN,			// Brown
+	COLOR_MENU_ITM_CYAN,			// Cyan
+	COLOR_MENU_ITM_YELLOW,			// Yellow
+	COLOR_MENU_ITM_TRANSPARENT,		// Transparent
+	COLOR_MENU_ITM_COUNT,			// No of color menu items
 };
 
-enum PlayMenuItem // The items of the Play menu (you should add more items)
+enum PlayMenuItem // The items of the play menu
 {
-	// Note: Items are **(ordered)** here as they appear in menu
-	// If you want to change the menu items order, change the order here
-
-	// TODO: Add more items names here
-	ITM_DRAW_MODE,
-	ITM_PICKBYSHAPE,
-	ITM_PICKBYCOLOR,
-	ITM_PICKBYSHAPEANDCOLOR,
-	ITM_EXIT_PLAY,
-	PLAY_ITM_COUNT // no. of menu items ==> This should be the last line in this enum
-
+	ITM_DRAW_MODE,					// Switch To Draw Mode
+	ITM_PICKBYSHAPE,				// Pick By Shape Gamemode
+	ITM_PICKBYCOLOR,				// Pick By Color Gamemode
+	ITM_PICKBYSHAPEANDCOLOR,		// Pick By Shape and Color Gamemode
+	ITM_EXIT_PLAY,					// Exit Play Mode
+	PLAY_ITM_COUNT,					// No of play menu items
 };
 
 __declspec(selectany) // This line to prevent "redefinition error"
 
-	struct UI_Info // User Interface Info.
+struct UI_Info // User Interface Info.
 {
 	GUI_MODE InterfaceMode;
 
@@ -99,10 +91,7 @@ __declspec(selectany) // This line to prevent "redefinition error"
 	color MsgColor;		  // Messages color
 	color BkGrndColor;	  // Background color
 	color StatusBarColor; // Status bar color
-	int PenWidth;		  // width of the pen that draws shapes
-
-	/// Add more members if needed
-
-} UI; // create a global object UI
+	int PenWidth;		  // Width of the pen that draws shapes
+} UI; // Create a global object UI
 
 #endif

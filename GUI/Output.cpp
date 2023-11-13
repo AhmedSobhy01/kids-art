@@ -19,13 +19,13 @@ Output::Output()
 	UI.ColorMenuWidth = COLOR_MENU_ITM_COUNT * UI.ColorMenuItemWidth + 13;
 	UI.ColorMenuHeight = 60;
 
-	UI.DrawColor = BLUE;				   // Drawing color
-	UI.FillColor = GREEN;				   // Filling color
-	UI.MsgColor = RED;					   // Messages color
-	UI.BkGrndColor = LIGHTGOLDENRODYELLOW; // Background color
-	UI.HighlightColor = MAGENTA;		   // This color should NOT be used to draw figures. use if for highlight only
-	UI.StatusBarColor = TURQUOISE;
-	UI.PenWidth = 3; // width of the figures frames
+	UI.DrawColor = BLUE;					// Drawing color
+	UI.FillColor = GREEN;					// Filling color
+	UI.MsgColor = RED;						// Messages color
+	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	// Background color
+	UI.HighlightColor = MAGENTA;			// This color should NOT be used to draw figures, use if for highlight only
+	UI.StatusBarColor = TURQUOISE;			// Status bar background color
+	UI.PenWidth = 3;						// Width of the figures frames
 
 	// Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
@@ -58,12 +58,14 @@ window *Output::CreateWind(int w, int h, int x, int y) const
 	return pW;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+
 void Output::CreateColorMenuWind(int x, bool withTransparent)
 {
 	colorMenuWind = new window((withTransparent ? UI.ColorMenuWidth : UI.ColorMenuWidth - UI.ColorMenuItemWidth), UI.ColorMenuHeight, (UI.wx + x) < UI.width ? (UI.wx + x) : (UI.width - 10), UI.wy + UI.ToolBarHeight + 35);
 	colorMenuWind->ChangeTitle("Colors");
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+
 void Output::DrawColorMenuItems(bool withTransparent) const
 {
 	int arraySize = (withTransparent ? COLOR_MENU_ITM_COUNT : COLOR_MENU_ITM_COUNT - 1);
@@ -88,6 +90,7 @@ void Output::DrawColorMenuItems(bool withTransparent) const
 	delete[] ColorMenuItemImages;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+
 void Output::OpenColorMenuWind(int x, bool withTransparent)
 {
 	CreateColorMenuWind(x, withTransparent); // Intializes a new window and sets data memeber to that pointer
@@ -95,17 +98,20 @@ void Output::OpenColorMenuWind(int x, bool withTransparent)
 	DrawColorMenuItems(withTransparent); // Draws color images to color menu window
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+
 void Output::CloseColorMenuWind()
 {
 	delete colorMenuWind;
 	colorMenuWind = nullptr;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+
 window *Output::GetColorMenuWind() const
 {
 	return colorMenuWind;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+
 void Output::CreateStatusBar() const
 {
 	pWind->SetPen(UI.StatusBarColor, 1);
@@ -113,6 +119,7 @@ void Output::CreateStatusBar() const
 	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+
 void Output::ClearStatusBar() const
 {
 	// Clear Status bar by drawing a filled white rectangle
@@ -121,6 +128,7 @@ void Output::ClearStatusBar() const
 	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+
 void Output::CreateDrawToolBar() const
 {
 	UI.InterfaceMode = MODE_DRAW;
@@ -128,12 +136,7 @@ void Output::CreateDrawToolBar() const
 	pWind->SetBrush(WHITE);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 
-	// You can draw the tool bar icons in any way you want.
-	// Below is one possible way
-
-	// First prepare List of images for each menu item
-	// To control the order of these images in the menu,
-	// reoder them in UI_Info.h ==> enum DrawMenuItem
+	// Draw mode toolbar images
 	string MenuItemImages[DRAW_ITM_COUNT];
 	MenuItemImages[ITM_PLAY_MODE] = "images\\DrawMode\\PlayMode.jpg";
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Rectangle.jpg";
@@ -163,26 +166,21 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_SAVE] = "images\\DrawMode\\Save.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\DrawMode\\Exit.jpg";
 
-	// TODO: Prepare images for each menu item and add it to the list
-
 	// Draw menu item one image at a time
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-
-	// Ahmed: removed the red border :)
-	// Draw a line under the toolbar
-	// pWind->SetPen(RED, 3);
-	// pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::CreatePlayToolBar() const
 {
+	// Clear toolbar
 	pWind->SetPen(WHITE, 1);
 	pWind->SetBrush(WHITE);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 	UI.InterfaceMode = MODE_PLAY;
-	/// TODO: write code to create Play mode menu
+
+	// Draw mode toolbar images
 	string PlayMenuItems[PLAY_ITM_COUNT];
 	PlayMenuItems[ITM_DRAW_MODE] = "images\\PlayMode\\draw-mode.jpg";
 	PlayMenuItems[ITM_PICKBYSHAPE] = "images\\PlayMode\\PickByShape.jpg";
@@ -193,10 +191,6 @@ void Output::CreatePlayToolBar() const
 	// Draw menu item one image at a time
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)
 		pWind->DrawImage(PlayMenuItems[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-
-	// Draw a line under the toolbar
-	// pWind->SetPen(RED, 3);
-	// pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -218,19 +212,19 @@ void Output::PrintMessage(string msg) const // Prints a message on status bar
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-color Output::getCrntDrawColor() const // get current drawing color
+color Output::getCrntDrawColor() const // Get current drawing color
 {
 	return UI.DrawColor;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-color Output::getCrntFillColor() const // get current filling color
+color Output::getCrntFillColor() const // Get current filling color
 {
 	return UI.FillColor;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-int Output::getCrntPenWidth() const // get current pen width
+int Output::getCrntPenWidth() const // Get current pen width
 {
 	return UI.PenWidth;
 }
@@ -259,10 +253,12 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 
 	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
 }
+//////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected) const // Drawing square
 {
-	int squareSize = 150; //	If changed here, make sure to also change it in the TestCode.cpp call
+	const int squareSize = 150; //	If changed here, make sure to also change it in the TestCode.cpp call
+
 	color DrawingClr;
 	if (selected)
 		DrawingClr = UI.HighlightColor;
@@ -271,6 +267,7 @@ void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected) const //
 
 	pWind->SetPen(DrawingClr, 1);
 	drawstyle style;
+
 	if (SquareGfxInfo.isFilled)
 	{
 		style = FILLED;
@@ -287,6 +284,7 @@ void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected) const //
 
 	pWind->DrawRectangle(p1.x, p1.y, p2.x, p2.y, style);
 }
+//////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected) const // Drawing Triangle
 {
@@ -308,6 +306,7 @@ void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo,
 
 	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
 }
+//////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected) const
 {
@@ -330,10 +329,12 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected
 	int radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
 	pWind->DrawCircle(P1.x, P1.y, radius, style);
 }
+//////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::DrawHexagon(Point P1, GfxInfo HexagonGfxInfo, bool selected) const
 {
-	int hexagonSize = 80;
+	const int hexagonSize = 80; //	If changed here, make sure to also change it in the TestCode.cpp call
+
 	color drawcolor;
 	drawstyle style;
 	if (selected)
@@ -363,8 +364,8 @@ void Output::DrawHexagon(Point P1, GfxInfo HexagonGfxInfo, bool selected) const
 
 	pWind->DrawPolygon(xPointsArray, yPointsArray, 6, style);
 }
-
 //////////////////////////////////////////////////////////////////////////////////////////
+
 Output::~Output()
 {
 	delete pWind;
