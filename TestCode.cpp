@@ -3,7 +3,7 @@
 
 // This is a test code to test the Input and Output classes
 
-void printSelectedColor(Output *, const color&); // Prints status message in status bar for selected color
+void printSelectedColor(Output *, const color &); // Prints status message in status bar for selected color
 
 int main()
 {
@@ -26,22 +26,22 @@ int main()
 	pOut->PrintMessage("TEST0: Color menu window, click anywhere to open color menu window");
 	pIn->GetPointClicked(x, y); // Wait for any click
 
-	pOut->OpenColorMenuWind(); // Creates color window instance
+	pOut->OpenColorMenuWind();						 // Creates color window instance
 	pIn->SetColorMenuWind(pOut->GetColorMenuWind()); // Updates Input class with color window object pointer
 
 	pOut->PrintMessage("Select a color from color menu");
 	color selectedColor = pIn->GetSelectedColor(); // Gets user selection of the color
 
-	pOut->CloseColorMenuWind(); // Destroys color window instance
+	pOut->CloseColorMenuWind();						 // Destroys color window instance
 	pIn->SetColorMenuWind(pOut->GetColorMenuWind()); // Updates Input class with color window object pointer
 
-	printSelectedColor(pOut, selectedColor);  // Prints selected color to the status bar
-	pIn->GetPointClicked(x, y); // Wait for any click
-	
+	printSelectedColor(pOut, selectedColor); // Prints selected color to the status bar
+	pIn->GetPointClicked(x, y);				 // Wait for any click
+
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 1:
 	//			Creates the toolbar, drawing area, and status bar
-	//			This has already been done through the constrcutor of class Output
+	//			This has already been done through the constructor of class Output
 	///////////////////////////////////////////////////////////////////////////////////
 
 	pOut->PrintMessage("TEST1: Drawing toolbar, status bar and drawing area, click anywhere to continue");
@@ -79,7 +79,7 @@ int main()
 		}
 	} while (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight);
 
-	gfxInfo.BorderWdth = 5;
+	gfxInfo.BorderWidth = 5;
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.isFilled = false;
 	pOut->DrawRect(P1, P2, gfxInfo, false);
@@ -104,7 +104,7 @@ int main()
 		}
 	} while (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight);
 
-	gfxInfo.BorderWdth = 6;
+	gfxInfo.BorderWidth = 6;
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.FillClr = YELLOW;
 	gfxInfo.isFilled = true;
@@ -141,7 +141,7 @@ int main()
 		}
 	} while (P1.y - squareSize / 2 < UI.ToolBarHeight);
 
-	gfxInfo.BorderWdth = 5;
+	gfxInfo.BorderWidth = 5;
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.isFilled = false;
 	pOut->DrawSquare(P1, gfxInfo, false);
@@ -166,7 +166,7 @@ int main()
 	} while (P1.y - squareSize / 2 < UI.ToolBarHeight);
 
 	gfxInfo.DrawClr = BLUE;
-	gfxInfo.BorderWdth = 5;
+	gfxInfo.BorderWidth = 5;
 	gfxInfo.FillClr = YELLOW;
 	gfxInfo.isFilled = true;
 	pOut->DrawSquare(P1, gfxInfo, false);
@@ -202,7 +202,7 @@ int main()
 		}
 	} while (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight || P3.y < UI.ToolBarHeight);
 
-	gfxInfo.BorderWdth = 5;
+	gfxInfo.BorderWidth = 5;
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.isFilled = false;
 	pOut->DrawTriangle(P1, P2, P3, gfxInfo, false);
@@ -229,7 +229,7 @@ int main()
 	} while (P1.y < UI.ToolBarHeight || P2.y < UI.ToolBarHeight || P3.y < UI.ToolBarHeight);
 
 	gfxInfo.DrawClr = BLUE;
-	gfxInfo.BorderWdth = 5;
+	gfxInfo.BorderWidth = 5;
 	gfxInfo.FillClr = YELLOW;
 	gfxInfo.isFilled = true;
 	pOut->DrawTriangle(P1, P2, P3, gfxInfo, false);
@@ -266,7 +266,7 @@ int main()
 	} while (P1.y - hexagonSize / 2.0 * sqrt(3) < UI.ToolBarHeight);
 
 	gfxInfo.DrawClr = BLUE;
-	gfxInfo.BorderWdth = 5;
+	gfxInfo.BorderWidth = 5;
 	gfxInfo.isFilled = false;
 	pOut->DrawHexagon(P1, gfxInfo, false);
 
@@ -290,7 +290,7 @@ int main()
 	} while (P1.y - hexagonSize / 2.0 * sqrt(3) < UI.ToolBarHeight);
 
 	gfxInfo.DrawClr = BLUE;
-	gfxInfo.BorderWdth = 5;
+	gfxInfo.BorderWidth = 5;
 	gfxInfo.isFilled = true;
 	gfxInfo.FillClr = YELLOW;
 	pOut->DrawHexagon(P1, gfxInfo, false);
@@ -329,7 +329,7 @@ int main()
 		}
 	} while (P1.y - radius <= UI.ToolBarHeight);
 
-	gfxInfo.BorderWdth = 5;
+	gfxInfo.BorderWidth = 5;
 	gfxInfo.DrawClr = BLUE;
 	gfxInfo.isFilled = false;
 	pOut->DrawCircle(P1, P2, gfxInfo, false);
@@ -357,7 +357,7 @@ int main()
 	} while (P1.y - radius <= UI.ToolBarHeight);
 
 	gfxInfo.DrawClr = BLUE;
-	gfxInfo.BorderWdth = 5;
+	gfxInfo.BorderWidth = 5;
 	gfxInfo.FillClr = YELLOW;
 	gfxInfo.isFilled = true;
 	pOut->DrawCircle(P1, P2, gfxInfo, false);
@@ -371,7 +371,7 @@ int main()
 	pOut->PrintMessage("Drawing a circle test is done, click anywhere to continue");
 	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->ClearDrawArea();
-	
+
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 3:
 	//			Input Class: Read strings from the user
@@ -385,7 +385,7 @@ int main()
 	pOut->PrintMessage("You Entered: " + userInput);
 	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->ClearDrawArea();
-	
+
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 4:
 	//			Input Class : Check for the user action
@@ -434,7 +434,7 @@ int main()
 			pOut->PrintMessage("Action: Border width, click anywhere");
 			break;
 		case OUTLINE_COLOR:
-			pOut->PrintMessage("Action: Ouline color, select a color");
+			pOut->PrintMessage("Action: Outline color, select a color");
 
 			pOut->OpenColorMenuWind(ClickedItemOrder * UI.MenuItemWidth, false);
 			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
@@ -509,13 +509,13 @@ int main()
 			pOut->PrintMessage("Action: Save graph, click anywhere");
 			break;
 		case PICK_BY_SHAPE:
-			pOut->PrintMessage("Action: Pick by shape gamemode, click anywhere");
+			pOut->PrintMessage("Action: Pick by shape game mode, click anywhere");
 			break;
 		case PICK_BY_COLOR:
-			pOut->PrintMessage("Action: Pick by color gamemode, click anywhere");
+			pOut->PrintMessage("Action: Pick by color game mode, click anywhere");
 			break;
 		case PICK_BY_SHAPE_COLOR:
-			pOut->PrintMessage("Action: Pick by shape and color gamemode, click anywhere");
+			pOut->PrintMessage("Action: Pick by shape and color game mode, click anywhere");
 			break;
 		case DRAWING_AREA:
 			pOut->PrintMessage("Action: Drawing Area, click anywhere");
@@ -533,7 +533,7 @@ int main()
 
 	/// Exiting
 	pOut->PrintMessage("Action: Exit, click anywhere to exit");
-	pIn->GetPointClicked(x, y);  // Wait for any click
+	pIn->GetPointClicked(x, y); // Wait for any click
 
 	delete pIn;
 	delete pOut;

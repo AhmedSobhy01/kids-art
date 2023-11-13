@@ -19,13 +19,13 @@ Output::Output()
 	UI.ColorMenuWidth = COLOR_MENU_ITM_COUNT * UI.ColorMenuItemWidth + 13;
 	UI.ColorMenuHeight = 60;
 
-	UI.DrawColor = BLUE;					// Drawing color
-	UI.FillColor = GREEN;					// Filling color
-	UI.MsgColor = RED;						// Messages color
-	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	// Background color
-	UI.HighlightColor = MAGENTA;			// This color should NOT be used to draw figures, use if for highlight only
-	UI.StatusBarColor = TURQUOISE;			// Status bar background color
-	UI.PenWidth = 3;						// Width of the figures frames
+	UI.DrawColor = BLUE;				   // Drawing color
+	UI.FillColor = GREEN;				   // Filling color
+	UI.MsgColor = RED;					   // Messages color
+	UI.BkGrndColor = LIGHTGOLDENRODYELLOW; // Background color
+	UI.HighlightColor = MAGENTA;		   // This color should NOT be used to draw figures, use if for highlight only
+	UI.StatusBarColor = TURQUOISE;		   // Status bar background color
+	UI.PenWidth = 3;					   // Width of the figures frames
 
 	// Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
@@ -74,7 +74,7 @@ void Output::DrawColorMenuItems(bool withTransparent) const
 {
 	int arraySize = (withTransparent ? COLOR_MENU_ITM_COUNT : COLOR_MENU_ITM_COUNT - 1);
 	string *ColorMenuItemImages = new string[arraySize];
-	
+
 	ColorMenuItemImages[COLOR_MENU_ITM_BLACK] = "images\\Colors\\Black.jpg";
 	ColorMenuItemImages[COLOR_MENU_ITM_RED] = "images\\Colors\\Red.jpg";
 	ColorMenuItemImages[COLOR_MENU_ITM_BLUE] = "images\\Colors\\Blue.jpg";
@@ -99,7 +99,7 @@ void Output::OpenColorMenuWind(int x, bool withTransparent)
 {
 	UI.ColorMenuWidth = (withTransparent ? COLOR_MENU_ITM_COUNT : COLOR_MENU_ITM_COUNT - 1) * UI.ColorMenuItemWidth + 13;
 
-	CreateColorMenuWind(x, withTransparent); // Intializes a new window and sets data memeber to that pointer
+	CreateColorMenuWind(x, withTransparent); // Initializes a new window and sets data member to that pointer
 
 	DrawColorMenuItems(withTransparent); // Draws color images to color menu window
 }
@@ -218,19 +218,19 @@ void Output::PrintMessage(string msg) const // Prints a message on status bar
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-color Output::getCrntDrawColor() const // Get current drawing color
+color Output::getCurrentDrawColor() const // Get current drawing color
 {
 	return UI.DrawColor;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-color Output::getCrntFillColor() const // Get current filling color
+color Output::getCurrentFillColor() const // Get current filling color
 {
 	return UI.FillColor;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-int Output::getCrntPenWidth() const // Get current pen width
+int Output::getCurrentPenWidth() const // Get current pen width
 {
 	return UI.PenWidth;
 }

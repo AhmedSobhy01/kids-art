@@ -7,40 +7,40 @@
 
 enum ActionType // The actions supported
 {
-	TO_PLAY,				// Switch interface to play mode
-	TO_DRAW,				// Switch interface to draw mode
-	DRAW_RECT,				// Draw Rectangle
-	DRAW_CIRCLE,			// Draw Circle
-	DRAW_SQUARE,			// Draw Square
-	DRAW_TRIANGLE,			// Draw Triangle
-	DRAW_HEXAGON,			// Draw Hexagon
-	OUTLINE,				// Outline Selected Shape
-	SELECT,					// Select Shape
-	BORDER_WIDTH,			// Change Selected Shape Border Width
-	OUTLINE_COLOR,			// Outline Color Menu
-	FILL_COLOR,				// Fill Color Menu
-	FILL,					// Fill Selected Shape
-	REMOVE,					// Remove Selected Shape
-	MOVE,					// Move Selected Shape
-	RESIZE,					// Resize Selected Shape
-	DRAG_MOVE,				// Move Selected Shape By Dragging
-	DRAG_RESIZE,			// Resize Selected Shape By Dragging
-	UNDO,					// Undo Last Action
-	REDO,					// Redo Last Action
-	CLEAR_ALL,				// Clear Canvas
-	START_RECORDING,		// Start Recording
-	STOP_RECORDING,			// Stop Recording
-	PLAY_RECORDING,			// Play Recording
-	BACKGROUND_COLOR,		// Canvas Background Color Menu
-	OPEN_GRAPH,				// Open Saved Graph
-	SAVE_GRAPH,				// Save Current Graph
-	PICK_BY_COLOR,			// Pick By Color Game Mode (Play Mode)
-	PICK_BY_SHAPE,			// Pick By Shape Game Mode (Play Mode)
-	PICK_BY_SHAPE_COLOR,	// Pick By Shape and Color Game Mode (Play Mode)
-	DRAWING_AREA,			// A click on the drawing area
-	STATUS,					// A click on the status bar
-	EMPTY,					// A click on empty place in the toolbar
-	EXIT					// Exit
+	TO_PLAY,			 // Switch interface to play mode
+	TO_DRAW,			 // Switch interface to draw mode
+	DRAW_RECT,			 // Draw Rectangle
+	DRAW_CIRCLE,		 // Draw Circle
+	DRAW_SQUARE,		 // Draw Square
+	DRAW_TRIANGLE,		 // Draw Triangle
+	DRAW_HEXAGON,		 // Draw Hexagon
+	OUTLINE,			 // Outline Selected Shape
+	SELECT,				 // Select Shape
+	BORDER_WIDTH,		 // Change Selected Shape Border Width
+	OUTLINE_COLOR,		 // Outline Color Menu
+	FILL_COLOR,			 // Fill Color Menu
+	FILL,				 // Fill Selected Shape
+	REMOVE,				 // Remove Selected Shape
+	MOVE,				 // Move Selected Shape
+	RESIZE,				 // Resize Selected Shape
+	DRAG_MOVE,			 // Move Selected Shape By Dragging
+	DRAG_RESIZE,		 // Resize Selected Shape By Dragging
+	UNDO,				 // Undo Last Action
+	REDO,				 // Redo Last Action
+	CLEAR_ALL,			 // Clear Canvas
+	START_RECORDING,	 // Start Recording
+	STOP_RECORDING,		 // Stop Recording
+	PLAY_RECORDING,		 // Play Recording
+	BACKGROUND_COLOR,	 // Canvas Background Color Menu
+	OPEN_GRAPH,			 // Open Saved Graph
+	SAVE_GRAPH,			 // Save Current Graph
+	PICK_BY_COLOR,		 // Pick By Color Game Mode (Play Mode)
+	PICK_BY_SHAPE,		 // Pick By Shape Game Mode (Play Mode)
+	PICK_BY_SHAPE_COLOR, // Pick By Shape and Color Game Mode (Play Mode)
+	DRAWING_AREA,		 // A click on the drawing area
+	STATUS,				 // A click on the status bar
+	EMPTY,				 // A click on empty place in the toolbar
+	EXIT				 // Exit
 };
 
 struct Point // To be used for figures points
@@ -50,10 +50,10 @@ struct Point // To be used for figures points
 
 struct GfxInfo // Graphical info of each figure
 {
-	color DrawClr;			// Draw color of the figure
-	color FillClr;			// Fill color of the figure
-	bool isFilled;			// Figure Filled or not
-	int BorderWdth;			// Width of figure borders
+	color DrawClr;	 // Draw color of the figure
+	color FillClr;	 // Fill color of the figure
+	bool isFilled;	 // Figure Filled or not
+	int BorderWidth; // Width of figure borders
 };
 
 #endif

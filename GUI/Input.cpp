@@ -43,7 +43,7 @@ string Input::GetString(Output *pO) const
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-ActionType Input::GetUserAction(int* _ClickedItemOrder) const // This function reads the position where the user clicks to determine the desired action
+ActionType Input::GetUserAction(int *_ClickedItemOrder) const // This function reads the position where the user clicks to determine the desired action
 {
 	int x, y;
 	pWind->WaitMouseClick(x, y); // Get the coordinates of the user click
@@ -53,7 +53,7 @@ ActionType Input::GetUserAction(int* _ClickedItemOrder) const // This function r
 		// [1] If user clicks on the Toolbar
 		if (y >= 0 && y < UI.ToolBarHeight)
 		{
-			// Check whick Menu item was clicked
+			// Check which menu item was clicked
 			//==> This assumes that menu items are lined up horizontally <==
 			int ClickedItemOrder = (x / UI.MenuItemWidth);
 			// Divide x coord of the point clicked by the menu item width (int division)
@@ -61,7 +61,7 @@ ActionType Input::GetUserAction(int* _ClickedItemOrder) const // This function r
 
 			if (_ClickedItemOrder)
 				*_ClickedItemOrder = ClickedItemOrder; // Return ClickedItemOrder if it was wanted in the parameters list
-			
+
 			switch (ClickedItemOrder)
 			{
 			case ITM_PLAY_MODE:
@@ -120,7 +120,7 @@ ActionType Input::GetUserAction(int* _ClickedItemOrder) const // This function r
 				return EXIT;
 
 			default:
-				return EMPTY; // A click on empty place in desgin toolbar
+				return EMPTY; // A click on empty place in design toolbar
 			}
 		}
 
@@ -151,7 +151,7 @@ ActionType Input::GetUserAction(int* _ClickedItemOrder) const // This function r
 			case ITM_EXIT_PLAY:
 				return EXIT;
 			default:
-				return EMPTY; // A click on empty place in desgin toolbar
+				return EMPTY; // A click on empty place in design toolbar
 			}
 		}
 
