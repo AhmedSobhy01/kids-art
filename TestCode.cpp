@@ -38,7 +38,6 @@ int main()
 	printSelectedColor(pOut, selectedColor);  // Prints selected color to the status bar
 	pIn->GetPointClicked(x, y); // Wait for any click
 	
-#if False
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 1:
 	//			Creates the toolbar, drawing area, and status bar
@@ -386,8 +385,7 @@ int main()
 	pOut->PrintMessage("You Entered: " + userInput);
 	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->ClearDrawArea();
-#endif
-
+	
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 4:
 	//			Input Class : Check for the user action
@@ -495,6 +493,14 @@ int main()
 			break;
 		case BACKGROUND_COLOR:
 			pOut->PrintMessage("Action: Background color, select a color");
+
+			pOut->OpenColorMenuWind(ClickedItemOrder * UI.MenuItemWidth);
+			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
+			UI.BkGrndColor = pIn->GetSelectedColor();
+			pOut->CloseColorMenuWind();
+			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
+
+			pOut->ClearDrawArea();
 			break;
 		case OPEN_GRAPH:
 			pOut->PrintMessage("Action: Open graph, click anywhere");
