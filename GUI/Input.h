@@ -21,7 +21,7 @@ public:
 	color GetSelectedColor() const;
 	string GetString(Output *pO) const; // Returns a string entered by the user
 
-	ActionType GetUserAction() const; // Read the user click and map to an action
+	ActionType GetUserAction(int* = nullptr) const; // Read the user click and map to an action
 
 	~Input();
 };

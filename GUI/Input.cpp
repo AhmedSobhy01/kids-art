@@ -6,15 +6,21 @@ Input::Input(window *pW)
 	pWind = pW; // point to the passed window
 }
 
+//======================================================================================//
+//								Interface Functions										//
+//======================================================================================//
+
 void Input::SetColorMenuWind(window *ptr)
 {
 	colorMenuWind = ptr;
 }
+//////////////////////////////////////////////////////////////////////////////////////////
 
 void Input::GetPointClicked(int &x, int &y) const
 {
 	pWind->WaitMouseClick(x, y); // Wait for mouse click
 }
+//////////////////////////////////////////////////////////////////////////////////////////
 
 string Input::GetString(Output *pO) const
 {
@@ -35,16 +41,16 @@ string Input::GetString(Output *pO) const
 			pO->PrintMessage(Label);
 	}
 }
+//////////////////////////////////////////////////////////////////////////////////////////
 
-// This function reads the position where the user clicks to determine the desired action
-ActionType Input::GetUserAction() const
+ActionType Input::GetUserAction(int* _ClickedItemOrder) const // This function reads the position where the user clicks to determine the desired action
 {
 	int x, y;
 	pWind->WaitMouseClick(x, y); // Get the coordinates of the user click
 
 	if (UI.InterfaceMode == MODE_DRAW) // GUI in the DRAW mode
 	{
-		//[1] If user clicks on the Toolbar
+		// [1] If user clicks on the Toolbar
 		if (y >= 0 && y < UI.ToolBarHeight)
 		{
 			// Check whick Menu item was clicked
@@ -53,6 +59,9 @@ ActionType Input::GetUserAction() const
 			// Divide x coord of the point clicked by the menu item width (int division)
 			// if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
 
+			if (_ClickedItemOrder)
+				*_ClickedItemOrder = ClickedItemOrder; // Return ClickedItemOrder if it was wanted in the parameters list
+			
 			switch (ClickedItemOrder)
 			{
 			case ITM_PLAY_MODE:
@@ -115,20 +124,17 @@ ActionType Input::GetUserAction() const
 			}
 		}
 
-		//[2] User clicks on the drawing area
+		// [2] User clicks on the drawing area
 		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
 		{
 			return DRAWING_AREA;
 		}
 
-		//[3] User clicks on the status bar
+		// [3] User clicks on the status bar
 		return STATUS;
 	}
 	else // GUI is in PLAY mode
 	{
-		/// TODO:
-		// perform checks similar to Draw mode checks above
-		// and return the correspoding action
 		if (y >= 0 && y < UI.ToolBarHeight)
 		{
 			int ClickedItemOrder = (x / UI.MenuItemWidth);
@@ -149,20 +155,19 @@ ActionType Input::GetUserAction() const
 			}
 		}
 
-		//[2] User clicks on the drawing area
+		// [2] User clicks on the drawing area
 		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
 		{
 			return DRAWING_AREA;
 		}
 
-		//[3] User clicks on the status bar
+		// [3] User clicks on the status bar
 		return STATUS;
 	}
 }
-/////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 
-// This function reads the position where the user clicks to determine the selected color
-color Input::GetSelectedColor() const
+color Input::GetSelectedColor() const // This function reads the position where the user clicks to determine the selected color
 {
 	if (colorMenuWind)
 	{
@@ -202,7 +207,7 @@ color Input::GetSelectedColor() const
 
 	return TRANSPARENT_COLOR;
 }
-/////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 
 Input::~Input()
 {

@@ -12,32 +12,32 @@ public:
 
 	window *CreateWind(int, int, int, int) const; // creates the application window
 
-	void CreateColorMenuWind(int, bool);	  // creates color menu window
-	void DrawColorMenuItems(bool) const;  // draws color images to color menu window
-	void OpenColorMenuWind(int, bool = true);	  // creates the color menu window and draws color images
-	void CloseColorMenuWind();		  // closes the color menu window
-	window *GetColorMenuWind() const; // returns pointer to the color menu window or nullptr if it doesn't exist
+	void CreateColorMenuWind(int, bool); // Creates color menu window
+	void DrawColorMenuItems(bool) const; // Draws color images to color menu window
+	void OpenColorMenuWind(int = 0, bool = true); // Creates the color menu window and draws color images
+	void CloseColorMenuWind(); // Closes the color menu window
+	window *GetColorMenuWind() const; // Returns pointer to the color menu window or nullptr if it doesn't exist
 
-	void CreateDrawToolBar() const; // creates Draw mode toolbar & menu
-	void CreatePlayToolBar() const; // creates Play mode toolbar & menu
-	void CreateStatusBar() const;	// create the status bar
+	void CreateDrawToolBar() const; // Creates Draw mode toolbar & menu
+	void CreatePlayToolBar() const; // Creates Play mode toolbar & menu
+	void CreateStatusBar() const; // Create the status bar
 
-	Input *CreateInput() const;	 // creates a pointer to the Input object
+	Input *CreateInput() const; // Creates a pointer to the Input object
 	void ClearStatusBar() const; // Clears the status bar
-	void ClearDrawArea() const;	 // Clears the drawing area
+	void ClearDrawArea() const; // Clears the drawing area
 
-	// -- Figures Drawing functions
+	// Figures drawing functions
 	void DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected = false) const;				   // Draw a rectangle
 	void DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected = false) const;						   // Draw a square
 	void DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected = false) const; // Draw a triangle
 	void DrawHexagon(Point P1, GfxInfo HexagonGfxInfo, bool selected = false) const;					   // Draw a hexagon
-	void DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected = false) const;			   // Draw a Circle
+	void DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected = false) const;			   // Draw a circle
 
-	void PrintMessage(string msg) const; // Print a message on Status bar
+	void PrintMessage(string msg) const; // Print a message on status bar
 
-	color getCrntDrawColor() const; // get current drwawing color
-	color getCrntFillColor() const; // get current filling color
-	int getCrntPenWidth() const;	// get current pen width
+	color getCrntDrawColor() const; // Get current drwawing color
+	color getCrntFillColor() const; // Get current filling color
+	int getCrntPenWidth() const;	// Get current pen width
 
 	~Output();
 };

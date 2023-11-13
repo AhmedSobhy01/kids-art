@@ -61,7 +61,11 @@ window *Output::CreateWind(int w, int h, int x, int y) const
 
 void Output::CreateColorMenuWind(int x, bool withTransparent)
 {
-	colorMenuWind = new window((withTransparent ? UI.ColorMenuWidth : UI.ColorMenuWidth - UI.ColorMenuItemWidth), UI.ColorMenuHeight, (UI.wx + x) < UI.width ? (UI.wx + x) : (UI.width - 10), UI.wy + UI.ToolBarHeight + 35);
+	int xPos = UI.wx + x;
+	if ((xPos + UI.ColorMenuWidth) > UI.width || x < UI.wx)
+		xPos = (UI.width - UI.ColorMenuWidth) / 2;
+
+	colorMenuWind = new window((withTransparent ? UI.ColorMenuWidth : UI.ColorMenuWidth - UI.ColorMenuItemWidth), UI.ColorMenuHeight, xPos, UI.wy + UI.ToolBarHeight + 35);
 	colorMenuWind->ChangeTitle("Colors");
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -93,6 +97,8 @@ void Output::DrawColorMenuItems(bool withTransparent) const
 
 void Output::OpenColorMenuWind(int x, bool withTransparent)
 {
+	UI.ColorMenuWidth = (withTransparent ? COLOR_MENU_ITM_COUNT : COLOR_MENU_ITM_COUNT - 1) * UI.ColorMenuItemWidth + 13;
+
 	CreateColorMenuWind(x, withTransparent); // Intializes a new window and sets data memeber to that pointer
 
 	DrawColorMenuItems(withTransparent); // Draws color images to color menu window

@@ -26,7 +26,7 @@ int main()
 	pOut->PrintMessage("TEST0: Color menu window, click anywhere to open color menu window");
 	pIn->GetPointClicked(x, y); // Wait for any click
 
-	pOut->OpenColorMenuWind((UI.width - UI.ColorMenuWidth) / 2); // Creates color window instance
+	pOut->OpenColorMenuWind(); // Creates color window instance
 	pIn->SetColorMenuWind(pOut->GetColorMenuWind()); // Updates Input class with color window object pointer
 
 	pOut->PrintMessage("Select a color from color menu");
@@ -37,7 +37,8 @@ int main()
 
 	printSelectedColor(pOut, selectedColor);  // Prints selected color to the status bar
 	pIn->GetPointClicked(x, y); // Wait for any click
-
+	
+#if False
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 1:
 	//			Creates the toolbar, drawing area, and status bar
@@ -385,6 +386,7 @@ int main()
 	pOut->PrintMessage("You Entered: " + userInput);
 	pIn->GetPointClicked(x, y); // Wait for any click
 	pOut->ClearDrawArea();
+#endif
 
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 4:
@@ -392,11 +394,13 @@ int main()
 	///////////////////////////////////////////////////////////////////////////////////
 	pOut->PrintMessage("TEST4: Input class for detecting user action, click anywhere");
 
+	int ClickedItemOrder = 0;
 	ActionType actionType;
 
 	do
 	{
-		actionType = pIn->GetUserAction();
+		actionType = pIn->GetUserAction(&ClickedItemOrder);
+
 		switch (actionType)
 		{
 		case TO_DRAW:
@@ -434,7 +438,7 @@ int main()
 		case OUTLINE_COLOR:
 			pOut->PrintMessage("Action: Ouline color, select a color");
 
-			pOut->OpenColorMenuWind((UI.width - UI.ColorMenuWidth) / 2, false);
+			pOut->OpenColorMenuWind(ClickedItemOrder * UI.MenuItemWidth, false);
 			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
 			selectedColor = pIn->GetSelectedColor();
 			pOut->CloseColorMenuWind();
@@ -445,7 +449,7 @@ int main()
 		case FILL_COLOR:
 			pOut->PrintMessage("Action: Fill color, select a color");
 
-			pOut->OpenColorMenuWind((UI.width - UI.ColorMenuWidth) / 2);
+			pOut->OpenColorMenuWind(ClickedItemOrder * UI.MenuItemWidth);
 			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
 			selectedColor = pIn->GetSelectedColor();
 			pOut->CloseColorMenuWind();
