@@ -13,32 +13,32 @@ enum GUI_MODE // Graphical user interface mode
 	MODE_PLAY  // Playing mode
 };
 
-enum DrawMenuItem // The items of the draw menu
+enum DrawMenuItem // The items of the draw menu (ordered)
 {
 	ITM_PLAY_MODE,			// Swith To Play Mode
 	ITM_RECT,				// Draw Rectangle
-	ITM_CIRCLE,				// Draw Circle
 	ITM_SQUARE,				// Draw Square
 	ITM_TRIANGLE,			// Draw Triangle
+	ITM_CIRCLE,				// Draw Circle
 	ITM_HEXAGON,			// Draw Hexagon
-	ITM_OUTLINE,			// Outline Selected Shape
-	ITM_SELECT,				// Select Shape
 	ITM_BORDER_WIDTH,		// Change Selected Shape Border Width
 	ITM_OUTLINE_COLOR,		// Outline Color Menu
 	ITM_FILL_COLOR,			// Fill Color Menu
+	ITM_SELECT,				// Select Shape
+	ITM_OUTLINE,			// Outline Selected Shape
 	ITM_FILL,				// Fill Selected Shape
 	ITM_REMOVE,				// Remove Selected Shape
 	ITM_MOVE,				// Move Selected Shape
 	ITM_RESIZE,				// Resize Selected Shape
 	ITM_DRAG_MOVE,			// Move Selected Shape By Dragging
 	ITM_DRAG_RESIZE,		// Resize Selected Shape By Dragging
-	ITM_UNDO,				// Undo Last Action
-	ITM_REDO,				// Redo Last Action
-	ITM_CLEAR_ALL,			// Clear Canvas
 	ITM_START_RECORDING,	// Start Recording
 	ITM_STOP_RECORDING,		// Stop Recording
 	ITM_PLAY_RECORDING,		// Play Recording
+	ITM_UNDO,				// Undo Last Action
+	ITM_REDO,				// Redo Last Action
 	ITM_BACKGROUND_COLOR,	// Canvas Background Color Menu
+	ITM_CLEAR_ALL,			// Clear Canvas
 	ITM_OPEN,				// Open Graph
 	ITM_SAVE,				// Save Graph
 	ITM_EXIT,				// Exit
@@ -46,7 +46,7 @@ enum DrawMenuItem // The items of the draw menu
 	DRAW_ITM_COUNT,			// No of menu items
 };
 
-enum ColorMenuItem
+enum ColorMenuItem  // The items of the color menu (ordered)
 {
 	COLOR_MENU_ITM_BLACK,			// Black
 	COLOR_MENU_ITM_RED,				// Red
@@ -61,7 +61,7 @@ enum ColorMenuItem
 	COLOR_MENU_ITM_COUNT,			// No of color menu items
 };
 
-enum PlayMenuItem // The items of the play menu
+enum PlayMenuItem // The items of the play menu (ordered)
 {
 	ITM_DRAW_MODE,					// Switch To Draw Mode
 	ITM_PICKBYSHAPE,				// Pick By Shape Gamemode
