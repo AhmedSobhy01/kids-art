@@ -32,6 +32,29 @@ int main()
 	pOut->CloseColorMenuWind();
 	pIn->SetColorMenuWind(pOut->GetColorMenuWind());
 
+	if (selectedColor == BLACK)
+		pOut->PrintMessage("You choose Black, Click anywhere to continue");
+	else if (selectedColor == RED)
+		pOut->PrintMessage("You choose Red, Click anywhere to continue");
+	else if (selectedColor == BLUE)
+		pOut->PrintMessage("You choose Blue, Click anywhere to continue");
+	else if (selectedColor == GREEN)
+		pOut->PrintMessage("You choose Green, Click anywhere to continue");
+	else if (selectedColor == MAGENTA)
+		pOut->PrintMessage("You choose Magenta, Click anywhere to continue");
+	else if (selectedColor == ORANGE)
+		pOut->PrintMessage("You choose Orange, Click anywhere to continue");
+	else if (selectedColor == BROWN)
+		pOut->PrintMessage("You choose Brown, Click anywhere to continue");
+	else if (selectedColor == CYAN)
+		pOut->PrintMessage("You choose Cyan, Click anywhere to continue");
+	else if (selectedColor == YELLOW)
+		pOut->PrintMessage("You choose Yellow, Click anywhere to continue");
+	else if (selectedColor == TRANSPARENT_COLOR)
+		pOut->PrintMessage("You choose Transparent, Click anywhere to continue");
+
+	pIn->GetPointClicked(x, y);
+
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 1:
 	//			Create The FULL Tool bar, the drawing area and the status bar
