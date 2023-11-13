@@ -3,6 +3,8 @@
 
 // This is a test code to test the Input and Output classes
 
+void printSelectedColor(Output* output, color color);
+
 int main()
 {
 	int x, y;
@@ -24,7 +26,7 @@ int main()
 	pOut->PrintMessage("TEST0: Color Menu Window, Click anywhere to open color menu window");
 	pIn->GetPointClicked(x, y); // Wait for any click
 
-	pOut->OpenColorMenuWind((UI.width - UI.ColorMenuWidth) / 2, false);
+	pOut->OpenColorMenuWind((UI.width - UI.ColorMenuWidth) / 2);
 	pIn->SetColorMenuWind(pOut->GetColorMenuWind());
 
 	color selectedColor = pIn->GetSelectedColor();
@@ -32,27 +34,7 @@ int main()
 	pOut->CloseColorMenuWind();
 	pIn->SetColorMenuWind(pOut->GetColorMenuWind());
 
-	if (selectedColor == BLACK)
-		pOut->PrintMessage("You choose Black, Click anywhere to continue");
-	else if (selectedColor == RED)
-		pOut->PrintMessage("You choose Red, Click anywhere to continue");
-	else if (selectedColor == BLUE)
-		pOut->PrintMessage("You choose Blue, Click anywhere to continue");
-	else if (selectedColor == GREEN)
-		pOut->PrintMessage("You choose Green, Click anywhere to continue");
-	else if (selectedColor == MAGENTA)
-		pOut->PrintMessage("You choose Magenta, Click anywhere to continue");
-	else if (selectedColor == ORANGE)
-		pOut->PrintMessage("You choose Orange, Click anywhere to continue");
-	else if (selectedColor == BROWN)
-		pOut->PrintMessage("You choose Brown, Click anywhere to continue");
-	else if (selectedColor == CYAN)
-		pOut->PrintMessage("You choose Cyan, Click anywhere to continue");
-	else if (selectedColor == YELLOW)
-		pOut->PrintMessage("You choose Yellow, Click anywhere to continue");
-	else if (selectedColor == TRANSPARENT_COLOR)
-		pOut->PrintMessage("You choose Transparent, Click anywhere to continue");
-
+	printSelectedColor(pOut, selectedColor);
 	pIn->GetPointClicked(x, y);
 
 	///////////////////////////////////////////////////////////////////////////////////
@@ -432,9 +414,25 @@ int main()
 			break;
 		case OUTLINE_COLOR:
 			pOut->PrintMessage("Action: Ouline Color , Click to choose a color");
+
+			pOut->OpenColorMenuWind((UI.width - UI.ColorMenuWidth) / 2, false);
+			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
+			selectedColor = pIn->GetSelectedColor();
+			pOut->CloseColorMenuWind();
+			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
+
+			printSelectedColor(pOut, selectedColor);
 			break;
 		case FILL_COLOR:
 			pOut->PrintMessage("Action: Fill Color , Click to choose a color");
+
+			pOut->OpenColorMenuWind((UI.width - UI.ColorMenuWidth) / 2);
+			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
+			selectedColor = pIn->GetSelectedColor();
+			pOut->CloseColorMenuWind();
+			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
+
+			printSelectedColor(pOut, selectedColor);
 			break;
 		case FILL:
 			pOut->PrintMessage("Action: Fill a Shape , Select a shape to fill");
@@ -512,4 +510,27 @@ int main()
 	delete pIn;
 	delete pOut;
 	return 0;
+}
+
+void printSelectedColor(Output* outputPtr, color color) {
+	if (color == BLACK)
+		outputPtr->PrintMessage("You choose Black, Click anywhere to continue");
+	else if (color == RED)
+		outputPtr->PrintMessage("You choose Red, Click anywhere to continue");
+	else if (color == BLUE)
+		outputPtr->PrintMessage("You choose Blue, Click anywhere to continue");
+	else if (color == GREEN)
+		outputPtr->PrintMessage("You choose Green, Click anywhere to continue");
+	else if (color == MAGENTA)
+		outputPtr->PrintMessage("You choose Magenta, Click anywhere to continue");
+	else if (color == ORANGE)
+		outputPtr->PrintMessage("You choose Orange, Click anywhere to continue");
+	else if (color == BROWN)
+		outputPtr->PrintMessage("You choose Brown, Click anywhere to continue");
+	else if (color == CYAN)
+		outputPtr->PrintMessage("You choose Cyan, Click anywhere to continue");
+	else if (color == YELLOW)
+		outputPtr->PrintMessage("You choose Yellow, Click anywhere to continue");
+	else if (color == TRANSPARENT_COLOR)
+		outputPtr->PrintMessage("You choose Transparent, Click anywhere to continue");
 }
