@@ -16,7 +16,7 @@ Output::Output()
 	UI.MenuItemWidth = 45;
 
 	UI.ColorMenuItemWidth = 40;
-	UI.ColorMenuWidth = COLOR_MENU_ITM_COUNT * UI.ColorMenuItemWidth + 20;
+	UI.ColorMenuWidth = COLOR_MENU_ITM_COUNT * UI.ColorMenuItemWidth + 13;
 	UI.ColorMenuHeight = 60;
 
 	UI.DrawColor = BLUE;				   // Drawing color
@@ -58,15 +58,17 @@ window *Output::CreateWind(int w, int h, int x, int y) const
 	return pW;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-void Output::CreateColorMenuWind(int x)
+void Output::CreateColorMenuWind(int x, bool withTransparent)
 {
-	colorMenuWind = new window(UI.ColorMenuWidth, UI.ColorMenuHeight, (UI.wx + x) < UI.width ? (UI.wx + x) : (UI.width - 10), UI.wy + UI.ToolBarHeight + 35);
+	colorMenuWind = new window((withTransparent ? UI.ColorMenuWidth : UI.ColorMenuWidth - UI.ColorMenuItemWidth), UI.ColorMenuHeight, (UI.wx + x) < UI.width ? (UI.wx + x) : (UI.width - 10), UI.wy + UI.ToolBarHeight + 35);
 	colorMenuWind->ChangeTitle("Colors");
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-void Output::DrawColorMenuItems() const
+void Output::DrawColorMenuItems(bool withTransparent) const
 {
-	string ColorMenuItemImages[COLOR_MENU_ITM_COUNT];
+	int arraySize = (withTransparent ? COLOR_MENU_ITM_COUNT : COLOR_MENU_ITM_COUNT - 1);
+	string *ColorMenuItemImages = new string[arraySize];
+	
 	ColorMenuItemImages[COLOR_MENU_ITM_BLACK] = "images\\Colors\\Black.jpg";
 	ColorMenuItemImages[COLOR_MENU_ITM_RED] = "images\\Colors\\Red.jpg";
 	ColorMenuItemImages[COLOR_MENU_ITM_BLUE] = "images\\Colors\\Blue.jpg";
@@ -76,17 +78,21 @@ void Output::DrawColorMenuItems() const
 	ColorMenuItemImages[COLOR_MENU_ITM_BROWN] = "images\\Colors\\Brown.jpg";
 	ColorMenuItemImages[COLOR_MENU_ITM_CYAN] = "images\\Colors\\Cyan.jpg";
 	ColorMenuItemImages[COLOR_MENU_ITM_YELLOW] = "images\\Colors\\Yellow.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_TRANSPARENT] = "images\\Colors\\Transparent.jpg";
 
-	for (int i = 0; i < COLOR_MENU_ITM_COUNT; i++)
+	if (withTransparent)
+		ColorMenuItemImages[COLOR_MENU_ITM_TRANSPARENT] = "images\\Colors\\Transparent.jpg";
+
+	for (int i = 0; i < arraySize; i++)
 		colorMenuWind->DrawImage(ColorMenuItemImages[i], i * UI.ColorMenuItemWidth, 0, UI.ColorMenuItemWidth, UI.ColorMenuItemWidth);
+
+	delete[] ColorMenuItemImages;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-void Output::OpenColorMenuWind(int x)
+void Output::OpenColorMenuWind(int x, bool withTransparent)
 {
-	CreateColorMenuWind(x); // Intializes a new window and sets data memeber to that pointer
+	CreateColorMenuWind(x, withTransparent); // Intializes a new window and sets data memeber to that pointer
 
-	DrawColorMenuItems(); // Draws color images to color menu window
+	DrawColorMenuItems(withTransparent); // Draws color images to color menu window
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CloseColorMenuWind()

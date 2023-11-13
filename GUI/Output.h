@@ -12,9 +12,9 @@ public:
 
 	window *CreateWind(int, int, int, int) const; // creates the application window
 
-	void CreateColorMenuWind(int);	  // creates color menu window
-	void DrawColorMenuItems() const;  // draws color images to color menu window
-	void OpenColorMenuWind(int);	  // creates the color menu window and draws color images
+	void CreateColorMenuWind(int, bool);	  // creates color menu window
+	void DrawColorMenuItems(bool) const;  // draws color images to color menu window
+	void OpenColorMenuWind(int, bool = true);	  // creates the color menu window and draws color images
 	void CloseColorMenuWind();		  // closes the color menu window
 	window *GetColorMenuWind() const; // returns pointer to the color menu window or nullptr if it doesn't exist
 
