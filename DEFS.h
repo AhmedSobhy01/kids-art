@@ -3,12 +3,12 @@
 
 #include "CMUgraphicsLib\CMUgraphics.h"
 
-//This file contains some global constants and definitions to be used in the project.
-enum ActionType //The actions supported (you can add more if needed)
+// This file contains some global constants and definitions to be used in the project.
+enum ActionType // The actions supported (you can add more if needed)
 {
-	TO_PLAY,		//Switch interface to Play mode
-	TO_DRAW,		//Switch interface to Draw mode
-	DRAW_RECT,		//Draw Rectangle
+	TO_PLAY,   // Switch interface to Play mode
+	TO_DRAW,   // Switch interface to Draw mode
+	DRAW_RECT, // Draw Rectangle
 	DRAW_CIRCLE,
 	DRAW_SQUARE,
 	DRAW_TRIANGLE,
@@ -36,24 +36,25 @@ enum ActionType //The actions supported (you can add more if needed)
 	PICK_BY_COLOR,
 	PICK_BY_SHAPE,
 	PICK_BY_SHAPE_COLOR,
-	DRAWING_AREA,	//A click on the drawing area
-	STATUS,			//A click on the status bar
-	EMPTY,			//A click on empty place in the toolbar
-	EXIT		    //Exit
+	DRAWING_AREA, // A click on the drawing area
+	STATUS,		  // A click on the status bar
+	EMPTY,		  // A click on empty place in the toolbar
+	EXIT		  // Exit
 
-	///TODO: Add the other action types of the two modes
+	/// TODO: Add the other action types of the two modes
 };
 
-struct Point	//To be used for figures points
-{ int x,y; };
-
-struct GfxInfo	//Graphical info of each figure (you may add more members)
+struct Point // To be used for figures points
 {
-	color DrawClr;	//Draw color of the figure
-	color FillClr;	//Fill color of the figure
-	bool isFilled;	//Figure Filled or not
-	int BorderWdth;	//Width of figure borders
+	int x, y;
+};
 
+struct GfxInfo // Graphical info of each figure (you may add more members)
+{
+	color DrawClr;	// Draw color of the figure
+	color FillClr;	// Fill color of the figure
+	bool isFilled;	// Figure Filled or not
+	int BorderWdth; // Width of figure borders
 };
 
 #endif
