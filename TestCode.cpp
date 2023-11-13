@@ -36,7 +36,7 @@ int main()
 	pIn->SetColorMenuWind(pOut->GetColorMenuWind()); // Updates Input class with color window object pointer
 
 	printSelectedColor(pOut, selectedColor); // Prints selected color to the status bar
-	pIn->GetPointClicked(x, y);				 // Wait for any click
+	pIn->GetPointClicked(x, y);				 // Wait for any click 
 
 	///////////////////////////////////////////////////////////////////////////////////
 	// TEST 1:
@@ -459,7 +459,7 @@ int main()
 			pOut->PrintMessage("Action: Fill selected shape, click anywhere");
 			break;
 		case REMOVE:
-			pOut->PrintMessage("Action: remove selected shape, click anywhere");
+			pOut->PrintMessage("Action: Remove selected shape, click anywhere");
 			break;
 		case MOVE:
 			pOut->PrintMessage("Action: Move selected shape, click anywhere");

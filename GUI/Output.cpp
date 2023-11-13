@@ -188,10 +188,10 @@ void Output::CreatePlayToolBar() const
 
 	// Draw mode toolbar images
 	string PlayMenuItems[PLAY_ITM_COUNT];
-	PlayMenuItems[ITM_DRAW_MODE] = "images\\PlayMode\\draw-mode.jpg";
+	PlayMenuItems[ITM_DRAW_MODE] = "images\\PlayMode\\DrawMode.jpg";
 	PlayMenuItems[ITM_PICKBYSHAPE] = "images\\PlayMode\\PickByShape.jpg";
 	PlayMenuItems[ITM_PICKBYCOLOR] = "images\\PlayMode\\PickByColor.jpg";
-	PlayMenuItems[ITM_PICKBYSHAPEANDCOLOR] = "images\\PlayMode\\PickByShapeandColor.jpg";
+	PlayMenuItems[ITM_PICKBYSHAPEANDCOLOR] = "images\\PlayMode\\PickByShapeAndColor.jpg";
 	PlayMenuItems[ITM_EXIT_PLAY] = "images\\DrawMode\\Exit.jpg";
 
 	// Draw menu item one image at a time
