@@ -57,6 +57,7 @@ enum ColorMenuItem // The items of the color menu (ordered)
 	COLOR_MENU_ITM_BROWN,		// Brown
 	COLOR_MENU_ITM_CYAN,		// Cyan
 	COLOR_MENU_ITM_YELLOW,		// Yellow
+	COLOR_MENU_ITM_GOLD,		// Gold
 	COLOR_MENU_ITM_TRANSPARENT, // Transparent
 	COLOR_MENU_ITM_COUNT,		// No of color menu items
 };
