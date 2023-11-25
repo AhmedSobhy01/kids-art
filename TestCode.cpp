@@ -494,7 +494,7 @@ int main()
 		case BACKGROUND_COLOR:
 			pOut->PrintMessage("Action: Background color, select a color");
 
-			pOut->OpenColorMenuWind(ClickedItemOrder * UI.MenuItemWidth);
+			pOut->OpenColorMenuWind(ClickedItemOrder * UI.MenuItemWidth, false);
 			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
 			UI.BkGrndColor = pIn->GetSelectedColor();
 			pOut->CloseColorMenuWind();
