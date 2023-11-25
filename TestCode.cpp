@@ -560,6 +560,8 @@ void printSelectedColor(Output *outputPtr, const color &color)
 		outputPtr->PrintMessage("You selected Cyan, click anywhere to continue");
 	else if (color == YELLOW)
 		outputPtr->PrintMessage("You selected Yellow, click anywhere to continue");
+	else if (color == LIGHTGOLDENRODYELLOW)
+		outputPtr->PrintMessage("You selected Gold, click anywhere to continue");
 	else if (color == TRANSPARENT_COLOR)
 		outputPtr->PrintMessage("You selected Transparent, click anywhere to continue");
 }

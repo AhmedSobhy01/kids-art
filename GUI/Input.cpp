@@ -198,6 +198,8 @@ color Input::GetSelectedColor() const // This function reads the position where 
 				return CYAN;
 			case COLOR_MENU_ITM_YELLOW:
 				return YELLOW;
+			case COLOR_MENU_ITM_GOLD:
+				return LIGHTGOLDENRODYELLOW;
 
 			default:
 				return TRANSPARENT_COLOR;

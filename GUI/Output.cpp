@@ -65,7 +65,7 @@ void Output::CreateColorMenuWind(int x, bool withTransparent)
 	if ((xPos + UI.ColorMenuWidth) > UI.width || x < UI.wx)
 		xPos = (UI.width - UI.ColorMenuWidth) / 2;
 
-	colorMenuWind = new window((withTransparent ? UI.ColorMenuWidth : UI.ColorMenuWidth - UI.ColorMenuItemWidth), UI.ColorMenuHeight, xPos, UI.wy + UI.ToolBarHeight + 35);
+	colorMenuWind = new window(UI.ColorMenuWidth, UI.ColorMenuHeight, xPos, UI.wy + UI.ToolBarHeight + 35);
 	colorMenuWind->ChangeTitle("Colors");
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -84,6 +84,7 @@ void Output::DrawColorMenuItems(bool withTransparent) const
 	ColorMenuItemImages[COLOR_MENU_ITM_BROWN] = "images\\Colors\\Brown.jpg";
 	ColorMenuItemImages[COLOR_MENU_ITM_CYAN] = "images\\Colors\\Cyan.jpg";
 	ColorMenuItemImages[COLOR_MENU_ITM_YELLOW] = "images\\Colors\\Yellow.jpg";
+	ColorMenuItemImages[COLOR_MENU_ITM_GOLD] = "images\\Colors\\Gold.jpg";
 
 	if (withTransparent)
 		ColorMenuItemImages[COLOR_MENU_ITM_TRANSPARENT] = "images\\Colors\\Transparent.jpg";
