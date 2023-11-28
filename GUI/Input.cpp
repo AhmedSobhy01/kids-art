@@ -19,6 +19,7 @@ void Input::GetPointClicked(int &x, int &y) const
 string Input::GetString(Output *pO) const
 {
 	pWind->FlushKeyQueue();
+	pWind->FlushMouseQueue();
 
 	string Label;
 	char Key;
