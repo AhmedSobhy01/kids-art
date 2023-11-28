@@ -26,14 +26,25 @@ string Input::GetString(Output *pO) const
 	while (1)
 	{
 		pWind->WaitKeyPress(Key);
-		if (Key == 27) // ESCAPE key is pressed
+		if (Key == 27) { // ESCAPE key is pressed
+			pWind->FlushKeyQueue();
+			pWind->FlushMouseQueue();
+
 			return ""; // returns nothing as user has cancelled label
-		if (Key == 13) // ENTER key is pressed
+		}
+
+		if (Key == 13) { // ENTER key is pressed
+			pWind->FlushKeyQueue();
+			pWind->FlushMouseQueue();
+
 			return Label;
+		}
+
 		if ((Key == 8) && (Label.size() >= 1)) // BackSpace is pressed
 			Label.resize(Label.size() - 1);
 		else
 			Label += Key;
+
 		if (pO)
 			pO->PrintMessage(Label);
 	}
@@ -219,6 +230,7 @@ color Input::GetSelectedColor(Output* pO) const // This function reads the posit
 		}
 	}
 
+	pO->CloseColorMenuWind();
 	return TRANSPARENT_COLOR;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
