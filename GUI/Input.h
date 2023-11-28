@@ -11,14 +11,11 @@ class Input // The application manager should have a pointer to this class
 {
 private:
 	window *pWind;		   // Pointer to the Graphics Window
-	window *colorMenuWind; // Pointer to the Color Menu Window
 public:
 	Input(window *pW); // Constructor
 
-	void SetColorMenuWind(window *); // Set pointer of color menu window
-
 	void GetPointClicked(int &x, int &y) const; // Get coordinate where user clicks
-	color GetSelectedColor() const;
+	color GetSelectedColor(Output* pO) const;
 	string GetString(Output *pO) const; // Returns a string entered by the user
 
 	ActionType GetUserAction(int * = nullptr) const; // Read the user click and map to an action

@@ -10,12 +10,6 @@ Input::Input(window *pW)
 //								Interface Functions										//
 //======================================================================================//
 
-void Input::SetColorMenuWind(window *ptr)
-{
-	colorMenuWind = ptr;
-}
-//////////////////////////////////////////////////////////////////////////////////////////
-
 void Input::GetPointClicked(int &x, int &y) const
 {
 	pWind->WaitMouseClick(x, y); // Wait for mouse click
@@ -25,6 +19,7 @@ void Input::GetPointClicked(int &x, int &y) const
 string Input::GetString(Output *pO) const
 {
 	pWind->FlushKeyQueue();
+	pWind->FlushMouseQueue();
 
 	string Label;
 	char Key;
@@ -169,43 +164,58 @@ ActionType Input::GetUserAction(int *_ClickedItemOrder) const // This function r
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-color Input::GetSelectedColor() const // This function reads the position where the user clicks to determine the selected color
+color Input::GetSelectedColor(Output* pO) const // This function reads the position where the user clicks to determine the selected color
 {
-	if (colorMenuWind)
+	if (pO->GetColorMenuWind())
 	{
 		int x, y;
-		colorMenuWind->WaitMouseClick(x, y); // Get the coordinates of the user click
+		pO->GetColorMenuWind()->WaitMouseClick(x, y); // Get the coordinates of the user click
 
 		if (y >= 0 && y < UI.ColorMenuHeight)
 		{
 			int ClickedColorOrder = (x / UI.ColorMenuItemWidth);
+			color selectedColor;
 
 			switch (ClickedColorOrder)
 			{
 			case COLOR_MENU_ITM_BLACK:
-				return BLACK;
+				selectedColor = BLACK;
+				break;
 			case COLOR_MENU_ITM_RED:
-				return RED;
+				selectedColor = RED;
+				break;
 			case COLOR_MENU_ITM_BLUE:
-				return BLUE;
+				selectedColor = BLUE;
+				break;
 			case COLOR_MENU_ITM_GREEN:
-				return GREEN;
+				selectedColor = GREEN;
+				break;
 			case COLOR_MENU_ITM_MAGENTA:
-				return MAGENTA;
+				selectedColor = MAGENTA;
+				break;
 			case COLOR_MENU_ITM_ORANGE:
-				return ORANGE;
+				selectedColor = ORANGE;
+				break;
 			case COLOR_MENU_ITM_BROWN:
-				return BROWN;
+				selectedColor = BROWN;
+				break;
 			case COLOR_MENU_ITM_CYAN:
-				return CYAN;
+				selectedColor = CYAN;
+				break;
 			case COLOR_MENU_ITM_YELLOW:
-				return YELLOW;
+				selectedColor = YELLOW;
+				break;
 			case COLOR_MENU_ITM_GOLD:
-				return LIGHTGOLDENRODYELLOW;
+				selectedColor = LIGHTGOLDENRODYELLOW;
+				break;
 
 			default:
-				return TRANSPARENT_COLOR;
+				selectedColor = TRANSPARENT_COLOR;
+				break;
 			}
+
+			pO->CloseColorMenuWind();
+			return selectedColor;
 		}
 	}
 

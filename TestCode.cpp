@@ -27,13 +27,11 @@ int main()
 	pIn->GetPointClicked(x, y); // Wait for any click
 
 	pOut->OpenColorMenuWind();						 // Creates color window instance
-	pIn->SetColorMenuWind(pOut->GetColorMenuWind()); // Updates Input class with color window object pointer
 
 	pOut->PrintMessage("Select a color from color menu");
-	color selectedColor = pIn->GetSelectedColor(); // Gets user selection of the color
+	color selectedColor = pIn->GetSelectedColor(pOut); // Gets user selection of the color
 
 	pOut->CloseColorMenuWind();						 // Destroys color window instance
-	pIn->SetColorMenuWind(pOut->GetColorMenuWind()); // Updates Input class with color window object pointer
 
 	printSelectedColor(pOut, selectedColor); // Prints selected color to the status bar
 	pIn->GetPointClicked(x, y);				 // Wait for any click 
@@ -437,10 +435,7 @@ int main()
 			pOut->PrintMessage("Action: Outline color, select a color");
 
 			pOut->OpenColorMenuWind(ClickedItemOrder * UI.MenuItemWidth, false);
-			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
-			selectedColor = pIn->GetSelectedColor();
-			pOut->CloseColorMenuWind();
-			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
+			selectedColor = pIn->GetSelectedColor(pOut);
 
 			printSelectedColor(pOut, selectedColor);
 			break;
@@ -448,10 +443,7 @@ int main()
 			pOut->PrintMessage("Action: Fill color, select a color");
 
 			pOut->OpenColorMenuWind(ClickedItemOrder * UI.MenuItemWidth);
-			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
-			selectedColor = pIn->GetSelectedColor();
-			pOut->CloseColorMenuWind();
-			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
+			selectedColor = pIn->GetSelectedColor(pOut);
 
 			printSelectedColor(pOut, selectedColor);
 			break;
@@ -495,10 +487,7 @@ int main()
 			pOut->PrintMessage("Action: Background color, select a color");
 
 			pOut->OpenColorMenuWind(ClickedItemOrder * UI.MenuItemWidth, false);
-			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
-			UI.BkGrndColor = pIn->GetSelectedColor();
-			pOut->CloseColorMenuWind();
-			pIn->SetColorMenuWind(pOut->GetColorMenuWind());
+			UI.BkGrndColor = pIn->GetSelectedColor(pOut);
 
 			pOut->ClearDrawArea();
 			break;
