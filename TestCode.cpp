@@ -31,8 +31,6 @@ int main()
 	pOut->PrintMessage("Select a color from color menu");
 	color selectedColor = pIn->GetSelectedColor(pOut); // Gets user selection of the color
 
-	pOut->CloseColorMenuWind();						 // Destroys color window instance
-
 	printSelectedColor(pOut, selectedColor); // Prints selected color to the status bar
 	pIn->GetPointClicked(x, y);				 // Wait for any click 
 
