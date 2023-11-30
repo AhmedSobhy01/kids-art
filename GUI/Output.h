@@ -35,8 +35,8 @@ public:
 
 	void PrintMessage(string msg) const; // Print a message on status bar
 
-	color getCurrentDrawColor() const; // Get current drawing color
-	color getCurrentFillColor() const; // Get current filling color
+	color getCrntDrawColor() const; // Get current drawing color
+	color getCrntFillColor() const; // Get current filling color
 	int getCurrentPenWidth() const;	   // Get current pen width
 
 	~Output();
