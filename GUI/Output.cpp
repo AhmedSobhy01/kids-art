@@ -219,13 +219,13 @@ void Output::PrintMessage(string msg) const // Prints a message on status bar
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-color Output::getCurrentDrawColor() const // Get current drawing color
+color Output::getCrntDrawColor() const // Get current drawing color
 {
 	return UI.DrawColor;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-color Output::getCurrentFillColor() const // Get current filling color
+color Output::getCrntFillColor() const // Get current filling color
 {
 	return UI.FillColor;
 }
