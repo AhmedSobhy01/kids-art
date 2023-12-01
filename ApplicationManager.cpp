@@ -2,6 +2,7 @@
 #include "Actions\AddRectAction.h"
 #include "Actions\AddSquareAction.h"
 #include "Actions\AddTriangleAction.h"
+#include "Actions\AddCircleAction.h"
 
 
 //Constructor
@@ -43,6 +44,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case DRAW_TRIANGLE:
 		pAct = new AddTriangleAction(this);
+		break;
+	case DRAW_CIRCLE:
+		pAct = new AddCircleAction(this);
 		break;
 
 		case EXIT:

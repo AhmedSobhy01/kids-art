@@ -152,6 +152,8 @@
     <ClCompile Include="Figures\CSquare.cpp" />
     <ClCompile Include="Figures\CTriangle.cpp" />
     <ClCompile Include="Actions\AddTriangleAction.cpp" />
+    <ClCompile Include="Figures\CCircle.cpp" />
+    <ClCompile Include="Actions\AddCircleAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -243,6 +245,8 @@
     <ClInclude Include="Figures\CSquare.h" />
     <ClInclude Include="Figures\CTriangle.h" />
     <ClInclude Include="Actions\AddTriangleAction.h" />
+    <ClInclude Include="Figures\CCircle.h" />
+    <ClInclude Include="Actions\AddCircleAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

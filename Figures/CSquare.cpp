@@ -1,7 +1,7 @@
 #include "CSquare.h"
 
-CSquare::CSquare(Point Center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
-	this->center = Center;
+CSquare::CSquare(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
+	this->center = center;
 }
 
 void CSquare::Draw(Output* pOut) const {
