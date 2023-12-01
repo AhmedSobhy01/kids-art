@@ -12,7 +12,7 @@ AddSquareAction::AddSquareAction(ApplicationManager* pApp) :Action(pApp)
 void AddSquareAction::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	pOut->PrintMessage("New Square: Click at center");
+	pOut->PrintMessage("New Square: Click at the center");
 	pIn->GetPointClicked(center.x, center.y);
 	SquareGfxInfo.isFilled = false;
 	SquareGfxInfo.DrawClr = pOut->getCrntDrawColor();
@@ -24,9 +24,9 @@ void AddSquareAction::ReadActionParameters() {
 void AddSquareAction::Execute() {
 	ReadActionParameters();
 
-	//Create a rectangle with the parameters read from the user
+	//Create a square with the parameters read from the user
 	CSquare* R = new CSquare(center, SquareGfxInfo);
 
-	//Add the rectangle to the list of figures
+	//Add the square to the list of figures
 	pManager->AddFigure(R);
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include "Action.h"
 class AddSquareAction :
-    public Action
+	public Action
 {
 private:
 	Point center;
