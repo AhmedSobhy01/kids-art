@@ -1,5 +1,7 @@
 #include "ApplicationManager.h"
 #include "Actions\AddRectAction.h"
+#include "SwitchToPlayAction.h"
+#include "SwitchToDrawAction.h"
 
 
 //Constructor
@@ -40,6 +42,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case EXIT:
 			///create ExitAction here
 			
+			break;
+
+		case TO_PLAY:
+			pAct = new SwitchToPlayAction(this);
+			break;
+
+		case TO_DRAW:
+			pAct = new SwitchToDrawAction(this);
 			break;
 		
 		case STATUS:	//a click on the status bar ==> no action
