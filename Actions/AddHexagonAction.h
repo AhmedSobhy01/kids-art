@@ -1,12 +1,12 @@
 #pragma once
 #include "Action.h"
-class AddSquareAction : public Action
+class AddHexagonAction : public Action
 {
 private:
 	Point center;
-	GfxInfo SquareGfxInfo;
+	GfxInfo HexagonGfxInfo;
 public:
-	AddSquareAction(ApplicationManager* pApp);
+	AddHexagonAction(ApplicationManager* pApp);
 
 	void ReadActionParameters();
 

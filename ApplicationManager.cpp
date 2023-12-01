@@ -3,6 +3,7 @@
 #include "Actions\AddSquareAction.h"
 #include "Actions\AddTriangleAction.h"
 #include "Actions\AddCircleAction.h"
+#include "Actions\AddHexagonAction.h"
 
 
 //Constructor
@@ -47,6 +48,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case DRAW_CIRCLE:
 		pAct = new AddCircleAction(this);
+		break;
+	case DRAW_HEXAGON:
+		pAct = new AddHexagonAction(this);
 		break;
 
 		case EXIT:
