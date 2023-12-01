@@ -1,5 +1,6 @@
 #include "ApplicationManager.h"
 #include "Actions\AddRectAction.h"
+#include "Actions\AddSquareAction.h"
 
 
 //Constructor
@@ -33,9 +34,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
-		case DRAW_RECT:
-			pAct = new AddRectAction(this);
-			break;
+	case DRAW_RECT:
+		pAct = new AddRectAction(this);
+		break;
+	case DRAW_SQUARE:
+		pAct = new AddSquareAction(this);
+		break;
 
 		case EXIT:
 			///create ExitAction here
