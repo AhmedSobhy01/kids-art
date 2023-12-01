@@ -16,11 +16,13 @@ public:
 
 	Action(ApplicationManager *pApp) { pManager = pApp; }	//constructor
 
+	virtual bool Validate() = 0;
+
 	//Reads parameters required for action to execute (code depends on action type)
-	virtual void ReadActionParameters() =0;
+	virtual void ReadActionParameters() = 0;
 	
 	//Execute action (code depends on action type)
-	virtual void Execute() =0;
+	virtual void Execute() = 0;
 
 };
 

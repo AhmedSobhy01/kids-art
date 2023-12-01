@@ -7,7 +7,7 @@ private:
 	GfxInfo SquareGfxInfo;
 public:
 	AddSquareAction(ApplicationManager* pApp);
-
+	bool Validate();
 	void ReadActionParameters();
 
 	void Execute();

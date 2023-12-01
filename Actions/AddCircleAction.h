@@ -9,7 +9,7 @@ private:
     GfxInfo CircleGfxInfo;
 public:
     AddCircleAction(ApplicationManager* pApp);
-
+    bool Validate();
     void ReadActionParameters();
 
     void Execute();

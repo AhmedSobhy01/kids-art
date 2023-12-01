@@ -6,24 +6,42 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddRectAction::AddRectAction(ApplicationManager * pApp):Action(pApp)
-{}
+AddRectAction::AddRectAction(ApplicationManager* pApp) :Action(pApp)
+{
+	P1.x = 0;
+	P1.y = 200;
+	P2.x = 0;
+	P2.y = 200;
+}
 
-void AddRectAction::ReadActionParameters() 
-{	
+bool AddRectAction::Validate() {
+	return P1.y >= UI.ToolBarHeight && P2.y >= UI.ToolBarHeight && P1.y <= (UI.height - UI.StatusBarHeight) && P2.y <= (UI.height - UI.StatusBarHeight);
+}
+
+void AddRectAction::ReadActionParameters()
+{
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
 	pOut->PrintMessage("New Rectangle: Click at first corner");
-	
+
 	//Read 1st corner and store in point P1
 	pIn->GetPointClicked(P1.x, P1.y);
+	if (!Validate()) {
+		pOut->PrintMessage("ERROR: Invalid Point Location");
+		return;
+	};
 
 	pOut->PrintMessage("New Rectangle: Click at second corner");
 
 	//Read 2nd corner and store in point P2
 	pIn->GetPointClicked(P2.x, P2.y);
+	if (!Validate()) {
+		pOut->PrintMessage("ERROR: Invalid Point Location");
+		return;
+	};
+
 
 	RectGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
@@ -36,14 +54,16 @@ void AddRectAction::ReadActionParameters()
 }
 
 //Execute the action
-void AddRectAction::Execute() 
+void AddRectAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	
-	//Create a rectangle with the parameters read from the user
-	CRectangle *R=new CRectangle(P1, P2, RectGfxInfo);
+	if (Validate()) {
+		//Create a rectangle with the parameters read from the user
+		CRectangle* R = new CRectangle(P1, P2, RectGfxInfo);
+		//Add the rectangle to the list of figures
+		pManager->AddFigure(R);
 
-	//Add the rectangle to the list of figures
-	pManager->AddFigure(R);
+	}
+
 }

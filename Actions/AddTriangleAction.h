@@ -10,7 +10,7 @@ private:
 	GfxInfo TriangleGfxInfo;
 public:
 	AddTriangleAction(ApplicationManager* pApp);
-
+	bool Validate();
 	void ReadActionParameters();
 
 	void Execute();

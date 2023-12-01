@@ -7,7 +7,7 @@ private:
 	GfxInfo HexagonGfxInfo;
 public:
 	AddHexagonAction(ApplicationManager* pApp);
-
+	bool Validate();
 	void ReadActionParameters();
 
 	void Execute();

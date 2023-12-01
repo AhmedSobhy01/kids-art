@@ -8,12 +8,20 @@
 
 AddSquareAction::AddSquareAction(ApplicationManager* pApp) :Action(pApp)
 {}
+bool AddSquareAction::Validate() {
+	int squareSize = CSquare::getSquareSize();
+	return (center.y - squareSize / 2) > UI.ToolBarHeight && (center.y + squareSize / 2) <= (UI.height - UI.StatusBarHeight);
+}
 
 void AddSquareAction::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("New Square: Click at the center");
 	pIn->GetPointClicked(center.x, center.y);
+	if (!Validate()) {
+		pOut->PrintMessage("ERROR: Invalid Point Location");
+		return;
+	}
 	SquareGfxInfo.isFilled = false;
 	SquareGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	SquareGfxInfo.FillClr = pOut->getCrntFillColor();
@@ -23,10 +31,11 @@ void AddSquareAction::ReadActionParameters() {
 
 void AddSquareAction::Execute() {
 	ReadActionParameters();
+	if (Validate()) {
+		//Create a square with the parameters read from the user
+		CSquare* S = new CSquare(center, SquareGfxInfo);
 
-	//Create a square with the parameters read from the user
-	CSquare* S = new CSquare(center, SquareGfxInfo);
-
-	//Add the square to the list of figures
-	pManager->AddFigure(S);
+		//Add the square to the list of figures
+		pManager->AddFigure(S);
+	}
 }

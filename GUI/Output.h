@@ -17,7 +17,7 @@ public:
 	void OpenColorMenuWind(int = 0, bool = true); // Creates the color menu window and draws color images
 	void CloseColorMenuWind();					  // Closes the color menu window
 	window *GetColorMenuWind() const;			  // Returns pointer to the color menu window or nullptr if it doesn't exist
-
+	 
 	void CreateDrawToolBar() const; // Creates Draw mode toolbar & menu
 	void CreatePlayToolBar() const; // Creates Play mode toolbar & menu
 	void CreateStatusBar() const;	// Create the status bar
@@ -28,9 +28,9 @@ public:
 
 	// Figures drawing functions
 	void DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected = false) const;				   // Draw a rectangle
-	void DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected = false) const;						   // Draw a square
-	void DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected = false) const; // Draw a triangle
-	void DrawHexagon(Point P1, GfxInfo HexagonGfxInfo, bool selected = false) const;					   // Draw a hexagon
+	void DrawSquare(Point P1,int squareSize ,GfxInfo SquareGfxInfo, bool selected = false) const;						   // Draw a square
+	void DrawTriangle(Point P1 ,Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected = false) const; // Draw a triangle
+	void DrawHexagon(Point P1, int hexagonSize, GfxInfo HexagonGfxInfo, bool selected = false) const;					   // Draw a hexagon
 	void DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected = false) const;			   // Draw a circle
 
 	void PrintMessage(string msg) const; // Print a message on status bar

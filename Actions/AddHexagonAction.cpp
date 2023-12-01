@@ -7,13 +7,25 @@
 #include "..\GUI\Output.h"
 
 AddHexagonAction::AddHexagonAction(ApplicationManager* pApp) :Action(pApp)
-{}
+{
+	center.x = 0;
+	center.y = 200;
+}
+bool AddHexagonAction::Validate() {
+	int hexagonSize = CHexagon::getHexagonSize();
+
+	return (center.y - hexagonSize / 2 * sqrt(3)) > UI.ToolBarHeight && (center.y + hexagonSize / 2 * sqrt(3)) <= (UI.height - UI.StatusBarHeight);
+}
 
 void AddHexagonAction::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("New Hexagon: Click at the center");
 	pIn->GetPointClicked(center.x, center.y);
+	if (!Validate()) {
+		pOut->PrintMessage("ERROR: Invalid Point Location");
+		return;
+	}
 	HexagonGfxInfo.isFilled = false;
 	HexagonGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	HexagonGfxInfo.FillClr = pOut->getCrntFillColor();
@@ -23,10 +35,11 @@ void AddHexagonAction::ReadActionParameters() {
 
 void AddHexagonAction::Execute() {
 	ReadActionParameters();
+	if (Validate()) {
+		//Create a hexagon with the parameters read from the user
+		CHexagon* H = new CHexagon(center, HexagonGfxInfo);
 
-	//Create a hexagon with the parameters read from the user
-	CHexagon* H = new CHexagon(center, HexagonGfxInfo);
-
-	//Add the hexagon to the list of figures
-	pManager->AddFigure(H);
+		//Add the hexagon to the list of figures
+		pManager->AddFigure(H);
+	}
 }

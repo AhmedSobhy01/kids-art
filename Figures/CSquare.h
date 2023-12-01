@@ -4,8 +4,10 @@ class CSquare : public CFigure
 {
 private:
 	Point center;
+	static const int squareSize;
 public:
 	CSquare(Point, GfxInfo);
 	void Draw(Output* pOut)const;
+	static int getSquareSize();
 };
 
