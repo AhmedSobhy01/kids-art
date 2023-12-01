@@ -29,7 +29,10 @@ void AddRectAction::ReadActionParameters()
 	//Read 1st corner and store in point P1
 	pIn->GetPointClicked(P1.x, P1.y);
 	if (!Validate()) {
-		pOut->PrintMessage("ERROR: Invalid Point Location");
+		int x, y;
+		pOut->PrintMessage("ERROR: Invalid Point Location. Click anywhere to continue.");
+		pIn->GetPointClicked(x, y);
+		pOut->ClearStatusBar();
 		return;
 	};
 
@@ -38,7 +41,10 @@ void AddRectAction::ReadActionParameters()
 	//Read 2nd corner and store in point P2
 	pIn->GetPointClicked(P2.x, P2.y);
 	if (!Validate()) {
-		pOut->PrintMessage("ERROR: Invalid Point Location");
+		int x, y;
+		pOut->PrintMessage("ERROR: Invalid Point Location. Click anywhere to continue.");
+		pIn->GetPointClicked(x, y);
+		pOut->ClearStatusBar();
 		return;
 	};
 

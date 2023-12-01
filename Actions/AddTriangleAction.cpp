@@ -28,19 +28,28 @@ void AddTriangleAction::ReadActionParameters() {
 	pOut->PrintMessage("New Triangle: Click at the first corner");
 	pIn->GetPointClicked(P1.x, P1.y);
 	if (!Validate()) {
-		pOut->PrintMessage("ERROR: Invalid Point Location");
+		int x, y;
+		pOut->PrintMessage("ERROR: Invalid Point Location. Click anywhere to continue.");
+		pIn->GetPointClicked(x, y);
+		pOut->ClearStatusBar();
 		return;
 	}
 	pOut->PrintMessage("New Triangle: Click at the second corner");
 	pIn->GetPointClicked(P2.x, P2.y);
 	if (!Validate()) {
-		pOut->PrintMessage("ERROR: Invalid Point Location");
+		int x, y;
+		pOut->PrintMessage("ERROR: Invalid Point Location. Click anywhere to continue.");
+		pIn->GetPointClicked(x, y);
+		pOut->ClearStatusBar();
 		return;
 	}
 	pOut->PrintMessage("New Triangle: Click at the third corner");
 	pIn->GetPointClicked(P3.x, P3.y);
 	if (!Validate()) {
-		pOut->PrintMessage("ERROR: Invalid Point Location");
+		int x, y;
+		pOut->PrintMessage("ERROR: Invalid Point Location. Click anywhere to continue.");
+		pIn->GetPointClicked(x, y);
+		pOut->ClearStatusBar();
 		return;
 	}
 	TriangleGfxInfo.isFilled = false;

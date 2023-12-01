@@ -23,7 +23,10 @@ void AddHexagonAction::ReadActionParameters() {
 	pOut->PrintMessage("New Hexagon: Click at the center");
 	pIn->GetPointClicked(center.x, center.y);
 	if (!Validate()) {
-		pOut->PrintMessage("ERROR: Invalid Point Location");
+		int x, y;
+		pOut->PrintMessage("ERROR: Invalid Point Location. Click anywhere to continue.");
+		pIn->GetPointClicked(x, y);
+		pOut->ClearStatusBar();
 		return;
 	}
 	HexagonGfxInfo.isFilled = false;

@@ -27,7 +27,10 @@ void AddCircleAction::ReadActionParameters() {
 	pOut->PrintMessage("New Circle: //TODO: add a messege here :)");
 	pIn->GetPointClicked(radius.x, radius.y);
 	if (!Validate()) {
-		pOut->PrintMessage("ERROR: Invalid Point Location");
+		int x, y;
+		pOut->PrintMessage("ERROR: Invalid Point Location. Click anywhere to continue.");
+		pIn->GetPointClicked(x, y);
+		pOut->ClearStatusBar();
 		return;
 	}
 	CircleGfxInfo.isFilled = false;
