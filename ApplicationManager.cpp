@@ -5,6 +5,8 @@
 #include "Actions\AddCircleAction.h"
 #include "Actions\AddHexagonAction.h"
 #include "Actions\SelectAction.h"
+#include "Actions\SwitchToDrawAction.h"
+#include "Actions\SwitchToPlayAction.h"
 
 
 //Constructor
