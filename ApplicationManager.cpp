@@ -93,15 +93,15 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
 	bool found = false;
-	int i = 0;
-	while (i < FigCount && !found) {
+	int i = FigCount-1;
+	while (i >= 0 && !found) {
 		if (FigList[i]->CheckSelected(x, y)) {
 			found = true;
-			return FigList[i];
 		}
-		else i++;
+		else i--;
 	}
 
+	if(found)return FigList[i];
 
 
 	//Add your code here to search for a figure given a point x,y	
