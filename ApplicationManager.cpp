@@ -5,6 +5,8 @@
 #include "Actions\AddCircleAction.h"
 #include "Actions\AddHexagonAction.h"
 #include "Actions\SelectAction.h"
+#include "Actions\SwitchToDrawAction.h"
+#include "Actions\SwitchToPlayAction.h"
 
 
 //Constructor
@@ -59,6 +61,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		}
 		pAct = new SelectAction(this);
 		break;
+      
+  case TO_PLAY:
+			pAct = new SwitchToPlayAction(this);
+			break;
+
+	case TO_DRAW:
+			pAct = new SwitchToDrawAction(this);
+			break;
 
 	case EXIT:
 		///create ExitAction here
