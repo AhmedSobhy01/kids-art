@@ -5,6 +5,7 @@
 #include "Actions\AddCircleAction.h"
 #include "Actions\AddHexagonAction.h"
 #include "Actions\SelectAction.h"
+#include "Actions\MoveAction.h"
 #include "Actions\SwitchToDrawAction.h"
 #include "Actions\SwitchToPlayAction.h"
 
@@ -12,6 +13,7 @@
 //Constructor
 ApplicationManager::ApplicationManager()
 {
+	SelectedFig = NULL;
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
@@ -60,9 +62,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			FigList[i]->SetSelected(false);
 		}
 		pAct = new SelectAction(this);
+
+		break;
+	case MOVE:
+		pAct = new MoveAction(this);
 		break;
       
-  case TO_PLAY:
+	case TO_PLAY:
 			pAct = new SwitchToPlayAction(this);
 			break;
 
@@ -97,6 +103,9 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
 }
+CFigure*& ApplicationManager::GetSelected() {
+	return SelectedFig;
+}
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
 {
@@ -126,6 +135,12 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
+	GfxInfo background;
+	background.BorderWidth = 0;
+	background.DrawClr = UI.BkGrndColor;
+	background.FillClr = UI.BkGrndColor;
+	background.isFilled = true;
+	pOut->DrawRect(Point{ 0,UI.ToolBarHeight }, Point{ UI.width,UI.height - UI.StatusBarHeight }, background);
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }

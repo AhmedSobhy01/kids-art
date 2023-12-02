@@ -39,3 +39,25 @@ bool CTriangle::CheckSelected(int x, int y) {
 	//double w2 = ((P.y - P1.y) - w1 * ABy) / ACy;
 	//return w1 >= 0 && w2 >= 0 && (w1 + w2)<=1;
 }
+
+void CTriangle::SetCenter(Point c) {
+	Point center = { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
+	int dx = c.x - center.x;
+	int dy = c.y - center.y;
+	P1.x += dx;
+	P2.x += dx;
+	P3.x += dx;
+	P1.y += dy;
+	P2.y += dy;
+	P3.y += dy;
+
+}
+bool CTriangle::Validate(Point c) {
+	Point center = { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
+	int dx = c.x - center.x;
+	int dy = c.y - center.y;
+	bool cond1 = P1.y + dy >= UI.ToolBarHeight && P1.y + dy <= (UI.height - UI.StatusBarHeight);
+	bool cond2 = P2.y + dy >= UI.ToolBarHeight && P2.y + dy <= (UI.height - UI.StatusBarHeight);
+	bool cond3 = P3.y + dy >= UI.ToolBarHeight && P3.y + dy <= (UI.height - UI.StatusBarHeight);
+	return cond1 && cond2 && cond3;
+}

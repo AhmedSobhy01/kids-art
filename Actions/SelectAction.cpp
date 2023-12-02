@@ -23,6 +23,7 @@ void SelectAction::Execute() {
 	if (F != NULL) {
 		F->SetSelected(true);
 		pOut->ClearStatusBar();
+		pManager->GetSelected() = F;
 	}
 	else {
 		int x, y;
