@@ -1,8 +1,6 @@
 #pragma once
 #include "CFigure.h"
-struct doublePoint {
-	double x, y;
-};
+
 class CHexagon : public CFigure
 {
 private:
