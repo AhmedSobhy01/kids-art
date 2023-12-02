@@ -8,14 +8,10 @@
 SwitchToPlayAction::SwitchToPlayAction(ApplicationManager *pApp): Action(pApp)
 {}
 
-void SwitchToPlayAction::ReadActionParameters() {
-	Input* pIn = pManager->GetInput();
-	actType = TO_PLAY;///actType = TO_PLAY
-}
+void SwitchToPlayAction::ReadActionParameters() 
+{ }
 
 void SwitchToPlayAction::Execute() {
 	Output* pOut = pManager->GetOutput();
-	ReadActionParameters();
-
 	pOut->CreatePlayToolBar();
 }

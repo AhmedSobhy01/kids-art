@@ -6,13 +6,10 @@
 SwitchToDrawAction::SwitchToDrawAction(ApplicationManager* pApp) :Action(pApp) 
 {}
 
-void SwitchToDrawAction::ReadActionParameters() {
-	actType = TO_DRAW;
-}
+void SwitchToDrawAction::ReadActionParameters() 
+{ }
 
 void SwitchToDrawAction::Execute() {
 	Output* pOut = pManager->GetOutput();
-	ReadActionParameters();
-
 	pOut->CreateDrawToolBar();
 }
