@@ -14,3 +14,14 @@ void CSquare::Draw(Output* pOut) const {
 int CSquare::getSquareSize() {
 	return squareSize;
 }
+
+bool CSquare::CheckSelected(int x, int y) {
+	Point p1, p2;
+	p1.x = center.x - squareSize / 2;
+	p1.y = center.y - squareSize / 2;
+	p2.x = center.x + squareSize / 2;
+	p2.y = center.y + squareSize / 2;
+	bool cond1 = (p1.x < x) && (x < p2.x);
+	bool cond2 = (p1.y < y) && (y < p2.y);
+	return cond1 && cond2;
+}

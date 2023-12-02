@@ -9,5 +9,6 @@ public:
 	CSquare(Point, GfxInfo);
 	void Draw(Output* pOut)const;
 	static int getSquareSize();
+	bool CheckSelected(int x, int y);
 };
 
