@@ -248,7 +248,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, UI.PenWidth);
 	drawstyle style;
 	if (RectGfxInfo.isFilled)
 	{
@@ -262,17 +262,15 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawSquare(Point P1, GfxInfo SquareGfxInfo, bool selected) const // Drawing square
+void Output::DrawSquare(Point P1,int squareSize, GfxInfo SquareGfxInfo, bool selected) const // Drawing square
 {
-	const int squareSize = 150; //	If changed here, make sure to also change it in the TestCode.cpp call
-
 	color DrawingClr;
 	if (selected)
 		DrawingClr = UI.HighlightColor;
 	else
 		DrawingClr = SquareGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, UI.PenWidth);
 	drawstyle style;
 
 	if (SquareGfxInfo.isFilled)
@@ -302,7 +300,7 @@ void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo,
 	else
 		DrawingClr = TriangleGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, UI.PenWidth);
 	if (TriangleGfxInfo.isFilled)
 	{
 		pWind->SetBrush(TriangleGfxInfo.FillClr);
@@ -324,7 +322,7 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected
 	else
 		drawcolor = CircleGfxInfo.DrawClr;
 
-	pWind->SetPen(drawcolor, 1);
+	pWind->SetPen(drawcolor, UI.PenWidth);
 	if (CircleGfxInfo.isFilled)
 	{
 		style = FILLED;
@@ -338,9 +336,8 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawHexagon(Point P1, GfxInfo HexagonGfxInfo, bool selected) const
+void Output::DrawHexagon(Point P1,int hexagonSize ,GfxInfo HexagonGfxInfo, bool selected) const
 {
-	const int hexagonSize = 80; //	If changed here, make sure to also change it in the TestCode.cpp call
 
 	color drawcolor;
 	drawstyle style;
@@ -349,7 +346,7 @@ void Output::DrawHexagon(Point P1, GfxInfo HexagonGfxInfo, bool selected) const
 	else
 		drawcolor = HexagonGfxInfo.DrawClr;
 
-	pWind->SetPen(drawcolor, 1);
+	pWind->SetPen(drawcolor, UI.PenWidth);
 	if (HexagonGfxInfo.isFilled)
 	{
 		style = FILLED;
