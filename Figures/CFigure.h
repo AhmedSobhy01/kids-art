@@ -24,7 +24,7 @@ public:
 	
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
-
+	virtual bool CheckSelected(int x, int y) = 0;
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
 
