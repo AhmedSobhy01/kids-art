@@ -135,12 +135,8 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
-	GfxInfo background;
-	background.BorderWidth = 0;
-	background.DrawClr = UI.BkGrndColor;
-	background.FillClr = UI.BkGrndColor;
-	background.isFilled = true;
-	pOut->DrawRect(Point{ 0,UI.ToolBarHeight }, Point{ UI.width,UI.height - UI.StatusBarHeight }, background);
+
+	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
