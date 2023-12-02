@@ -8,5 +8,6 @@ private:
 public:
 	CCircle(Point, Point, GfxInfo);
 	void Draw(Output* pOut)const;
+	bool CheckSelected(int x, int y);
 };
 
