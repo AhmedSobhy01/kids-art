@@ -19,10 +19,16 @@ void SelectAction::ReadActionParameters() {
 void SelectAction::Execute() {
 	ReadActionParameters();
 	CFigure* F = pManager->GetFigure(P.x, P.y);
+	if (F == NULL) {
+		return;
+	}
 	CFigure* S = pManager->GetSelected();
-	if (F != NULL) {
-		F->SetSelected(S != F);
-		pManager->GetSelected() = F != S ? F : NULL;
+	F->SetSelected(true);
+	if(S != NULL)S->SetSelected(false);
+	pManager->SetSelected(F);
+	if (F == S) {
+		F->SetSelected(false);
+		pManager->SetSelected(NULL);
 	}
 
 }

@@ -39,6 +39,6 @@ void MoveAction::Execute(){
 			F->SetCenter(P);
 		}
 		F->SetSelected(false);
-		pManager->GetSelected() = NULL;
+		pManager->SetSelected(NULL);
 	}
 }

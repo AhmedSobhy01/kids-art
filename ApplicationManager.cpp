@@ -58,9 +58,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new AddHexagonAction(this);
 		break;
 	case SELECT:
-		for (int i = 0; i < FigCount; i++) {
-			FigList[i]->SetSelected(false);
-		}
+		//for (int i = 0; i < FigCount; i++) {
+		//	FigList[i]->SetSelected(false);
+		//}
 		pAct = new SelectAction(this);
 
 		break;
@@ -103,8 +103,11 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
 }
-CFigure*& ApplicationManager::GetSelected() {
+CFigure* ApplicationManager::GetSelected() {
 	return SelectedFig;
+}
+void ApplicationManager::SetSelected(CFigure* c) {
+	SelectedFig = c;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
@@ -135,7 +138,6 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
-
 	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
