@@ -5,7 +5,7 @@ UndoableActionStack::UndoableActionStack(int _MaxSize) : ItemsCount(0), MaxSize(
 	items = new UndoableAction * [MaxSize];
 
 	for (int i = 0; i < MaxSize; i++)
-		items[i] = nullptr;
+		items[i] = NULL;
 }
 
 int UndoableActionStack::size() const
@@ -18,7 +18,7 @@ void UndoableActionStack::push(UndoableAction* item)
 	if (item) {
 		if (ItemsCount >= MaxSize) {
 			delete items[0];
-			items[0] = nullptr;
+			items[0] = NULL;
 
 			for (int i = 1; i < ItemsCount; i++)
 				items[i - 1] = items[i];
@@ -34,13 +34,13 @@ UndoableAction* UndoableActionStack::pop()
 {
 	if (!empty()) {
 		UndoableAction* item = items[ItemsCount - 1];
-		items[ItemsCount - 1] = nullptr;
+		items[ItemsCount - 1] = NULL;
 
 		ItemsCount--;
 		return item;
 	}
 
-	return nullptr;
+	return NULL;
 }
 
 UndoableAction* UndoableActionStack::top() const
@@ -48,7 +48,7 @@ UndoableAction* UndoableActionStack::top() const
 	if (!empty())
 		return items[ItemsCount - 1];
 
-	return nullptr;
+	return NULL;
 }
 
 bool UndoableActionStack::empty() const
@@ -59,7 +59,7 @@ bool UndoableActionStack::empty() const
 void UndoableActionStack::clear()
 {
 	for (int i = 0; i < ItemsCount; i++)
-		items[i] = nullptr;
+		items[i] = NULL;
 
 	ItemsCount = 0;
 }

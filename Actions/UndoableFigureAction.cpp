@@ -2,7 +2,7 @@
 
 UndoableFigureAction::UndoableFigureAction(ApplicationManager* pApp) : UndoableAction(pApp)
 {
-	figure = nullptr;
+	figure = NULL;
 }
 
 void UndoableFigureAction::Undo()

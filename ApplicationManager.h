@@ -8,46 +8,50 @@
 #include "Containers\FigureList.h"
 #include "Containers\UndoableActionStack.h"
 
-//Main class that manages everything in the application.
+// Main class that manages everything in the application.
 class ApplicationManager
 {
-	enum { MaxFigCount = 200 };	//Max no of figures
+	enum
+	{
+		MaxFigCount = 200,
+		MaxUndoableActions = 5
+	}; // Max no of figures
 
 private:
-	FigureList FigList;	//List of done figures
+	FigureList FigList; // List of done figures
 
 	UndoableActionStack UndoableActions; // Stack of actions that can be undone
 	UndoableActionStack RedoableActions; // Stack of actions that can be redone
 
-	CFigure* SelectedFig; //Pointer to the selected figure
+	CFigure *SelectedFig; // Pointer to the selected figure
 
-	//Pointers to Input and Output classes
+	// Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
 
-public:	
-	ApplicationManager(); 
+public:
+	ApplicationManager();
 	~ApplicationManager();
-	
+
 	// -- Action-Related Functions
-	//Reads the input command from the user and returns the corresponding action type
+	// Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
-	void ExecuteAction(ActionType) ; //Creates an action and executes it
-	
+	void ExecuteAction(ActionType); // Creates an action and executes it
+
 	// -- Figures Management Functions
-	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
-	void RemoveFigure(CFigure* pFig);          //Removes a figure from the FigList
-	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
+	void AddFigure(CFigure *pFig);			// Adds a new figure to the FigList
+	void RemoveFigure(CFigure *pFig);		// Removes a figure from the FigList
+	CFigure *GetFigure(int x, int y) const; // Search for a figure given a point inside the figure
 
 	// -- Undo & Redo Stacks
-	UndoableActionStack& GetUndoableActionsStack();
-	UndoableActionStack& GetRedoableActionsStack();
+	UndoableActionStack &GetUndoableActionsStack();
+	UndoableActionStack &GetRedoableActionsStack();
 	void ClearRedoableActionsStack();
-		
+
 	// -- Interface Management Functions
-	Input *GetInput() const; //Return pointer to the input
-	Output *GetOutput() const; //Return pointer to the output
-	void UpdateInterface() const;	//Redraws all the drawing window	
+	Input *GetInput() const;	  // Return pointer to the input
+	Output *GetOutput() const;	  // Return pointer to the output
+	void UpdateInterface() const; // Redraws all the drawing window
 };
 
 #endif

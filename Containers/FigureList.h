@@ -20,7 +20,6 @@ public:
 	CFigure* remove(CFigure*);
 	bool empty() const;
 	void clear();
-	void print() const;
 
 	~FigureList();
 };

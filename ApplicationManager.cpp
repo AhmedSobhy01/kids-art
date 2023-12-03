@@ -11,14 +11,14 @@
 #include "Actions\UndoAction.h"
 #include "Actions\RedoAction.h"
 
-//Constructor
-ApplicationManager::ApplicationManager(): FigList(MaxFigCount), UndoableActions(5), RedoableActions(5)
+// Constructor
+ApplicationManager::ApplicationManager() : FigList(MaxFigCount), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions)
 {
-	//Create Input and output
+	// Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
 
-	SelectedFig = nullptr;
+	SelectedFig = NULL;
 }
 
 //==================================================================================//
@@ -26,16 +26,16 @@ ApplicationManager::ApplicationManager(): FigList(MaxFigCount), UndoableActions(
 //==================================================================================//
 ActionType ApplicationManager::GetUserAction() const
 {
-	//Ask the input to get the action from the user.
+	// Ask the input to get the action from the user.
 	return pIn->GetUserAction();
 }
 ////////////////////////////////////////////////////////////////////////////////////
-//Creates an action and executes it
+// Creates an action and executes it
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
-	Action* pAct = NULL;
+	Action *pAct = NULL;
 
-	//According to Action Type, create the corresponding action object
+	// According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
 	case TO_PLAY:
@@ -70,77 +70,82 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new RedoAction(this);
 		break;
 	case EXIT:
-		///create ExitAction here
+		/// create ExitAction here
 
 		break;
-	case STATUS:	//a click on the status bar ==> no action
+	case STATUS: // a click on the status bar ==> no action
 		return;
 	}
 
-	//Execute the created action
-	if (pAct != nullptr)
+	// Execute the created action
+	if (pAct != NULL)
 	{
-		pAct->Execute();//Execute
+		pAct->Execute(); // Execute
 
 		if (ActType != UNDO && ActType != REDO)
 			ClearRedoableActionsStack();
 
-		if (dynamic_cast<UndoableAction*>(pAct) == NULL) {
+		if (dynamic_cast<UndoableAction *>(pAct) == NULL)
+		{
 			delete pAct;
 		}
 		else
-			UndoableActions.push(dynamic_cast<UndoableAction*>(pAct));
+			UndoableActions.push(dynamic_cast<UndoableAction *>(pAct));
 
-		pAct = nullptr;
+		pAct = NULL;
 	}
 }
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
 
-//Add a figure to the list of figures
-void ApplicationManager::AddFigure(CFigure* pFig)
+// Add a figure to the list of figures
+void ApplicationManager::AddFigure(CFigure *pFig)
 {
 	FigList.push_back(pFig);
 }
 ///////s/////////////////////////////////////////////////////////////////////////////
-void ApplicationManager::RemoveFigure(CFigure* pFig)
+void ApplicationManager::RemoveFigure(CFigure *pFig)
 {
-	CFigure* f = FigList.remove(pFig);
+	CFigure *f = FigList.remove(pFig);
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure* ApplicationManager::GetFigure(int x, int y) const
+CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
-	//If a figure is found return a pointer to it.
-	//if this point (x,y) does not belong to any figure return NULL
+	// If a figure is found return a pointer to it.
+	// if this point (x,y) does not belong to any figure return NULL
 	bool found = false;
 	int i = FigList.size() - 1;
-	while (i >= 0 && !found) {
-		if (FigList[i]->CheckSelected(x, y)) {
+	while (i >= 0 && !found)
+	{
+		if (FigList[i]->CheckSelected(x, y))
+		{
 			found = true;
 		}
-		else i--;
+		else
+			i--;
 	}
 
-	if (found) return FigList[i];
+	if (found)
+		return FigList[i];
 
-
-	//Add your code here to search for a figure given a point x,y	
-	//Remember that ApplicationManager only calls functions do NOT implement it.
+	// Add your code here to search for a figure given a point x,y
+	// Remember that ApplicationManager only calls functions do NOT implement it.
 
 	return NULL;
 }
-UndoableActionStack& ApplicationManager::GetUndoableActionsStack()
+UndoableActionStack &ApplicationManager::GetUndoableActionsStack()
 {
 	return UndoableActions;
 }
-UndoableActionStack& ApplicationManager::GetRedoableActionsStack()
+UndoableActionStack &ApplicationManager::GetRedoableActionsStack()
 {
 	return RedoableActions;
 }
 void ApplicationManager::ClearRedoableActionsStack()
 {
-	for (int i = 0; i < RedoableActions.size(); i++) {
+	for (int i = 0; i < RedoableActions.size(); i++)
+	{
 		delete RedoableActions.pop();
 	}
 
@@ -150,32 +155,31 @@ void ApplicationManager::ClearRedoableActionsStack()
 //							Interface Management Functions							//
 //==================================================================================//
 
-//Draw all figures on the user interface
+// Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
 	pOut->ClearDrawArea();
 
 	for (int i = 0; i < FigList.size(); i++)
-		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+		FigList[i]->Draw(pOut); // Call Draw function (virtual member fn)
 }
 ////////////////////////////////////////////////////////////////////////////////////
-//Return a pointer to the input
-Input* ApplicationManager::GetInput() const
+// Return a pointer to the input
+Input *ApplicationManager::GetInput() const
 {
 	return pIn;
 }
-//Return a pointer to the output
-Output* ApplicationManager::GetOutput() const
+// Return a pointer to the output
+Output *ApplicationManager::GetOutput() const
 {
 	return pOut;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-//Destructor
+// Destructor
 ApplicationManager::~ApplicationManager()
 {
 	for (int i = 0; i < FigList.size(); i++)
 		delete FigList[i];
 	delete pIn;
 	delete pOut;
-
 }

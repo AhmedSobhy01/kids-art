@@ -16,7 +16,7 @@ public:
 	void DrawColorMenuItems(bool) const;		  // Draws color images to color menu window
 	void OpenColorMenuWind(int = 0, bool = true); // Creates the color menu window and draws color images
 	void CloseColorMenuWind();					  // Closes the color menu window
-	window *GetColorMenuWind() const;			  // Returns pointer to the color menu window or nullptr if it doesn't exist
+	window *GetColorMenuWind() const;			  // Returns pointer to the color menu window or NULL if it doesn't exist
 	 
 	void CreateDrawToolBar() const; // Creates Draw mode toolbar & menu
 	void CreatePlayToolBar() const; // Creates Play mode toolbar & menu
