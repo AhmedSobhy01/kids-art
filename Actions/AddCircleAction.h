@@ -1,7 +1,10 @@
-#pragma once
+#ifndef ADD_CIRCLE_ACTION_H
+#define ADD_CIRCLE_ACTION_H
+
 #include "Action.h"
-class AddCircleAction :
-    public Action
+#include "UndoableFigureAction.h"
+
+class AddCircleAction: public UndoableFigureAction
 {
 private:
     Point center;
@@ -15,3 +18,4 @@ public:
     void Execute();
 };
 
+#endif

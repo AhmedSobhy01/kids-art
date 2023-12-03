@@ -1,6 +1,10 @@
-#pragma once
+#ifndef ADD_SQUARE_ACTION_H
+#define ADD_SQUARE_ACTION_H
+
 #include "Action.h"
-class AddSquareAction : public Action
+#include "UndoableFigureAction.h"
+
+class AddSquareAction : public UndoableFigureAction
 {
 private:
 	Point center;
@@ -13,3 +17,4 @@ public:
 	void Execute();
 };
 
+#endif

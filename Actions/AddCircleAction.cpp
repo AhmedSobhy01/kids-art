@@ -6,7 +6,7 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddCircleAction::AddCircleAction(ApplicationManager* pApp) :Action(pApp)
+AddCircleAction::AddCircleAction(ApplicationManager* pApp): UndoableFigureAction(pApp)
 {
 	center.x = 0;
 	center.y = 200;
@@ -44,9 +44,9 @@ void AddCircleAction::Execute() {
 	ReadActionParameters();
 	if (Validate()) {
 		//Create a circle with the parameters read from the user
-		CCircle* C = new CCircle(center, radius, CircleGfxInfo);
+		figure = new CCircle(center, radius, CircleGfxInfo);
 
 		//Add the circle to the list of figures
-		pManager->AddFigure(C);
+		pManager->AddFigure(figure);
 	}
 }

@@ -1,4 +1,5 @@
 #include "ApplicationManager.h"
+#include "Actions\UndoableAction.h"
 #include "Actions\AddRectAction.h"
 #include "Actions\AddSquareAction.h"
 #include "Actions\AddTriangleAction.h"
@@ -7,7 +8,8 @@
 #include "Actions\SelectAction.h"
 #include "Actions\SwitchToDrawAction.h"
 #include "Actions\SwitchToPlayAction.h"
-
+#include "Actions\UndoAction.h"
+#include "Actions\RedoAction.h"
 
 //Constructor
 ApplicationManager::ApplicationManager(): FigList(MaxFigCount), UndoableActions(5), RedoableActions(5)
@@ -59,29 +61,37 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new AddHexagonAction(this);
 		break;
 	case SELECT:
-		for (int i = 0; i < FigList.size(); i++) {
-			FigList[i]->SetSelected(false);
-		}
 		pAct = new SelectAction(this);
 		break;
 	case UNDO:
-
-
+		pAct = new UndoAction(this);
+		break;
+	case REDO:
+		pAct = new RedoAction(this);
+		break;
 	case EXIT:
 		///create ExitAction here
 
 		break;
-
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	}
 
 	//Execute the created action
-	if (pAct != NULL)
+	if (pAct != nullptr)
 	{
 		pAct->Execute();//Execute
-		delete pAct;	//You may need to change this line depending to your implementation
-		pAct = NULL;
+
+		if (ActType != UNDO && ActType != REDO)
+			ClearRedoableActionsStack();
+
+		if (dynamic_cast<UndoableAction*>(pAct) == NULL) {
+			delete pAct;
+		}
+		else
+			UndoableActions.push(dynamic_cast<UndoableAction*>(pAct));
+
+		pAct = nullptr;
 	}
 }
 //==================================================================================//
@@ -91,8 +101,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
-	if (FigList.size() < MaxFigCount)
-		FigList.push_back(pFig);
+	FigList.push_back(pFig);
+}
+///////s/////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::RemoveFigure(CFigure* pFig)
+{
+	CFigure* f = FigList.remove(pFig);
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
@@ -116,6 +130,22 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 
 	return NULL;
 }
+UndoableActionStack& ApplicationManager::GetUndoableActionsStack()
+{
+	return UndoableActions;
+}
+UndoableActionStack& ApplicationManager::GetRedoableActionsStack()
+{
+	return RedoableActions;
+}
+void ApplicationManager::ClearRedoableActionsStack()
+{
+	for (int i = 0; i < RedoableActions.size(); i++) {
+		delete RedoableActions.pop();
+	}
+
+	RedoableActions.clear();
+}
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -123,6 +153,8 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
+	pOut->ClearDrawArea();
+
 	for (int i = 0; i < FigList.size(); i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }

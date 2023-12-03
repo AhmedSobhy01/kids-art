@@ -2,9 +2,10 @@
 #define ADD_RECT_ACTION_H
 
 #include "Action.h"
+#include "UndoableFigureAction.h"
 
 //Add Rectangle Action class
-class AddRectAction: public Action
+class AddRectAction: public UndoableFigureAction
 {
 private:
 	Point P1, P2; //Rectangle Corners
@@ -17,7 +18,6 @@ public:
 	
 	//Add rectangle to the ApplicationManager
 	virtual void Execute() ;
-	
 };
 
 #endif

@@ -1,6 +1,10 @@
-#pragma once
+#ifndef ADD_HEXAGON_ACTION_H
+#define ADD_HEXAGON_ACTION_H
+
 #include "Action.h"
-class AddHexagonAction : public Action
+#include "UndoableFigureAction.h"
+
+class AddHexagonAction : public UndoableFigureAction
 {
 private:
 	Point center;
@@ -13,3 +17,4 @@ public:
 	void Execute();
 };
 
+#endif

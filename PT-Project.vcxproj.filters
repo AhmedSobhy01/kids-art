@@ -163,12 +163,6 @@
     <ClCompile Include="Actions\AddTriangleAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Figures\CCircle.cpp">
-      <Filter>Action Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Figures\CHexagon.cpp">
-      <Filter>Action Classes</Filter>
-    </ClCompile>
     <ClCompile Include="Figures\CSquare.cpp">
       <Filter>Figures Classes</Filter>
     </ClCompile>
@@ -187,10 +181,22 @@
     <ClCompile Include="Containers\FigureList.cpp">
       <Filter>Containers</Filter>
     </ClCompile>
-    <ClCompile Include="Containers\ActionStack.cpp">
+    <ClCompile Include="Containers\UndoableActionStack.cpp">
       <Filter>Containers</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\UndoableAction.cpp">
+    <ClCompile Include="Figures\CCircle.cpp">
+      <Filter>Figures Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\CHexagon.cpp">
+      <Filter>Figures Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\UndoAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\RedoAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\UndoableFigureAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -292,12 +298,6 @@
     <ClInclude Include="Actions\AddTriangleAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Figures\CCircle.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Figures\CHexagon.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
     <ClInclude Include="Figures\CSquare.h">
       <Filter>Figures Classes</Filter>
     </ClInclude>
@@ -316,10 +316,25 @@
     <ClInclude Include="Containers\FigureList.h">
       <Filter>Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Containers\ActionStack.h">
+    <ClInclude Include="Containers\UndoableActionStack.h">
       <Filter>Containers</Filter>
     </ClInclude>
     <ClInclude Include="Actions\UndoableAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\CCircle.h">
+      <Filter>Figures Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\CHexagon.h">
+      <Filter>Figures Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\UndoAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\RedoAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\UndoableFigureAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

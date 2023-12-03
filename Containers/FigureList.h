@@ -18,7 +18,9 @@ public:
 	CFigure* pop_back();
 	CFigure* remove(int);
 	CFigure* remove(CFigure*);
+	bool empty() const;
 	void clear();
+	void print() const;
 
 	~FigureList();
 };

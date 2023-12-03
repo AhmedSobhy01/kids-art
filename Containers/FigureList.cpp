@@ -5,7 +5,7 @@ FigureList::FigureList(int _MaxSize): ItemsCount(0), MaxSize(_MaxSize)
 	items = new CFigure * [MaxSize];
 
 	for (int i = 0; i < MaxSize; i++)
-		items[i] = nullptr;
+		items[i] = NULL;
 }
 
 CFigure* FigureList::operator[](int index) const
@@ -13,7 +13,7 @@ CFigure* FigureList::operator[](int index) const
 	if (index < ItemsCount && index >= 0)
 		return items[index];
 
-	return nullptr;
+	return NULL;
 }
 
 int FigureList::size() const
@@ -23,16 +23,21 @@ int FigureList::size() const
 
 void FigureList::push_back(CFigure* item)
 {
-	items[ItemsCount++] = item;
+	if (item && ItemsCount < MaxSize)
+		items[ItemsCount++] = item;
 }
 
 CFigure* FigureList::pop_back()
 {
-	CFigure* item = items[ItemsCount - 1];
+	if (!empty()) {
+		CFigure* item = items[ItemsCount - 1];
 
-	items[--ItemsCount] = nullptr;
+		items[--ItemsCount] = NULL;
 
-	return item;
+		return item;
+	}
+
+	return NULL;
 }
 
 CFigure* FigureList::remove(int index)
@@ -40,40 +45,51 @@ CFigure* FigureList::remove(int index)
 	if (index < ItemsCount && index >= 0) {
 		CFigure* item = items[index];
 
+		items[index] = NULL;
+
 		int i = index;
-		while (items[i + 1] != nullptr && i < ItemsCount) {
+		while (items[i + 1] != NULL && i < ItemsCount) {
 			items[i] = items[i + 1];
-			items[i + 1] = nullptr;
+			items[i + 1] = NULL;
 			i++;
 		}
+
+		ItemsCount--;
 		
 		return item;
 	}
 
-	return nullptr;
+	return NULL;
 }
 
 CFigure* FigureList::remove(CFigure* item)
 {
-	if (ItemsCount > 0) {
+	if (item && !empty()) {
 		int index = -1;
 
 		int i = 0;
-		while(i == -1 && i < ItemsCount)
+		while (index == -1 && i < ItemsCount) {
 			if (items[i] == item)
 				index = i;
+			i++;
+		}
 
 		if (index != -1)
 			return remove(index);
 	}
 
-	return nullptr;
+	return NULL;
+}
+
+bool FigureList::empty() const
+{
+	return ItemsCount == 0;
 }
 
 void FigureList::clear()
 {
 	for (int i = 0; i < ItemsCount; i++)
-		items[i] = nullptr;
+		items[i] = NULL;
 
 	ItemsCount = 0;
 }
