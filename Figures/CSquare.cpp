@@ -25,3 +25,9 @@ bool CSquare::CheckSelected(int x, int y) {
 	bool cond2 = (p1.y < y) && (y < p2.y);
 	return cond1 && cond2;
 }
+void CSquare::SetCenter(Point center) {
+	this->center = center;
+}
+bool CSquare::Validate(Point c) {
+	return (center.y - squareSize / 2) > UI.ToolBarHeight && (center.y + squareSize / 2) <= (UI.height - UI.StatusBarHeight);
+}

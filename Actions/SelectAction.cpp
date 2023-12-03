@@ -13,23 +13,22 @@ void SelectAction::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Select: Click on a shape to select.");
 	pIn->GetPointClicked(P.x, P.y);
+	pOut->ClearStatusBar();
 }
 
 void SelectAction::Execute() {
-	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
 	ReadActionParameters();
 	CFigure* F = pManager->GetFigure(P.x, P.y);
-	if (F != NULL) {
-		F->SetSelected(true);
-		pOut->ClearStatusBar();
+	if (F == NULL) {
+		return;
 	}
-	else {
-		int x, y;
-		pOut->PrintMessage("Clicked outside objects so none selected. Click anywhere to continue");
-		pIn->GetPointClicked(x, y);
-		pOut->ClearStatusBar();
-
+	CFigure* S = pManager->GetSelected();
+	F->SetSelected(true);
+	if(S != NULL)S->SetSelected(false);
+	pManager->SetSelected(F);
+	if (F == S) {
+		F->SetSelected(false);
+		pManager->SetSelected(NULL);
 	}
 
 }

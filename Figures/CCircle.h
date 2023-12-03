@@ -9,5 +9,7 @@ public:
 	CCircle(Point, Point, GfxInfo);
 	void Draw(Output* pOut)const;
 	bool CheckSelected(int x, int y);
+	void SetCenter(Point);
+	bool Validate(Point);
 };
 

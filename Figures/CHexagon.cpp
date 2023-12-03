@@ -39,3 +39,11 @@ bool CHexagon::CheckSelected(int x, int y) {
 	double err = totalArea - PArea;
 	return -0.001 < err && err < 0.001;
 }
+
+void CHexagon::SetCenter(Point c) {
+	this->center = c;
+}
+
+bool CHexagon::Validate(Point c) {
+	return (c.y - hexagonSize / 2 * sqrt(3)) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3)) <= (UI.height - UI.StatusBarHeight);
+}
