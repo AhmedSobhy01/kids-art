@@ -6,6 +6,7 @@
 #include "Actions\AddCircleAction.h"
 #include "Actions\AddHexagonAction.h"
 #include "Actions\SelectAction.h"
+#include "Actions\MoveAction.h"
 #include "Actions\SwitchToDrawAction.h"
 #include "Actions\SwitchToPlayAction.h"
 #include "Actions\UndoAction.h"
@@ -14,7 +15,7 @@
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions)
 {
-	// Create Input and output
+  // Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
 
@@ -41,7 +42,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case TO_PLAY:
 		pAct = new SwitchToPlayAction(this);
 		break;
-
 	case TO_DRAW:
 		pAct = new SwitchToDrawAction(this);
 		break;
@@ -62,6 +62,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case SELECT:
 		pAct = new SelectAction(this);
+		break;
+	case MOVE:
+		pAct = new MoveAction(this);
 		break;
 	case UNDO:
 		pAct = new UndoAction(this);
@@ -108,6 +111,12 @@ void ApplicationManager::AddFigure(CFigure *pFig)
 void ApplicationManager::RemoveFigure(CFigure *pFig)
 {
 	CFigure *f = FigList.remove(pFig);
+}
+CFigure* ApplicationManager::GetSelected() {
+	return SelectedFig;
+}
+void ApplicationManager::SetSelected(CFigure* c) {
+	SelectedFig = c;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure *ApplicationManager::GetFigure(int x, int y) const

@@ -23,7 +23,7 @@ private:
 	UndoableActionStack UndoableActions; // Stack of actions that can be undone
 	UndoableActionStack RedoableActions; // Stack of actions that can be redone
 
-	CFigure *SelectedFig; // Pointer to the selected figure
+  CFigure *SelectedFig; // Pointer to the selected figure
 
 	// Pointers to Input and Output classes
 	Input *pIn;
@@ -42,6 +42,9 @@ public:
 	void AddFigure(CFigure *pFig);			// Adds a new figure to the FigList
 	void RemoveFigure(CFigure *pFig);		// Removes a figure from the FigList
 	CFigure *GetFigure(int x, int y) const; // Search for a figure given a point inside the figure
+  
+  CFigure* GetSelected();
+	void SetSelected(CFigure*);
 
 	// -- Undo & Redo Stacks
 	UndoableActionStack &GetUndoableActionsStack();

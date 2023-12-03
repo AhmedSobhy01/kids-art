@@ -187,6 +187,7 @@
     <ClCompile Include="Actions\SwitchToDrawAction.cpp" />
     <ClCompile Include="Actions\SwitchToPlayAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
+    <ClCompile Include="Actions\MoveAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddSquareAction.h" />
@@ -235,6 +236,7 @@
     <ClInclude Include="Actions\SwitchToDrawAction.h" />
     <ClInclude Include="Actions\SwitchToPlayAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
+    <ClInclude Include="Actions\MoveAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
