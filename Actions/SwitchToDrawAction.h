@@ -1,5 +1,6 @@
-#ifndef _SWITCH_TO_DRAW_H_
-#define _SWITCH_TO_DRAW_H_
+#ifndef SWITCH_TO_DRAW_H
+#define SWITCH_TO_DRAW_H
+
 #include "Action.h"
 
 class SwitchToDrawAction: public Action {
@@ -10,4 +11,5 @@ public:
 
 	virtual void Execute();
 };
+
 #endif

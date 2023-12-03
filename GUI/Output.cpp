@@ -33,7 +33,7 @@ Output::Output()
 	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
 
 	// Initialize Color Menu Window Pointer
-	colorMenuWind = nullptr;
+	colorMenuWind = NULL;
 
 	CreateDrawToolBar();
 	CreateStatusBar();
@@ -109,7 +109,7 @@ void Output::OpenColorMenuWind(int x, bool withTransparent)
 void Output::CloseColorMenuWind()
 {
 	delete colorMenuWind;
-	colorMenuWind = nullptr;
+	colorMenuWind = NULL;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 

@@ -6,7 +6,7 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddHexagonAction::AddHexagonAction(ApplicationManager* pApp) :Action(pApp)
+AddHexagonAction::AddHexagonAction(ApplicationManager* pApp): UndoableFigureAction(pApp)
 {
 	center.x = 0;
 	center.y = 200;
@@ -40,9 +40,9 @@ void AddHexagonAction::Execute() {
 	ReadActionParameters();
 	if (Validate()) {
 		//Create a hexagon with the parameters read from the user
-		CHexagon* H = new CHexagon(center, HexagonGfxInfo);
+		figure = new CHexagon(center, HexagonGfxInfo);
 
 		//Add the hexagon to the list of figures
-		pManager->AddFigure(H);
+		pManager->AddFigure(figure);
 	}
 }

@@ -6,7 +6,7 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddSquareAction::AddSquareAction(ApplicationManager* pApp) :Action(pApp)
+AddSquareAction::AddSquareAction(ApplicationManager* pApp): UndoableFigureAction(pApp)
 {}
 bool AddSquareAction::Validate() {
 	int squareSize = CSquare::getSquareSize();
@@ -36,9 +36,9 @@ void AddSquareAction::Execute() {
 	ReadActionParameters();
 	if (Validate()) {
 		//Create a square with the parameters read from the user
-		CSquare* S = new CSquare(center, SquareGfxInfo);
+		figure = new CSquare(center, SquareGfxInfo);
 
 		//Add the square to the list of figures
-		pManager->AddFigure(S);
+		pManager->AddFigure(figure);
 	}
 }

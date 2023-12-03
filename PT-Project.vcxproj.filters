@@ -19,6 +19,9 @@
     <Filter Include="Application Manager">
       <UniqueIdentifier>{be3a4e10-d854-4bf8-9add-2f85904b4103}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Containers">
+      <UniqueIdentifier>{0fb6ddee-e0de-4102-bcef-4decdc57eab7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMUgraphicsLib\auxil.cpp">
@@ -160,12 +163,6 @@
     <ClCompile Include="Actions\AddTriangleAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Figures\CCircle.cpp">
-      <Filter>Action Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Figures\CHexagon.cpp">
-      <Filter>Action Classes</Filter>
-    </ClCompile>
     <ClCompile Include="Figures\CSquare.cpp">
       <Filter>Figures Classes</Filter>
     </ClCompile>
@@ -181,7 +178,30 @@
     <ClCompile Include="Actions\SwitchToPlayAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\MoveAction.cpp" />
+    <ClCompile Include="Containers\FigureList.cpp">
+      <Filter>Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Containers\UndoableActionStack.cpp">
+      <Filter>Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\CCircle.cpp">
+      <Filter>Figures Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\CHexagon.cpp">
+      <Filter>Figures Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\UndoAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\RedoAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\UndoableFigureAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\MoveAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -281,12 +301,6 @@
     <ClInclude Include="Actions\AddTriangleAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Figures\CCircle.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Figures\CHexagon.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
     <ClInclude Include="Figures\CSquare.h">
       <Filter>Figures Classes</Filter>
     </ClInclude>
@@ -302,7 +316,33 @@
     <ClInclude Include="Actions\SwitchToPlayAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\MoveAction.h" />
+    <ClInclude Include="Containers\FigureList.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Containers\UndoableActionStack.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\UndoableAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\CCircle.h">
+      <Filter>Figures Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\CHexagon.h">
+      <Filter>Figures Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\UndoAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\RedoAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\UndoableFigureAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\MoveAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

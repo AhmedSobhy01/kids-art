@@ -4,7 +4,7 @@
 #include "..\ApplicationManager.h"
 
 
-SwitchToDrawAction::SwitchToDrawAction(ApplicationManager* pApp) :Action(pApp) 
+SwitchToDrawAction::SwitchToDrawAction(ApplicationManager* pApp): Action(pApp) 
 {}
 
 void SwitchToDrawAction::ReadActionParameters() 

@@ -4,7 +4,7 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-SelectAction::SelectAction(ApplicationManager* pApp) :Action(pApp) {
+SelectAction::SelectAction(ApplicationManager* pApp): Action(pApp) {
 
 }
 
