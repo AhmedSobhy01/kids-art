@@ -132,6 +132,9 @@
     <ClCompile Include="Actions\AddTriangleAction.cpp" />
     <ClCompile Include="Actions\AddCircleAction.cpp" />
     <ClCompile Include="Actions\AddHexagonAction.cpp" />
+    <ClCompile Include="Actions\UndoableAction.cpp" />
+    <ClCompile Include="Containers\ActionStack.cpp" />
+    <ClCompile Include="Containers\FigureList.cpp" />
     <ClCompile Include="Figures\CHexagon.cpp" />
     <ClCompile Include="Figures\CCircle.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
@@ -188,6 +191,9 @@
     <ClInclude Include="Actions\AddTriangleAction.h" />
     <ClInclude Include="Actions\AddCircleAction.h" />
     <ClInclude Include="Actions\AddHexagonAction.h" />
+    <ClInclude Include="Actions\UndoableAction.h" />
+    <ClInclude Include="Containers\ActionStack.h" />
+    <ClInclude Include="Containers\FigureList.h" />
     <ClInclude Include="Figures\CHexagon.h" />
     <ClInclude Include="Figures\CCircle.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />

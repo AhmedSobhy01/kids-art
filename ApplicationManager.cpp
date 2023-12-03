@@ -10,17 +10,13 @@
 
 
 //Constructor
-ApplicationManager::ApplicationManager()
+ApplicationManager::ApplicationManager(): FigList(MaxFigCount), UndoableActions(5), RedoableActions(5)
 {
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
 
-	FigCount = 0;
-
-	//Create an array of figure pointers and set them to NULL		
-	for (int i = 0; i < MaxFigCount; i++)
-		FigList[i] = NULL;
+	SelectedFig = nullptr;
 }
 
 //==================================================================================//
@@ -40,6 +36,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
+	case TO_PLAY:
+		pAct = new SwitchToPlayAction(this);
+		break;
+
+	case TO_DRAW:
+		pAct = new SwitchToDrawAction(this);
+		break;
 	case DRAW_RECT:
 		pAct = new AddRectAction(this);
 		break;
@@ -56,19 +59,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new AddHexagonAction(this);
 		break;
 	case SELECT:
-		for (int i = 0; i < FigCount; i++) {
+		for (int i = 0; i < FigList.size(); i++) {
 			FigList[i]->SetSelected(false);
 		}
 		pAct = new SelectAction(this);
 		break;
-      
-  case TO_PLAY:
-			pAct = new SwitchToPlayAction(this);
-			break;
+	case UNDO:
 
-	case TO_DRAW:
-			pAct = new SwitchToDrawAction(this);
-			break;
 
 	case EXIT:
 		///create ExitAction here
@@ -94,8 +91,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
-	if (FigCount < MaxFigCount)
-		FigList[FigCount++] = pFig;
+	if (FigList.size() < MaxFigCount)
+		FigList.push_back(pFig);
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
@@ -103,7 +100,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
 	bool found = false;
-	int i = FigCount - 1;
+	int i = FigList.size() - 1;
 	while (i >= 0 && !found) {
 		if (FigList[i]->CheckSelected(x, y)) {
 			found = true;
@@ -111,7 +108,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 		else i--;
 	}
 
-	if (found)return FigList[i];
+	if (found) return FigList[i];
 
 
 	//Add your code here to search for a figure given a point x,y	
@@ -126,7 +123,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
-	for (int i = 0; i < FigCount; i++)
+	for (int i = 0; i < FigList.size(); i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -144,7 +141,7 @@ Output* ApplicationManager::GetOutput() const
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
-	for (int i = 0; i < FigCount; i++)
+	for (int i = 0; i < FigList.size(); i++)
 		delete FigList[i];
 	delete pIn;
 	delete pOut;

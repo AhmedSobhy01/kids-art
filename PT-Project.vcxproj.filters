@@ -19,6 +19,9 @@
     <Filter Include="Application Manager">
       <UniqueIdentifier>{be3a4e10-d854-4bf8-9add-2f85904b4103}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Containers">
+      <UniqueIdentifier>{0fb6ddee-e0de-4102-bcef-4decdc57eab7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMUgraphicsLib\auxil.cpp">
@@ -181,6 +184,15 @@
     <ClCompile Include="Actions\SwitchToPlayAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Containers\FigureList.cpp">
+      <Filter>Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Containers\ActionStack.cpp">
+      <Filter>Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\UndoableAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -299,6 +311,15 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\SwitchToPlayAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Containers\FigureList.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Containers\ActionStack.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\UndoableAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

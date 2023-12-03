@@ -5,6 +5,8 @@
 #include "Figures\CFigure.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
+#include "Containers\FigureList.h"
+#include "Containers\ActionStack.h"
 
 //Main class that manages everything in the application.
 class ApplicationManager
@@ -12,8 +14,9 @@ class ApplicationManager
 	enum { MaxFigCount = 200 };	//Max no of figures
 
 private:
-	int FigCount;		//Actual number of figures
-	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
+	FigureList FigList;	//List of done figures
+	ActionStack UndoableActions; // Stack of actions that can be undone
+	ActionStack RedoableActions; // Stack of actions that can be redone
 
 	CFigure* SelectedFig; //Pointer to the selected figure
 
