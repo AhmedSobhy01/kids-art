@@ -202,8 +202,12 @@
     <ClCompile Include="Actions\MoveAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\ChangeFillColorAction.cpp" />
-    <ClCompile Include="Actions\ChangeOutlineColorAction.cpp" />
+    <ClCompile Include="Actions\ChangeFillColorAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ChangeOutlineColorAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -345,8 +349,12 @@
     <ClInclude Include="Actions\MoveAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\ChangeFillColorAction.h" />
-    <ClInclude Include="Actions\ChangeOutlineColorAction.h" />
+    <ClInclude Include="Actions\ChangeFillColorAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ChangeOutlineColorAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

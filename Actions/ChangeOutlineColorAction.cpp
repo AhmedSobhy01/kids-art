@@ -18,8 +18,7 @@ void ChangeOutlineColorAction::ReadActionParameters()
 		pOut->ClearStatusBar();
 		return;
 	}
-	pOut->CreateColorMenuWind(8 * 45, 0);
-	pOut->DrawColorMenuItems(0);
+	pOut->OpenColorMenuWind(8 * UI.ColorMenuItemWidth, false);
 	pOut->PrintMessage("Change Outline Color: Select a color.");
 }
 

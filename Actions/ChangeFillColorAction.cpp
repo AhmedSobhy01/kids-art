@@ -18,8 +18,7 @@ void ChangeFillColorAction::ReadActionParameters()
 		pOut->ClearStatusBar();
 		return;
 	}
-	pOut->CreateColorMenuWind(8 * 45, 1);
-	pOut->DrawColorMenuItems(1);
+	pOut->OpenColorMenuWind(8 * UI.ColorMenuItemWidth);
 	pOut->PrintMessage("Change Fill Color: Select a color.");
 }
 
