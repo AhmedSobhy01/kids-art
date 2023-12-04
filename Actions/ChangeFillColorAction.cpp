@@ -21,7 +21,6 @@ void ChangeFillColorAction::ReadActionParameters()
 	pOut->CreateColorMenuWind(8 * 45, 1);
 	pOut->DrawColorMenuItems(1);
 	pOut->PrintMessage("Change Fill Color: Select a color.");
-	pOut->ClearStatusBar();
 }
 
 void ChangeFillColorAction::Execute()
@@ -33,6 +32,7 @@ void ChangeFillColorAction::Execute()
 	if (F != NULL)
 	{
 		F->ChngFillClr(pIn->GetSelectedColor(pOut));
+		pOut->ClearStatusBar();
 		F->SetSelected(false);
 		pManager->SetSelected(NULL);
 	}

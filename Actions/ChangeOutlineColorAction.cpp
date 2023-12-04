@@ -21,7 +21,6 @@ void ChangeOutlineColorAction::ReadActionParameters()
 	pOut->CreateColorMenuWind(8 * 45, 0);
 	pOut->DrawColorMenuItems(0);
 	pOut->PrintMessage("Change Outline Color: Select a color.");
-	pOut->ClearStatusBar();
 }
 
 void ChangeOutlineColorAction::Execute()
@@ -33,6 +32,7 @@ void ChangeOutlineColorAction::Execute()
 	if (F != NULL)
 	{
 		F->ChngDrawClr(pIn->GetSelectedColor(pOut));
+		pOut->ClearStatusBar();
 		F->SetSelected(false);
 		pManager->SetSelected(NULL);
 	}
