@@ -4,7 +4,7 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-ChangeFillColorAction::ChangeFillColorAction(ApplicationManager* pApp): Action(pApp) {}
+ChangeFillColorAction::ChangeFillColorAction(ApplicationManager* pApp): UndoableAction(pApp) {}
 
 void ChangeFillColorAction::ReadActionParameters()
 {
@@ -25,18 +25,39 @@ void ChangeFillColorAction::ReadActionParameters()
 bool ChangeFillColorAction::Execute()
 {
 	ReadActionParameters();
-	CFigure* F = pManager->GetSelected();
+	Figure = pManager->GetSelected();
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
-	if (F != NULL)
+	if (Figure != NULL)
 	{
-		F->ChngFillClr(pIn->GetSelectedColor(pOut));
+		OldColor = Figure->GetFillClr();
+		NewColor = pIn->GetSelectedColor(pOut);
+
+		Figure->ChngFillClr(NewColor);
 		pOut->ClearStatusBar();
-		F->SetSelected(false);
+		Figure->SetSelected(false);
 		pManager->SetSelected(NULL);
 
 		return true;
 	}
 
 	return false;
+}
+
+void ChangeFillColorAction::Undo()
+{
+	if (Figure)
+		Figure->ChngFillClr(OldColor);
+}
+
+void ChangeFillColorAction::Redo()
+{
+	if (Figure)
+		Figure->ChngFillClr(NewColor);
+}
+
+ChangeFillColorAction::~ChangeFillColorAction()
+{
+	if (Figure)
+		delete Figure;
 }

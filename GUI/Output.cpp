@@ -1,5 +1,6 @@
 #include "Output.h"
 #include <cmath>
+#include <iostream>
 
 Output::Output()
 {
@@ -72,6 +73,7 @@ void Output::CreateColorMenuWind(int x, bool withTransparent)
 
 void Output::DrawColorMenuItems(bool withTransparent) const
 {
+	std::cout << 1 << std::endl;
 	int arraySize = (withTransparent ? COLOR_MENU_ITM_COUNT : COLOR_MENU_ITM_COUNT - 1);
 	string *ColorMenuItemImages = new string[arraySize];
 
@@ -92,12 +94,17 @@ void Output::DrawColorMenuItems(bool withTransparent) const
 	for (int i = 0; i < arraySize; i++)
 		colorMenuWind->DrawImage(ColorMenuItemImages[i], i * UI.ColorMenuItemWidth, 0, UI.ColorMenuItemWidth, UI.ColorMenuItemWidth);
 
+	std::cout << 2 << std::endl;
+	std::cout << ColorMenuItemImages << std::endl;
+
 	delete[] ColorMenuItemImages;
+
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::OpenColorMenuWind(int x, bool withTransparent)
 {
+	std::cout << 0 << std::endl;
 	UI.ColorMenuWidth = (withTransparent ? COLOR_MENU_ITM_COUNT : COLOR_MENU_ITM_COUNT - 1) * UI.ColorMenuItemWidth + 13;
 
 	CreateColorMenuWind(x, withTransparent); // Initializes a new window and sets data member to that pointer
@@ -108,8 +115,10 @@ void Output::OpenColorMenuWind(int x, bool withTransparent)
 
 void Output::CloseColorMenuWind()
 {
-	delete colorMenuWind;
-	colorMenuWind = NULL;
+	if (colorMenuWind) {
+		delete colorMenuWind;
+		colorMenuWind = NULL;
+	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
