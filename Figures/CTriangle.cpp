@@ -40,6 +40,11 @@ bool CTriangle::CheckSelected(int x, int y) {
 	//return w1 >= 0 && w2 >= 0 && (w1 + w2)<=1;
 }
 
+Point CTriangle::GetCenter() const
+{
+	return { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
+}
+
 void CTriangle::SetCenter(Point c) {
 	Point center = { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
 	int dx = c.x - center.x;

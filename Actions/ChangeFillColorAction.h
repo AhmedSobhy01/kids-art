@@ -3,12 +3,12 @@
 
 #include "Action.h"
 
-class ChangeFillColorAction : public Action
+class ChangeFillColorAction: public Action
 {
 public:
 	ChangeFillColorAction(ApplicationManager*);
-	void ReadActionParameters();
-	void Execute();
+	virtual void ReadActionParameters();
+	virtual bool Execute();
 };
 
 #endif

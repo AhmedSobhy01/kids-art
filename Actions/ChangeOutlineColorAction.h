@@ -3,12 +3,12 @@
 
 #include "Action.h"
 
-class ChangeOutlineColorAction : public Action
+class ChangeOutlineColorAction: public Action
 {
 public:
 	ChangeOutlineColorAction(ApplicationManager*);
 	virtual void ReadActionParameters();
-	virtual void Execute();
+	virtual bool Execute();
 };
 
 #endif

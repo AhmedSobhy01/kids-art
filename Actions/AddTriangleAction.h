@@ -14,9 +14,9 @@ private:
 public:
 	AddTriangleAction(ApplicationManager* pApp);
 	bool Validate();
-	void ReadActionParameters();
 
-	void Execute();
+	virtual void ReadActionParameters();
+	virtual bool Execute();
 };
 
 #endif

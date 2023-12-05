@@ -60,7 +60,7 @@ void AddRectAction::ReadActionParameters()
 }
 
 //Execute the action
-void AddRectAction::Execute()
+bool AddRectAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
@@ -70,6 +70,8 @@ void AddRectAction::Execute()
 		//Add the rectangle to the list of figures
 		pManager->AddFigure(figure);
 
+		return true;
 	}
 
+	return false;
 }

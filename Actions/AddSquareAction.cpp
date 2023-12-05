@@ -32,7 +32,7 @@ void AddSquareAction::ReadActionParameters() {
 	pOut->ClearStatusBar();
 }
 
-void AddSquareAction::Execute() {
+bool AddSquareAction::Execute() {
 	ReadActionParameters();
 	if (Validate()) {
 		//Create a square with the parameters read from the user
@@ -40,5 +40,9 @@ void AddSquareAction::Execute() {
 
 		//Add the square to the list of figures
 		pManager->AddFigure(figure);
+
+		return true;
 	}
+
+	return false;
 }

@@ -10,7 +10,7 @@ void RedoAction::ReadActionParameters()
 {
 }
 
-void RedoAction::Execute()
+bool RedoAction::Execute()
 {
 	UndoableActionStack& redoableActions = pManager->GetRedoableActionsStack();
 
@@ -23,11 +23,13 @@ void RedoAction::Execute()
 		pIn->GetPointClicked(x, y);
 		pOut->PrintMessage("");
 
-		return;
+		return false;
 	}
 
 	UndoableActionStack& undoableActions = pManager->GetUndoableActionsStack();
 
 	redoableActions.top()->Redo();
 	undoableActions.push(redoableActions.pop());
+
+	return true;
 }

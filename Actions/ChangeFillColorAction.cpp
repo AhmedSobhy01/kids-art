@@ -4,7 +4,7 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-ChangeFillColorAction::ChangeFillColorAction(ApplicationManager* pApp) :Action(pApp) {}
+ChangeFillColorAction::ChangeFillColorAction(ApplicationManager* pApp): Action(pApp) {}
 
 void ChangeFillColorAction::ReadActionParameters()
 {
@@ -22,7 +22,7 @@ void ChangeFillColorAction::ReadActionParameters()
 	pOut->PrintMessage("Change Fill Color: Select a color.");
 }
 
-void ChangeFillColorAction::Execute()
+bool ChangeFillColorAction::Execute()
 {
 	ReadActionParameters();
 	CFigure* F = pManager->GetSelected();
@@ -34,5 +34,9 @@ void ChangeFillColorAction::Execute()
 		pOut->ClearStatusBar();
 		F->SetSelected(false);
 		pManager->SetSelected(NULL);
+
+		return true;
 	}
+
+	return false;
 }

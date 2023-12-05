@@ -22,7 +22,7 @@ public:
 	virtual void ReadActionParameters() = 0;
 	
 	//Execute action (code depends on action type)
-	virtual void Execute() = 0;
+	virtual bool Execute() = 0;
 
 };
 

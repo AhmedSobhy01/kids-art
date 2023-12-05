@@ -25,6 +25,7 @@ public:
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	virtual bool CheckSelected(int x, int y) = 0;
+	virtual Point GetCenter() const = 0;
 	virtual void SetCenter(Point) = 0;
 	virtual bool Validate(Point) = 0;
 	///The following functions should be supported by the figure class

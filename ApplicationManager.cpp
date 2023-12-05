@@ -91,7 +91,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	// Execute the created action
 	if (pAct != NULL)
 	{
-		pAct->Execute(); // Execute
+		bool result = pAct->Execute(); // Execute
 
 		if (ActType != UNDO && ActType != REDO)
 			ClearRedoableActionsStack();
@@ -101,7 +101,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			delete pAct;
 		}
 		else
-			UndoableActions.push(dynamic_cast<UndoableAction *>(pAct));
+			if (result)
+				UndoableActions.push(dynamic_cast<UndoableAction *>(pAct));
 
 		pAct = NULL;
 	}

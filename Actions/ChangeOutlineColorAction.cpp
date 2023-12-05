@@ -4,7 +4,7 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-ChangeOutlineColorAction::ChangeOutlineColorAction(ApplicationManager* pApp) :Action(pApp) {}
+ChangeOutlineColorAction::ChangeOutlineColorAction(ApplicationManager* pApp): Action(pApp) {}
 
 void ChangeOutlineColorAction::ReadActionParameters()
 {
@@ -22,7 +22,7 @@ void ChangeOutlineColorAction::ReadActionParameters()
 	pOut->PrintMessage("Change Outline Color: Select a color.");
 }
 
-void ChangeOutlineColorAction::Execute()
+bool ChangeOutlineColorAction::Execute()
 {
 	ReadActionParameters();
 	CFigure* F = pManager->GetSelected();
@@ -34,5 +34,9 @@ void ChangeOutlineColorAction::Execute()
 		pOut->ClearStatusBar();
 		F->SetSelected(false);
 		pManager->SetSelected(NULL);
+
+		return true;
 	}
+
+	return false;
 }

@@ -18,6 +18,10 @@ bool CRectangle::CheckSelected(int x, int y) {
 	bool cond2 = Corner1.y < y && y < Corner2.y;
 	return cond1 && cond2;
 }
+Point CRectangle::GetCenter() const
+{
+	return { (Corner1.x + Corner2.x) / 2, (Corner1.y + Corner2.y) / 2 };
+}
 void CRectangle::SetCenter(Point c) {
 	Point center = { (Corner1.x + Corner2.x) / 2,(Corner1.y + Corner2.y) / 2 };
 	int dy = c.y - center.y;
