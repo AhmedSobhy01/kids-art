@@ -4,7 +4,7 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-ChangeOutlineColorAction::ChangeOutlineColorAction(ApplicationManager* pApp): Action(pApp) {}
+ChangeOutlineColorAction::ChangeOutlineColorAction(ApplicationManager* pApp): UndoableAction(pApp) {}
 
 void ChangeOutlineColorAction::ReadActionParameters()
 {
@@ -25,18 +25,40 @@ void ChangeOutlineColorAction::ReadActionParameters()
 bool ChangeOutlineColorAction::Execute()
 {
 	ReadActionParameters();
-	CFigure* F = pManager->GetSelected();
+	Figure = pManager->GetSelected();
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
-	if (F != NULL)
+
+	if (Figure != NULL)
 	{
-		F->ChngDrawClr(pIn->GetSelectedColor(pOut));
+		OldColor = Figure->GetDrawClr();
+		NewColor = pIn->GetSelectedColor(pOut);
+
+		Figure->ChngDrawClr(NewColor);
 		pOut->ClearStatusBar();
-		F->SetSelected(false);
+		Figure->SetSelected(false);
 		pManager->SetSelected(NULL);
 
 		return true;
 	}
 
 	return false;
+}
+
+void ChangeOutlineColorAction::Undo()
+{
+	if (Figure)
+		Figure->ChngDrawClr(OldColor);
+}
+
+void ChangeOutlineColorAction::Redo()
+{
+	if (Figure)
+		Figure->ChngDrawClr(NewColor);
+}
+
+ChangeOutlineColorAction::~ChangeOutlineColorAction()
+{
+	if (Figure)
+		delete Figure;
 }
