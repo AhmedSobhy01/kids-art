@@ -11,6 +11,8 @@
 #include "Actions\SwitchToPlayAction.h"
 #include "Actions\UndoAction.h"
 #include "Actions\RedoAction.h"
+#include "Actions\ChangeFillColorAction.h"
+#include "Actions\ChangeOutlineColorAction.h"
 
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions)
@@ -71,6 +73,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case REDO:
 		pAct = new RedoAction(this);
+		break;
+	case OUTLINE_COLOR:
+		pAct = new ChangeOutlineColorAction(this);
+		break;
+	case FILL_COLOR:
+		pAct = new ChangeFillColorAction(this);
 		break;
 	case EXIT:
 		/// create ExitAction here
