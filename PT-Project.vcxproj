@@ -134,6 +134,7 @@
     <ClCompile Include="Actions\AddHexagonAction.cpp" />
     <ClCompile Include="Actions\ChangeFillColorAction.cpp" />
     <ClCompile Include="Actions\ChangeOutlineColorAction.cpp" />
+    <ClCompile Include="Actions\PickByShapeAction.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
     <ClCompile Include="Actions\UndoableFigureAction.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Actions\AddHexagonAction.h" />
     <ClInclude Include="Actions\ChangeFillColorAction.h" />
     <ClInclude Include="Actions\ChangeOutlineColorAction.h" />
+    <ClInclude Include="Actions\PickByShapeAction.h" />
     <ClInclude Include="Actions\RedoAction.h" />
     <ClInclude Include="Actions\UndoableAction.h" />
     <ClInclude Include="Actions\UndoableFigureAction.h" />

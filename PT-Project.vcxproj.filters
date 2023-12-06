@@ -208,6 +208,7 @@
     <ClCompile Include="Actions\ChangeOutlineColorAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\PickByShapeAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -353,6 +354,9 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ChangeOutlineColorAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\PickByShapeAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

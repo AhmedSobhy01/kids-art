@@ -13,6 +13,8 @@
 #include "Actions\RedoAction.h"
 #include "Actions\ChangeFillColorAction.h"
 #include "Actions\ChangeOutlineColorAction.h"
+#include "Actions/PickByShapeAction.h"
+#include <iostream>
 
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions)
@@ -79,6 +81,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case FILL_COLOR:
 		pAct = new ChangeFillColorAction(this);
+		break;
+	case PICK_BY_SHAPE:
+		pAct = new PickByShapeAction(this);
 		break;
 	case EXIT:
 		/// create ExitAction here
@@ -151,6 +156,29 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 
 	return NULL;
 }
+
+CFigure* ApplicationManager::GetRandomFigure() {
+	int j = rand() % FigList.size();
+	return FigList[j];
+}
+
+int ApplicationManager::CountFigure(CFigure* fig)
+{
+	int counter =0;
+	CFigure* Figure = fig;
+	for (int i = 0; i < FigList.size(); i++) {
+		if (FigList[i]->Type() == fig->Type())counter++;
+	}
+	return counter;
+}
+
+int ApplicationManager::FiguresCount() {
+	return FigList.size();
+}
+
+void ApplicationManager::UnHideFigures() {
+	for (int i = 0; i < FigList.size(); i++)FigList[i]->UnHide();
+}
 UndoableActionStack &ApplicationManager::GetUndoableActionsStack()
 {
 	return UndoableActions;
@@ -177,8 +205,9 @@ void ApplicationManager::UpdateInterface() const
 {
 	pOut->ClearDrawArea();
 
-	for (int i = 0; i < FigList.size(); i++)
-		FigList[i]->Draw(pOut); // Call Draw function (virtual member fn)
+	for (int i = 0; i < FigList.size(); i++) {
+		if(!FigList[i]->isHidden())FigList[i]->Draw(pOut); // Call Draw function (virtual member fn)
+	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // Return a pointer to the input

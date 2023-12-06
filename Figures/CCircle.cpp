@@ -1,8 +1,11 @@
 #include "CCircle.h"
+#include "..\GUI\Output.h"
+#include "..\ApplicationManager.h"
 
 CCircle::CCircle(Point center, Point radius, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	this->center = center;
 	this->radius = radius;
+	type = CIRCLE;
 }
 
 void CCircle::Draw(Output* pOut) const {

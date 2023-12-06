@@ -4,6 +4,7 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;
+	Hidden = false;
 }
 
 void CFigure::SetSelected(bool s)
@@ -21,3 +22,18 @@ void CFigure::ChngFillClr(color Fclr)
 	FigGfxInfo.FillClr = Fclr; 
 }
 
+bool CFigure::isHidden() {
+	return Hidden;
+}
+
+void CFigure::Hide() {
+	Hidden = true;
+}
+
+void CFigure::UnHide() {
+	Hidden = false;
+}
+
+ShapeType CFigure::Type(){
+	return type;
+}
