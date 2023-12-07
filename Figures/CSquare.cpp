@@ -26,6 +26,10 @@ bool CSquare::CheckSelected(int x, int y) {
 	bool cond2 = (p1.y < y) && (y < p2.y);
 	return cond1 && cond2;
 }
+Point CSquare::GetCenter() const
+{
+	return center;
+}
 void CSquare::SetCenter(Point center) {
 	this->center = center;
 }

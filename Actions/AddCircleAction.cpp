@@ -40,7 +40,7 @@ void AddCircleAction::ReadActionParameters() {
 	pOut->ClearStatusBar();
 }
 
-void AddCircleAction::Execute() {
+bool AddCircleAction::Execute() {
 	ReadActionParameters();
 	if (Validate()) {
 		//Create a circle with the parameters read from the user
@@ -48,5 +48,9 @@ void AddCircleAction::Execute() {
 
 		//Add the circle to the list of figures
 		pManager->AddFigure(figure);
+
+		return true;
 	}
+
+	return false;
 }

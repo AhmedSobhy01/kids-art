@@ -1,13 +1,24 @@
-#pragma once
-#include "Action.h"
-class MoveAction :
-    public Action
+#ifndef MOVE_ACTION_H
+#define MOVE_ACTION_H
+
+#include "UndoableAction.h"
+#include "../Figures/CFigure.h"
+
+class MoveAction: public UndoableAction
 {
-private:
-    Point P;
+    Point NewCenter;
+    Point OldCenter;
+    CFigure* Figure;
+
 public:
     MoveAction(ApplicationManager* pApp);
-    void ReadActionParameters();
-    void Execute();
+    virtual void ReadActionParameters();
+    virtual bool Execute();
+
+    virtual void Undo();
+    virtual void Redo();
+
+    ~MoveAction();
 };
 
+#endif

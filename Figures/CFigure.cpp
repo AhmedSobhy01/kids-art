@@ -13,6 +13,16 @@ void CFigure::SetSelected(bool s)
 bool CFigure::IsSelected() const
 {	return Selected; }
 
+color CFigure::GetDrawClr() const
+{
+	return FigGfxInfo.DrawClr;
+}
+
+color CFigure::GetFillClr() const
+{
+	return FigGfxInfo.FillClr;
+}
+
 void CFigure::ChngDrawClr(color Dclr)
 {	FigGfxInfo.DrawClr = Dclr; }
 

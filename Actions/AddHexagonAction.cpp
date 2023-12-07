@@ -36,7 +36,7 @@ void AddHexagonAction::ReadActionParameters() {
 	pOut->ClearStatusBar();
 }
 
-void AddHexagonAction::Execute() {
+bool AddHexagonAction::Execute() {
 	ReadActionParameters();
 	if (Validate()) {
 		//Create a hexagon with the parameters read from the user
@@ -44,5 +44,9 @@ void AddHexagonAction::Execute() {
 
 		//Add the hexagon to the list of figures
 		pManager->AddFigure(figure);
+
+		return true;
 	}
+
+	return false;
 }

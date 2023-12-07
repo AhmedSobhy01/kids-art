@@ -10,7 +10,9 @@ SwitchToPlayAction::SwitchToPlayAction(ApplicationManager *pApp): Action(pApp)
 void SwitchToPlayAction::ReadActionParameters() 
 {}
 
-void SwitchToPlayAction::Execute() {
+bool SwitchToPlayAction::Execute() {
 	Output* pOut = pManager->GetOutput();
 	pOut->CreatePlayToolBar();
+
+	return true;
 }

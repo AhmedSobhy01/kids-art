@@ -9,8 +9,8 @@ private:
 public:
     SelectAction(ApplicationManager* pApp);
 
-    void ReadActionParameters();
-    void Execute();
+    virtual void ReadActionParameters();
+    virtual bool Execute();
 };
 
 #endif

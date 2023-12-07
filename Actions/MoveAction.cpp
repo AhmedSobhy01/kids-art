@@ -4,7 +4,7 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-MoveAction::MoveAction(ApplicationManager* pApp):Action(pApp){}
+MoveAction::MoveAction(ApplicationManager* pApp): UndoableAction(pApp) {}
 
 void MoveAction::ReadActionParameters(){
 	CFigure* F = pManager->GetSelected();
@@ -18,8 +18,8 @@ void MoveAction::ReadActionParameters(){
 		return;
 	}
 	pOut->PrintMessage("Move: Click on a new point to move.");
-	pIn->GetPointClicked(P.x, P.y);
-	if (F->Validate(P)) {
+	pIn->GetPointClicked(NewCenter.x, NewCenter.y);
+	if (F->Validate(NewCenter)) {
 		pOut->ClearStatusBar();
 	}
 	else {
@@ -30,15 +30,41 @@ void MoveAction::ReadActionParameters(){
 		return;
 	}
 }
-void MoveAction::Execute(){
+bool MoveAction::Execute(){
 	ReadActionParameters();
-	CFigure* F = pManager->GetSelected();
+	Figure = pManager->GetSelected();
 	
-	if (F != NULL) {
-		if (F->Validate(P)) {
-			F->SetCenter(P);
+	if (Figure != NULL) {
+		bool r = false;
+
+		if (Figure->Validate(NewCenter)) {
+			OldCenter = Figure->GetCenter();
+			Figure->SetCenter(NewCenter);
+			r = true;
 		}
-		F->SetSelected(false);
+		Figure->SetSelected(false);
 		pManager->SetSelected(NULL);
+
+		return r;
 	}
+
+	return false;
+}
+
+void MoveAction::Undo()
+{
+	if (Figure)
+		Figure->SetCenter(OldCenter);
+}
+
+void MoveAction::Redo()
+{
+	if (Figure)
+		Figure->SetCenter(NewCenter);
+}
+
+MoveAction::~MoveAction()
+{
+	if (Figure)
+		delete Figure;
 }
