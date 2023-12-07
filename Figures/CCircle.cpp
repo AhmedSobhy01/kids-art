@@ -12,6 +12,11 @@ bool CCircle::CheckSelected(int x, int y) {
 	return sqrt(pow(center.x - x, 2) + pow(center.y - y, 2)) <= sqrt(pow(center.x - radius.x, 2) + pow(center.y - radius.y, 2));
 }
 
+Point CCircle::GetCenter() const
+{
+	return center;
+}
+
 void CCircle::SetCenter(Point c) {
 	this->radius.x += (c.x - this->center.x);
 	this->radius.y += (c.y - this->center.y);

@@ -40,6 +40,11 @@ bool CHexagon::CheckSelected(int x, int y) {
 	return -0.001 < err && err < 0.001;
 }
 
+Point CHexagon::GetCenter() const
+{
+	return center;
+}
+
 void CHexagon::SetCenter(Point c) {
 	this->center = c;
 }

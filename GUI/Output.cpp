@@ -108,8 +108,11 @@ void Output::OpenColorMenuWind(int x, bool withTransparent)
 
 void Output::CloseColorMenuWind()
 {
-	delete colorMenuWind;
-	colorMenuWind = NULL;
+	if (colorMenuWind)
+	{
+		delete colorMenuWind;
+		colorMenuWind = NULL;
+	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -262,7 +265,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawSquare(Point P1,int squareSize, GfxInfo SquareGfxInfo, bool selected) const // Drawing square
+void Output::DrawSquare(Point P1, int squareSize, GfxInfo SquareGfxInfo, bool selected) const // Drawing square
 {
 	color DrawingClr;
 	if (selected)
@@ -336,7 +339,7 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawHexagon(Point P1,int hexagonSize ,GfxInfo HexagonGfxInfo, bool selected) const
+void Output::DrawHexagon(Point P1, int hexagonSize, GfxInfo HexagonGfxInfo, bool selected) const
 {
 
 	color drawcolor;

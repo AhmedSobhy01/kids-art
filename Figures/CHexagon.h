@@ -12,6 +12,7 @@ public:
 	void Draw(Output* pOut)const;
 	static int getHexagonSize();
 	bool CheckSelected(int x, int y);
+	Point GetCenter() const;
 	void SetCenter(Point);
 	bool Validate(Point);
 };

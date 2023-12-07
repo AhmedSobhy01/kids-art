@@ -11,6 +11,7 @@ public:
 	CTriangle(Point, Point, Point, GfxInfo FigureGfxInfo);
 	void Draw(Output* pOut) const;
 	bool CheckSelected(int x, int y);
+	Point GetCenter() const;
 	void SetCenter(Point);
 	bool Validate(Point);
 };

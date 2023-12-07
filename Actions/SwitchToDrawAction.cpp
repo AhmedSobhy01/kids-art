@@ -10,7 +10,9 @@ SwitchToDrawAction::SwitchToDrawAction(ApplicationManager* pApp): Action(pApp)
 void SwitchToDrawAction::ReadActionParameters() 
 {}
 
-void SwitchToDrawAction::Execute() {
+bool SwitchToDrawAction::Execute() {
 	Output* pOut = pManager->GetOutput();
 	pOut->CreateDrawToolBar();
+
+	return true;
 }
