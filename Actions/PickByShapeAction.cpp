@@ -5,11 +5,13 @@
 PickByShapeAction::PickByShapeAction(ApplicationManager* pApp) : Action(pApp) {
 
 }
-void PickByShapeAction::ReadActionParameters() {
-	FiguresNumber = pManager->FiguresCount();
-	RandomFigure = pManager->GetRandomFigure();
+void PickByShapeAction::ReadActionParameters() {									// Generates random figure and counts it
 	CorrectPicks = 0;
 	Counter = 0;
+	FiguresNumber = pManager->FiguresCount();
+	RandomFigure = pManager->GetRandomFigure();
+	RandomFigureNumber = pManager->CountFigure(RandomFigure);
+
 }
 
 string PickByShapeAction::GetFigureName(ShapeType stype) {							// Returns the shape type (to be used in PrintMessage function)
@@ -31,12 +33,9 @@ void PickByShapeAction::PrintMessage(CFigure* randomfigure) {						// Prints a m
 	pOut->PrintMessage("Pick all the " + GetFigureName(randomfigure->Type()) + to_string(pManager->CountFigure(randomfigure)) + " exist");
 }
 void PickByShapeAction::Execute() {
-
-	///Generate random figure and count it///
 	ReadActionParameters();
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	RandomFigureNumber = pManager->CountFigure(RandomFigure);
 
 	PrintMessage(RandomFigure);
 
@@ -52,8 +51,9 @@ void PickByShapeAction::Execute() {
 		pManager->UpdateInterface();
 		Counter++;
 	}
-	if (Counter == CorrectPicks)pOut->PrintMessage("You won and picked all the shapes correctly!");
-		else pOut->PrintMessage("Game over. Correct picks are " + to_string(CorrectPicks) + " out of " + to_string(Counter) + " picks.");
-		pManager->UnHideFigures();
-		pManager->UpdateInterface();
+	if (Counter == CorrectPicks)pOut->PrintMessage("Congratulations! All your picks are correct!");
+	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks.");
+
+	pManager->UnHideFigures();
+	pManager->UpdateInterface();
 }

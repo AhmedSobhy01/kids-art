@@ -10,7 +10,7 @@ private:
 	int CorrectPicks;
 	int Counter;						// Counter for how many picks made
 	int FiguresNumber;					// Integer to store total number of figures in FigList
-	int RandomFigureNumber;				// Integer to store how many instances for the Random Figure to be picked
+	int RandomFigureNumber;				// Integer to store how many instances for the random figure to be picked
 public:
 	PickByShapeAction(ApplicationManager*);
 	virtual void ReadActionParameters();

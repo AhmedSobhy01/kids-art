@@ -134,6 +134,7 @@
     <ClCompile Include="Actions\AddHexagonAction.cpp" />
     <ClCompile Include="Actions\ChangeFillColorAction.cpp" />
     <ClCompile Include="Actions\ChangeOutlineColorAction.cpp" />
+    <ClCompile Include="Actions\PickByColorAction.cpp" />
     <ClCompile Include="Actions\PickByShapeAction.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
     <ClCompile Include="Actions\UndoableFigureAction.cpp" />
@@ -243,6 +244,7 @@
     <ClInclude Include="Actions\SwitchToPlayAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
+    <ClInclude Include="Actions\PickByColorAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

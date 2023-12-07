@@ -33,6 +33,8 @@ public:
 	void Hide();					// Hides the shape
 	void UnHide();					// Unhides the shape
 	ShapeType Type();				// Returns the type of a shape
+	color GetColor();
+	bool isFilled();
 
 	virtual bool CheckSelected(int x, int y) = 0;
 	virtual void SetCenter(Point) = 0;
