@@ -35,6 +35,7 @@ public:
 	ShapeType Type();				// Returns the type of a shape
 	color GetColor();
 	bool isFilled();
+	bool operator==(CFigure*);
 
 	virtual bool CheckSelected(int x, int y) = 0;
 	virtual void SetCenter(Point) = 0;

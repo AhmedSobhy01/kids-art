@@ -43,6 +43,7 @@ bool CFigure::isFilled()
 	return FigGfxInfo.isFilled;
 }
 
+
 ShapeType CFigure::Type(){
 	return type;
 }

@@ -15,6 +15,7 @@
 #include "Actions\ChangeOutlineColorAction.h"
 #include "Actions/PickByShapeAction.h"
 #include "Actions/PickByColorAction.h"
+#include "Actions/PickByShapeAndColorAction.h"
 #include <iostream>
 
 // Constructor
@@ -88,6 +89,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case PICK_BY_COLOR:
 		pAct = new PickByColorAction(this);
+		break;
+	case PICK_BY_SHAPE_COLOR:
+		pAct = new PickByShapeAndColorAction(this);
 		break;
 	case EXIT:
 		/// create ExitAction here
@@ -170,10 +174,18 @@ color ApplicationManager::GetRandomColor() {
 	return GetRandomFigure()->GetColor();
 }
 
+int ApplicationManager::CountRandomFigColor(CFigure* Fig)
+{
+	int counter = 0;
+	for (int i = 0; i < FigList.size(); i++) {
+		if (FigList[i]->Type() == Fig->Type() && FigList[i]->GetColor() == Fig->GetColor()) counter++;
+	}
+	return counter;
+}
+
 int ApplicationManager::CountFigure(CFigure* fig)
 {
 	int counter =0;
-	CFigure* Figure = fig;
 	for (int i = 0; i < FigList.size(); i++) {
 		if (FigList[i]->Type() == fig->Type())counter++;
 	}

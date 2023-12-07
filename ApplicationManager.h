@@ -44,6 +44,7 @@ public:
 	CFigure *GetFigure(int x, int y) const; // Search for a figure given a point inside the figure
 	CFigure* GetRandomFigure();				// Creates a random index and returns its corresponding figure in the FigList
 	color GetRandomColor();
+	int CountRandomFigColor(CFigure*);
 	int CountFigure(CFigure*);				// Counts how many instances of a passed figure
 	int CountColor(color);
 	int FiguresCount();						// Returns the number of figures in FigList

@@ -210,6 +210,7 @@
     </ClCompile>
     <ClCompile Include="Actions\PickByShapeAction.cpp" />
     <ClCompile Include="Actions\PickByColorAction.cpp" />
+    <ClCompile Include="Actions\PickByShapeAndColorAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -361,6 +362,7 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\PickByColorAction.h" />
+    <ClInclude Include="Actions\PickByShapeAndColorAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
