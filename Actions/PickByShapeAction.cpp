@@ -8,7 +8,6 @@ PickByShapeAction::PickByShapeAction(ApplicationManager* pApp) : Action(pApp) {
 void PickByShapeAction::ReadActionParameters() {									// Generates random figure and counts it
 	CorrectPicks = 0;
 	Counter = 0;
-	FiguresNumber = pManager->FiguresCount();
 	RandomFigure = pManager->GetRandomFigure();
 	RandomFigureNumber = pManager->CountFigure(RandomFigure);
 
@@ -33,10 +32,14 @@ void PickByShapeAction::PrintMessage(CFigure* randomfigure) {						// Prints a m
 	pOut->PrintMessage("Pick all the " + GetFigureName(randomfigure->Type()) + to_string(pManager->CountFigure(randomfigure)) + " exist");
 }
 void PickByShapeAction::Execute() {
-	ReadActionParameters();
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-
+	FiguresNumber = pManager->FiguresCount();
+	if (FiguresNumber == 0) {
+		pOut->PrintMessage("Switch to Draw Mode and draw some shapes to play with them.");
+		return;
+	}
+	ReadActionParameters();
 	PrintMessage(RandomFigure);
 
 	////				Main Loop				////

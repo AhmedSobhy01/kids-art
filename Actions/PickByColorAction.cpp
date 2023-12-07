@@ -9,11 +9,8 @@ PickByColorAction::PickByColorAction(ApplicationManager* pApp) :Action(pApp) {
 void PickByColorAction::ReadActionParameters() {												// Initializes the data members
 	CorrectPicks = 0;
 	Counter = 0;
-	FiguresNumber = 0;
-	RandomColorNumber = 0;
 	RandomColor = pManager->GetRandomColor();
 	RandomColorNumber = pManager->CountColor(RandomColor);
-	FiguresNumber = pManager->FiguresCount();
 }
 
 string PickByColorAction::GetFigureColor(color FigColor) {
@@ -38,10 +35,14 @@ void PickByColorAction::PrintMessage() {
 	pOut->PrintMessage("Pick all the " + ColorToPick + " figures. " + to_string(RandomColorNumber) + " exist.");
 }
 void PickByColorAction::Execute() {
-	ReadActionParameters();
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-
+	FiguresNumber = pManager->FiguresCount();
+	if (FiguresNumber == 0) {
+		pOut->PrintMessage("Switch to Draw Mode and draw some shapes to play with them.");
+		return;
+	}
+	ReadActionParameters();
 	PrintMessage();
 
 	///					Main Loop				///

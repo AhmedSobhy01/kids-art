@@ -54,6 +54,11 @@ void PickByShapeAndColorAction::PrintMessage() {
 void PickByShapeAndColorAction::Execute() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+	FiguresNumber = pManager->FiguresCount();
+	if (FiguresNumber == 0) {
+		pOut->PrintMessage("Switch to Draw Mode and draw some shapes to play with them.");
+		return;
+	}
 	ReadActionParameters();
 	GetFigureStats(RandomFigure);
 	PrintMessage();
