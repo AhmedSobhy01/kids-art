@@ -132,10 +132,14 @@ void ApplicationManager::AddFigure(CFigure *pFig)
 {
 	FigList.push_back(pFig);
 }
-///////s/////////////////////////////////////////////////////////////////////////////
-void ApplicationManager::RemoveFigure(CFigure *pFig)
+void ApplicationManager::AddFigure(CFigure* pFig, int index)
 {
-	CFigure *f = FigList.remove(pFig);
+	FigList.push_back(pFig, index);
+}
+///////s/////////////////////////////////////////////////////////////////////////////
+int ApplicationManager::RemoveFigure(CFigure *pFig)
+{
+	return FigList.remove(pFig);
 }
 CFigure* ApplicationManager::GetSelected() {
 	return SelectedFig;

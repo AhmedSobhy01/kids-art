@@ -21,10 +21,17 @@ int FigureList::size() const
 	return ItemsCount;
 }
 
+void FigureList::push_back(CFigure* item, int index)
+{
+	if (item && ItemsCount < MaxSize && items[index] == NULL) {
+		items[index] = item;
+		ItemsCount++;
+	}
+}
+
 void FigureList::push_back(CFigure* item)
 {
-	if (item && ItemsCount < MaxSize)
-		items[ItemsCount++] = item;
+	push_back(item, ItemsCount);
 }
 
 CFigure* FigureList::pop_back()
@@ -62,7 +69,7 @@ CFigure* FigureList::remove(int index)
 	return NULL;
 }
 
-CFigure* FigureList::remove(CFigure* item)
+int FigureList::remove(CFigure* item)
 {
 	if (item && !empty()) {
 		int index = -1;
@@ -75,10 +82,14 @@ CFigure* FigureList::remove(CFigure* item)
 		}
 
 		if (index != -1)
-			return remove(index);
+		{
+			remove(index);
+			return index;
+		}
+			
 	}
 
-	return NULL;
+	return -1;
 }
 
 bool FigureList::empty() const
