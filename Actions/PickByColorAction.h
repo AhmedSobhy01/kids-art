@@ -15,7 +15,7 @@ private:
 public:
 	PickByColorAction(ApplicationManager*);
 	virtual void ReadActionParameters();
-	virtual void Execute();
+	virtual bool Execute();
 	void PrintMessage();					// Prints the starting message
 	string GetFigureColor(color);			// Returns the color of a figure as a string
 };

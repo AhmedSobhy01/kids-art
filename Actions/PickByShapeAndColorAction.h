@@ -19,7 +19,7 @@ private:
 public:
 	PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager*);
 	virtual void ReadActionParameters();
-	virtual void Execute();
+	virtual bool Execute();
 	void PrintMessage();		// To print the starting message
 	void GetFigureStats(CFigure*); // Converts the enum values of the figures properties and assigns them into the string members
 };

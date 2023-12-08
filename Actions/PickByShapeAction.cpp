@@ -31,13 +31,13 @@ void PickByShapeAction::PrintMessage(CFigure* randomfigure) {						// Prints a m
 	Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Pick all the " + GetFigureName(randomfigure->Type()) + to_string(pManager->CountFigure(randomfigure)) + " exist");
 }
-void PickByShapeAction::Execute() {
+bool PickByShapeAction::Execute() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	FiguresNumber = pManager->FiguresCount();
 	if (FiguresNumber == 0) {
 		pOut->PrintMessage("Switch to Draw Mode and draw some shapes to play with them.");
-		return;
+		return false;
 	}
 	ReadActionParameters();
 	PrintMessage(RandomFigure);
@@ -59,4 +59,6 @@ void PickByShapeAction::Execute() {
 
 	pManager->UnHideFigures();
 	pManager->UpdateInterface();
+
+	return true;
 }

@@ -14,7 +14,7 @@ private:
 public:
 	PickByShapeAction(ApplicationManager*);
 	virtual void ReadActionParameters();
-	virtual void Execute();
+	virtual bool Execute();
 	void PrintMessage(CFigure*);		// Prints the starting message according to the shape type
 	string GetFigureName(ShapeType);	// Returns the shape name corresponding to its Enum ShapeType
 };

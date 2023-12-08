@@ -34,13 +34,13 @@ void PickByColorAction::PrintMessage() {
 	Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Pick all the " + ColorToPick + " figures. " + to_string(RandomColorNumber) + " exist.");
 }
-void PickByColorAction::Execute() {
+bool PickByColorAction::Execute() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	FiguresNumber = pManager->FiguresCount();
 	if (FiguresNumber == 0) {
 		pOut->PrintMessage("Switch to Draw Mode and draw some shapes to play with them.");
-		return;
+		return false;
 	}
 	ReadActionParameters();
 	PrintMessage();
@@ -62,4 +62,6 @@ void PickByColorAction::Execute() {
 
 	pManager->UnHideFigures();
 	pManager->UpdateInterface();
+
+	return true;
 }
