@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CCIRCLE_H
+#define CCIRCLE_H
 #include "CFigure.h"
 class CCircle : public CFigure
 {
@@ -13,4 +14,5 @@ public:
 	void SetCenter(Point);
 	bool Validate(Point);
 };
+#endif
 

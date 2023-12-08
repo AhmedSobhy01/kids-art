@@ -5,12 +5,15 @@
 #include "..\GUI\Output.h"
 
 //Base class for all figures
+
 class CFigure
 {
 protected:
 	int ID;		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
+	ShapeType type;
+	bool Hidden;
 	
 	/// Add more parameters if needed.
 
@@ -27,6 +30,18 @@ public:
 
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
+
+
+	///				Play Mode Functions			///
+	bool isHidden();				// Checks if a shape is hidden
+	void Hide();					// Hides the shape
+	void UnHide();					// Unhides the shape
+	ShapeType Type();				// Returns the type of a shape
+	color GetColor();
+	bool isFilled();
+	bool operator==(CFigure*);
+
+
 
 	virtual bool CheckSelected(int x, int y) = 0;
 	virtual Point GetCenter() const = 0;
