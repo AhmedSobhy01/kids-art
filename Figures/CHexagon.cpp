@@ -4,6 +4,7 @@ const int CHexagon::hexagonSize = 80;
 
 CHexagon::CHexagon(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	this->center = center;
+	type = HEXAGON;
 }
 
 void CHexagon::Draw(Output* pOut) const {
