@@ -13,6 +13,7 @@
 #include "Actions\RedoAction.h"
 #include "Actions\ChangeFillColorAction.h"
 #include "Actions\ChangeOutlineColorAction.h"
+#include "Actions\ChangeBackgroundColorAction.h"
 
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions)
@@ -79,6 +80,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case FILL_COLOR:
 		pAct = new ChangeFillColorAction(this);
+		break;
+	case BACKGROUND_COLOR:
+		pAct = new ChangeBackgroundColorAction(this);
 		break;
 	case EXIT:
 		/// create ExitAction here

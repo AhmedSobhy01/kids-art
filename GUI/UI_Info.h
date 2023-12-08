@@ -74,7 +74,7 @@ enum PlayMenuItem // The items of the play menu (ordered)
 
 __declspec(selectany) // This line to prevent "redefinition error"
 
-	struct UI_Info // User Interface Info.
+	struct UI_Info // User Interface Info.`
 {
 	GUI_MODE InterfaceMode;
 
