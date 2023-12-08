@@ -86,6 +86,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case REMOVE:
 		pAct = new DeleteAction(this);
+		break;
 	case PICK_BY_SHAPE:
 		pAct = new PickByShapeAction(this);
 		break;
