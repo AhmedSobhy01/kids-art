@@ -29,9 +29,9 @@ void AddHexagonAction::ReadActionParameters() {
 		pOut->ClearStatusBar();
 		return;
 	}
-	HexagonGfxInfo.isFilled = false;
 	HexagonGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	HexagonGfxInfo.FillClr = pOut->getCrntFillColor();
+	HexagonGfxInfo.isFilled = (HexagonGfxInfo.FillClr != TRANSPARENT_COLOR);
 	HexagonGfxInfo.BorderWidth = pOut->getCurrentPenWidth();
 	pOut->ClearStatusBar();
 }

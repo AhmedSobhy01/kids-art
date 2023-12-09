@@ -33,9 +33,9 @@ void AddCircleAction::ReadActionParameters() {
 		pOut->ClearStatusBar();
 		return;
 	}
-	CircleGfxInfo.isFilled = false;
 	CircleGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	CircleGfxInfo.FillClr = pOut->getCrntFillColor();
+	CircleGfxInfo.isFilled = (CircleGfxInfo.FillClr != TRANSPARENT_COLOR);
 	CircleGfxInfo.BorderWidth = pOut->getCurrentPenWidth();
 	pOut->ClearStatusBar();
 }

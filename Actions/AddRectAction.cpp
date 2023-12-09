@@ -49,10 +49,10 @@ void AddRectAction::ReadActionParameters()
 	};
 
 
-	RectGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	RectGfxInfo.FillClr = pOut->getCrntFillColor();
+	RectGfxInfo.isFilled = (RectGfxInfo.FillClr != TRANSPARENT_COLOR);
 	RectGfxInfo.BorderWidth = pOut->getCurrentPenWidth();
 
 	pOut->ClearStatusBar();
