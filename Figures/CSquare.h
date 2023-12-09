@@ -10,6 +10,7 @@ public:
 	void Draw(Output* pOut)const;
 	static int getSquareSize();
 	bool CheckSelected(int x, int y);
+	Point GetCenter() const;
 	void SetCenter(Point);
 	bool Validate(Point);
 };

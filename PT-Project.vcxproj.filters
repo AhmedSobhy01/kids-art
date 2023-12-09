@@ -208,7 +208,18 @@
     <ClCompile Include="Actions\ChangeOutlineColorAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\PickByShapeAction.cpp" />
+    <ClCompile Include="Actions\DeleteAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\PickByColorAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\PickByShapeAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\PickByShapeAndColorAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -356,7 +367,16 @@
     <ClInclude Include="Actions\ChangeOutlineColorAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\DeleteAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
     <ClInclude Include="Actions\PickByShapeAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\PickByColorAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\PickByShapeAndColorAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

@@ -13,8 +13,10 @@
 #include "Actions\RedoAction.h"
 #include "Actions\ChangeFillColorAction.h"
 #include "Actions\ChangeOutlineColorAction.h"
+#include "Actions\DeleteAction.h"
 #include "Actions/PickByShapeAction.h"
-#include <iostream>
+#include "Actions/PickByColorAction.h"
+#include "Actions/PickByShapeAndColorAction.h"
 
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions)
@@ -82,8 +84,17 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case FILL_COLOR:
 		pAct = new ChangeFillColorAction(this);
 		break;
+	case REMOVE:
+		pAct = new DeleteAction(this);
+		break;
 	case PICK_BY_SHAPE:
 		pAct = new PickByShapeAction(this);
+		break;
+	case PICK_BY_COLOR:
+		pAct = new PickByColorAction(this);
+		break;
+	case PICK_BY_SHAPE_COLOR:
+		pAct = new PickByShapeAndColorAction(this);
 		break;
 	case EXIT:
 		/// create ExitAction here
@@ -96,7 +107,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	// Execute the created action
 	if (pAct != NULL)
 	{
-		pAct->Execute(); // Execute
+		bool result = pAct->Execute(); // Execute
 
 		if (ActType != UNDO && ActType != REDO)
 			ClearRedoableActionsStack();
@@ -106,7 +117,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			delete pAct;
 		}
 		else
-			UndoableActions.push(dynamic_cast<UndoableAction *>(pAct));
+			if (result)
+				UndoableActions.push(dynamic_cast<UndoableAction *>(pAct));
 
 		pAct = NULL;
 	}
@@ -162,12 +174,31 @@ CFigure* ApplicationManager::GetRandomFigure() {
 	return FigList[j];
 }
 
+
+int ApplicationManager::CountFigColor(CFigure* Fig)
+{
+	int counter = 0;
+	for (int i = 0; i < FigList.size(); i++) {
+		if (FigList[i]->Type() == Fig->Type() && FigList[i]->GetFillClr() == Fig->GetFillClr()) counter++;
+	}
+	return counter;
+}
+
 int ApplicationManager::CountFigure(CFigure* fig)
 {
 	int counter =0;
-	CFigure* Figure = fig;
 	for (int i = 0; i < FigList.size(); i++) {
 		if (FigList[i]->Type() == fig->Type())counter++;
+	}
+	return counter;
+}
+
+int ApplicationManager::CountColor( color RandomColor)
+{
+	int counter = 0;
+	for (int i = 0; i < FigList.size(); i++) {
+		if (FigList[i]->GetFillClr() == RandomColor) counter++;
+
 	}
 	return counter;
 }

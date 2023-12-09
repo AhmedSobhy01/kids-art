@@ -230,7 +230,6 @@ color Input::GetSelectedColor(Output* pO) const // This function reads the posit
 		}
 	}
 
-	pO->CloseColorMenuWind();
 	return TRANSPARENT_COLOR;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
