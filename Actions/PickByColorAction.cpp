@@ -39,7 +39,9 @@ bool PickByColorAction::Execute() {
 	Input* pIn = pManager->GetInput();
 	FiguresNumber = pManager->FiguresCount();
 	if (FiguresNumber == 0) {
+
 		pOut->PrintMessage("Switch to Draw Mode and draw some shapes to play with.");
+    
 		return false;
 	}
 	ReadActionParameters();
@@ -50,7 +52,9 @@ bool PickByColorAction::Execute() {
 		CFigure* ClickedFigure = pManager->GetFigure(P.x, P.y);									// Get the clicked shape
 
 		if (ClickedFigure == NULL || ClickedFigure->isHidden()) continue;						// If theres not shape clicked or the shape is hidden
+
 		else if (ClickedFigure->GetFillClr() == RandomColor) CorrectPicks++;					// Correct color is picked
+
 
 		ClickedFigure->Hide();																	// Hiding every clicked shape
 		pManager->UpdateInterface();

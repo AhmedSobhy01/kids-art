@@ -174,7 +174,6 @@ CFigure* ApplicationManager::GetRandomFigure() {
 	return FigList[j];
 }
 
-
 int ApplicationManager::CountFigColor(CFigure* Fig)
 {
 	int counter = 0;
@@ -198,7 +197,6 @@ int ApplicationManager::CountColor( color RandomColor)
 	int counter = 0;
 	for (int i = 0; i < FigList.size(); i++) {
 		if (FigList[i]->GetFillClr() == RandomColor) counter++;
-
 	}
 	return counter;
 }

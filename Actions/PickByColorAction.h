@@ -4,6 +4,7 @@
 #include "..\GUI\UI_Info.h"
 #include "..\Figures\CFigure.h"
 
+
 class PickByColorAction: public Action {
 private:
 	Point P;

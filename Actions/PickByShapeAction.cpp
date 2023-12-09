@@ -59,6 +59,7 @@ bool PickByShapeAction::Execute() {
 		else if (ClickedShape->Type() == RandomFigureType) CorrectPicks++;					// Correct Shape picked
 
 		ClickedShape->Hide();																// Hiding any clicked shape
+
 		pManager->UpdateInterface();
 		Counter++;
 	}
