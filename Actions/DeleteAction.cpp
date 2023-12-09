@@ -1,10 +1,9 @@
 #include "DeleteAction.h"
 #include "..\ApplicationManager.h"
-#include "..\Figures\CFigure.h"
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-DeleteAction::DeleteAction(ApplicationManager* pApp) :Action(pApp) {
+DeleteAction::DeleteAction(ApplicationManager* pApp): UndoableAction(pApp) {
 
 }
 
@@ -24,11 +23,31 @@ void DeleteAction::ReadActionParameters() {
 
 bool DeleteAction::Execute() {
 	ReadActionParameters();
-	CFigure* F = pManager->GetSelected();
-	if (F != NULL) {
-		pManager->RemoveFigure(F);
+	Figure = pManager->GetSelected();
+
+	if (Figure != NULL) {
+		RemovedFromIndex = pManager->RemoveFigure(Figure);
+		Figure->SetSelected(false);
 		pManager->SetSelected(NULL);
 		return true;
 	}
 	return false;
+}
+
+void DeleteAction::Undo()
+{
+	if (Figure)
+		pManager->AddFigure(Figure, RemovedFromIndex);
+}
+
+void DeleteAction::Redo()
+{
+	if (Figure)
+		RemovedFromIndex = pManager->RemoveFigure(Figure);
+}
+
+DeleteAction::~DeleteAction()
+{
+	if (Figure)
+		delete Figure;
 }

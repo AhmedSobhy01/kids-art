@@ -39,9 +39,10 @@ public:
 	void ExecuteAction(ActionType); // Creates an action and executes it
 
 	// -- Figures Management Functions
-	void AddFigure(CFigure *pFig);			// Adds a new figure to the FigList
-	void RemoveFigure(CFigure *pFig);		// Removes a figure from the FigList
-	CFigure *GetFigure(int x, int y) const; // Search for a figure given a point inside the figure
+	void AddFigure(CFigure*);			// Adds a new figure to the FigList
+	void AddFigure(CFigure*, int);			// Adds a new figure to the FigList at specific index
+	int RemoveFigure(CFigure*);		// Removes a figure from the FigList
+	CFigure *GetFigure(int, int) const; // Search for a figure given a point inside the figure
 	CFigure* GetRandomFigure();				// Creates a random index and returns its corresponding figure in the FigList
 	color GetRandomColor();
 	int CountRandomFigColor(CFigure*);

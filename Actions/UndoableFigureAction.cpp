@@ -17,5 +17,6 @@ void UndoableFigureAction::Redo()
 
 UndoableFigureAction::~UndoableFigureAction()
 {
-	delete figure;
+	if (figure)
+		delete figure;
 }
