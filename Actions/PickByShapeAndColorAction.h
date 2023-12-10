@@ -8,8 +8,9 @@
 class PickByShapeAndColorAction :public Action {
 private:
 	Point P;
-	color RandomColor;
+	color RandomFigureColor;
 	CFigure* RandomFigure;
+	ShapeType RandomFigureType;
 	string RandomFigureName;	// To store the random figure name as a string
 	string RandomColorName;		// To store the random figure color as a string
 	int CorrectPicks;
@@ -21,6 +22,6 @@ public:
 	virtual void ReadActionParameters();
 	virtual bool Execute();
 	void PrintMessage();		// To print the starting message
-	void GetFigureStats(CFigure*); // Converts the enum values of the figures properties and assigns them into the string members
+	void SetFigureStats(); // Converts the enum values of the figures properties and assigns them into the string members
 };
 #endif

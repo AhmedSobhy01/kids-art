@@ -25,9 +25,9 @@ void AddSquareAction::ReadActionParameters() {
 		pOut->ClearStatusBar();
 		return;
 	}
-	SquareGfxInfo.isFilled = false;
 	SquareGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	SquareGfxInfo.FillClr = pOut->getCrntFillColor();
+	SquareGfxInfo.isFilled = (SquareGfxInfo.FillClr != TRANSPARENT_COLOR);
 	SquareGfxInfo.BorderWidth = pOut->getCurrentPenWidth();
 	pOut->ClearStatusBar();
 }

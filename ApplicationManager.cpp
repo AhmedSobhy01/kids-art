@@ -182,15 +182,11 @@ CFigure* ApplicationManager::GetRandomFigure() {
 	return FigList[j];
 }
 
-color ApplicationManager::GetRandomColor() {
-	return GetRandomFigure()->GetColor();
-}
-
-int ApplicationManager::CountRandomFigColor(CFigure* Fig)
+int ApplicationManager::CountFigColor(CFigure* Fig)
 {
 	int counter = 0;
 	for (int i = 0; i < FigList.size(); i++) {
-		if (FigList[i]->Type() == Fig->Type() && FigList[i]->GetColor() == Fig->GetColor()) counter++;
+		if (FigList[i]->Type() == Fig->Type() && FigList[i]->GetFillClr() == Fig->GetFillClr()) counter++;
 	}
 	return counter;
 }
@@ -208,8 +204,7 @@ int ApplicationManager::CountColor( color RandomColor)
 {
 	int counter = 0;
 	for (int i = 0; i < FigList.size(); i++) {
-		if (FigList[i]->GetColor() == RandomColor) counter++;
-
+		if (FigList[i]->GetFillClr() == RandomColor) counter++;
 	}
 	return counter;
 }
@@ -218,7 +213,7 @@ int ApplicationManager::FiguresCount() {
 	return FigList.size();
 }
 
-void ApplicationManager::UnHideFigures() {
+void ApplicationManager::UnhideFigures() {
 	for (int i = 0; i < FigList.size(); i++)FigList[i]->UnHide();
 }
 UndoableActionStack &ApplicationManager::GetUndoableActionsStack()

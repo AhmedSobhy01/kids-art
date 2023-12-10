@@ -52,9 +52,9 @@ void AddTriangleAction::ReadActionParameters() {
 		pOut->ClearStatusBar();
 		return;
 	}
-	TriangleGfxInfo.isFilled = false;
 	TriangleGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	TriangleGfxInfo.FillClr = pOut->getCrntFillColor();
+	TriangleGfxInfo.isFilled = (TriangleGfxInfo.FillClr != TRANSPARENT_COLOR);
 	TriangleGfxInfo.BorderWidth = pOut->getCurrentPenWidth();
 	pOut->ClearStatusBar();
 }

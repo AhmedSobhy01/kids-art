@@ -44,12 +44,11 @@ public:
 	int RemoveFigure(CFigure*);		// Removes a figure from the FigList
 	CFigure *GetFigure(int, int) const; // Search for a figure given a point inside the figure
 	CFigure* GetRandomFigure();				// Creates a random index and returns its corresponding figure in the FigList
-	color GetRandomColor();
-	int CountRandomFigColor(CFigure*);
-	int CountFigure(CFigure*);				// Counts how many instances of a passed figure
 	int CountColor(color);
+	int CountFigure(CFigure*);				// Counts how many instances of a passed figure
+	int CountFigColor(CFigure*);
 	int FiguresCount();						// Returns the number of figures in FigList
-	void UnHideFigures();					// Reveals the hidden figures during the Play Mode 
+	void UnhideFigures();					// Reveals the hidden figures during the Play Mode 
 	CFigure* GetSelected();
 	void SetSelected(CFigure*);
 
