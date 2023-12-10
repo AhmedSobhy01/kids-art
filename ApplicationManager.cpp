@@ -87,6 +87,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case BACKGROUND_COLOR:
 		pAct = new ChangeBackgroundColorAction(this);
+		break;
 	case REMOVE:
 		pAct = new DeleteAction(this);
 		break;
