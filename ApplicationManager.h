@@ -58,10 +58,13 @@ public:
 	void SetSelected(CFigure*);
 
 	// -- Recorded Actions List
-	bool AddActionToRecordings(Action*);
+	bool AddActionToRecordings(Action*, bool);
 	List<Action>& GetRecordedActionsList();
 	void ClearRecordedActionsList();
+
 	void SetRecordingState(bool);
+	bool CanRecord() const;
+	bool IsCurrentlyRecording() const;
 
 	// -- Undo & Redo Stacks
 	bool AddActionToUndoables(Action*, bool);

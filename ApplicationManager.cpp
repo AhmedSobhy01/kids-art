@@ -9,6 +9,8 @@
 #include "Actions\MoveAction.h"
 #include "Actions\SwitchToDrawAction.h"
 #include "Actions\SwitchToPlayAction.h"
+#include "Actions\StartRecordingAction.h"
+#include "Actions\StopRecordingAction.h"
 #include "Actions\UndoAction.h"
 #include "Actions\RedoAction.h"
 #include "Actions\ChangeFillColorAction.h"
@@ -73,6 +75,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case MOVE:
 		pAct = new MoveAction(this);
 		break;
+	case START_RECORDING:
+		pAct = new StartRecordingAction(this);
+		break;
+	case STOP_RECORDING:
+		pAct = new StopRecordingAction(this);
+		break;
 	case UNDO:
 		pAct = new UndoAction(this);
 		break;
@@ -116,7 +124,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		bool result = pAct->Execute(); // Execute
 
-		bool a = AddActionToRecordings(pAct);
+		bool a = AddActionToRecordings(pAct, result);
 		bool b = AddActionToUndoables(pAct, result);
 
 		if (!a && !b)
@@ -150,10 +158,16 @@ void ApplicationManager::SetSelected(CFigure* c) {
 	SelectedFig = c;
 }
 
-bool ApplicationManager::AddActionToRecordings(Action* pAct)
+bool ApplicationManager::AddActionToRecordings(Action* pAct, bool flag)
 {
-	if (pAct->ShouldRecord()) {
+	if (flag && pAct->ShouldRecord()) {
 		RecordedActions.push_back(pAct);
+
+		if (RecordedActions.size() == MaxRecordableActions) {
+			SetRecordingState(false);
+
+			pOut->PrintMessage("Recording stopped (operations: " + to_string(RecordedActions.size()) + ").");
+		}
 		
 		return true;
 	}
@@ -176,6 +190,14 @@ void ApplicationManager::ClearRecordedActionsList()
 void ApplicationManager::SetRecordingState(bool state)
 {
 	IsRecording = state;
+}
+bool ApplicationManager::CanRecord() const
+{
+	return FigList.empty() && UndoableActions.empty() && RedoableActions.empty();
+}
+bool ApplicationManager::IsCurrentlyRecording() const
+{
+	return IsRecording;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure *ApplicationManager::GetFigure(int x, int y) const

@@ -139,6 +139,8 @@
     <ClCompile Include="Actions\PickByShapeAndColorAction.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
     <ClCompile Include="Actions\ChangeBackgroundColorAction.cpp" />
+    <ClCompile Include="Actions\StartRecordingAction.cpp" />
+    <ClCompile Include="Actions\StopRecordingAction.cpp" />
     <ClCompile Include="Actions\UndoableFigureAction.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
     <ClCompile Include="Containers\UndoableActionStack.cpp" />
@@ -208,6 +210,8 @@
     <ClInclude Include="Actions\PickByShapeAction.h" />
     <ClInclude Include="Actions\PickByShapeAndColorAction.h" />
     <ClInclude Include="Actions\RedoAction.h" />
+    <ClInclude Include="Actions\StartRecordingAction.h" />
+    <ClInclude Include="Actions\StopRecordingAction.h" />
     <ClInclude Include="Actions\UndoableAction.h" />
     <ClInclude Include="Actions\UndoableFigureAction.h" />
     <ClInclude Include="Actions\UndoAction.h" />
