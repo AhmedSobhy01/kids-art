@@ -15,9 +15,11 @@ void CRectangle::Draw(Output* pOut) const
 }
 
 bool CRectangle::CheckSelected(int x, int y) {
+	if (Hidden) return false;
+
 	bool cond1 = Corner1.x < x && x < Corner2.x;
 	bool cond2 = Corner1.y < y && y < Corner2.y;
-	return cond1 && cond2 && !Hidden;
+	return cond1 && cond2;
 }
 Point CRectangle::GetCenter() const
 {

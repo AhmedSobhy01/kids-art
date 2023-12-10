@@ -20,6 +20,8 @@ double CHexagon::calcTriangleArea(double x1, double y1, double x2, double y2, do
 }
 
 bool CHexagon::CheckSelected(int x, int y) {
+	if (Hidden) return false;
+
 	//double r = sqrt(pow(center.x - x, 2) + pow(center.y - y, 2));
 	//double theta = atan2((y - center.y), (x - center.x));
 	//const int n = 6;
@@ -38,7 +40,7 @@ bool CHexagon::CheckSelected(int x, int y) {
 		PArea += calcTriangleArea(x, y, xPointsArray[i], yPointsArray[i], xPointsArray[(i + 1) % 6], yPointsArray[(i + 1) % 6]);
 	}
 	double err = totalArea - PArea;
-	return -0.001 < err && err < 0.001 && !Hidden;
+	return -0.001 < err && err < 0.001;
 }
 
 Point CHexagon::GetCenter() const

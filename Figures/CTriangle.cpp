@@ -22,13 +22,15 @@ double CTriangle::calcArea(Point P1, Point P2, Point P3) {
 }
 
 bool CTriangle::CheckSelected(int x, int y) {
+	if (Hidden) return false;
+
 	Point P = { x,y };
 	double totalArea = calcArea(P1, P2, P3);
 	double A1 = calcArea(P, P2, P3);
 	double A2 = calcArea(P, P1, P3);
 	double A3 = calcArea(P, P2, P1);
 	double err = totalArea - A1 - A2 - A3;
-	return -2 < err && err < 2 && !Hidden;
+	return -2 < err && err < 2;
 
 	///another way to find a point inside a triangle using barycantric corrdinates
 
