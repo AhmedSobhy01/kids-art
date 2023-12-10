@@ -17,6 +17,8 @@ int CSquare::getSquareSize() {
 }
 
 bool CSquare::CheckSelected(int x, int y) {
+	if (Hidden) return false;
+
 	Point p1, p2;
 	p1.x = center.x - squareSize / 2;
 	p1.y = center.y - squareSize / 2;

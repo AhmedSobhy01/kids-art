@@ -22,6 +22,8 @@ double CTriangle::calcArea(Point P1, Point P2, Point P3) {
 }
 
 bool CTriangle::CheckSelected(int x, int y) {
+	if (Hidden) return false;
+
 	Point P = { x,y };
 	double totalArea = calcArea(P1, P2, P3);
 	double A1 = calcArea(P, P2, P3);

@@ -20,6 +20,8 @@ double CHexagon::calcTriangleArea(double x1, double y1, double x2, double y2, do
 }
 
 bool CHexagon::CheckSelected(int x, int y) {
+	if (Hidden) return false;
+
 	//double r = sqrt(pow(center.x - x, 2) + pow(center.y - y, 2));
 	//double theta = atan2((y - center.y), (x - center.x));
 	//const int n = 6;
