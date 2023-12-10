@@ -3,7 +3,6 @@
 
 #include "UndoableAction.h"
 
-
 class ChangeOutlineColorAction: public UndoableAction
 {
 	color OldColor;

@@ -13,6 +13,7 @@
 #include "Actions\RedoAction.h"
 #include "Actions\ChangeFillColorAction.h"
 #include "Actions\ChangeOutlineColorAction.h"
+#include "Actions\ChangeBackgroundColorAction.h"
 #include "Actions\DeleteAction.h"
 #include "Actions/PickByShapeAction.h"
 #include "Actions/PickByColorAction.h"
@@ -83,6 +84,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case FILL_COLOR:
 		pAct = new ChangeFillColorAction(this);
+		break;
+	case BACKGROUND_COLOR:
+		pAct = new ChangeBackgroundColorAction(this);
 		break;
 	case REMOVE:
 		pAct = new DeleteAction(this);

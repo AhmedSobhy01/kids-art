@@ -208,6 +208,9 @@
     <ClCompile Include="Actions\ChangeOutlineColorAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ChangeBackgroundColorAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
     <ClCompile Include="Actions\DeleteAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
@@ -365,6 +368,9 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ChangeOutlineColorAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ChangeBackgroundColorAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\DeleteAction.h">

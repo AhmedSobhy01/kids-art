@@ -138,6 +138,7 @@
     <ClCompile Include="Actions\PickByShapeAction.cpp" />
     <ClCompile Include="Actions\PickByShapeAndColorAction.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
+    <ClCompile Include="Actions\ChangeBackgroundColorAction.cpp" />
     <ClCompile Include="Actions\UndoableFigureAction.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
     <ClCompile Include="Containers\UndoableActionStack.cpp" />
@@ -200,6 +201,9 @@
     <ClInclude Include="Actions\AddTriangleAction.h" />
     <ClInclude Include="Actions\AddCircleAction.h" />
     <ClInclude Include="Actions\AddHexagonAction.h" />
+    <ClInclude Include="Actions\ChangeBackgroundColorAction.h" />
+    <ClInclude Include="Actions\ChangeFillColorAction.h" />
+    <ClInclude Include="Actions\ChangeOutlineColorAction.h" />
     <ClInclude Include="Actions\ChangeFillColorAction.h" />
     <ClInclude Include="Actions\ChangeOutlineColorAction.h" />
     <ClInclude Include="Actions\PickByShapeAction.h" />
