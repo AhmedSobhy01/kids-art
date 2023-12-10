@@ -205,7 +205,7 @@ int ApplicationManager::FiguresCount() {
 	return FigList.size();
 }
 
-void ApplicationManager::UnHideFigures() {
+void ApplicationManager::UnhideFigures() {
 	for (int i = 0; i < FigList.size(); i++)FigList[i]->UnHide();
 }
 UndoableActionStack &ApplicationManager::GetUndoableActionsStack()

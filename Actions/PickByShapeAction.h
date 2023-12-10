@@ -4,7 +4,6 @@
 #include "..\ApplicationManager.h"
 
 class PickByShapeAction : public Action {
-private:
 	Point P;
 	CFigure* RandomFigure;
 	ShapeType RandomFigureType;
@@ -13,6 +12,7 @@ private:
 	int Counter;						// Counter for how many picks made
 	int FiguresNumber;					// Integer to store total number of figures in FigList
 	int RandomFigureNumber;				// Integer to store how many instances for the random figure to be picked
+
 public:
 	PickByShapeAction(ApplicationManager*);
 	virtual void ReadActionParameters();

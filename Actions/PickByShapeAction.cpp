@@ -2,9 +2,10 @@
 #include "..\ApplicationManager.h"
 #include "..\GUI\Output.h"
 
-PickByShapeAction::PickByShapeAction(ApplicationManager* pApp) : Action(pApp) {
-
+PickByShapeAction::PickByShapeAction(ApplicationManager* pApp) : Action(pApp), P{ 0, 0 }, RandomFigureType(RECTANGLE), RandomFigureName(""), CorrectPicks(0), Counter(0), FiguresNumber(0), RandomFigureNumber(0) {
+	RandomFigure = NULL;
 }
+
 void PickByShapeAction::ReadActionParameters() {									// Generates random figure and counts it
 	CorrectPicks = 0;
 	Counter = 0;
@@ -12,7 +13,6 @@ void PickByShapeAction::ReadActionParameters() {									// Generates random fig
 	RandomFigureNumber = pManager->CountFigure(RandomFigure);
 	RandomFigureType = RandomFigure->Type();
 	SetFigureName();
-
 }
 
 void PickByShapeAction::SetFigureName() {							// Returns the shape type (to be used in PrintMessage function)
@@ -66,7 +66,7 @@ bool PickByShapeAction::Execute() {
 	if (Counter == CorrectPicks)pOut->PrintMessage("Congratulations! All your picks are correct!");
 	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks.");
 
-	pManager->UnHideFigures();
+	pManager->UnhideFigures();
 	pManager->UpdateInterface();
 
 	return true;

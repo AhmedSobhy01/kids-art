@@ -47,7 +47,7 @@ public:
 	int CountFigure(CFigure*);				// Counts how many instances of a passed figure
 	int CountFigColor(CFigure*);
 	int FiguresCount();						// Returns the number of figures in FigList
-	void UnHideFigures();					// Reveals the hidden figures during the Play Mode 
+	void UnhideFigures();					// Reveals the hidden figures during the Play Mode 
 	CFigure* GetSelected();
 	void SetSelected(CFigure*);
 

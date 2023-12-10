@@ -1,8 +1,8 @@
 #include "PickByShapeAndColorAction.h"
 
-PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager* pApp) : Action(pApp)
+PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager* pApp): Action(pApp), RandomFigureColor(TRANSPARENT_COLOR),  P{0, 0}, RandomFigureType(RECTANGLE), RandomFigureName(""), RandomColorName(""), CorrectPicks(0), Counter(0), FiguresNumber(0), RandomColorFigNumber(0)
 {
-
+	RandomFigure = NULL;
 }
 
 void PickByShapeAndColorAction::ReadActionParameters() {
@@ -77,7 +77,7 @@ bool PickByShapeAndColorAction::Execute() {
 	if (Counter == CorrectPicks)pOut->PrintMessage("Congratulations! All your picks are correct!");
 	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks.");
 
-	pManager->UnHideFigures();
+	pManager->UnhideFigures();
 	pManager->UpdateInterface();
 
 	return true;

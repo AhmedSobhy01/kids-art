@@ -2,9 +2,7 @@
 #include "..\ApplicationManager.h"
 #include "..\GUI\Output.h"
 
-PickByColorAction::PickByColorAction(ApplicationManager* pApp) :Action(pApp) {
-
-}
+PickByColorAction::PickByColorAction(ApplicationManager* pApp): Action(pApp) {}
 
 void PickByColorAction::ReadActionParameters() {												// Initializes the data members
 	CorrectPicks = 0;
@@ -63,7 +61,7 @@ bool PickByColorAction::Execute() {
 	if (Counter == CorrectPicks) pOut->PrintMessage("Congratulations! All your picks are correct!");
 	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks");
 
-	pManager->UnHideFigures();
+	pManager->UnhideFigures();
 	pManager->UpdateInterface();
 
 	return true;
