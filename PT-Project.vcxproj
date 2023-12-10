@@ -142,7 +142,6 @@
     <ClCompile Include="Actions\UndoableFigureAction.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
     <ClCompile Include="Containers\UndoableActionStack.cpp" />
-    <ClCompile Include="Containers\FigureList.cpp" />
     <ClCompile Include="Actions\DeleteAction.cpp" />
     <ClCompile Include="Figures\CHexagon.cpp" />
     <ClCompile Include="Figures\CCircle.cpp" />
@@ -213,7 +212,7 @@
     <ClInclude Include="Actions\UndoableFigureAction.h" />
     <ClInclude Include="Actions\UndoAction.h" />
     <ClInclude Include="Containers\UndoableActionStack.h" />
-    <ClInclude Include="Containers\FigureList.h" />
+    <ClInclude Include="Containers\List.h" />
     <ClInclude Include="Actions\DeleteAction.h" />
     <ClInclude Include="Figures\CHexagon.h" />
     <ClInclude Include="Figures\CCircle.h" />

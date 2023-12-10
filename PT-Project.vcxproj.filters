@@ -178,9 +178,6 @@
     <ClCompile Include="Actions\SwitchToPlayAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Containers\FigureList.cpp">
-      <Filter>Containers</Filter>
-    </ClCompile>
     <ClCompile Include="Containers\UndoableActionStack.cpp">
       <Filter>Containers</Filter>
     </ClCompile>
@@ -337,7 +334,7 @@
     <ClInclude Include="Actions\SwitchToPlayAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Containers\FigureList.h">
+    <ClInclude Include="Containers\List.h">
       <Filter>Containers</Filter>
     </ClInclude>
     <ClInclude Include="Containers\UndoableActionStack.h">
@@ -364,12 +361,6 @@
     <ClInclude Include="Actions\MoveAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\ChangeFillColorAction.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\ChangeOutlineColorAction.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
     <ClInclude Include="Actions\ChangeBackgroundColorAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
@@ -383,6 +374,16 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\PickByShapeAndColorAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ChangeFillColorAction.h" />
+    <ClInclude Include="Actions\ChangeOutlineColorAction.h" />
+    <ClInclude Include="Actions\ChangeFillColorAction.h" />
+    <ClInclude Include="Actions\ChangeOutlineColorAction.h" />
+    <ClInclude Include="Actions\ChangeFillColorAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ChangeOutlineColorAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

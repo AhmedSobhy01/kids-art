@@ -14,7 +14,7 @@ protected:
 
 public:
 
-	Action(ApplicationManager *pApp) { pManager = pApp; }	//constructor
+	Action(ApplicationManager* pApp) { pManager = pApp; }	//constructor
 
 	virtual bool Validate() { return true; };
 
@@ -24,6 +24,9 @@ public:
 	//Execute action (code depends on action type)
 	virtual bool Execute() = 0;
 
+	virtual bool ShouldRecord() const {
+		return true;  // By default, record all actions
+	}
 };
 
 #endif

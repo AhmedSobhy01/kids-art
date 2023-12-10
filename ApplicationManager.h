@@ -5,8 +5,9 @@
 #include "Figures\CFigure.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
-#include "Containers\FigureList.h"
+#include "Containers\List.h"
 #include "Containers\UndoableActionStack.h"
+#include "Actions/Action.h"
 
 // Main class that manages everything in the application.
 class ApplicationManager
@@ -14,11 +15,15 @@ class ApplicationManager
 	enum
 	{
 		MaxFigCount = 200,
-		MaxUndoableActions = 5
+		MaxRecordableActions = 20,
+		MaxUndoableActions = 5,
 	}; // Max no of figures
 
 private:
-	FigureList FigList; // List of done figures
+	List<CFigure> FigList; // List of done figures
+
+	List<Action> RecordedActions; // List of recorded actions
+	bool IsRecording;
 
 	UndoableActionStack UndoableActions; // Stack of actions that can be undone
 	UndoableActionStack RedoableActions; // Stack of actions that can be redone
@@ -52,7 +57,14 @@ public:
 	CFigure* GetSelected();
 	void SetSelected(CFigure*);
 
+	// -- Recorded Actions List
+	bool AddActionToRecordings(Action*);
+	List<Action>& GetRecordedActionsList();
+	void ClearRecordedActionsList();
+	void SetRecordingState(bool);
+
 	// -- Undo & Redo Stacks
+	bool AddActionToUndoables(Action*, bool);
 	UndoableActionStack &GetUndoableActionsStack();
 	UndoableActionStack &GetRedoableActionsStack();
 	void ClearRedoableActionsStack();

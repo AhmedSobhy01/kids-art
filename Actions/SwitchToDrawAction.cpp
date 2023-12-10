@@ -5,7 +5,8 @@
 
 
 SwitchToDrawAction::SwitchToDrawAction(ApplicationManager* pApp): Action(pApp) 
-{}
+{
+}
 
 void SwitchToDrawAction::ReadActionParameters() 
 {}
@@ -15,4 +16,8 @@ bool SwitchToDrawAction::Execute() {
 	pOut->CreateDrawToolBar();
 
 	return true;
+}
+
+bool SwitchToDrawAction::ShouldRecord() const {
+	return false;
 }

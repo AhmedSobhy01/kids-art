@@ -15,12 +15,12 @@
 #include "Actions\ChangeOutlineColorAction.h"
 #include "Actions\ChangeBackgroundColorAction.h"
 #include "Actions\DeleteAction.h"
-#include "Actions/PickByShapeAction.h"
-#include "Actions/PickByColorAction.h"
-#include "Actions/PickByShapeAndColorAction.h"
+#include "Actions\PickByShapeAction.h"
+#include "Actions\PickByColorAction.h"
+#include "Actions\PickByShapeAndColorAction.h"
 
 // Constructor
-ApplicationManager::ApplicationManager() : FigList(MaxFigCount), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions)
+ApplicationManager::ApplicationManager(): FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions)
 {
   // Create Input and output
 	pOut = new Output;
@@ -111,19 +111,17 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	// Execute the created action
 	if (pAct != NULL)
 	{
-		bool result = pAct->Execute(); // Execute
-
 		if (ActType != UNDO && ActType != REDO)
 			ClearRedoableActionsStack();
 
-		if (dynamic_cast<UndoableAction *>(pAct) == NULL)
-		{
-			delete pAct;
-		}
-		else
-			if (result)
-				UndoableActions.push(dynamic_cast<UndoableAction *>(pAct));
+		bool result = pAct->Execute(); // Execute
 
+		bool a = AddActionToRecordings(pAct);
+		bool b = AddActionToUndoables(pAct, result);
+
+		if (!a && !b)
+			delete pAct;
+		
 		pAct = NULL;
 	}
 }
@@ -150,6 +148,34 @@ CFigure* ApplicationManager::GetSelected() {
 }
 void ApplicationManager::SetSelected(CFigure* c) {
 	SelectedFig = c;
+}
+
+bool ApplicationManager::AddActionToRecordings(Action* pAct)
+{
+	if (pAct->ShouldRecord()) {
+		RecordedActions.push_back(pAct);
+		
+		return true;
+	}
+
+	return false;
+}
+
+List<Action>& ApplicationManager::GetRecordedActionsList()
+{
+	return RecordedActions;
+}
+
+void ApplicationManager::ClearRecordedActionsList()
+{
+	for (int i = 0; i < RecordedActions.size(); i++)
+		delete RecordedActions[i];
+
+	RecordedActions.clear();
+}
+void ApplicationManager::SetRecordingState(bool state)
+{
+	IsRecording = state;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure *ApplicationManager::GetFigure(int x, int y) const
@@ -215,6 +241,17 @@ int ApplicationManager::FiguresCount() {
 
 void ApplicationManager::UnhideFigures() {
 	for (int i = 0; i < FigList.size(); i++)FigList[i]->UnHide();
+}
+
+bool ApplicationManager::AddActionToUndoables(Action* pAct, bool flag)
+{
+	if (flag && dynamic_cast<UndoableAction*>(pAct) != NULL) {
+		UndoableActions.push(dynamic_cast<UndoableAction*>(pAct));
+
+		return true;
+	}
+
+	return false;
 }
 UndoableActionStack &ApplicationManager::GetUndoableActionsStack()
 {
