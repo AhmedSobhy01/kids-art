@@ -2,62 +2,71 @@
 #include "..\ApplicationManager.h"
 #include "..\GUI\Output.h"
 
-PickByShapeAction::PickByShapeAction(ApplicationManager* pApp) : Action(pApp) {
-
+PickByShapeAction::PickByShapeAction(ApplicationManager* pApp) : Action(pApp), P{ 0, 0 }, RandomFigureType(RECTANGLE), RandomFigureName(""), CorrectPicks(0), Counter(0), FiguresNumber(0), RandomFigureNumber(0) {
+	RandomFigure = NULL;
 }
+
 void PickByShapeAction::ReadActionParameters() {									// Generates random figure and counts it
 	CorrectPicks = 0;
 	Counter = 0;
 	RandomFigure = pManager->GetRandomFigure();
 	RandomFigureNumber = pManager->CountFigure(RandomFigure);
-
+	RandomFigureType = RandomFigure->Type();
+	SetFigureName();
 }
 
-string PickByShapeAction::GetFigureName(ShapeType stype) {							// Returns the shape type (to be used in PrintMessage function)
-	switch (stype) {
+void PickByShapeAction::SetFigureName() {							// Returns the shape type (to be used in PrintMessage function)
+	switch (RandomFigureType) {
 	case CIRCLE:
-		return "Circles, ";
+		RandomFigureName = "Circles, ";
+		break;
 	case SQUARE:
-		return "Squares, ";
+		RandomFigureName = "Squares, ";
+		break;
 	case TRIANGLE:
-		return "Triangles, ";
+		RandomFigureName = "Triangles, ";
+		break;
 	case HEXAGON:
-		return "Hexagons, ";
+		RandomFigureName = "Hexagons, ";
+		break;
 	case RECTANGLE:
-		return "Rectangles, ";
+		RandomFigureName = "Rectangles, ";
+		break;
 	}
 }
-void PickByShapeAction::PrintMessage(CFigure* randomfigure) {						// Prints a message according to the random asked shape
+
+void PickByShapeAction::PrintMessage() {						// Prints a message according to the random asked shape
 	Output* pOut = pManager->GetOutput();
-	pOut->PrintMessage("Pick all the " + GetFigureName(randomfigure->Type()) + to_string(pManager->CountFigure(randomfigure)) + " exist");
+	pOut->PrintMessage("Pick all the " + RandomFigureName + to_string(RandomFigureNumber) + " exist");
 }
+
 bool PickByShapeAction::Execute() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	FiguresNumber = pManager->FiguresCount();
 	if (FiguresNumber == 0) {
-		pOut->PrintMessage("Switch to Draw Mode and draw some shapes to play with them.");
+		pOut->PrintMessage("Switch to Draw Mode and draw some shapes to play with.");
 		return false;
 	}
 	ReadActionParameters();
-	PrintMessage(RandomFigure);
-
-	////				Main Loop				////
+	PrintMessage();
+	
 	while (CorrectPicks < RandomFigureNumber && Counter != FiguresNumber) {
 		pIn->GetPointClicked(P.x, P.y);
-		CFigure* ClickedShape = pManager->GetFigure(P.x, P.y);						// Get the clicked shape
+		CFigure* ClickedShape = pManager->GetFigure(P.x, P.y);								// Get the clicked shape
 
-		if (ClickedShape == NULL || ClickedShape->isHidden()) continue;				// If the there's no clicked shape or the clicked shape is already hidden
-		else if (ClickedShape->Type() == RandomFigure->Type()) CorrectPicks++;		// Correct Shape picked
+		if (ClickedShape == NULL || ClickedShape->isHidden()) continue;						// If the there's no clicked shape or the clicked shape is already hidden
+		else if (ClickedShape->Type() == RandomFigureType) CorrectPicks++;					// Correct Shape picked
 
-		ClickedShape->Hide();														// Hiding any clicked shape
+		ClickedShape->Hide();																// Hiding any clicked shape
+
 		pManager->UpdateInterface();
 		Counter++;
 	}
 	if (Counter == CorrectPicks)pOut->PrintMessage("Congratulations! All your picks are correct!");
 	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks.");
 
-	pManager->UnHideFigures();
+	pManager->UnhideFigures();
 	pManager->UpdateInterface();
 
 	return true;

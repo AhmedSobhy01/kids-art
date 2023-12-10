@@ -44,10 +44,6 @@ void CFigure::UnHide() {
 	Hidden = false;
 }
 
-color CFigure::GetColor() {
-	return FigGfxInfo.FillClr;
-}
-
 bool CFigure::isFilled()
 {
 	return FigGfxInfo.isFilled;

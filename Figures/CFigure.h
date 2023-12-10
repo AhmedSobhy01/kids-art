@@ -37,10 +37,7 @@ public:
 	void Hide();					// Hides the shape
 	void UnHide();					// Unhides the shape
 	ShapeType Type();				// Returns the type of a shape
-	color GetColor();
 	bool isFilled();
-	bool operator==(CFigure*);
-
 
 
 	virtual bool CheckSelected(int x, int y) = 0;

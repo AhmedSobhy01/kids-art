@@ -1,22 +1,22 @@
 #include "PickByShapeAndColorAction.h"
 
-PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager* pApp) : Action(pApp)
+PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager* pApp): Action(pApp), RandomFigureColor(TRANSPARENT_COLOR),  P{0, 0}, RandomFigureType(RECTANGLE), RandomFigureName(""), RandomColorName(""), CorrectPicks(0), Counter(0), FiguresNumber(0), RandomColorFigNumber(0)
 {
-
+	RandomFigure = NULL;
 }
 
-void PickByShapeAndColorAction::ReadActionParameters() {						// Generates random figure and counts it
-	
+void PickByShapeAndColorAction::ReadActionParameters() {
 	CorrectPicks = 0;
 	Counter = 0;
 	RandomFigure = pManager->GetRandomFigure();
-	RandomColor = RandomFigure->GetColor();
-	RandomColorFigNumber = pManager->CountRandomFigColor(RandomFigure);
+	RandomFigureColor = RandomFigure->GetFillClr();
+	RandomColorFigNumber = pManager->CountFigColor(RandomFigure);
+	RandomFigureType = RandomFigure->Type();
+	SetFigureStats();
 }
 
-void PickByShapeAndColorAction::GetFigureStats(CFigure* Fig) {
-	ShapeType type = Fig->Type();
-	switch (type) {
+void PickByShapeAndColorAction::SetFigureStats() {
+	switch (RandomFigureType) {
 	case CIRCLE:
 		RandomFigureName =  "Circles";
 		break;
@@ -33,17 +33,17 @@ void PickByShapeAndColorAction::GetFigureStats(CFigure* Fig) {
 		RandomFigureName = "Rectangles";
 		break;
 	}
-	if (Fig->GetColor() == BLACK) RandomColorName = "Black";
-	else if (Fig->GetColor() == RED) RandomColorName = "Red";
-	else if (Fig->GetColor() == BLUE) RandomColorName = "Blue";
-	else if (Fig->GetColor() == GREEN) RandomColorName = "Green";
-	else if (Fig->GetColor() == MAGENTA) RandomColorName = "Magenta";
-	else if (Fig->GetColor() == ORANGE) RandomColorName = "Orange";
-	else if (Fig->GetColor() == BROWN) RandomColorName = "Brown";
-	else if (Fig->GetColor() == CYAN) RandomColorName = "Cyan";
-	else if (Fig->GetColor() == YELLOW) RandomColorName = "Yellow";
-	else if (Fig->GetColor() == GOLD) RandomColorName = "Gold";
-	else if (Fig->GetColor() == TRANSPARENT_COLOR) RandomColorName = "Transparent";
+	if (RandomFigureColor == BLACK) RandomColorName = "Black";
+	else if (RandomFigureColor == RED) RandomColorName = "Red";
+	else if (RandomFigureColor == BLUE) RandomColorName = "Blue";
+	else if (RandomFigureColor == GREEN) RandomColorName = "Green";
+	else if (RandomFigureColor == MAGENTA) RandomColorName = "Magenta";
+	else if (RandomFigureColor == ORANGE) RandomColorName = "Orange";
+	else if (RandomFigureColor == BROWN) RandomColorName = "Brown";
+	else if (RandomFigureColor == CYAN) RandomColorName = "Cyan";
+	else if (RandomFigureColor == YELLOW) RandomColorName = "Yellow";
+	else if (RandomFigureColor == GOLD) RandomColorName = "Gold";
+	else if (RandomFigureColor == TRANSPARENT_COLOR) RandomColorName = "Transparent";
 }
 
 void PickByShapeAndColorAction::PrintMessage() {
@@ -56,21 +56,19 @@ bool PickByShapeAndColorAction::Execute() {
 	Input* pIn = pManager->GetInput();
 	FiguresNumber = pManager->FiguresCount();
 	if (FiguresNumber == 0) {
-		pOut->PrintMessage("Switch to Draw Mode and draw some shapes to play with them.");
+		pOut->PrintMessage("Switch to Draw Mode and draw some shapes to play with.");
 		return false;
 	}
 	ReadActionParameters();
-	GetFigureStats(RandomFigure);
 	PrintMessage();
 
-	///							Main Loop						///
-	while (CorrectPicks < RandomColorFigNumber && Counter != FiguresNumber && FiguresNumber !=0) {
+	while (CorrectPicks < RandomColorFigNumber && Counter != FiguresNumber) {
 		pIn->GetPointClicked(P.x, P.y);
 		CFigure* ClickedFigure = pManager->GetFigure(P.x, P.y);													// Gets the clicked shape
 		if (ClickedFigure == NULL || ClickedFigure->isHidden()) continue;										// If there's no clicked shape or the clicked shape is already hidden
 		
-		bool SameType = ClickedFigure->Type() == RandomFigure->Type();
-		bool SameColor = ClickedFigure->GetColor() == RandomFigure->GetColor();
+		bool SameType = ClickedFigure->Type() == RandomFigureType;
+		bool SameColor = ClickedFigure->GetFillClr() == RandomFigureColor;
 		if (SameType && SameColor) CorrectPicks++;																// Checks if the shapes of the same type & color
 		ClickedFigure->Hide();																					// Hiding any clicked shape
 		pManager->UpdateInterface();
@@ -78,7 +76,8 @@ bool PickByShapeAndColorAction::Execute() {
 	}
 	if (Counter == CorrectPicks)pOut->PrintMessage("Congratulations! All your picks are correct!");
 	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks.");
-	pManager->UnHideFigures();
+
+	pManager->UnhideFigures();
 	pManager->UpdateInterface();
 
 	return true;
