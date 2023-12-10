@@ -28,7 +28,7 @@ bool CTriangle::CheckSelected(int x, int y) {
 	double A2 = calcArea(P, P1, P3);
 	double A3 = calcArea(P, P2, P1);
 	double err = totalArea - A1 - A2 - A3;
-	return -2 < err && err < 2;
+	return -2 < err && err < 2 && !Hidden;
 
 	///another way to find a point inside a triangle using barycantric corrdinates
 

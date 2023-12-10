@@ -38,7 +38,7 @@ bool CHexagon::CheckSelected(int x, int y) {
 		PArea += calcTriangleArea(x, y, xPointsArray[i], yPointsArray[i], xPointsArray[(i + 1) % 6], yPointsArray[(i + 1) % 6]);
 	}
 	double err = totalArea - PArea;
-	return -0.001 < err && err < 0.001;
+	return -0.001 < err && err < 0.001 && !Hidden;
 }
 
 Point CHexagon::GetCenter() const

@@ -24,7 +24,7 @@ bool CSquare::CheckSelected(int x, int y) {
 	p2.y = center.y + squareSize / 2;
 	bool cond1 = (p1.x < x) && (x < p2.x);
 	bool cond2 = (p1.y < y) && (y < p2.y);
-	return cond1 && cond2;
+	return cond1 && cond2 && !Hidden;
 }
 Point CSquare::GetCenter() const
 {
