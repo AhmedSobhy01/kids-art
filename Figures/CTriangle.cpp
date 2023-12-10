@@ -7,6 +7,7 @@ CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigu
 	this->P1 = P1;
 	this->P2 = P2;
 	this->P3 = P3;
+	type = TRIANGLE;
 }
 
 
@@ -38,6 +39,11 @@ bool CTriangle::CheckSelected(int x, int y) {
 	//double w1 = (P1.x * ACy + (P.y - P1.y) * ACx - P.x * ACy)/(ABy*ACx-ABx*ACy);
 	//double w2 = ((P.y - P1.y) - w1 * ABy) / ACy;
 	//return w1 >= 0 && w2 >= 0 && (w1 + w2)<=1;
+}
+
+Point CTriangle::GetCenter() const
+{
+	return { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
 }
 
 void CTriangle::SetCenter(Point c) {

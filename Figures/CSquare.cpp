@@ -5,6 +5,7 @@ const int CSquare::squareSize = 150;
 
 CSquare::CSquare(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	this->center = center;
+	type = SQUARE;
 }
 
 void CSquare::Draw(Output* pOut) const {
@@ -24,6 +25,10 @@ bool CSquare::CheckSelected(int x, int y) {
 	bool cond1 = (p1.x < x) && (x < p2.x);
 	bool cond2 = (p1.y < y) && (y < p2.y);
 	return cond1 && cond2;
+}
+Point CSquare::GetCenter() const
+{
+	return center;
 }
 void CSquare::SetCenter(Point center) {
 	this->center = center;

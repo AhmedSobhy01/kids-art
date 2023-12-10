@@ -16,19 +16,26 @@ void SelectAction::ReadActionParameters() {
 	pOut->ClearStatusBar();
 }
 
-void SelectAction::Execute() {
+bool SelectAction::Execute() {
 	ReadActionParameters();
+
 	CFigure* F = pManager->GetFigure(P.x, P.y);
-	if (F == NULL) {
-		return;
-	}
+	if (F == NULL)
+		return false;
+
 	CFigure* S = pManager->GetSelected();
+	if(S != NULL)
+		S->SetSelected(false);
+
 	F->SetSelected(true);
-	if(S != NULL)S->SetSelected(false);
+
 	pManager->SetSelected(F);
+
 	if (F == S) {
 		F->SetSelected(false);
 		pManager->SetSelected(NULL);
 	}
+
+	return true;
 
 }

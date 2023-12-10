@@ -14,6 +14,10 @@
 #include "Actions\ChangeFillColorAction.h"
 #include "Actions\ChangeOutlineColorAction.h"
 #include "Actions\ChangeBackgroundColorAction.h"
+#include "Actions\DeleteAction.h"
+#include "Actions/PickByShapeAction.h"
+#include "Actions/PickByColorAction.h"
+#include "Actions/PickByShapeAndColorAction.h"
 
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions)
@@ -83,6 +87,17 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case BACKGROUND_COLOR:
 		pAct = new ChangeBackgroundColorAction(this);
+	case REMOVE:
+		pAct = new DeleteAction(this);
+		break;
+	case PICK_BY_SHAPE:
+		pAct = new PickByShapeAction(this);
+		break;
+	case PICK_BY_COLOR:
+		pAct = new PickByColorAction(this);
+		break;
+	case PICK_BY_SHAPE_COLOR:
+		pAct = new PickByShapeAndColorAction(this);
 		break;
 	case EXIT:
 		/// create ExitAction here
@@ -95,7 +110,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	// Execute the created action
 	if (pAct != NULL)
 	{
-		pAct->Execute(); // Execute
+		bool result = pAct->Execute(); // Execute
 
 		if (ActType != UNDO && ActType != REDO)
 			ClearRedoableActionsStack();
@@ -105,7 +120,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			delete pAct;
 		}
 		else
-			UndoableActions.push(dynamic_cast<UndoableAction *>(pAct));
+			if (result)
+				UndoableActions.push(dynamic_cast<UndoableAction *>(pAct));
 
 		pAct = NULL;
 	}
@@ -119,10 +135,14 @@ void ApplicationManager::AddFigure(CFigure *pFig)
 {
 	FigList.push_back(pFig);
 }
-///////s/////////////////////////////////////////////////////////////////////////////
-void ApplicationManager::RemoveFigure(CFigure *pFig)
+void ApplicationManager::AddFigure(CFigure* pFig, int index)
 {
-	CFigure *f = FigList.remove(pFig);
+	FigList.push_back(pFig, index);
+}
+///////s/////////////////////////////////////////////////////////////////////////////
+int ApplicationManager::RemoveFigure(CFigure *pFig)
+{
+	return FigList.remove(pFig);
 }
 CFigure* ApplicationManager::GetSelected() {
 	return SelectedFig;
@@ -155,6 +175,51 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 
 	return NULL;
 }
+
+CFigure* ApplicationManager::GetRandomFigure() {
+	int j = rand() % FigList.size();
+	return FigList[j];
+}
+
+color ApplicationManager::GetRandomColor() {
+	return GetRandomFigure()->GetColor();
+}
+
+int ApplicationManager::CountRandomFigColor(CFigure* Fig)
+{
+	int counter = 0;
+	for (int i = 0; i < FigList.size(); i++) {
+		if (FigList[i]->Type() == Fig->Type() && FigList[i]->GetColor() == Fig->GetColor()) counter++;
+	}
+	return counter;
+}
+
+int ApplicationManager::CountFigure(CFigure* fig)
+{
+	int counter =0;
+	for (int i = 0; i < FigList.size(); i++) {
+		if (FigList[i]->Type() == fig->Type())counter++;
+	}
+	return counter;
+}
+
+int ApplicationManager::CountColor( color RandomColor)
+{
+	int counter = 0;
+	for (int i = 0; i < FigList.size(); i++) {
+		if (FigList[i]->GetColor() == RandomColor) counter++;
+
+	}
+	return counter;
+}
+
+int ApplicationManager::FiguresCount() {
+	return FigList.size();
+}
+
+void ApplicationManager::UnHideFigures() {
+	for (int i = 0; i < FigList.size(); i++)FigList[i]->UnHide();
+}
 UndoableActionStack &ApplicationManager::GetUndoableActionsStack()
 {
 	return UndoableActions;
@@ -181,8 +246,9 @@ void ApplicationManager::UpdateInterface() const
 {
 	pOut->ClearDrawArea();
 
-	for (int i = 0; i < FigList.size(); i++)
-		FigList[i]->Draw(pOut); // Call Draw function (virtual member fn)
+	for (int i = 0; i < FigList.size(); i++) {
+		if(!FigList[i]->isHidden())FigList[i]->Draw(pOut); // Call Draw function (virtual member fn)
+	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // Return a pointer to the input

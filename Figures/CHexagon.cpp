@@ -4,6 +4,7 @@ const int CHexagon::hexagonSize = 80;
 
 CHexagon::CHexagon(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	this->center = center;
+	type = HEXAGON;
 }
 
 void CHexagon::Draw(Output* pOut) const {
@@ -38,6 +39,11 @@ bool CHexagon::CheckSelected(int x, int y) {
 	}
 	double err = totalArea - PArea;
 	return -0.001 < err && err < 0.001;
+}
+
+Point CHexagon::GetCenter() const
+{
+	return center;
 }
 
 void CHexagon::SetCenter(Point c) {

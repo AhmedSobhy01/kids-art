@@ -12,9 +12,9 @@ private:
 public:
 	AddSquareAction(ApplicationManager* pApp);
 	bool Validate();
-	void ReadActionParameters();
 
-	void Execute();
+	virtual void ReadActionParameters();
+	virtual bool Execute();
 };
 
 #endif
