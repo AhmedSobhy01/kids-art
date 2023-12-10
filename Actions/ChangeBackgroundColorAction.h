@@ -9,7 +9,7 @@ class ChangeBackgroundColorAction : public Action
 public:
 	ChangeBackgroundColorAction(ApplicationManager*);
 	virtual void ReadActionParameters();
-	virtual void Execute();
+	virtual bool Execute();
 };
 
 #endif 

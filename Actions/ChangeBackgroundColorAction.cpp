@@ -13,7 +13,7 @@ void ChangeBackgroundColorAction::ReadActionParameters()
 	pOut->PrintMessage("Change Background Color: Select a color.");
 }
 
-void ChangeBackgroundColorAction::Execute()
+bool ChangeBackgroundColorAction::Execute()
 {
 	ReadActionParameters();
 	Input* pIn = pManager->GetInput();
@@ -21,4 +21,6 @@ void ChangeBackgroundColorAction::Execute()
 
 	UI.BkGrndColor = pIn->GetSelectedColor(pOut);
 	pOut->ClearStatusBar();
+
+	return true;
 }
