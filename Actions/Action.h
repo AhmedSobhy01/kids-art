@@ -4,8 +4,6 @@
 #include "..\DefS.h"
 
 class ApplicationManager; // forward class declaration
-class UndoableAction;
-class UndoableFigureAction;
 
 // Base class for all possible actions
 class Action
