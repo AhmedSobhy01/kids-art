@@ -5,7 +5,8 @@
 #include "Figures\CFigure.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
-#include "Containers\List.h"
+#include "Containers\FigureList.h"
+#include "Containers\RecordedActionList.h"
 #include "Containers\UndoableActionStack.h"
 #include "Actions/Action.h"
 
@@ -20,15 +21,15 @@ class ApplicationManager
 	}; // Max no of figures
 
 private:
-	List<CFigure> FigList; // List of done figures
+	FigureList FigList; // List of done figures
 
-	List<Action> RecordedActions; // List of recorded actions
+	RecordedActionList RecordedActions; // List of recorded actions
 	bool IsRecording;
 
 	UndoableActionStack UndoableActions; // Stack of actions that can be undone
 	UndoableActionStack RedoableActions; // Stack of actions that can be redone
 
-  CFigure *SelectedFig; // Pointer to the selected figure
+	CFigure *SelectedFig; // Pointer to the selected figure
 
 	// Pointers to Input and Output classes
 	Input *pIn;
@@ -48,20 +49,24 @@ public:
 	void AddFigure(CFigure*, int);			// Adds a new figure to the FigList at specific index
 	int RemoveFigure(CFigure*);		// Removes a figure from the FigList
 	CFigure *GetFigure(int, int) const; // Search for a figure given a point inside the figure
+	bool FigListContains(CFigure*) const;
+
 	CFigure* GetRandomFigure();				// Creates a random index and returns its corresponding figure in the FigList
 	int CountColor(color);
 	int CountFigure(CFigure*);				// Counts how many instances of a passed figure
 	int CountFigColor(CFigure*);
 	int FiguresCount();						// Returns the number of figures in FigList
 	void UnhideFigures();					// Reveals the hidden figures during the Play Mode 
+
 	CFigure* GetSelected();
 	void SetSelected(CFigure*);
 
 	// -- Recorded Actions List
 	bool AddActionToRecordings(Action*, bool);
-	List<Action>& GetRecordedActionsList();
+	RecordedActionList& GetRecordedActionsList();
 	void ClearRecordedActionsList();
 
+	// -- Recorded State Management
 	void SetRecordingState(bool);
 	bool CanRecord() const;
 	bool IsCurrentlyRecording() const;
@@ -70,6 +75,7 @@ public:
 	bool AddActionToUndoables(Action*, bool);
 	UndoableActionStack &GetUndoableActionsStack();
 	UndoableActionStack &GetRedoableActionsStack();
+	void ClearUndoableActionsStack();
 	void ClearRedoableActionsStack();
 
 	// -- Interface Management Functions

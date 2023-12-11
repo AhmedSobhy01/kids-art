@@ -3,8 +3,8 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-DeleteAction::DeleteAction(ApplicationManager* pApp): UndoableAction(pApp) {
-
+DeleteAction::DeleteAction(ApplicationManager* pApp): UndoableAction(pApp), RemovedFromIndex(0) {
+	Figure = NULL;
 }
 
 
@@ -48,6 +48,6 @@ void DeleteAction::Redo()
 
 DeleteAction::~DeleteAction()
 {
-	if (Figure)
+	if (Figure && !pManager->FigListContains(Figure))
 		delete Figure;
 }

@@ -56,9 +56,3 @@ void ChangeOutlineColorAction::Redo()
 	if (Figure)
 		Figure->ChngDrawClr(NewColor);
 }
-
-ChangeOutlineColorAction::~ChangeOutlineColorAction()
-{
-	if (Figure)
-		delete Figure;
-}

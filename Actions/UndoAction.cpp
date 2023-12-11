@@ -2,7 +2,7 @@
 #include "UndoableAction.h"
 #include "../Containers/UndoableActionStack.h"
 
-UndoAction::UndoAction(ApplicationManager* pApp): Action(pApp)
+UndoAction::UndoAction(ApplicationManager *pApp) : Action(pApp)
 {
 }
 
@@ -12,11 +12,12 @@ void UndoAction::ReadActionParameters()
 
 bool UndoAction::Execute()
 {
-	UndoableActionStack& undoableActions = pManager->GetUndoableActionsStack();
+	UndoableActionStack &undoableActions = pManager->GetUndoableActionsStack();
 
-	if (undoableActions.empty()) {
-		Output* pOut = pManager->GetOutput();
-		Input* pIn = pManager->GetInput();
+	if (undoableActions.empty())
+	{
+		Output *pOut = pManager->GetOutput();
+		Input *pIn = pManager->GetInput();
 		int x, y;
 
 		pOut->PrintMessage("Nothing to undo ... click anywhere to continue");
@@ -26,10 +27,13 @@ bool UndoAction::Execute()
 		return false;
 	}
 
-	UndoableActionStack& redoableActions = pManager->GetRedoableActionsStack();
+	UndoableActionStack &redoableActions = pManager->GetRedoableActionsStack();
 
-	undoableActions.top()->Undo();
-	redoableActions.push(undoableActions.pop());
+	UndoableAction *pAct = undoableActions.pop();
+
+	pAct->Undo();
+
+	redoableActions.push(pAct);
 
 	return true;
 }

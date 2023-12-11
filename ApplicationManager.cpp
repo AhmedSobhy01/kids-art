@@ -22,9 +22,9 @@
 #include "Actions\PickByShapeAndColorAction.h"
 
 // Constructor
-ApplicationManager::ApplicationManager(): FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions)
+ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions)
 {
-  // Create Input and output
+	// Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
 
@@ -129,7 +129,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		if (!a && !b)
 			delete pAct;
-		
+
 		pAct = NULL;
 	}
 }
@@ -142,7 +142,7 @@ void ApplicationManager::AddFigure(CFigure *pFig)
 {
 	FigList.push_back(pFig);
 }
-void ApplicationManager::AddFigure(CFigure* pFig, int index)
+void ApplicationManager::AddFigure(CFigure *pFig, int index)
 {
 	FigList.push_back(pFig, index);
 }
@@ -151,41 +151,46 @@ int ApplicationManager::RemoveFigure(CFigure *pFig)
 {
 	return FigList.remove(pFig);
 }
-CFigure* ApplicationManager::GetSelected() {
+CFigure *ApplicationManager::GetSelected()
+{
 	return SelectedFig;
 }
-void ApplicationManager::SetSelected(CFigure* c) {
+void ApplicationManager::SetSelected(CFigure *c)
+{
 	SelectedFig = c;
 }
 
-bool ApplicationManager::AddActionToRecordings(Action* pAct, bool flag)
+bool ApplicationManager::AddActionToRecordings(Action *pAct, bool flag)
 {
-	if (flag && pAct->ShouldRecord()) {
+	if (IsCurrentlyRecording() && flag && pAct->ShouldRecord())
+	{
 		RecordedActions.push_back(pAct);
 
-		if (RecordedActions.size() == MaxRecordableActions) {
+		if (RecordedActions.size() == MaxRecordableActions)
+		{
 			SetRecordingState(false);
 
 			pOut->PrintMessage("Recording stopped (operations: " + to_string(RecordedActions.size()) + ").");
 		}
-		
+
 		return true;
 	}
 
 	return false;
 }
 
-List<Action>& ApplicationManager::GetRecordedActionsList()
+RecordedActionList &ApplicationManager::GetRecordedActionsList()
 {
 	return RecordedActions;
 }
 
 void ApplicationManager::ClearRecordedActionsList()
 {
-	for (int i = 0; i < RecordedActions.size(); i++)
-		delete RecordedActions[i];
+	for (int i = 0; i < RecordedActions.size(); i++) {
+		Action* pAct = RecordedActions.remove(i);
 
-	RecordedActions.clear();
+		if (pAct->CanBeDeleted()) delete pAct;
+	}
 }
 void ApplicationManager::SetRecordingState(bool state)
 {
@@ -225,50 +230,66 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	return NULL;
 }
 
-CFigure* ApplicationManager::GetRandomFigure() {
+CFigure *ApplicationManager::GetRandomFigure()
+{
 	int j = rand() % FigList.size();
 	return FigList[j];
 }
 
-int ApplicationManager::CountFigColor(CFigure* Fig)
+bool ApplicationManager::FigListContains(CFigure* Figure) const
+{
+	return FigList.contains(Figure);
+}
+
+int ApplicationManager::CountFigColor(CFigure *Fig)
 {
 	int counter = 0;
-	for (int i = 0; i < FigList.size(); i++) {
-		if (FigList[i]->Type() == Fig->Type() && FigList[i]->GetFillClr() == Fig->GetFillClr()) counter++;
+	for (int i = 0; i < FigList.size(); i++)
+	{
+		if (FigList[i]->Type() == Fig->Type() && FigList[i]->GetFillClr() == Fig->GetFillClr())
+			counter++;
 	}
 	return counter;
 }
 
-int ApplicationManager::CountFigure(CFigure* fig)
-{
-	int counter =0;
-	for (int i = 0; i < FigList.size(); i++) {
-		if (FigList[i]->Type() == fig->Type())counter++;
-	}
-	return counter;
-}
-
-int ApplicationManager::CountColor( color RandomColor)
+int ApplicationManager::CountFigure(CFigure *fig)
 {
 	int counter = 0;
-	for (int i = 0; i < FigList.size(); i++) {
-		if (FigList[i]->GetFillClr() == RandomColor) counter++;
+	for (int i = 0; i < FigList.size(); i++)
+	{
+		if (FigList[i]->Type() == fig->Type())
+			counter++;
 	}
 	return counter;
 }
 
-int ApplicationManager::FiguresCount() {
+int ApplicationManager::CountColor(color RandomColor)
+{
+	int counter = 0;
+	for (int i = 0; i < FigList.size(); i++)
+	{
+		if (FigList[i]->GetFillClr() == RandomColor)
+			counter++;
+	}
+	return counter;
+}
+
+int ApplicationManager::FiguresCount()
+{
 	return FigList.size();
 }
 
-void ApplicationManager::UnhideFigures() {
-	for (int i = 0; i < FigList.size(); i++)FigList[i]->UnHide();
+void ApplicationManager::UnhideFigures()
+{
+	for (int i = 0; i < FigList.size(); i++)
+		FigList[i]->UnHide();
 }
 
-bool ApplicationManager::AddActionToUndoables(Action* pAct, bool flag)
+bool ApplicationManager::AddActionToUndoables(Action *pAct, bool flag)
 {
-	if (flag && dynamic_cast<UndoableAction*>(pAct) != NULL) {
-		UndoableActions.push(dynamic_cast<UndoableAction*>(pAct));
+	if (flag && dynamic_cast<UndoableAction *>(pAct) != NULL)
+	{
+		UndoableActions.push(dynamic_cast<UndoableAction *>(pAct));
 
 		return true;
 	}
@@ -283,14 +304,21 @@ UndoableActionStack &ApplicationManager::GetRedoableActionsStack()
 {
 	return RedoableActions;
 }
+void ApplicationManager::ClearUndoableActionsStack()
+{
+	for (int i = 0; i < UndoableActions.size(); i++) {
+		UndoableAction* pAct = UndoableActions.pop();
+
+		if (pAct->CanBeDeleted()) delete pAct;
+	}
+}
 void ApplicationManager::ClearRedoableActionsStack()
 {
-	for (int i = 0; i < RedoableActions.size(); i++)
-	{
-		delete RedoableActions.pop();
-	}
+	for (int i = 0; i < RedoableActions.size(); i++) {
+		UndoableAction* pAct = RedoableActions.pop();
 
-	RedoableActions.clear();
+		if (pAct->CanBeDeleted()) delete pAct;
+	}
 }
 //==================================================================================//
 //							Interface Management Functions							//
@@ -301,8 +329,10 @@ void ApplicationManager::UpdateInterface() const
 {
 	pOut->ClearDrawArea();
 
-	for (int i = 0; i < FigList.size(); i++) {
-		if(!FigList[i]->isHidden())FigList[i]->Draw(pOut); // Call Draw function (virtual member fn)
+	for (int i = 0; i < FigList.size(); i++)
+	{
+		if (!FigList[i]->isHidden())
+			FigList[i]->Draw(pOut); // Call Draw function (virtual member fn)
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -322,6 +352,7 @@ ApplicationManager::~ApplicationManager()
 {
 	for (int i = 0; i < FigList.size(); i++)
 		delete FigList[i];
+
 	delete pIn;
 	delete pOut;
 }

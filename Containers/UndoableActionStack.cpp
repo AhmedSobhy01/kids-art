@@ -1,8 +1,9 @@
 #include "UndoableActionStack.h"
+#include "../Actions/UndoableFigureAction.h"
 
 UndoableActionStack::UndoableActionStack(int _MaxSize) : ItemsCount(0), MaxSize(_MaxSize)
 {
-	items = new UndoableAction * [MaxSize];
+	items = new UndoableAction *[MaxSize];
 
 	for (int i = 0; i < MaxSize; i++)
 		items[i] = NULL;
@@ -13,11 +14,15 @@ int UndoableActionStack::size() const
 	return ItemsCount;
 }
 
-void UndoableActionStack::push(UndoableAction* item)
+void UndoableActionStack::push(UndoableAction *item)
 {
-	if (item) {
-		if (ItemsCount >= MaxSize) {
-			delete items[0];
+	if (item)
+	{
+		if (ItemsCount >= MaxSize)
+		{
+			items[0]->DecrementReference();
+			if (items[0]->CanBeDeleted())
+				delete items[0];
 			items[0] = NULL;
 
 			for (int i = 1; i < ItemsCount; i++)
@@ -27,13 +32,16 @@ void UndoableActionStack::push(UndoableAction* item)
 		}
 
 		items[ItemsCount++] = item;
+		item->IncrementReference();
 	}
 }
 
-UndoableAction* UndoableActionStack::pop()
+UndoableAction *UndoableActionStack::pop()
 {
-	if (!empty()) {
-		UndoableAction* item = items[ItemsCount - 1];
+	if (!empty())
+	{
+		UndoableAction *item = items[ItemsCount - 1];
+		item->DecrementReference();
 		items[ItemsCount - 1] = NULL;
 
 		ItemsCount--;
@@ -43,7 +51,7 @@ UndoableAction* UndoableActionStack::pop()
 	return NULL;
 }
 
-UndoableAction* UndoableActionStack::top() const
+UndoableAction *UndoableActionStack::top() const
 {
 	if (!empty())
 		return items[ItemsCount - 1];

@@ -16,8 +16,6 @@ public:
 
 	virtual void Undo();
 	virtual void Redo();
-
-	~ChangeFillColorAction();
 };
 
 #endif
