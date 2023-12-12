@@ -55,9 +55,3 @@ void ChangeFillColorAction::Redo()
 	if (Figure)
 		Figure->ChngFillClr(NewColor);
 }
-
-ChangeFillColorAction::~ChangeFillColorAction()
-{
-	if (Figure)
-		delete Figure;
-}

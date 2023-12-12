@@ -62,9 +62,3 @@ void MoveAction::Redo()
 	if (Figure)
 		Figure->SetCenter(NewCenter);
 }
-
-MoveAction::~MoveAction()
-{
-	if (Figure)
-		delete Figure;
-}

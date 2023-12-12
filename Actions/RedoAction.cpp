@@ -28,8 +28,10 @@ bool RedoAction::Execute()
 
 	UndoableActionStack& undoableActions = pManager->GetUndoableActionsStack();
 
-	redoableActions.top()->Redo();
-	undoableActions.push(redoableActions.pop());
+	UndoableAction* pAct = redoableActions.pop();
+
+	pAct->Redo();
+	undoableActions.push(pAct);
 
 	return true;
 }

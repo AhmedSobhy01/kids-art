@@ -5,7 +5,8 @@
 
 
 SwitchToPlayAction::SwitchToPlayAction(ApplicationManager *pApp): Action(pApp)
-{}
+{
+}
 
 void SwitchToPlayAction::ReadActionParameters() 
 {}
@@ -15,4 +16,8 @@ bool SwitchToPlayAction::Execute() {
 	pOut->CreatePlayToolBar();
 
 	return true;
+}
+
+bool SwitchToPlayAction::ShouldRecord() const {
+	return false;
 }

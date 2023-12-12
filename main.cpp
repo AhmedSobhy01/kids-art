@@ -1,6 +1,5 @@
 #include "ApplicationManager.h"
 
-
 int main()
 {
 
@@ -20,8 +19,6 @@ int main()
 		AppManager.UpdateInterface();
 
 	} while(ActType != EXIT);
-	
-
 	
 	return 0;
 }

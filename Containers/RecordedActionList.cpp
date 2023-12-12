@@ -1,14 +1,14 @@
-#include "FigureList.h"
+#include "RecordedActionList.h"
 
-FigureList::FigureList(int _MaxSize) : ItemsCount(0), MaxSize(_MaxSize)
+RecordedActionList::RecordedActionList(int _MaxSize) : ItemsCount(0), MaxSize(_MaxSize)
 {
-	items = new CFigure * [MaxSize];
+	items = new Action * [MaxSize];
 
 	for (int i = 0; i < MaxSize; i++)
 		items[i] = NULL;
 }
 
-CFigure* FigureList::operator[](int index) const
+Action* RecordedActionList::operator[](int index) const
 {
 	if (index < ItemsCount && index >= 0)
 		return items[index];
@@ -16,28 +16,31 @@ CFigure* FigureList::operator[](int index) const
 	return NULL;
 }
 
-int FigureList::size() const
+int RecordedActionList::size() const
 {
 	return ItemsCount;
 }
 
-void FigureList::push_back(CFigure* item, int index)
+void RecordedActionList::push_back(Action* item, int index)
 {
 	if (item && ItemsCount < MaxSize && items[index] == NULL) {
 		items[index] = item;
+		item->IncrementReference();
+
 		ItemsCount++;
 	}
 }
 
-void FigureList::push_back(CFigure* item)
+void RecordedActionList::push_back(Action* item)
 {
 	push_back(item, ItemsCount);
 }
 
-CFigure* FigureList::pop_back()
+Action* RecordedActionList::pop_back()
 {
 	if (!empty()) {
-		CFigure* item = items[ItemsCount - 1];
+		Action* item = items[ItemsCount - 1];
+		item->DecrementReference();
 
 		items[--ItemsCount] = NULL;
 
@@ -47,10 +50,11 @@ CFigure* FigureList::pop_back()
 	return NULL;
 }
 
-CFigure* FigureList::remove(int index)
+Action* RecordedActionList::remove(int index)
 {
 	if (index < ItemsCount && index >= 0) {
-		CFigure* item = items[index];
+		Action* item = items[index];
+		item->DecrementReference();
 
 		items[index] = NULL;
 
@@ -69,7 +73,7 @@ CFigure* FigureList::remove(int index)
 	return NULL;
 }
 
-int FigureList::remove(CFigure* item)
+int RecordedActionList::remove(Action* item)
 {
 	if (item && !empty()) {
 		int index = -1;
@@ -92,23 +96,12 @@ int FigureList::remove(CFigure* item)
 	return -1;
 }
 
-bool FigureList::contains(CFigure* item) const {
-	int i = 0;
-	bool found = false;
-
-	while (!found && i < size())
-		if (items[i++] == item)
-			found = true;
-
-	return found;
-}
-
-bool FigureList::empty() const
+bool RecordedActionList::empty() const
 {
 	return ItemsCount == 0;
 }
 
-void FigureList::clear()
+void RecordedActionList::clear()
 {
 	for (int i = 0; i < ItemsCount; i++)
 		items[i] = NULL;
@@ -116,7 +109,7 @@ void FigureList::clear()
 	ItemsCount = 0;
 }
 
-FigureList::~FigureList()
+RecordedActionList::~RecordedActionList()
 {
 	clear();
 

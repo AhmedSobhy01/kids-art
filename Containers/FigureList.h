@@ -13,13 +13,23 @@ public:
 	FigureList(int);
 
 	CFigure* operator[](int) const;
+
 	int size() const;
+
 	void push_back(CFigure*, int);
+
 	void push_back(CFigure*);
+
 	CFigure* pop_back();
+
 	CFigure* remove(int);
+
 	int remove(CFigure*);
+
+	bool contains(CFigure*) const;
+
 	bool empty() const;
+
 	void clear();
 
 	~FigureList();
