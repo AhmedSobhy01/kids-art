@@ -124,7 +124,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			ClearRedoableActionsStack();
 
 		bool result = pAct->Execute(); // Execute
-		PlayActionSound(ActType);
+		
+		if (result) // Play sound if action executed correctly
+			PlayActionSound(ActType);
 
 		bool a = AddActionToRecordings(pAct, result);
 		bool b = AddActionToUndoables(pAct, result);
