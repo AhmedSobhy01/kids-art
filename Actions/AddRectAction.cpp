@@ -6,8 +6,6 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-#include<windows.h>
-
 AddRectAction::AddRectAction(ApplicationManager* pApp): UndoableFigureAction(pApp)
 {
 	P1.x = 0;
@@ -72,16 +70,8 @@ bool AddRectAction::Execute()
 		//Add the rectangle to the list of figures
 		pManager->AddFigure(figure);
 
-		PlayActionSound();
-
 		return true;
 	}
 
 	return false;
-}
-
-void AddRectAction::PlayActionSound() const
-{
-	if (pManager->ShouldPlayActionSound())
-		PlaySound("sounds\\Rectangle.wav", NULL, SND_FILENAME | SND_ASYNC);
 }

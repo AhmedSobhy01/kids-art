@@ -18,8 +18,6 @@ public:
 	
 	//Add rectangle to the ApplicationManager
 	virtual bool Execute();
-
-	void PlayActionSound() const;
 };
 
 #endif

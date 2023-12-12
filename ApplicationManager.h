@@ -29,7 +29,7 @@ private:
 	UndoableActionStack UndoableActions; // Stack of actions that can be undone
 	UndoableActionStack RedoableActions; // Stack of actions that can be redone
 
-	bool PlayActionSound;
+	bool PlayActionSoundEnabled;
 
 	CFigure *SelectedFig; // Pointer to the selected figure
 
@@ -60,6 +60,7 @@ public:
 	int FiguresCount();						// Returns the number of figures in FigList
 	void UnhideFigures();					// Reveals the hidden figures during the Play Mode 
 
+	void PlayActionSound(ActionType) const;
 	bool ShouldPlayActionSound() const;
 
 	CFigure* GetSelected();

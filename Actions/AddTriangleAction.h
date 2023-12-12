@@ -17,8 +17,6 @@ public:
 
 	virtual void ReadActionParameters();
 	virtual bool Execute();
-
-	void PlayActionSound() const;
 };
 
 #endif
