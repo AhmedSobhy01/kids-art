@@ -22,7 +22,7 @@
 #include "Actions\PickByShapeAndColorAction.h"
 
 // Constructor
-ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions)
+ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSound(true)
 {
 	// Create Input and output
 	pOut = new Output;
@@ -283,6 +283,11 @@ void ApplicationManager::UnhideFigures()
 {
 	for (int i = 0; i < FigList.size(); i++)
 		FigList[i]->UnHide();
+}
+
+bool ApplicationManager::ShouldPlayActionSound() const
+{
+	return PlayActionSound;
 }
 
 bool ApplicationManager::AddActionToUndoables(Action *pAct, bool flag)

@@ -5,6 +5,7 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
+#include<windows.h>
 
 AddTriangleAction::AddTriangleAction(ApplicationManager* pApp): UndoableFigureAction(pApp) {
 	P1.x = 0;
@@ -67,8 +68,16 @@ bool AddTriangleAction::Execute() {
 		//Add the triangle to the list of figures
 		pManager->AddFigure(figure);
 
+		PlayActionSound();
+
 		return true;
 	}
 
 	return false;
+}
+
+void AddTriangleAction::PlayActionSound() const
+{
+	if (pManager->ShouldPlayActionSound())
+		PlaySound("sounds\\Triangle.wav", NULL, SND_FILENAME | SND_ASYNC);
 }

@@ -6,6 +6,8 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
+#include<windows.h>
+
 AddCircleAction::AddCircleAction(ApplicationManager* pApp): UndoableFigureAction(pApp)
 {
 	center.x = 0;
@@ -49,8 +51,16 @@ bool AddCircleAction::Execute() {
 		//Add the circle to the list of figures
 		pManager->AddFigure(figure);
 
+		PlayActionSound();
+
 		return true;
 	}
 
 	return false;
+}
+
+void AddCircleAction::PlayActionSound() const
+{
+	if (pManager->ShouldPlayActionSound())
+		PlaySound("sounds\\Circle.wav", NULL, SND_FILENAME | SND_ASYNC);
 }

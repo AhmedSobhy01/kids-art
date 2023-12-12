@@ -6,6 +6,8 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
+#include<windows.h>
+
 AddHexagonAction::AddHexagonAction(ApplicationManager* pApp): UndoableFigureAction(pApp)
 {
 	center.x = 0;
@@ -45,8 +47,16 @@ bool AddHexagonAction::Execute() {
 		//Add the hexagon to the list of figures
 		pManager->AddFigure(figure);
 
+		PlayActionSound();
+
 		return true;
 	}
 
 	return false;
+}
+
+void AddHexagonAction::PlayActionSound() const
+{
+	if (pManager->ShouldPlayActionSound())
+		PlaySound("sounds\\Hexagon.wav", NULL, SND_FILENAME | SND_ASYNC);
 }

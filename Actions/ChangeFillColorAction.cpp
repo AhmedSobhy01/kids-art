@@ -38,10 +38,18 @@ bool ChangeFillColorAction::Execute()
 		Figure->SetSelected(false);
 		pManager->SetSelected(NULL);
 
+		PlayActionSound();
+
 		return true;
 	}
 
 	return false;
+}
+
+void ChangeFillColorAction::PlayActionSound() const
+{
+	if (pManager->ShouldPlayActionSound())
+		PlaySound("sounds\\FillColorChanged.wav", NULL, SND_FILENAME | SND_ASYNC);
 }
 
 void ChangeFillColorAction::Undo()

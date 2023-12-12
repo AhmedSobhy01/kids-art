@@ -14,6 +14,8 @@ public:
 	virtual void ReadActionParameters();
 	virtual bool Execute();
 
+	void PlayActionSound() const;
+
 	virtual void Undo();
 	virtual void Redo();
 };

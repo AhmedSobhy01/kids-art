@@ -6,6 +6,8 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
+#include<windows.h>
+
 AddSquareAction::AddSquareAction(ApplicationManager* pApp): UndoableFigureAction(pApp)
 {}
 bool AddSquareAction::Validate() {
@@ -41,8 +43,16 @@ bool AddSquareAction::Execute() {
 		//Add the square to the list of figures
 		pManager->AddFigure(figure);
 
+		PlayActionSound();
+
 		return true;
 	}
 
 	return false;
+}
+
+void AddSquareAction::PlayActionSound() const
+{
+	if (pManager->ShouldPlayActionSound())
+		PlaySound("sounds\\Square.wav", NULL, SND_FILENAME | SND_ASYNC);
 }

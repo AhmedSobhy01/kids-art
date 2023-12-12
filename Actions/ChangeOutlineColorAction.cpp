@@ -39,10 +39,18 @@ bool ChangeOutlineColorAction::Execute()
 		Figure->SetSelected(false);
 		pManager->SetSelected(NULL);
 
+		PlayActionSound();
+
 		return true;
 	}
 
 	return false;
+}
+
+void ChangeOutlineColorAction::PlayActionSound() const
+{
+	if (pManager->ShouldPlayActionSound())
+		PlaySound("sounds\\OutlineColorChanged.wav", NULL, SND_FILENAME | SND_ASYNC);
 }
 
 void ChangeOutlineColorAction::Undo()

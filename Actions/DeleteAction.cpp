@@ -29,9 +29,19 @@ bool DeleteAction::Execute() {
 		RemovedFromIndex = pManager->RemoveFigure(Figure);
 		Figure->SetSelected(false);
 		pManager->SetSelected(NULL);
+
+		PlayActionSound();
+
 		return true;
 	}
 	return false;
+}
+
+
+void DeleteAction::PlayActionSound() const
+{
+	if (pManager->ShouldPlayActionSound())
+		PlaySound("sounds\\Deleted.wav", NULL, SND_FILENAME | SND_ASYNC);
 }
 
 void DeleteAction::Undo()
