@@ -3,8 +3,8 @@
 #include "Action.h"
 #include "..\ApplicationManager.h"
 
-
 class PickByShapeAction : public Action {
+private:
 	Point P;
 	CFigure* RandomFigure;
 	string RandomFigureType;
