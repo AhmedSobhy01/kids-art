@@ -198,7 +198,7 @@ void ApplicationManager::ClearRecordedActionsList()
 	int size = RecordedActions.size();
 
 	for (int i = 0; i < size; i++) {
-		Action* pAct = RecordedActions.remove(i);
+		Action* pAct = RecordedActions.pop_back();
 
 		if (pAct->CanBeDeleted()) delete pAct;
 	}

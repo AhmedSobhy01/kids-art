@@ -41,8 +41,9 @@ UndoableAction *UndoableActionStack::pop()
 	if (!empty())
 	{
 		UndoableAction *item = items[ItemsCount - 1];
-		item->DecrementReference();
+
 		items[ItemsCount - 1] = NULL;
+		item->DecrementReference();
 
 		ItemsCount--;
 		return item;

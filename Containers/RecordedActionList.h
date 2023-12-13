@@ -26,8 +26,6 @@ public:
 
 	int remove(Action*);
 
-	bool contains(Action*) const;
-
 	bool empty() const;
 
 	void clear();
