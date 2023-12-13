@@ -54,7 +54,7 @@ bool PickByColorAction::Execute() {
 			return false;
 		}
 
-		if (ClickedFigure == NULL || ClickedFigure->isHidden()) continue;						// If theres not shape clicked or the shape is hidden
+		if (ClickedFigure == NULL || ClickedFigure->isHidden()) continue;						// If theres no shape clicked or the shape is hidden
 		else if (ClickedFigure->GetFillClr() == RandomColor) CorrectPicks++;					// Correct color is picked
 
 		ClickedFigure->Hide();																	// Hiding every clicked shape
