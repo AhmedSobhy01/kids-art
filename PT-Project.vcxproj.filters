@@ -232,7 +232,9 @@
     <ClCompile Include="Containers\RecordedActionList.cpp">
       <Filter>Containers</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\ClearAllAction.cpp" />
+    <ClCompile Include="Actions\ClearAllAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -404,7 +406,9 @@
     <ClInclude Include="Containers\RecordedActionList.h">
       <Filter>Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\ClearAllAction.h" />
+    <ClInclude Include="Actions\ClearAllAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
