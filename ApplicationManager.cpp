@@ -18,6 +18,7 @@
 #include "Actions\ChangeOutlineColorAction.h"
 #include "Actions\ChangeBackgroundColorAction.h"
 #include "Actions\DeleteAction.h"
+#include "Actions\ClearAllAction.h"
 #include "Actions\PickByShapeAction.h"
 #include "Actions\PickByColorAction.h"
 #include "Actions\PickByShapeAndColorAction.h"
@@ -100,6 +101,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case REMOVE:
 		pAct = new DeleteAction(this);
 		break;
+	case CLEAR_ALL:
+		pAct = new ClearAllAction(this);
+		break;
 	case PICK_BY_SHAPE:
 		pAct = new PickByShapeAction(this);
 		break;
@@ -131,8 +135,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		bool a = AddActionToRecordings(pAct, result);
 		bool b = AddActionToUndoables(pAct, result);
 
-		if (!a && !b)
+		if (!a && !b) {
 			delete pAct;
+		}
 
 		pAct = NULL;
 	}
@@ -190,7 +195,9 @@ RecordedActionList &ApplicationManager::GetRecordedActionsList()
 
 void ApplicationManager::ClearRecordedActionsList()
 {
-	for (int i = 0; i < RecordedActions.size(); i++) {
+	int size = RecordedActions.size();
+
+	for (int i = 0; i < size; i++) {
 		Action* pAct = RecordedActions.remove(i);
 
 		if (pAct->CanBeDeleted()) delete pAct;
@@ -245,6 +252,14 @@ bool ApplicationManager::FigListContains(CFigure* Figure) const
 	return FigList.contains(Figure);
 }
 
+void ApplicationManager::ClearFigures()
+{
+	int size = FigList.size();
+
+	for (int i = 0; i < size; i++)
+		delete FigList.pop_back();
+}
+
 int ApplicationManager::CountFigColor(CFigure *Fig)
 {
 	int counter = 0;
@@ -254,6 +269,13 @@ int ApplicationManager::CountFigColor(CFigure *Fig)
 			counter++;
 	}
 	return counter;
+}
+
+void ApplicationManager::ResetColors()
+{
+	UI.DrawColor = BLUE;
+	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;
+	UI.FillColor = TRANSPARENT_COLOR;
 }
 
 int ApplicationManager::CountFigure(CFigure *fig)
@@ -352,7 +374,9 @@ UndoableActionStack &ApplicationManager::GetRedoableActionsStack()
 }
 void ApplicationManager::ClearUndoableActionsStack()
 {
-	for (int i = 0; i < UndoableActions.size(); i++) {
+	int size = UndoableActions.size();
+
+	for (int i = 0; i < size; i++) {
 		UndoableAction* pAct = UndoableActions.pop();
 
 		if (pAct->CanBeDeleted()) delete pAct;
@@ -360,7 +384,9 @@ void ApplicationManager::ClearUndoableActionsStack()
 }
 void ApplicationManager::ClearRedoableActionsStack()
 {
-	for (int i = 0; i < RedoableActions.size(); i++) {
+	int size = RedoableActions.size();
+
+	for (int i = 0; i < size; i++) {
 		UndoableAction* pAct = RedoableActions.pop();
 
 		if (pAct->CanBeDeleted()) delete pAct;

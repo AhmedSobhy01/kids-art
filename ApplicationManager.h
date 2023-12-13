@@ -8,7 +8,7 @@
 #include "Containers\FigureList.h"
 #include "Containers\RecordedActionList.h"
 #include "Containers\UndoableActionStack.h"
-#include "Actions/Action.h"
+#include "Actions\Action.h"
 
 // Main class that manages everything in the application.
 class ApplicationManager
@@ -52,11 +52,14 @@ public:
 	int RemoveFigure(CFigure*);		// Removes a figure from the FigList
 	CFigure *GetFigure(int, int) const; // Search for a figure given a point inside the figure
 	bool FigListContains(CFigure*) const;
+	void ClearFigures();
 
 	CFigure* GetRandomFigure();				// Creates a random index and returns its corresponding figure in the FigList
 	int CountColor(color);
 	int CountFigure(CFigure*);				// Counts how many instances of a passed figure
 	int CountFigColor(CFigure*);
+	void ResetColors();
+
 	int FiguresCount();						// Returns the number of figures in FigList
 	void UnhideFigures();					// Reveals the hidden figures during the Play Mode 
 
