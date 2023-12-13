@@ -232,6 +232,7 @@
     <ClCompile Include="Containers\RecordedActionList.cpp">
       <Filter>Containers</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ClearAllAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -403,6 +404,7 @@
     <ClInclude Include="Containers\RecordedActionList.h">
       <Filter>Containers</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\ClearAllAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

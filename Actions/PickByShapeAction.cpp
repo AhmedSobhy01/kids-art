@@ -57,7 +57,7 @@ bool PickByShapeAction::Execute() {
 
 		if (ClickedShape == NULL || ClickedShape->isHidden()) continue;						// If the there's no clicked shape or the clicked shape is already hidden
 		else if (ClickedShape->Type() == RandomFigureType) CorrectPicks++;					// Correct Shape picked
-
+		
 		ClickedShape->Hide();																// Hiding any clicked shape
 
 		pManager->UpdateInterface();
