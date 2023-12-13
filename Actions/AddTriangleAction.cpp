@@ -5,7 +5,6 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-
 AddTriangleAction::AddTriangleAction(ApplicationManager* pApp): UndoableFigureAction(pApp) {
 	P1.x = 0;
 	P1.y = 200;

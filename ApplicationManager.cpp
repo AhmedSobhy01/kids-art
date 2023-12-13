@@ -1,3 +1,4 @@
+#include <windows.h>
 #include "ApplicationManager.h"
 #include "Actions\UndoableAction.h"
 #include "Actions\AddRectAction.h"
@@ -22,7 +23,7 @@
 #include "Actions\PickByShapeAndColorAction.h"
 
 // Constructor
-ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions)
+ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
 {
 	// Create Input and output
 	pOut = new Output;
@@ -123,6 +124,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			ClearRedoableActionsStack();
 
 		bool result = pAct->Execute(); // Execute
+		
+		if (result) // Play sound if action executed correctly
+			PlayActionSound(ActType);
 
 		bool a = AddActionToRecordings(pAct, result);
 		bool b = AddActionToUndoables(pAct, result);
@@ -283,6 +287,48 @@ void ApplicationManager::UnhideFigures()
 {
 	for (int i = 0; i < FigList.size(); i++)
 		FigList[i]->UnHide();
+}
+
+void ApplicationManager::PlayActionSound(ActionType ActType) const
+{
+	if (ShouldPlayActionSound()) {
+		char* filename = NULL;
+
+		switch (ActType) {
+			case DRAW_RECT:
+				filename = "sounds\\Rectangle.wav";
+				break;
+			case DRAW_SQUARE:
+				filename = "sounds\\Square.wav";
+				break;
+			case DRAW_TRIANGLE:
+				filename = "sounds\\Triangle.wav";
+				break;
+			case DRAW_CIRCLE:
+				filename = "sounds\\Circle.wav";
+				break;
+			case DRAW_HEXAGON:
+				filename = "sounds\\Hexagon.wav";
+				break;
+			case OUTLINE_COLOR:
+				filename = "sounds\\OutlineColorChanged.wav";
+				break;
+			case FILL_COLOR:
+				filename = "sounds\\FillColorChanged.wav";
+				break;
+			case REMOVE:
+				filename = "sounds\\Deleted.wav";
+				break;
+		}
+
+		if (filename != NULL)
+			PlaySound(filename, NULL, SND_FILENAME | SND_ASYNC);
+	}
+}
+
+bool ApplicationManager::ShouldPlayActionSound() const
+{
+	return PlayActionSoundEnabled;
 }
 
 bool ApplicationManager::AddActionToUndoables(Action *pAct, bool flag)

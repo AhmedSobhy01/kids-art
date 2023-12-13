@@ -29,6 +29,7 @@ bool DeleteAction::Execute() {
 		RemovedFromIndex = pManager->RemoveFigure(Figure);
 		Figure->SetSelected(false);
 		pManager->SetSelected(NULL);
+
 		return true;
 	}
 	return false;
