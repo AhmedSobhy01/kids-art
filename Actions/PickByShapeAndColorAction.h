@@ -2,9 +2,6 @@
 #define PICK_BY_SHAPE_AND_COLOR_ACTION_H_
 #include "Action.h"
 #include "..\ApplicationManager.h"
-#include "..\GUI\UI_Info.h"
-#include "..\Figures\CFigure.h"
-#include <string>
 
 class PickByShapeAndColorAction :public Action {
 private:

@@ -1,15 +1,10 @@
 #include "PickByShapeAndColorAction.h"
 #include "SwitchToDrawAction.h"
-#include <string>
-using namespace std;
-PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager* pApp) : Action(pApp), RandomFigureColor(TRANSPARENT_COLOR), P{ 0, 0 }, RandomFigureType(""), RandomColorName(""), CorrectPicks(0), Counter(0), FiguresNumber(0), RandomColorFigNumber(0)
-{
-	RandomFigure = NULL;
-}
+
+PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager* pApp) : Action(pApp), CorrectPicks(0), Counter(0)
+{ }
 
 void PickByShapeAndColorAction::ReadActionParameters() {
-	CorrectPicks = 0;
-	Counter = 0;
 	RandomFigure = pManager->GetRandomFigure();
 	RandomFigureColor = RandomFigure->GetFillClr();
 	RandomColorFigNumber = pManager->CountFigColor(RandomFigure);

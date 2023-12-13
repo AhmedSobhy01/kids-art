@@ -1,13 +1,10 @@
 #include "PickByColorAction.h"
-#include "..\ApplicationManager.h"
-#include "..\GUI\Output.h"
 #include "SwitchToDrawAction.h"
 
-PickByColorAction::PickByColorAction(ApplicationManager* pApp): Action(pApp) {}
+PickByColorAction::PickByColorAction(ApplicationManager* pApp): Action(pApp), CorrectPicks(0), Counter(0)
+{ }
 
 void PickByColorAction::ReadActionParameters() {												// Initializes the data members
-	CorrectPicks = 0;
-	Counter = 0;
 	RandomFigure = pManager->GetRandomFigure();
 	RandomColor = RandomFigure->GetFillClr();
 	RandomColorNumber = pManager->CountColor(RandomColor);

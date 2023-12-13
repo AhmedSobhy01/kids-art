@@ -1,9 +1,7 @@
 #ifndef PICK_BY_COLOR_ACTION_H
 #define PICK_BY_COLOR_ACTION_H
 #include "Action.h"
-#include "..\GUI\UI_Info.h"
-#include "..\Figures\CFigure.h"
-
+#include "..\ApplicationManager.h"
 
 class PickByColorAction: public Action {
 private:

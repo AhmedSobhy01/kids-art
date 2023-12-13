@@ -1,24 +1,18 @@
 #include "PickByShapeAction.h"
-#include "..\ApplicationManager.h"
 #include "SwitchToDrawAction.h"
-#include "..\GUI\Output.h"
 
-PickByShapeAction::PickByShapeAction(ApplicationManager* pApp) : Action(pApp), P{ 0, 0 }, RandomFigureType(""), CorrectPicks(0), Counter(0), FiguresNumber(0), RandomFigureNumber(0) {
-	RandomFigure = NULL;
-}
+PickByShapeAction::PickByShapeAction(ApplicationManager* pApp) : Action(pApp), CorrectPicks(0), Counter(0)
+{ }
 
 void PickByShapeAction::ReadActionParameters() {				// Generates random figure and counts it
-	CorrectPicks = 0;
-	Counter = 0;
 	RandomFigure = pManager->GetRandomFigure();
 	RandomFigureNumber = pManager->CountFigure(RandomFigure);
 	RandomFigureType = RandomFigure->Type();
 }
 
-
 void PickByShapeAction::PrintMessage() {						// Prints a message according to the random asked shape
 	Output* pOut = pManager->GetOutput();
-	pOut->PrintMessage("Pick all the " + RandomFigureType + "s, " + to_string(RandomFigureNumber) + " exist");
+	pOut->PrintMessage("Pick all the " + RandomFigureType + "s. " + to_string(RandomFigureNumber) + " exist");
 }
 
 bool PickByShapeAction::Execute() {

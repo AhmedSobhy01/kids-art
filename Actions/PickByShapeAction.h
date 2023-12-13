@@ -2,8 +2,7 @@
 #define PICK_BY_SHAPE_ACTION_H
 #include "Action.h"
 #include "..\ApplicationManager.h"
-#include <string>
-using namespace std;
+
 
 class PickByShapeAction : public Action {
 	Point P;
