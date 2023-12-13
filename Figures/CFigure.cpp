@@ -1,4 +1,6 @@
 #include "CFigure.h"
+#include <string>
+using namespace std;
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
@@ -50,6 +52,6 @@ bool CFigure::isFilled()
 }
 
 
-ShapeType CFigure::Type(){
+string CFigure::Type(){
 	return type;
 }

@@ -4,7 +4,7 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(Figur
 {
 	Corner1 = P1;
 	Corner2 = P2;
-	type = RECTANGLE;
+	type = "Rectangle";
 }
 
 

@@ -5,7 +5,7 @@
 CCircle::CCircle(Point center, Point radius, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	this->center = center;
 	this->radius = radius;
-	type = CIRCLE;
+	type = "Circle";
 }
 
 void CCircle::Draw(Output* pOut) const {

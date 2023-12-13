@@ -4,14 +4,14 @@
 #include "..\ApplicationManager.h"
 #include "..\GUI\UI_Info.h"
 #include "..\Figures\CFigure.h"
+#include <string>
 
 class PickByShapeAndColorAction :public Action {
 private:
 	Point P;
 	color RandomFigureColor;
 	CFigure* RandomFigure;
-	ShapeType RandomFigureType;
-	string RandomFigureName;	// To store the random figure name as a string
+	string RandomFigureType;
 	string RandomColorName;		// To store the random figure color as a string
 	int CorrectPicks;
 	int Counter;				// Counter for total picks made

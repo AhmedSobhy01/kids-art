@@ -7,7 +7,7 @@ CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigu
 	this->P1 = P1;
 	this->P2 = P2;
 	this->P3 = P3;
-	type = TRIANGLE;
+	type = "Triangle";
 }
 
 
