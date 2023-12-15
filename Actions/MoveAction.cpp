@@ -68,10 +68,11 @@ void MoveAction::Redo()
 MoveAction::~MoveAction()
 {
 	if (Figure != NULL) {
+		Figure->DecrementReference();
+
 		if (Figure->CanBeDeleted())
 			delete Figure;
 
-		Figure->DecrementReference();
 		Figure = NULL;
 	}
 }
