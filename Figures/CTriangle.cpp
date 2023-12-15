@@ -69,3 +69,20 @@ bool CTriangle::Validate(Point c) {
 	bool cond3 = P3.y + dy >= UI.ToolBarHeight && P3.y + dy <= (UI.height - UI.StatusBarHeight);
 	return cond1 && cond2 && cond3;
 }
+
+void CTriangle::PrintInfo(Output* pOut) {
+	string info = "Triangle: Vertex1 = (";
+	info += to_string(P1.x);
+	info += ", ";
+	info += to_string(P1.y);
+	info += "), Vertex2 = (";
+	info += to_string(P2.x);
+	info += ", ";
+	info += to_string(P2.y);
+	info += "), Vertex3 = (";
+	info += to_string(P3.x);
+	info += ", ";
+	info += to_string(P3.y);
+	info += ")";
+	pOut->PrintMessage(info);
+}

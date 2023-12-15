@@ -55,3 +55,14 @@ void CHexagon::SetCenter(Point c) {
 bool CHexagon::Validate(Point c) {
 	return (c.y - hexagonSize / 2 * sqrt(3)) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3)) <= (UI.height - UI.StatusBarHeight);
 }
+
+void CHexagon::PrintInfo(Output* pOut) {
+	string info = "Hexagon: Center = (";
+	info += to_string(center.x);
+	info += ", ";
+	info += to_string(center.y);
+	info += "), SideLength = ";
+	info += to_string(hexagonSize);
+	pOut->PrintMessage(info);
+
+}
