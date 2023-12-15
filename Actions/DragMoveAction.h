@@ -1,10 +1,10 @@
 #ifndef DRAGMOVEACTION_H
 #define DRAGMOVEACTION_H
 
-#include "Action.h"
+#include "UndoableAction.h"
 #include "../Figures/CFigure.h"
 
-class DragMoveAction : public Action
+class DragMoveAction : public UndoableAction
 {
     Point NewCenter;
     Point OldCenter;
@@ -15,6 +15,11 @@ public:
     virtual void ReadActionParameters();
     virtual bool Execute();
 
+
+    virtual void Undo();
+    virtual void Redo();
+
+    ~DragMoveAction();
 };
 
 
