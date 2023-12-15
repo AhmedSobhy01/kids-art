@@ -55,3 +55,14 @@ void CHexagon::SetCenter(Point c) {
 bool CHexagon::Validate(Point c) {
 	return (c.y - hexagonSize / 2 * sqrt(3)) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3)) <= (UI.height - UI.StatusBarHeight);
 }
+
+void CHexagon::Save(string fName)
+{
+	ofstream fout;
+	fout.open(fName, ios::app);
+	if (fout.is_open())
+	{
+		fout << ID << " " << HEXAGON << " " << center.x << " " << center.y << " " << hexagonSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << endl;
+		return;
+	}
+}

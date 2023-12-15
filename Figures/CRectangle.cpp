@@ -44,3 +44,14 @@ bool CRectangle::Validate(Point c) {
 	return cond1 && cond2;
 
 }
+
+void CRectangle::Save(string fName)
+{
+	ofstream fout;
+	fout.open(fName, ios::app);
+	if (fout.is_open())
+	{
+		fout << ID << " " << RECTANGLE << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << endl;
+		return;
+	}
+}

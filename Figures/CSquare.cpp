@@ -38,3 +38,14 @@ void CSquare::SetCenter(Point center) {
 bool CSquare::Validate(Point c) {
 	return (center.y - squareSize / 2) > UI.ToolBarHeight && (center.y + squareSize / 2) <= (UI.height - UI.StatusBarHeight);
 }
+
+void CSquare::Save(string fName)
+{
+	ofstream fout;
+	fout.open(fName, ios::app);
+	if (fout.is_open())
+	{
+		fout << ID << " " << SQUARE << " " << center.x << " " << center.y << " " << squareSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << endl;
+		return;
+	}
+}

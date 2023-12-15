@@ -53,6 +53,7 @@ public:
 	CFigure *GetFigure(int, int) const; // Search for a figure given a point inside the figure
 	bool FigListContains(CFigure*) const;
 	void ClearFigures();
+	void SaveAll(string);
 
 	CFigure* GetRandomFigure();				// Creates a random index and returns its corresponding figure in the FigList
 	int CountColor(color);

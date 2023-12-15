@@ -22,6 +22,7 @@
 #include "Actions\PickByShapeAction.h"
 #include "Actions\PickByColorAction.h"
 #include "Actions\PickByShapeAndColorAction.h"
+#include "Actions\SaveAction.h"
 
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
@@ -112,6 +113,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case PICK_BY_SHAPE_COLOR:
 		pAct = new PickByShapeAndColorAction(this);
+		break;
+	case SAVE_GRAPH:
+		pAct = new SaveAction(this);
 		break;
 	case EXIT:
 		/// create ExitAction here
@@ -258,6 +262,12 @@ void ApplicationManager::ClearFigures()
 
 	for (int i = 0; i < size; i++)
 		delete FigList.pop_back();
+}
+
+void ApplicationManager::SaveAll(string fName)
+{
+	for (int i = 0; i < FiguresCount(); i++)
+		FigList[i]->Save(fName);
 }
 
 int ApplicationManager::CountFigColor(CFigure *Fig)

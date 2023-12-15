@@ -30,3 +30,14 @@ bool CCircle::Validate(Point c) {
 	int radius = sqrt(pow(center.x - this->radius.x, 2) + pow(center.y - this->radius.y, 2));
 	return (c.y - radius) >= UI.ToolBarHeight && (c.y + radius) <= (UI.height - UI.StatusBarHeight);
 }
+
+void CCircle::Save(string fName)
+{
+	ofstream fout;
+	fout.open(fName, ios::app);
+	if (fout.is_open())
+	{
+		fout << ID << " " << CIRCLE << " " << center.x << " " << center.y << " " << radius.x << " " << radius.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << endl;
+		return;
+	}
+}

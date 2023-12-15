@@ -13,6 +13,7 @@ public:
 	Point GetCenter() const;
 	void SetCenter(Point);
 	bool Validate(Point);
+	void Save(string);
 };
 #endif
 

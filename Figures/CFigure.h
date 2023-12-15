@@ -3,12 +3,14 @@
 
 #include "..\defs.h"
 #include "..\GUI\Output.h"
+#include <fstream>
 
 //Base class for all figures
 
 class CFigure
 {
 protected:
+	static int last_ID;
 	int ID;		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
@@ -44,6 +46,7 @@ public:
 	virtual Point GetCenter() const = 0;
 	virtual void SetCenter(Point) = 0;
 	virtual bool Validate(Point) = 0;
+	virtual void Save(string) = 0;
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
 

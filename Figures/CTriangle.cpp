@@ -69,3 +69,14 @@ bool CTriangle::Validate(Point c) {
 	bool cond3 = P3.y + dy >= UI.ToolBarHeight && P3.y + dy <= (UI.height - UI.StatusBarHeight);
 	return cond1 && cond2 && cond3;
 }
+
+void CTriangle::Save(string fName)
+{
+	ofstream fout;
+	fout.open(fName, ios::app);
+	if (fout.is_open())
+	{
+		fout << ID << " " << TRIANGLE << " " << P1.x << " " << P1.y << " " << P2.x << " " << P2.y << " " << P3.x << " " << P3.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << endl;
+		return;
+	}
+}
