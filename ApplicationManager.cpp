@@ -22,6 +22,7 @@
 #include "Actions\PickByShapeAction.h"
 #include "Actions\PickByColorAction.h"
 #include "Actions\PickByShapeAndColorAction.h"
+#include "Actions\ExitAction.h"
 
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
@@ -115,7 +116,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case EXIT:
 		/// create ExitAction here
-
+		pAct = new ExitAction(this);
 		break;
 	case STATUS: // a click on the status bar ==> no action
 		return;
