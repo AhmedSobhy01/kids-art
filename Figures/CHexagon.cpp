@@ -49,6 +49,7 @@ Point CHexagon::GetCenter() const
 }
 
 void CHexagon::SetCenter(Point c) {
+	if (!Validate(c))return;
 	this->center = c;
 }
 
@@ -64,5 +65,4 @@ void CHexagon::PrintInfo(Output* pOut) {
 	info += "), SideLength = ";
 	info += to_string(hexagonSize);
 	pOut->PrintMessage(info);
-
 }

@@ -33,6 +33,7 @@ Point CSquare::GetCenter() const
 	return center;
 }
 void CSquare::SetCenter(Point center) {
+	if (!Validate(center))return;
 	this->center = center;
 }
 bool CSquare::Validate(Point c) {
