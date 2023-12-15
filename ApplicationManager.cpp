@@ -24,6 +24,9 @@
 #include "Actions\PickByShapeAndColorAction.h"
 #include "Actions\ExitAction.h"
 
+#include "Actions\DragMoveAction.h"
+
+
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
 {
@@ -113,6 +116,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case PICK_BY_SHAPE_COLOR:
 		pAct = new PickByShapeAndColorAction(this);
+		break;
+	case DRAG_MOVE:
+		pAct = new DragMoveAction(this);
 		break;
 	case EXIT:
 		/// create ExitAction here

@@ -14,10 +14,11 @@ private:
 public:
 	Input(window *pW); // Constructor
 
-	void GetPointClicked(int &x, int &y) const; // Get coordinate where user clicks
+	void GetPointClicked(int& x, int& y) const; // Get coordinate where user clicks
+	void GetMouseCoord(int &x, int &y) const; // Get coordinate where user clicks
 	color GetSelectedColor(Output* pO) const;
 	string GetString(Output *pO) const; // Returns a string entered by the user
-
+	bool GetLeftClickState(int& x, int& y)const;
 	ActionType GetUserAction(int * = NULL) const; // Read the user click and map to an action
 
 	~Input();
