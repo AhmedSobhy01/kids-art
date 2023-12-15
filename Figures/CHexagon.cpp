@@ -62,7 +62,7 @@ void CHexagon::Save(string fName)
 	fout.open(fName, ios::app);
 	if (fout.is_open())
 	{
-		fout << ID << " " << HEXAGON << " " << center.x << " " << center.y << " " << hexagonSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << endl;
+		fout << ID << " " << HEXAGON << " " << center.x << " " << center.y << " " << hexagonSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << "   " << endl;
 		return;
 	}
 }

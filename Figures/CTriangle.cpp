@@ -76,7 +76,7 @@ void CTriangle::Save(string fName)
 	fout.open(fName, ios::app);
 	if (fout.is_open())
 	{
-		fout << ID << " " << TRIANGLE << " " << P1.x << " " << P1.y << " " << P2.x << " " << P2.y << " " << P3.x << " " << P3.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << endl;
+		fout << ID << " " << TRIANGLE << " " << P1.x << " " << P1.y << " " << P2.x << " " << P2.y << " " << P3.x << " " << P3.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << "   " << endl;
 		return;
 	}
 }

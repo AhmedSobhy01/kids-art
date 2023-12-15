@@ -1,5 +1,5 @@
-#ifndef SAVE_ACTION_H
-#define SAVE_ACTION_H
+#ifndef LOAD_ACTION_H
+#define LOAD_ACTION_H
 
 #include "Action.h"
 #include "..\ApplicationManager.h"
@@ -7,12 +7,12 @@
 #include <iostream>
 using namespace std;
 
-class SaveAction : public Action
+class LoadAction : public Action
 {
 private:
 	string fName;
 public:
-	SaveAction(ApplicationManager*);
+	LoadAction(ApplicationManager*);
 	void ReadActionParameters();
 	bool Execute();
 };

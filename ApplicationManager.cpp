@@ -23,6 +23,7 @@
 #include "Actions\PickByColorAction.h"
 #include "Actions\PickByShapeAndColorAction.h"
 #include "Actions\SaveAction.h"
+#include "Actions\LoadAction.h"
 
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
@@ -116,6 +117,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case SAVE_GRAPH:
 		pAct = new SaveAction(this);
+		break;
+	case OPEN_GRAPH:
+		pAct = new LoadAction(this);
 		break;
 	case EXIT:
 		/// create ExitAction here

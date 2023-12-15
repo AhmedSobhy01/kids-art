@@ -37,7 +37,7 @@ void CCircle::Save(string fName)
 	fout.open(fName, ios::app);
 	if (fout.is_open())
 	{
-		fout << ID << " " << CIRCLE << " " << center.x << " " << center.y << " " << radius.x << " " << radius.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << endl;
+		fout << ID << " " << CIRCLE << " " << center.x << " " << center.y << " " << radius.x << " " << radius.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << "   " << endl;
 		return;
 	}
 }

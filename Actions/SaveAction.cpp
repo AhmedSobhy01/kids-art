@@ -24,6 +24,7 @@ bool SaveAction::Execute()
 	{
 		pOut->PrintMessage("Created Save File Successfully");
 		pManager->SaveAll(fName);
+		fout.close();
 		return 1;
 	}
 	return 0;

@@ -32,6 +32,35 @@ ostream& operator<<(ostream& c, const color& col)
 	return c;
 }
 
+istream& operator>>(istream& c, const color& col)
+{
+	string x;
+	c >> x;
+	if (x == "BLACK")
+		c >> BLACK;
+	else if (x == "RED")
+		c >> RED;
+	else if (x == "BLUE")
+		c >> BLUE;
+	else if (x == "GREEN")
+		c >> GREEN;
+	else if (x == "MAGENTA")
+		c >> MAGENTA;
+	else if (x == "ORANGE")
+		c >> ORANGE;
+	else if (x == "BROWN")
+		c >> BROWN;
+	else if (x == "CYAN")
+		c >> CYAN;
+	else if (x == "YELLOW")
+		c >> YELLOW;
+	else if (x == "LIGHTGOLDENRODYELLOW")
+		c >> LIGHTGOLDENRODYELLOW;
+	else
+		c >> TRANSPARENT_COLOR;
+	return c;
+}
+
 bool operator==(color a, color b) {
 
   return ((a.ucRed == b.ucRed) && (a.ucGreen == b.ucGreen) && (a.ucBlue == b.ucBlue));

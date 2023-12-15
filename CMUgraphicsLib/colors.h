@@ -19,6 +19,7 @@ class color {
         ucRed = Red;  ucGreen = Green;  ucBlue = Blue; 
     }
     friend ostream& operator<<(ostream&, const color&);
+    friend istream& operator>>(istream&, const color&);
 
     // Color components.  0 = no intensity, 255 = full intensity
     unsigned char ucRed;

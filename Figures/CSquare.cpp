@@ -45,7 +45,7 @@ void CSquare::Save(string fName)
 	fout.open(fName, ios::app);
 	if (fout.is_open())
 	{
-		fout << ID << " " << SQUARE << " " << center.x << " " << center.y << " " << squareSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << endl;
+		fout << ID << " " << SQUARE << " " << center.x << " " << center.y << " " << squareSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << "   " << endl;
 		return;
 	}
 }
