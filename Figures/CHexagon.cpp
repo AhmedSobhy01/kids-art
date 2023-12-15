@@ -49,9 +49,10 @@ Point CHexagon::GetCenter() const
 }
 
 void CHexagon::SetCenter(Point c) {
+	if (!Validate(c))return;
 	this->center = c;
 }
 
 bool CHexagon::Validate(Point c) {
-	return (c.y - hexagonSize / 2 * sqrt(3)) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3)) <= (UI.height - UI.StatusBarHeight);
+	return (c.y - hexagonSize / 2 * sqrt(3) - FigGfxInfo.BorderWidth/2) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3) + FigGfxInfo.BorderWidth / 2) <= (UI.height - UI.StatusBarHeight);
 }
