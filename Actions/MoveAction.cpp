@@ -35,6 +35,8 @@ bool MoveAction::Execute(){
 	Figure = pManager->GetSelected();
 	
 	if (Figure != NULL) {
+		Figure->IncrementReference();
+
 		bool r = false;
 
 		if (Figure->Validate(NewCenter)) {
@@ -53,12 +55,23 @@ bool MoveAction::Execute(){
 
 void MoveAction::Undo()
 {
-	if (Figure)
+	if (Figure != NULL)
 		Figure->SetCenter(OldCenter);
 }
 
 void MoveAction::Redo()
 {
-	if (Figure)
+	if (Figure != NULL)
 		Figure->SetCenter(NewCenter);
+}
+
+MoveAction::~MoveAction()
+{
+	if (Figure != NULL) {
+		if (Figure->CanBeDeleted())
+			delete Figure;
+
+		Figure->DecrementReference();
+		Figure = NULL;
+	}
 }

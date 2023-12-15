@@ -2,6 +2,7 @@
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
+	ReferenceCount = 0;
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;
 	Hidden = false;

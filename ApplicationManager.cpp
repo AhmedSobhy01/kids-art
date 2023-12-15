@@ -135,9 +135,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		bool a = AddActionToRecordings(pAct, result);
 		bool b = AddActionToUndoables(pAct, result);
 
-		if (!a && !b) {
+		if (!a && !b)
 			delete pAct;
-		}
 
 		pAct = NULL;
 	}
@@ -188,7 +187,7 @@ bool ApplicationManager::AddActionToRecordings(Action *pAct, bool flag)
 	return false;
 }
 
-RecordedActionList &ApplicationManager::GetRecordedActionsList()
+List<Action>& ApplicationManager::GetRecordedActionsList()
 {
 	return RecordedActions;
 }
@@ -245,11 +244,6 @@ CFigure *ApplicationManager::GetRandomFigure()
 {
 	int j = rand() % FigList.size();
 	return FigList[j];
-}
-
-bool ApplicationManager::FigListContains(CFigure* Figure) const
-{
-	return FigList.contains(Figure);
 }
 
 void ApplicationManager::ClearFigures()

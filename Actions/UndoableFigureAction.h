@@ -8,7 +8,7 @@
 class UndoableFigureAction : public UndoableAction
 {
 protected:
-	CFigure* figure;
+	CFigure* Figure;
 
 public:
 	UndoableFigureAction(ApplicationManager* pApp);
