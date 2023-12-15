@@ -199,6 +199,7 @@
     <ClCompile Include="Actions\SwitchToPlayAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
+    <ClCompile Include="Actions\ToggleSoundAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddSquareAction.h" />
@@ -260,6 +261,7 @@
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
     <ClInclude Include="Actions\PickByColorAction.h" />
+    <ClInclude Include="Actions\ToggleSoundAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
