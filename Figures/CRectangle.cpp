@@ -45,3 +45,19 @@ bool CRectangle::Validate(Point c) {
 	return cond1 && cond2;
 
 }
+
+void CRectangle::PrintInfo(Output* pOut) {
+	string info = "Rectangle: Corner1 = (";
+	info += to_string(Corner1.x);
+	info += ", ";
+	info += to_string(Corner1.y);
+	info += "), Corner2 = (";
+	info += to_string(Corner2.x);
+	info += ", ";
+	info += to_string(Corner2.y);
+	info += "), Vertical Length = ";
+	info += to_string(abs(Corner1.y-Corner2.y));
+	info += ", Horizontal Width = ";
+	info += to_string(abs(Corner1.x - Corner2.x));
+	pOut->PrintMessage(info);
+}
