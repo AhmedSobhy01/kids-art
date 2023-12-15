@@ -115,7 +115,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case EXIT:
 		/// create ExitAction here
-
+		pAct = new ClearAllAction(this);
 		break;
 	case STATUS: // a click on the status bar ==> no action
 		return;
