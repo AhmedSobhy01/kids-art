@@ -36,10 +36,11 @@ bool AddSquareAction::Execute() {
 	ReadActionParameters();
 	if (Validate()) {
 		//Create a square with the parameters read from the user
-		figure = new CSquare(center, SquareGfxInfo);
+		Figure = new CSquare(center, SquareGfxInfo);
+		Figure->IncrementReference();
 
 		//Add the square to the list of figures
-		pManager->AddFigure(figure);
+		pManager->AddFigure(Figure);
 
 		return true;
 	}

@@ -44,10 +44,11 @@ bool AddCircleAction::Execute() {
 	ReadActionParameters();
 	if (Validate()) {
 		//Create a circle with the parameters read from the user
-		figure = new CCircle(center, radius, CircleGfxInfo);
+		Figure = new CCircle(center, radius, CircleGfxInfo);
+		Figure->IncrementReference();
 
 		//Add the circle to the list of figures
-		pManager->AddFigure(figure);
+		pManager->AddFigure(Figure);
 
 		return true;
 	}

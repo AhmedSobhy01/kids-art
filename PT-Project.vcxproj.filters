@@ -226,12 +226,6 @@
     <ClCompile Include="Actions\StopRecordingAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Containers\FigureList.cpp">
-      <Filter>Containers</Filter>
-    </ClCompile>
-    <ClCompile Include="Containers\RecordedActionList.cpp">
-      <Filter>Containers</Filter>
-    </ClCompile>
     <ClCompile Include="Actions\ClearAllAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
@@ -400,10 +394,7 @@
     <ClInclude Include="Actions\StopRecordingAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Containers\FigureList.h">
-      <Filter>Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="Containers\RecordedActionList.h">
+    <ClInclude Include="Containers\List.h">
       <Filter>Containers</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ClearAllAction.h">
