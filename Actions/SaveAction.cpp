@@ -21,7 +21,7 @@ bool SaveAction::Execute()
 	if (fout.is_open())
 	{
 		pOut->PrintMessage("Created Save File Successfully");
-		pManager->SaveAll(fName);
+		pManager->SaveAll(fout);
 		fout.close();
 		return 1;
 	}

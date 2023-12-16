@@ -268,14 +268,17 @@ void ApplicationManager::ClearFigures()
 		delete FigList.pop_back();
 }
 
-void ApplicationManager::SaveAll(string fName)
+void ApplicationManager::SaveAll(ofstream& fout)
 {
-	ofstream fout;
-	fout.open(fName);
 	fout << UI.DrawColor << " " << UI.FillColor << " " << UI.BkGrndColor << endl;
 	fout << FiguresCount() << endl;
 	for (int i = 0; i < FiguresCount(); i++)
 		FigList[i]->Save(fout);
+}
+
+void ApplicationManager::LoadAll(ifstream&)
+{
+
 }
 
 int ApplicationManager::CountFigColor(CFigure *Fig)
