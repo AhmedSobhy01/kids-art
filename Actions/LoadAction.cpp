@@ -34,17 +34,8 @@ bool LoadAction::Execute()
 		pOut->PrintMessage("Opened Load File Successfully");
 		string x;
 		CFigure* Figure;
-		Point P1;
-		Point P2;
-		Point P3;
-		Point center;
-		Point radius;
-		int size;
-		GfxInfo GfxInfo;
-		bool selected;
 		while (!fin.eof())
 		{
-			color c1, c2, c3;
 			fin >> UI.DrawColor >> UI.FillColor >> UI.BkGrndColor;
 			int count;
 			fin >> count;
@@ -61,8 +52,6 @@ bool LoadAction::Execute()
 					Figure = new CHexagon();
 				else if (x == "TRIANGLE")
 					Figure = new CTriangle();
-				else
-					pOut->PrintMessage("NO ITEM");
 				Figure->Load(fin);
 				Figure->Draw(pOut);
 				pManager->AddFigure(Figure);
