@@ -22,8 +22,8 @@
 #include "Actions\PickByShapeAction.h"
 #include "Actions\PickByColorAction.h"
 #include "Actions\PickByShapeAndColorAction.h"
+#include "Actions\ToggleSoundAction.h"
 #include "Actions\ExitAction.h"
-
 #include "Actions\DragMoveAction.h"
 
 
@@ -119,6 +119,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case DRAG_MOVE:
 		pAct = new DragMoveAction(this);
+		break;
+	case TOGGLE_SOUND:
+		pAct = new ToggleSoundAction(this);
 		break;
 	case EXIT:
 		/// create ExitAction here
@@ -352,6 +355,11 @@ void ApplicationManager::PlayActionSound(ActionType ActType) const
 bool ApplicationManager::ShouldPlayActionSound() const
 {
 	return PlayActionSoundEnabled;
+}
+
+void ApplicationManager::SetPlayActionSoundState(bool state)
+{
+	PlayActionSoundEnabled = state;
 }
 
 bool ApplicationManager::AddActionToUndoables(Action *pAct, bool flag)

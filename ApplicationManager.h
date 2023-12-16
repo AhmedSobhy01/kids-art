@@ -64,6 +64,7 @@ public:
 
 	void PlayActionSound(ActionType) const;
 	bool ShouldPlayActionSound() const;
+	void SetPlayActionSoundState(bool);
 
 	CFigure* GetSelected();
 	void SetSelected(CFigure*);
