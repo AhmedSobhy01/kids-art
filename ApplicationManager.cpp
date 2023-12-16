@@ -276,11 +276,6 @@ void ApplicationManager::SaveAll(ofstream& fout)
 		FigList[i]->Save(fout);
 }
 
-void ApplicationManager::LoadAll(ifstream&)
-{
-
-}
-
 int ApplicationManager::CountFigColor(CFigure *Fig)
 {
 	int counter = 0;

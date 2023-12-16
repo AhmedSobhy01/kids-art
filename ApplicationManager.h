@@ -54,7 +54,6 @@ public:
 	bool FigListContains(CFigure*) const;
 	void ClearFigures();
 	void SaveAll(ofstream&);
-	void LoadAll(ifstream&);
 
 	CFigure* GetRandomFigure();				// Creates a random index and returns its corresponding figure in the FigList
 	int CountColor(color);
