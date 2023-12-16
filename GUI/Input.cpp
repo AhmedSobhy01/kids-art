@@ -12,8 +12,20 @@ Input::Input(window *pW)
 
 void Input::GetPointClicked(int &x, int &y) const
 {
+	
 	pWind->WaitMouseClick(x, y); // Wait for mouse click
 }
+void Input::GetMouseCoord(int& x, int& y) const
+{
+
+	pWind->GetMouseCoord(x, y); // get mouse current position
+}
+
+bool Input::GetLeftClickState(int& x, int& y)const {
+	button b = LEFT_BUTTON;
+	return pWind->GetButtonState(b,x, y) == BUTTON_DOWN;
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 string Input::GetString(Output *pO) const
@@ -84,24 +96,16 @@ ActionType Input::GetUserAction(int *_ClickedItemOrder) const // This function r
 				return DRAW_TRIANGLE;
 			case ITM_HEXAGON:
 				return DRAW_HEXAGON;
-			case ITM_OUTLINE:
-				return OUTLINE;
 			case ITM_SELECT:
 				return SELECT;
-			case ITM_BORDER_WIDTH:
-				return BORDER_WIDTH;
 			case ITM_OUTLINE_COLOR:
 				return OUTLINE_COLOR;
 			case ITM_FILL_COLOR:
 				return FILL_COLOR;
-			case ITM_FILL:
-				return FILL;
 			case ITM_REMOVE:
 				return REMOVE;
 			case ITM_MOVE:
 				return MOVE;
-			case ITM_RESIZE:
-				return RESIZE;
 			case ITM_DRAG_MOVE:
 				return DRAG_MOVE;
 			case ITM_DRAG_RESIZE:
@@ -124,6 +128,8 @@ ActionType Input::GetUserAction(int *_ClickedItemOrder) const // This function r
 				return OPEN_GRAPH;
 			case ITM_SAVE:
 				return SAVE_GRAPH;
+			case ITM_TOGGLE_SOUND:
+				return TOGGLE_SOUND;
 			case ITM_EXIT:
 				return EXIT;
 

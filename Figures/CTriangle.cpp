@@ -53,6 +53,7 @@ Point CTriangle::GetCenter() const
 }
 
 void CTriangle::SetCenter(Point c) {
+	if (!Validate(c))return;
 	Point center = { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
 	int dx = c.x - center.x;
 	int dy = c.y - center.y;
@@ -68,9 +69,9 @@ bool CTriangle::Validate(Point c) {
 	Point center = { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
 	int dx = c.x - center.x;
 	int dy = c.y - center.y;
-	bool cond1 = P1.y + dy >= UI.ToolBarHeight && P1.y + dy <= (UI.height - UI.StatusBarHeight);
-	bool cond2 = P2.y + dy >= UI.ToolBarHeight && P2.y + dy <= (UI.height - UI.StatusBarHeight);
-	bool cond3 = P3.y + dy >= UI.ToolBarHeight && P3.y + dy <= (UI.height - UI.StatusBarHeight);
+	bool cond1 = P1.y + dy - FigGfxInfo.BorderWidth / 2 >= UI.ToolBarHeight && P1.y + dy + FigGfxInfo.BorderWidth / 2 < (UI.height - UI.StatusBarHeight);
+	bool cond2 = P2.y + dy - FigGfxInfo.BorderWidth / 2 >= UI.ToolBarHeight && P2.y + dy + FigGfxInfo.BorderWidth / 2 < (UI.height - UI.StatusBarHeight);
+	bool cond3 = P3.y + dy - FigGfxInfo.BorderWidth / 2 >= UI.ToolBarHeight && P3.y + dy + FigGfxInfo.BorderWidth / 2 < (UI.height - UI.StatusBarHeight);
 	return cond1 && cond2 && cond3;
 }
 
@@ -90,4 +91,21 @@ void CTriangle::Load(ifstream& fin)
 		fin >> ID >> P1.x >> P1.y >> P2.x >> P2.y >> P3.x >> P3.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
 		return;
 	}
+}
+
+void CTriangle::PrintInfo(Output* pOut) {
+	string info = "Triangle: Vertex1 = (";
+	info += to_string(P1.x);
+	info += ", ";
+	info += to_string(P1.y);
+	info += "), Vertex2 = (";
+	info += to_string(P2.x);
+	info += ", ";
+	info += to_string(P2.y);
+	info += "), Vertex3 = (";
+	info += to_string(P3.x);
+	info += ", ";
+	info += to_string(P3.y);
+	info += ")";
+	pOut->PrintMessage(info);
 }

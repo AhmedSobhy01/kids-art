@@ -5,10 +5,10 @@
 #include "Figures\CFigure.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
-#include "Containers\FigureList.h"
-#include "Containers\RecordedActionList.h"
+#include "Containers\List.h"
 #include "Containers\UndoableActionStack.h"
 #include "Actions\Action.h"
+#include "Figures/CFigure.h"
 
 // Main class that manages everything in the application.
 class ApplicationManager
@@ -21,9 +21,9 @@ class ApplicationManager
 	}; // Max no of figures
 
 private:
-	FigureList FigList; // List of done figures
+	List<CFigure> FigList; // List of done figures
 
-	RecordedActionList RecordedActions; // List of recorded actions
+	List<Action> RecordedActions; // List of recorded actions
 	bool IsRecording;
 
 	UndoableActionStack UndoableActions; // Stack of actions that can be undone
@@ -51,7 +51,6 @@ public:
 	void AddFigure(CFigure*, int);			// Adds a new figure to the FigList at specific index
 	int RemoveFigure(CFigure*);		// Removes a figure from the FigList
 	CFigure *GetFigure(int, int) const; // Search for a figure given a point inside the figure
-	bool FigListContains(CFigure*) const;
 	void ClearFigures();
 	void SaveAll(ofstream&);
 
@@ -66,13 +65,14 @@ public:
 
 	void PlayActionSound(ActionType) const;
 	bool ShouldPlayActionSound() const;
+	void SetPlayActionSoundState(bool);
 
 	CFigure* GetSelected();
 	void SetSelected(CFigure*);
 
 	// -- Recorded Actions List
 	bool AddActionToRecordings(Action*, bool);
-	RecordedActionList& GetRecordedActionsList();
+	List<Action>& GetRecordedActionsList();
 	void ClearRecordedActionsList();
 
 	// -- Recorded State Management

@@ -18,6 +18,7 @@ bool ClearAllAction::Execute() {
 	pManager->SetRecordingState(false);
 	pManager->ResetColors();
 	pManager->ClearFigures();
+	pManager->GetOutput()->ClearStatusBar();
 
 	return true;
 }

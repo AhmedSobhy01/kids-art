@@ -18,6 +18,7 @@ public:
 	bool Validate(Point);
 	void Save(ofstream&);
 	void Load(ifstream&);
+	void PrintInfo(Output* pOut);
 };
 
 #endif

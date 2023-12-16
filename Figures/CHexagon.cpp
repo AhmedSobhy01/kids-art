@@ -53,6 +53,7 @@ Point CHexagon::GetCenter() const
 }
 
 void CHexagon::SetCenter(Point c) {
+	if (!Validate(c))return;
 	this->center = c;
 }
 
@@ -76,4 +77,14 @@ void CHexagon::Load(ifstream& fin)
 		fin >> ID >> center.x >> center.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
 		return;
 	}
+}
+
+void CHexagon::PrintInfo(Output* pOut) {
+	string info = "Hexagon: Center = (";
+	info += to_string(center.x);
+	info += ", ";
+	info += to_string(center.y);
+	info += "), SideLength = ";
+	info += to_string(hexagonSize);
+	pOut->PrintMessage(info);
 }

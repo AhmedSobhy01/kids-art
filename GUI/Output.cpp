@@ -1,6 +1,8 @@
 #include "Output.h"
 #include <cmath>
 
+#include <iostream>
+
 Output::Output()
 {
 	// Initialize user interface parameters
@@ -154,15 +156,11 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_SQUARE] = "images\\DrawMode\\Square.jpg";
 	MenuItemImages[ITM_TRIANGLE] = "images\\DrawMode\\Triangle.jpg";
 	MenuItemImages[ITM_HEXAGON] = "images\\DrawMode\\Hexagon.jpg";
-	MenuItemImages[ITM_OUTLINE] = "images\\DrawMode\\Outline.jpg";
-	MenuItemImages[ITM_BORDER_WIDTH] = "images\\DrawMode\\BorderWidth.jpg";
 	MenuItemImages[ITM_OUTLINE_COLOR] = "images\\DrawMode\\ForegroundColor.jpg";
 	MenuItemImages[ITM_FILL_COLOR] = "images\\DrawMode\\BackgroundColor.jpg";
-	MenuItemImages[ITM_FILL] = "images\\DrawMode\\Fill.jpg";
 	MenuItemImages[ITM_SELECT] = "images\\DrawMode\\Select.jpg";
 	MenuItemImages[ITM_REMOVE] = "images\\DrawMode\\Remove.jpg";
 	MenuItemImages[ITM_MOVE] = "images\\DrawMode\\Move.jpg";
-	MenuItemImages[ITM_RESIZE] = "images\\DrawMode\\Resize.jpg";
 	MenuItemImages[ITM_DRAG_MOVE] = "images\\DrawMode\\DragMove.jpg";
 	MenuItemImages[ITM_DRAG_RESIZE] = "images\\DrawMode\\DragResize.jpg";
 	MenuItemImages[ITM_UNDO] = "images\\DrawMode\\Undo.jpg";
@@ -172,6 +170,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_STOP_RECORDING] = "images\\DrawMode\\StopRecording.jpg";
 	MenuItemImages[ITM_PLAY_RECORDING] = "images\\DrawMode\\PlayRecording.jpg";
 	MenuItemImages[ITM_BACKGROUND_COLOR] = "images\\DrawMode\\ArtboardBackground.jpg";
+	MenuItemImages[ITM_TOGGLE_SOUND] = "images\\DrawMode\\ToggleSound.jpg";
 	MenuItemImages[ITM_OPEN] = "images\\DrawMode\\Open.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\DrawMode\\Save.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\DrawMode\\Exit.jpg";

@@ -14,15 +14,11 @@ enum ActionType // The actions supported
 	DRAW_SQUARE,		 // Draw Square
 	DRAW_TRIANGLE,		 // Draw Triangle
 	DRAW_HEXAGON,		 // Draw Hexagon
-	OUTLINE,			 // Outline Selected Shape
 	SELECT,				 // Select Shape
-	BORDER_WIDTH,		 // Change Selected Shape Border Width
 	OUTLINE_COLOR,		 // Outline Color Menu
 	FILL_COLOR,			 // Fill Color Menu
-	FILL,				 // Fill Selected Shape
 	REMOVE,				 // Remove Selected Shape
 	MOVE,				 // Move Selected Shape
-	RESIZE,				 // Resize Selected Shape
 	DRAG_MOVE,			 // Move Selected Shape By Dragging
 	DRAG_RESIZE,		 // Resize Selected Shape By Dragging
 	UNDO,				 // Undo Last Action
@@ -32,6 +28,7 @@ enum ActionType // The actions supported
 	STOP_RECORDING,		 // Stop Recording
 	PLAY_RECORDING,		 // Play Recording
 	BACKGROUND_COLOR,	 // Canvas Background Color Menu
+	TOGGLE_SOUND,		 // Toggle Action Sound Playing
 	OPEN_GRAPH,			 // Open Saved Graph
 	SAVE_GRAPH,			 // Save Current Graph
 	PICK_BY_COLOR,		 // Pick By Color Game Mode (Play Mode)

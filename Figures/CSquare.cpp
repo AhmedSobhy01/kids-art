@@ -37,6 +37,7 @@ Point CSquare::GetCenter() const
 	return center;
 }
 void CSquare::SetCenter(Point center) {
+	if (!Validate(center))return;
 	this->center = center;
 }
 bool CSquare::Validate(Point c) {
@@ -59,4 +60,14 @@ void CSquare::Load(ifstream& fin)
 		fin >> ID >> center.x >> center.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
 		return;
 	}
+}
+
+void CSquare::PrintInfo(Output* pOut) {
+	string info = "Square: Center = (";
+	info += to_string(center.x);
+	info += ", ";
+	info += to_string(center.y);
+	info += "), Length = ";
+	info += to_string(squareSize);
+	pOut->PrintMessage(info);
 }

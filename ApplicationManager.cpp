@@ -24,6 +24,9 @@
 #include "Actions\PickByShapeAndColorAction.h"
 #include "Actions\SaveAction.h"
 #include "Actions\LoadAction.h"
+#include "Actions\ToggleSoundAction.h"
+#include "Actions\ExitAction.h"
+#include "Actions\DragMoveAction.h"
 
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
@@ -120,10 +123,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case OPEN_GRAPH:
 		pAct = new LoadAction(this);
+	case DRAG_MOVE:
+		pAct = new DragMoveAction(this);
+		break;
+	case TOGGLE_SOUND:
+		pAct = new ToggleSoundAction(this);
 		break;
 	case EXIT:
 		/// create ExitAction here
-
+		pAct = new ExitAction(this);
 		break;
 	case STATUS: // a click on the status bar ==> no action
 		return;
@@ -143,9 +151,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		bool a = AddActionToRecordings(pAct, result);
 		bool b = AddActionToUndoables(pAct, result);
 
-		if (!a && !b) {
+		if (!a && !b)
 			delete pAct;
-		}
 
 		pAct = NULL;
 	}
@@ -196,7 +203,7 @@ bool ApplicationManager::AddActionToRecordings(Action *pAct, bool flag)
 	return false;
 }
 
-RecordedActionList &ApplicationManager::GetRecordedActionsList()
+List<Action>& ApplicationManager::GetRecordedActionsList()
 {
 	return RecordedActions;
 }
@@ -206,7 +213,7 @@ void ApplicationManager::ClearRecordedActionsList()
 	int size = RecordedActions.size();
 
 	for (int i = 0; i < size; i++) {
-		Action* pAct = RecordedActions.remove(i);
+		Action* pAct = RecordedActions.pop_back();
 
 		if (pAct->CanBeDeleted()) delete pAct;
 	}
@@ -253,11 +260,6 @@ CFigure *ApplicationManager::GetRandomFigure()
 {
 	int j = rand() % FigList.size();
 	return FigList[j];
-}
-
-bool ApplicationManager::FigListContains(CFigure* Figure) const
-{
-	return FigList.contains(Figure);
 }
 
 void ApplicationManager::ClearFigures()
@@ -367,6 +369,11 @@ void ApplicationManager::PlayActionSound(ActionType ActType) const
 bool ApplicationManager::ShouldPlayActionSound() const
 {
 	return PlayActionSoundEnabled;
+}
+
+void ApplicationManager::SetPlayActionSoundState(bool state)
+{
+	PlayActionSoundEnabled = state;
 }
 
 bool ApplicationManager::AddActionToUndoables(Action *pAct, bool flag)
