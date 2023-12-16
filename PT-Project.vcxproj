@@ -135,8 +135,6 @@
     <ClCompile Include="Actions\ChangeFillColorAction.cpp" />
     <ClCompile Include="Actions\ChangeOutlineColorAction.cpp" />
     <ClCompile Include="Actions\ClearAllAction.cpp" />
-    <ClCompile Include="Actions\LoadAction.cpp" />
-    <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\PickByColorAction.cpp" />
     <ClCompile Include="Actions\PickByShapeAction.cpp" />
     <ClCompile Include="Actions\PickByShapeAndColorAction.cpp" />
@@ -212,8 +210,6 @@
     <ClInclude Include="Actions\ChangeFillColorAction.h" />
     <ClInclude Include="Actions\ChangeOutlineColorAction.h" />
     <ClInclude Include="Actions\ClearAllAction.h" />
-    <ClInclude Include="Actions\LoadAction.h" />
-    <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\PickByShapeAction.h" />
     <ClInclude Include="Actions\PickByShapeAndColorAction.h" />
     <ClInclude Include="Containers\List.h" />
