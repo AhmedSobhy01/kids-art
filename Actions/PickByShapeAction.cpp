@@ -29,6 +29,7 @@ bool PickByShapeAction::Execute() {
 
 	while (CorrectPicks < RandomFigureNumber && Counter != FiguresNumber) {
 		pIn->GetPointClicked(P.x, P.y);
+
 		CFigure* ClickedFigure = pManager->GetFigure(P.x, P.y);								// Get the clicked shape
 		
 		if (P.y >= 0 && P.y < UI.ToolBarHeight && P.x/UI.MenuItemWidth == 0) {				// If switched to Draw Mode

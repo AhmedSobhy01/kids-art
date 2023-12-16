@@ -7,7 +7,6 @@ DeleteAction::DeleteAction(ApplicationManager* pApp): UndoableAction(pApp), Remo
 	Figure = NULL;
 }
 
-
 void DeleteAction::ReadActionParameters() {
 	CFigure* F = pManager->GetSelected();
 	Input* pIn = pManager->GetInput();
@@ -26,9 +25,11 @@ bool DeleteAction::Execute() {
 	Figure = pManager->GetSelected();
 
 	if (Figure != NULL) {
+		Figure->IncrementReference();
 		RemovedFromIndex = pManager->RemoveFigure(Figure);
 		Figure->SetSelected(false);
 		pManager->SetSelected(NULL);
+
 		return true;
 	}
 	return false;
@@ -36,18 +37,24 @@ bool DeleteAction::Execute() {
 
 void DeleteAction::Undo()
 {
-	if (Figure)
+	if (Figure != NULL)
 		pManager->AddFigure(Figure, RemovedFromIndex);
 }
 
 void DeleteAction::Redo()
 {
-	if (Figure)
+	if (Figure != NULL)
 		RemovedFromIndex = pManager->RemoveFigure(Figure);
 }
 
 DeleteAction::~DeleteAction()
 {
-	if (Figure && !pManager->FigListContains(Figure))
-		delete Figure;
+	if (Figure != NULL) {
+		Figure->DecrementReference();
+
+		if (Figure->CanBeDeleted())
+			delete Figure;
+
+		Figure = NULL;
+	}
 }

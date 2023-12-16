@@ -66,9 +66,11 @@ bool AddRectAction::Execute()
 	ReadActionParameters();
 	if (Validate()) {
 		//Create a rectangle with the parameters read from the user
-		figure = new CRectangle(P1, P2, RectGfxInfo);
+		Figure = new CRectangle(P1, P2, RectGfxInfo);
+		Figure->IncrementReference();
+
 		//Add the rectangle to the list of figures
-		pManager->AddFigure(figure);
+		pManager->AddFigure(Figure);
 
 		return true;
 	}

@@ -12,8 +12,20 @@ Input::Input(window *pW)
 
 void Input::GetPointClicked(int &x, int &y) const
 {
+	
 	pWind->WaitMouseClick(x, y); // Wait for mouse click
 }
+void Input::GetMouseCoord(int& x, int& y) const
+{
+
+	pWind->GetMouseCoord(x, y); // get mouse current position
+}
+
+bool Input::GetLeftClickState(int& x, int& y)const {
+	button b = LEFT_BUTTON;
+	return pWind->GetButtonState(b,x, y) == BUTTON_DOWN;
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 string Input::GetString(Output *pO) const

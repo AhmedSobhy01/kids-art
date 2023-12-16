@@ -26,6 +26,7 @@ Point CRectangle::GetCenter() const
 	return { (Corner1.x + Corner2.x) / 2, (Corner1.y + Corner2.y) / 2 };
 }
 void CRectangle::SetCenter(Point c) {
+	if (!Validate(c))return;
 	Point center = { (Corner1.x + Corner2.x) / 2,(Corner1.y + Corner2.y) / 2 };
 	int dy = c.y - center.y;
 	int dx = c.x - center.x;
@@ -43,4 +44,20 @@ bool CRectangle::Validate(Point c) {
 	bool cond2 = Corner2.y + dy >= UI.ToolBarHeight && Corner2.y + dy <= (UI.height - UI.StatusBarHeight);
 	return cond1 && cond2;
 
+}
+
+void CRectangle::PrintInfo(Output* pOut) {
+	string info = "Rectangle: Corner1 = (";
+	info += to_string(Corner1.x);
+	info += ", ";
+	info += to_string(Corner1.y);
+	info += "), Corner2 = (";
+	info += to_string(Corner2.x);
+	info += ", ";
+	info += to_string(Corner2.y);
+	info += "), Vertical Length = ";
+	info += to_string(abs(Corner1.y-Corner2.y));
+	info += ", Horizontal Width = ";
+	info += to_string(abs(Corner1.x - Corner2.x));
+	pOut->PrintMessage(info);
 }

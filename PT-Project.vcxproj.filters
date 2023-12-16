@@ -226,11 +226,14 @@
     <ClCompile Include="Actions\StopRecordingAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Containers\FigureList.cpp">
-      <Filter>Containers</Filter>
+    <ClCompile Include="Actions\ClearAllAction.cpp">
+      <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Containers\RecordedActionList.cpp">
-      <Filter>Containers</Filter>
+    <ClCompile Include="Actions\ExitAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\DragMoveAction.cpp">
+      <Filter>Action Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -397,11 +400,17 @@
     <ClInclude Include="Actions\StopRecordingAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Containers\FigureList.h">
+    <ClInclude Include="Containers\List.h">
       <Filter>Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Containers\RecordedActionList.h">
-      <Filter>Containers</Filter>
+    <ClInclude Include="Actions\ClearAllAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ExitAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\DragMoveAction.h">
+      <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

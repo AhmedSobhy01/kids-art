@@ -5,7 +5,6 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-
 AddTriangleAction::AddTriangleAction(ApplicationManager* pApp): UndoableFigureAction(pApp) {
 	P1.x = 0;
 	P1.y = 200;
@@ -63,9 +62,11 @@ bool AddTriangleAction::Execute() {
 	ReadActionParameters();
 	if (Validate()) {
 		// Create a triangle with the parameters read from the user
-		figure = new CTriangle(P1, P2, P3, TriangleGfxInfo);
+		Figure = new CTriangle(P1, P2, P3, TriangleGfxInfo);
+		Figure->IncrementReference();
+
 		//Add the triangle to the list of figures
-		pManager->AddFigure(figure);
+		pManager->AddFigure(Figure);
 
 		return true;
 	}
