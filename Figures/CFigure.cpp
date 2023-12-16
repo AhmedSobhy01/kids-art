@@ -2,6 +2,14 @@
 
 int CFigure::last_ID = 0;
 
+CFigure::CFigure()
+{
+	Selected = false;
+	Hidden = false;
+	last_ID++;
+	ID = last_ID;
+}
+
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.

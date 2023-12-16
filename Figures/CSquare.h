@@ -6,6 +6,7 @@ private:
 	Point center;
 	static const int squareSize;
 public:
+	CSquare();
 	CSquare(Point, GfxInfo);
 	void Draw(Output* pOut)const;
 	static int getSquareSize();
@@ -13,6 +14,7 @@ public:
 	Point GetCenter() const;
 	void SetCenter(Point);
 	bool Validate(Point);
-	void Save(string);
+	void Save(ofstream&);
+	void Load(ifstream&);
 };
 

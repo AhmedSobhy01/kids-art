@@ -32,7 +32,7 @@ bool ChangeFillColorAction::Execute()
 	{
 		OldColor = Figure->GetFillClr();
 		NewColor = pIn->GetSelectedColor(pOut);
-
+		UI.FillColor = NewColor;
 		Figure->ChngFillClr(NewColor);
 		pOut->ClearStatusBar();
 		Figure->SetSelected(false);

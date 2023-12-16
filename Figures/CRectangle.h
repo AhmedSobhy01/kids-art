@@ -9,13 +9,15 @@ private:
 	Point Corner1;
 	Point Corner2;
 public:
+	CRectangle();
 	CRectangle(Point, Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
 	bool CheckSelected(int x, int y);
 	Point GetCenter() const;
 	void SetCenter(Point);
 	bool Validate(Point);
-	void Save(string);
+	void Save(ofstream&);
+	void Load(ifstream&);
 };
 
 #endif

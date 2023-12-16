@@ -270,8 +270,12 @@ void ApplicationManager::ClearFigures()
 
 void ApplicationManager::SaveAll(string fName)
 {
+	ofstream fout;
+	fout.open(fName);
+	fout << UI.DrawColor << " " << UI.FillColor << " " << UI.BkGrndColor << endl;
+	fout << FiguresCount() << endl;
 	for (int i = 0; i < FiguresCount(); i++)
-		FigList[i]->Save(fName);
+		FigList[i]->Save(fout);
 }
 
 int ApplicationManager::CountFigColor(CFigure *Fig)

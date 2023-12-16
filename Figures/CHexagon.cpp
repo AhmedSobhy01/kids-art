@@ -2,6 +2,10 @@
 
 const int CHexagon::hexagonSize = 80;
 
+CHexagon::CHexagon() :CFigure()
+{
+}
+
 CHexagon::CHexagon(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	this->center = center;
 	type = HEXAGON;
@@ -56,13 +60,20 @@ bool CHexagon::Validate(Point c) {
 	return (c.y - hexagonSize / 2 * sqrt(3)) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3)) <= (UI.height - UI.StatusBarHeight);
 }
 
-void CHexagon::Save(string fName)
+void CHexagon::Save(ofstream& fout)
 {
-	ofstream fout;
-	fout.open(fName, ios::app);
 	if (fout.is_open())
 	{
-		fout << ID << " " << HEXAGON << " " << center.x << " " << center.y << " " << hexagonSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << "   " << endl;
+		fout << "HEXAGON" << " " << ID << " " << center.x << " " << center.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << FigGfxInfo.isFilled << " " << Selected << endl;
+		return;
+	}
+}
+
+void CHexagon::Load(ifstream& fin)
+{
+	if (fin.is_open())
+	{
+		fin >> ID >> center.x >> center.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
 		return;
 	}
 }

@@ -2,6 +2,10 @@
 
 
 
+CTriangle::CTriangle() :CFigure()
+{
+}
+
 CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	this->P1 = P1;
@@ -70,13 +74,20 @@ bool CTriangle::Validate(Point c) {
 	return cond1 && cond2 && cond3;
 }
 
-void CTriangle::Save(string fName)
+void CTriangle::Save(ofstream& fout)
 {
-	ofstream fout;
-	fout.open(fName, ios::app);
 	if (fout.is_open())
 	{
-		fout << ID << " " << TRIANGLE << " " << P1.x << " " << P1.y << " " << P2.x << " " << P2.y << " " << P3.x << " " << P3.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << "   " << endl;
+		fout << "TRIANGLE" << " " << ID << " " << P1.x << " " << P1.y << " " << P2.x << " " << P2.y << " " << P3.x << " " << P3.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << FigGfxInfo.isFilled << " " << Selected << endl;
+		return;
+	}
+}
+
+void CTriangle::Load(ifstream& fin)
+{
+	if (fin.is_open())
+	{
+		fin >> ID >> P1.x >> P1.y >> P2.x >> P2.y >> P3.x >> P3.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
 		return;
 	}
 }

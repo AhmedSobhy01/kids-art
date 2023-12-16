@@ -10,8 +10,6 @@ void SaveAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Saving File: Enter File Name");
 	fName = pIn->GetString(pOut);
-	ofstream fout;
-	fout.open(fName);
 }
 
 bool SaveAction::Execute()

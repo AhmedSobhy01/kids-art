@@ -16,8 +16,6 @@ void LoadAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Loading File: Enter File Name");
 	fName = pIn->GetString(pOut);
-	ifstream fin;
-	fin.open(fName);
 }
 
 bool LoadAction::Execute()
@@ -35,6 +33,7 @@ bool LoadAction::Execute()
 		pAct = NULL;
 		pOut->PrintMessage("Opened Load File Successfully");
 		string x;
+		CFigure* Figure;
 		Point P1;
 		Point P2;
 		Point P3;
@@ -45,55 +44,28 @@ bool LoadAction::Execute()
 		bool selected;
 		while (!fin.eof())
 		{
-			char y;
-			fin >> x >> y;
-			switch (y)
+			color c1, c2, c3;
+			fin >> UI.DrawColor >> UI.FillColor >> UI.BkGrndColor;
+			int count;
+			fin >> count;
+			for (int i = 0; i <= count; i++)
 			{
-			case 48:
-				pOut->PrintMessage("Drew rect");
-				fin >> P1.x >> P1.y >> P2.x >> P2.y >> GfxInfo.DrawClr >> GfxInfo.FillClr >> selected;
-				pOut->DrawRect(P1, P2, GfxInfo, selected);
-				getline(fin, x, '\n');
-				if (fin.eof())
-					return 1;
-				break;
-			case 49:
-				pOut->PrintMessage("Drew square");
-				fin >> center.x >> center.y >> size >> GfxInfo.DrawClr >> GfxInfo.FillClr >> selected;
-				pOut->DrawSquare(center, size, GfxInfo, selected);
-				getline(fin, x, '\n');
-				if (fin.eof())
-					return 1;
-				break;
-			case 50:
-				pOut->PrintMessage("Drew tri");
-				fin >> P1.x >> P1.y >> P2.x >> P2.y >> P3.x >> P3.y >> GfxInfo.DrawClr >> GfxInfo.FillClr >> selected;
-				pOut->DrawTriangle(P1, P2, P3, GfxInfo, selected);
-				getline(fin, x, '\n');
-				if (fin.eof())
-					return 1;
-				break;
-			case 51:
-				pOut->PrintMessage("Drew circ");
-				fin >> center.x >> center.y >> radius.x >> radius.y >> GfxInfo.DrawClr >> GfxInfo.FillClr >> selected;
-				pOut->DrawCircle(center, radius, GfxInfo, selected);
-				getline(fin, x, '\n');
-				if (fin.eof())
-					return 1;
-				break;
-			case 52:
-				pOut->PrintMessage("Drew hex");
-				fin >> center.x >> center.y >> size >> GfxInfo.DrawClr >> GfxInfo.FillClr >> selected;
-				pOut->DrawSquare(center, size, GfxInfo, selected);
-				getline(fin, x, '\n');
-				if (fin.eof())
-					return 1;
-				break;
-			default:
-				pOut->PrintMessage("Didn't draw");
-				if (fin.eof())
-					return 1;
-				break;
+				fin >> x;
+				if (x == "RECTANGLE")
+					Figure = new CRectangle();
+				else if (x == "SQUARE")
+					Figure = new CSquare();
+				else if (x == "CIRCLE")
+					Figure = new CCircle();
+				else if (x == "HEXAGON")
+					Figure = new CHexagon();
+				else if (x == "TRIANGLE")
+					Figure = new CTriangle();
+				else
+					pOut->PrintMessage("NO ITEM");
+				Figure->Load(fin);
+				Figure->Draw(pOut);
+				pManager->AddFigure(Figure);
 			}
 		}
 		fin.close();

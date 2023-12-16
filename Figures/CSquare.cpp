@@ -3,6 +3,10 @@
 const int CSquare::squareSize = 150;
 
 
+CSquare::CSquare() :CFigure()
+{
+}
+
 CSquare::CSquare(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	this->center = center;
 	type = SQUARE;
@@ -39,13 +43,20 @@ bool CSquare::Validate(Point c) {
 	return (center.y - squareSize / 2) > UI.ToolBarHeight && (center.y + squareSize / 2) <= (UI.height - UI.StatusBarHeight);
 }
 
-void CSquare::Save(string fName)
+void CSquare::Save(ofstream& fout)
 {
-	ofstream fout;
-	fout.open(fName, ios::app);
 	if (fout.is_open())
 	{
-		fout << ID << " " << SQUARE << " " << center.x << " " << center.y << " " << squareSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << "   " << endl;
+		fout << "SQUARE" << " " << ID << " " << center.x << " " << center.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << FigGfxInfo.isFilled << " " << Selected << endl;
+		return;
+	}
+}
+
+void CSquare::Load(ifstream& fin)
+{
+	if (fin.is_open())
+	{
+		fin >> ID >> center.x >> center.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
 		return;
 	}
 }

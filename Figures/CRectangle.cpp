@@ -1,5 +1,9 @@
 #include "CRectangle.h"
 
+CRectangle::CRectangle() :CFigure()
+{
+}
+
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	Corner1 = P1;
@@ -45,13 +49,20 @@ bool CRectangle::Validate(Point c) {
 
 }
 
-void CRectangle::Save(string fName)
+void CRectangle::Save(ofstream& fout)
 {
-	ofstream fout;
-	fout.open(fName, ios::app);
 	if (fout.is_open())
 	{
-		fout << ID << " " << RECTANGLE << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << "   " << endl;
+		fout << "RECTANGLE" << " " << ID << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << FigGfxInfo.isFilled << " " << Selected << endl;
+		return;
+	}
+}
+
+void CRectangle::Load(ifstream& fin)
+{
+	if (fin.is_open())
+	{
+		fin >> ID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
 		return;
 	}
 }

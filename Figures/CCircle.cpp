@@ -2,6 +2,10 @@
 #include "..\GUI\Output.h"
 #include "..\ApplicationManager.h"
 
+CCircle::CCircle() :CFigure()
+{
+}
+
 CCircle::CCircle(Point center, Point radius, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	this->center = center;
 	this->radius = radius;
@@ -31,13 +35,20 @@ bool CCircle::Validate(Point c) {
 	return (c.y - radius) >= UI.ToolBarHeight && (c.y + radius) <= (UI.height - UI.StatusBarHeight);
 }
 
-void CCircle::Save(string fName)
+void CCircle::Save(ofstream& fout)
 {
-	ofstream fout;
-	fout.open(fName, ios::app);
 	if (fout.is_open())
 	{
-		fout << ID << " " << CIRCLE << " " << center.x << " " << center.y << " " << radius.x << " " << radius.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << Selected << "   " << endl;
+		fout << "CIRCLE" << " " << ID << " " << center.x << " " << center.y << " " << radius.x << " " << radius.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << FigGfxInfo.isFilled << " " << Selected << endl;
+		return;
+	}
+}
+
+void CCircle::Load(ifstream& fin)
+{
+	if (fin.is_open())
+	{
+		fin >> ID >> center.x >> center.y >> radius.x >> radius.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
 		return;
 	}
 }

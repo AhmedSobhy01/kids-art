@@ -32,32 +32,32 @@ ostream& operator<<(ostream& c, const color& col)
 	return c;
 }
 
-istream& operator>>(istream& c, const color& col)
+istream& operator>>(istream& c, color& col)
 {
 	string x;
 	c >> x;
 	if (x == "BLACK")
-		c >> BLACK;
+		col = BLACK;
 	else if (x == "RED")
-		c >> RED;
+		col = RED;
 	else if (x == "BLUE")
-		c >> BLUE;
+		col = BLUE;
 	else if (x == "GREEN")
-		c >> GREEN;
+		col = GREEN;
 	else if (x == "MAGENTA")
-		c >> MAGENTA;
+		col = MAGENTA;
 	else if (x == "ORANGE")
-		c >> ORANGE;
+		col = ORANGE;
 	else if (x == "BROWN")
-		c >> BROWN;
+		col = BROWN;
 	else if (x == "CYAN")
-		c >> CYAN;
+		col = CYAN;
 	else if (x == "YELLOW")
-		c >> YELLOW;
+		col = YELLOW;
 	else if (x == "LIGHTGOLDENRODYELLOW")
-		c >> LIGHTGOLDENRODYELLOW;
+		col = LIGHTGOLDENRODYELLOW;
 	else
-		c >> TRANSPARENT_COLOR;
+		col = TRANSPARENT_COLOR;
 	return c;
 }
 
@@ -71,4 +71,32 @@ bool operator!=(color a, color b) {
 
   return !(a == b);
   
+}
+
+string color::ReturnColor(color col)
+{
+	string c;
+	if (col == BLACK)
+		c = "Black";
+	else if (col == RED)
+		c = "Red";
+	else if (col == BLUE)
+		c = "Blue";
+	else if (col == GREEN)
+		c = "Green";
+	else if (col == MAGENTA)
+		c = "Magenta";
+	else if (col == ORANGE)
+		c = "Orange";
+	else if (col == BROWN)
+		c = "Brown";
+	else if (col == CYAN)
+		c = "Cyan";
+	else if (col == YELLOW)
+		c = "Yellow";
+	else if (col == LIGHTGOLDENRODYELLOW)
+		c = "Light Golden Or Yellow";
+	else
+		c = "Transparent color";
+	return c;
 }
