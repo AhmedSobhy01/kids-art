@@ -9,6 +9,7 @@ PickByColorAction::PickByColorAction(ApplicationManager* pApp): Action(pApp)
 void PickByColorAction::ReadActionParameters() {												// Initializes the data members
 	CorrectPicks = 0;
 	Counter = 0;
+	ChangedAction = false;
 	RandomFigure = pManager->GetRandomFigure();
 	RandomColor = RandomFigure->GetFillClr();
 	RandomColorNumber = pManager->CountColor(RandomColor);
@@ -29,6 +30,43 @@ void PickByColorAction::SetColorName() {
 	else if (RandomColor == TRANSPARENT_COLOR) RandomColorName = "Transparent";
 }
 
+void PickByColorAction::GetAction()
+{
+	Output* pOut;
+	SwitchToDrawAction* SwitchToDraw;
+	PickByShapeAction* PickByShape;
+	PickByShapeAndColorAction* PickShapeColor;
+	if (P.y >= 0 && P.y < UI.ToolBarHeight) {
+		int clickeditem = P.x / UI.MenuItemWidth;
+		switch (clickeditem) {
+		case ITM_DRAW_MODE:															// Switch to Draw mode
+			SwitchToDraw = new SwitchToDrawAction(pManager);
+			SwitchToDraw->Execute();
+			pOut = pManager->GetOutput();
+			pOut->PrintMessage("Game over. Switched to Draw Mode.");
+			ChangedAction = true;
+			delete SwitchToDraw;
+			return;
+		case ITM_PICKBYSHAPE:														// Switch to Pick By Shape mode
+			PickByShape = new PickByShapeAction(pManager);
+			PickByShape->Execute();
+			ChangedAction = true;
+			delete PickByShape;
+			return;
+		case ITM_PICKBYCOLOR:														// Switch to Pick By Color mode
+			this->Execute();
+			ChangedAction = true;
+			return;
+		case ITM_PICKBYSHAPEANDCOLOR:												// Switch to Pick By Shape & Color mode
+			PickShapeColor = new PickByShapeAndColorAction(pManager);
+			PickShapeColor->Execute();
+			ChangedAction = true;
+			delete PickShapeColor;
+			return;
+		}
+	}
+}
+
 void PickByColorAction::PrintMessage() {
 	Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Pick all the " + RandomColorName + " figures. " + to_string(RandomColorNumber) + " exist.");
@@ -41,38 +79,17 @@ bool PickByColorAction::Execute() {
 	Input* pIn = pManager->GetInput();
 	FiguresNumber = pManager->FiguresCount();
 	if (FiguresNumber == 0) {
-
 		pOut->PrintMessage("Switch to Draw Mode and draw some shapes to play with.");
 		return false;
 	}
 	ReadActionParameters();
 	PrintMessage();
-	SwitchToDrawAction SwitchToDraw(pManager);
-	PickByShapeAction PickByShape(pManager);
-	PickByShapeAndColorAction PickShapeColor(pManager);
 
 	while (CorrectPicks < RandomColorNumber && Counter != FiguresNumber) {
 		pIn->GetPointClicked(P.x, P.y);
 		CFigure* ClickedFigure = pManager->GetFigure(P.x, P.y);									// Get the clicked shape
-
-		if (P.y >= 0 && P.y < UI.ToolBarHeight) {
-			int clickeditem = P.x / UI.MenuItemWidth;
-			switch (clickeditem) {
-			case 0:																			// Switch to Draw mode
-				SwitchToDraw.Execute();
-				pOut->PrintMessage("Game over. Switched to Draw Mode");
-				return false;
-			case 1:																			// Switch to Pick By Shape mode
-				PickByShape.Execute();
-				return false;
-			case 2:																			// Switch to Pick By Color mode
-				this->Execute();
-				return false;
-			case 3:																			// Switch to Pick By Shape & Color mode
-				PickShapeColor.Execute();
-				return false;
-			}
-		}
+		GetAction();
+		if (ChangedAction) return false;
 
 		if (ClickedFigure == NULL || ClickedFigure->isHidden()) continue;						// If theres no shape clicked or the shape is hidden
 		else if (ClickedFigure->GetFillClr() == RandomColor) CorrectPicks++;					// Correct color is picked

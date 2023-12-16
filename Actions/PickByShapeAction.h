@@ -12,11 +12,13 @@ private:
 	int Counter;						// Counter for how many picks made
 	int FiguresNumber;					// Integer to store total number of figures in FigList
 	int RandomFigureNumber;				// Integer to store how many instances for the random figure to be picked
+	bool ChangedAction;
 
 public:
 	PickByShapeAction(ApplicationManager*);
 	virtual void ReadActionParameters();
 	virtual bool Execute();
-	void PrintMessage();		// Prints the starting message according to the shape type
+	void PrintMessage();				// Prints the starting message according to the shape type
+	void GetAction();					// Gets the user action
 };
 #endif

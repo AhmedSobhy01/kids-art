@@ -13,6 +13,7 @@ private:
 	int Counter;							// Counter for total picks made
 	int FiguresNumber;						// Integer to store total number of figures in FigList
 	int RandomColorNumber;					// Integer to store how many instances for the random color to be picked
+	bool ChangedAction;
 
 public:
 	PickByColorAction(ApplicationManager*);
@@ -20,5 +21,6 @@ public:
 	virtual bool Execute();
 	void PrintMessage();					// Prints the starting message
 	void SetColorName();					// Returns the color of a figure as a string
+	void GetAction();						// Gets the user action
 };
 #endif

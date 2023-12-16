@@ -14,11 +14,13 @@ private:
 	int Counter;				// Counter for total picks made
 	int FiguresNumber;			// Integer that stores number of all figures
 	int RandomColorFigNumber;	// Integer that stores how many instances for the random properties to be picked
+	bool ChangedAction;
 public:
 	PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager*);
 	virtual void ReadActionParameters();
 	virtual bool Execute();
 	void PrintMessage();		// To print the starting message
-	void SetFigureStats(); // Converts the enum values of the figures properties and assigns them into the string members
+	void SetFigureStats();		// Converts the enum values of the figures properties and assigns them into the string members
+	void GetAction();			// Gets the user action
 };
 #endif
