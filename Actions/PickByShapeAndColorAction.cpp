@@ -31,9 +31,15 @@ void PickByShapeAndColorAction::SetFigureStats() {
 	else if (RandomFigureColor == TRANSPARENT_COLOR) RandomColorName = "Transparent";
 }
 
-void PickByShapeAndColorAction::PrintMessage() {
+void PickByShapeAndColorAction::StartingMessage() {
 	Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Pick all the " + RandomColorName + " " + RandomFigureType + "s. " + to_string(RandomColorFigNumber) + " exist");
+}
+
+void PickByShapeAndColorAction::FinalMsg() {
+	Output* pOut = pManager->GetOutput();
+	if (Counter == CorrectPicks)pOut->PrintMessage("Congratulations! All your picks are correct! (" + to_string(CorrectPicks) + "/" + to_string(CorrectPicks) + ")");
+	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks.");
 }
 
 void PickByShapeAndColorAction::GetAction() {
@@ -83,7 +89,7 @@ bool PickByShapeAndColorAction::Execute() {
 		return false;
 	}
 	ReadActionParameters();
-	PrintMessage();
+	StartingMessage();
 
 	while (CorrectPicks < RandomColorFigNumber && Counter != FiguresNumber) {
 		pIn->GetPointClicked(P.x, P.y);
@@ -100,9 +106,7 @@ bool PickByShapeAndColorAction::Execute() {
 		pManager->UpdateInterface();
 		Counter++;
 	}
-	if (Counter == CorrectPicks)pOut->PrintMessage("Congratulations! All your picks are correct! (" + to_string(CorrectPicks) + "/" + to_string(CorrectPicks) + ")");
-	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks.");
-
+	FinalMsg();
 	pManager->UnhideFigures();
 	pManager->UpdateInterface();
 

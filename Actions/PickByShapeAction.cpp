@@ -16,9 +16,15 @@ void PickByShapeAction::ReadActionParameters() {				// Generates random figure a
 	RandomFigureType = RandomFigure->Type();
 }
 
-void PickByShapeAction::PrintMessage() {						// Prints a message according to the random asked shape
+void PickByShapeAction::StartingMessage() {						// Prints a message according to the random asked shape
 	Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Pick all the " + RandomFigureType + "s. " + to_string(RandomFigureNumber) + " exist");
+}
+
+void PickByShapeAction::FinalMsg() {
+	Output* pOut = pManager->GetOutput();
+	if (Counter == CorrectPicks) pOut->PrintMessage("Congratulations! All your picks are correct! (" + to_string(CorrectPicks) + "/" + to_string(CorrectPicks) + ")");
+	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks.");
 }
 
 void PickByShapeAction::GetAction()
@@ -70,7 +76,7 @@ bool PickByShapeAction::Execute() {
 		return false;
 	}
 	ReadActionParameters();
-	PrintMessage();
+	StartingMessage();
 
 	while (CorrectPicks < RandomFigureNumber && Counter != FiguresNumber) {
 		pIn->GetPointClicked(P.x, P.y);
@@ -86,12 +92,8 @@ bool PickByShapeAction::Execute() {
 		pManager->UpdateInterface();
 		Counter++;
 	}
-
-	if (Counter == CorrectPicks) pOut->PrintMessage("Congratulations! All your picks are correct! (" + to_string(CorrectPicks) + "/" + to_string(CorrectPicks) + ")");
-	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks.");
-
+	FinalMsg();
 	pManager->UnhideFigures();
 	pManager->UpdateInterface();
-
 	return true;
 }

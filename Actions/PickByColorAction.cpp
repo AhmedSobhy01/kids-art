@@ -30,6 +30,17 @@ void PickByColorAction::SetColorName() {
 	else if (RandomColor == TRANSPARENT_COLOR) RandomColorName = "Transparent";
 }
 
+void PickByColorAction::StartingMessage() {
+	Output* pOut = pManager->GetOutput();
+	pOut->PrintMessage("Pick all the " + RandomColorName + " figures. " + to_string(RandomColorNumber) + " exist.");
+}
+
+void PickByColorAction::FinalMsg() {
+	Output* pOut = pManager->GetOutput();
+	if (Counter == CorrectPicks) pOut->PrintMessage("Congratulations! All your picks are correct! (" + to_string(CorrectPicks) + "/" + to_string(CorrectPicks) + ")");
+	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks");
+}
+
 void PickByColorAction::GetAction()
 {
 	Output* pOut;
@@ -48,10 +59,7 @@ void PickByColorAction::GetAction()
 			delete SwitchToDraw;
 			return;
 		case ITM_PICKBYSHAPE:														// Switch to Pick By Shape mode
-			PickByShape = new PickByShapeAction(pManager);
-			PickByShape->Execute();
-			ChangedAction = true;
-			delete PickByShape;
+			pManager->ExecuteAction(PICK_BY_SHAPE);
 			return;
 		case ITM_PICKBYCOLOR:														// Switch to Pick By Color mode
 			this->Execute();
@@ -67,11 +75,6 @@ void PickByColorAction::GetAction()
 	}
 }
 
-void PickByColorAction::PrintMessage() {
-	Output* pOut = pManager->GetOutput();
-	pOut->PrintMessage("Pick all the " + RandomColorName + " figures. " + to_string(RandomColorNumber) + " exist.");
-}
-
 bool PickByColorAction::Execute() {
 	pManager->UnhideFigures();
 	pManager->UpdateInterface();
@@ -83,10 +86,11 @@ bool PickByColorAction::Execute() {
 		return false;
 	}
 	ReadActionParameters();
-	PrintMessage();
+	StartingMessage();
 
 	while (CorrectPicks < RandomColorNumber && Counter != FiguresNumber) {
 		pIn->GetPointClicked(P.x, P.y);
+
 		CFigure* ClickedFigure = pManager->GetFigure(P.x, P.y);									// Get the clicked shape
 		GetAction();
 		if (ChangedAction) return false;
@@ -98,10 +102,7 @@ bool PickByColorAction::Execute() {
 		pManager->UpdateInterface();
 		Counter++;
 	}
-
-	if (Counter == CorrectPicks) pOut->PrintMessage("Congratulations! All your picks are correct! (" + to_string(CorrectPicks) +"/" + to_string(CorrectPicks) + ")");
-	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks");
-
+	FinalMsg();
 	pManager->UnhideFigures();
 	pManager->UpdateInterface();
 	return true;
