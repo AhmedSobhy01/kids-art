@@ -134,11 +134,10 @@
     <ClCompile Include="Actions\AddHexagonAction.cpp" />
     <ClCompile Include="Actions\ChangeFillColorAction.cpp" />
     <ClCompile Include="Actions\ChangeOutlineColorAction.cpp" />
-    <ClCompile Include="Containers\FigureList.cpp" />
+    <ClCompile Include="Actions\ClearAllAction.cpp" />
     <ClCompile Include="Actions\PickByColorAction.cpp" />
     <ClCompile Include="Actions\PickByShapeAction.cpp" />
     <ClCompile Include="Actions\PickByShapeAndColorAction.cpp" />
-    <ClCompile Include="Containers\RecordedActionList.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
     <ClCompile Include="Actions\ChangeBackgroundColorAction.cpp" />
     <ClCompile Include="Actions\StartRecordingAction.cpp" />
@@ -147,6 +146,8 @@
     <ClCompile Include="Actions\UndoAction.cpp" />
     <ClCompile Include="Containers\UndoableActionStack.cpp" />
     <ClCompile Include="Actions\DeleteAction.cpp" />
+    <ClCompile Include="Actions\DragMoveAction.cpp" />
+    <ClCompile Include="Actions\ExitAction.cpp" />
     <ClCompile Include="Figures\CHexagon.cpp" />
     <ClCompile Include="Figures\CCircle.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
@@ -207,10 +208,10 @@
     <ClInclude Include="Actions\ChangeBackgroundColorAction.h" />
     <ClInclude Include="Actions\ChangeFillColorAction.h" />
     <ClInclude Include="Actions\ChangeOutlineColorAction.h" />
-    <ClInclude Include="Containers\FigureList.h" />
+    <ClInclude Include="Actions\ClearAllAction.h" />
     <ClInclude Include="Actions\PickByShapeAction.h" />
     <ClInclude Include="Actions\PickByShapeAndColorAction.h" />
-    <ClInclude Include="Containers\RecordedActionList.h" />
+    <ClInclude Include="Containers\List.h" />
     <ClInclude Include="Actions\RedoAction.h" />
     <ClInclude Include="Actions\StartRecordingAction.h" />
     <ClInclude Include="Actions\StopRecordingAction.h" />
@@ -219,6 +220,8 @@
     <ClInclude Include="Actions\UndoAction.h" />
     <ClInclude Include="Containers\UndoableActionStack.h" />
     <ClInclude Include="Actions\DeleteAction.h" />
+    <ClInclude Include="Actions\DragMoveAction.h" />
+    <ClInclude Include="Actions\ExitAction.h" />
     <ClInclude Include="Figures\CHexagon.h" />
     <ClInclude Include="Figures\CCircle.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />

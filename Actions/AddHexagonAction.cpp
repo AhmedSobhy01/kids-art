@@ -40,10 +40,11 @@ bool AddHexagonAction::Execute() {
 	ReadActionParameters();
 	if (Validate()) {
 		//Create a hexagon with the parameters read from the user
-		figure = new CHexagon(center, HexagonGfxInfo);
+		Figure = new CHexagon(center, HexagonGfxInfo);
+		Figure->IncrementReference();
 
 		//Add the hexagon to the list of figures
-		pManager->AddFigure(figure);
+		pManager->AddFigure(Figure);
 
 		return true;
 	}

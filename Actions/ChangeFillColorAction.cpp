@@ -34,6 +34,7 @@ bool ChangeFillColorAction::Execute()
 		NewColor = pIn->GetSelectedColor(pOut);
 
 		Figure->ChngFillClr(NewColor);
+		UI.FillColor = NewColor;
 		pOut->ClearStatusBar();
 		Figure->SetSelected(false);
 		pManager->SetSelected(NULL);

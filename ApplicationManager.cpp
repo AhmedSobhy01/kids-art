@@ -1,3 +1,4 @@
+#include <windows.h>
 #include "ApplicationManager.h"
 #include "Actions\UndoableAction.h"
 #include "Actions\AddRectAction.h"
@@ -17,14 +18,15 @@
 #include "Actions\ChangeOutlineColorAction.h"
 #include "Actions\ChangeBackgroundColorAction.h"
 #include "Actions\DeleteAction.h"
+#include "Actions\ClearAllAction.h"
 #include "Actions\PickByShapeAction.h"
 #include "Actions\PickByColorAction.h"
 #include "Actions\PickByShapeAndColorAction.h"
-#include <string>
-using namespace std;
+#include "Actions\ExitAction.h"
+#include "Actions\DragMoveAction.h"
 
 // Constructor
-ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions)
+ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
 {
 	// Create Input and output
 	pOut = new Output;
@@ -101,6 +103,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case REMOVE:
 		pAct = new DeleteAction(this);
 		break;
+	case CLEAR_ALL:
+		pAct = new ClearAllAction(this);
+		break;
 	case PICK_BY_SHAPE:
 		pAct = new PickByShapeAction(this);
 		break;
@@ -110,9 +115,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case PICK_BY_SHAPE_COLOR:
 		pAct = new PickByShapeAndColorAction(this);
 		break;
+	case DRAG_MOVE:
+		pAct = new DragMoveAction(this);
+		break;
 	case EXIT:
 		/// create ExitAction here
-
+		pAct = new ExitAction(this);
 		break;
 	case STATUS: // a click on the status bar ==> no action
 		return;
@@ -125,6 +133,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			ClearRedoableActionsStack();
 
 		bool result = pAct->Execute(); // Execute
+		
+		if (result) // Play sound if action executed correctly
+			PlayActionSound(ActType);
 
 		bool a = AddActionToRecordings(pAct, result);
 		bool b = AddActionToUndoables(pAct, result);
@@ -181,15 +192,17 @@ bool ApplicationManager::AddActionToRecordings(Action *pAct, bool flag)
 	return false;
 }
 
-RecordedActionList &ApplicationManager::GetRecordedActionsList()
+List<Action>& ApplicationManager::GetRecordedActionsList()
 {
 	return RecordedActions;
 }
 
 void ApplicationManager::ClearRecordedActionsList()
 {
-	for (int i = 0; i < RecordedActions.size(); i++) {
-		Action* pAct = RecordedActions.remove(i);
+	int size = RecordedActions.size();
+
+	for (int i = 0; i < size; i++) {
+		Action* pAct = RecordedActions.pop_back();
 
 		if (pAct->CanBeDeleted()) delete pAct;
 	}
@@ -238,9 +251,12 @@ CFigure *ApplicationManager::GetRandomFigure()
 	return FigList[j];
 }
 
-bool ApplicationManager::FigListContains(CFigure* Figure) const
+void ApplicationManager::ClearFigures()
 {
-	return FigList.contains(Figure);
+	int size = FigList.size();
+
+	for (int i = 0; i < size; i++)
+		delete FigList.pop_back();
 }
 
 int ApplicationManager::CountFigColor(CFigure *Fig)
@@ -252,6 +268,13 @@ int ApplicationManager::CountFigColor(CFigure *Fig)
 			counter++;
 	}
 	return counter;
+}
+
+void ApplicationManager::ResetColors()
+{
+	UI.DrawColor = BLUE;
+	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;
+	UI.FillColor = TRANSPARENT_COLOR;
 }
 
 int ApplicationManager::CountFigure(CFigure *fig)
@@ -287,6 +310,48 @@ void ApplicationManager::UnhideFigures()
 		FigList[i]->UnHide();
 }
 
+void ApplicationManager::PlayActionSound(ActionType ActType) const
+{
+	if (ShouldPlayActionSound()) {
+		char* filename = NULL;
+
+		switch (ActType) {
+			case DRAW_RECT:
+				filename = "sounds\\Rectangle.wav";
+				break;
+			case DRAW_SQUARE:
+				filename = "sounds\\Square.wav";
+				break;
+			case DRAW_TRIANGLE:
+				filename = "sounds\\Triangle.wav";
+				break;
+			case DRAW_CIRCLE:
+				filename = "sounds\\Circle.wav";
+				break;
+			case DRAW_HEXAGON:
+				filename = "sounds\\Hexagon.wav";
+				break;
+			case OUTLINE_COLOR:
+				filename = "sounds\\OutlineColorChanged.wav";
+				break;
+			case FILL_COLOR:
+				filename = "sounds\\FillColorChanged.wav";
+				break;
+			case REMOVE:
+				filename = "sounds\\Deleted.wav";
+				break;
+		}
+
+		if (filename != NULL)
+			PlaySound(filename, NULL, SND_FILENAME | SND_ASYNC);
+	}
+}
+
+bool ApplicationManager::ShouldPlayActionSound() const
+{
+	return PlayActionSoundEnabled;
+}
+
 bool ApplicationManager::AddActionToUndoables(Action *pAct, bool flag)
 {
 	if (flag && dynamic_cast<UndoableAction *>(pAct) != NULL)
@@ -308,7 +373,9 @@ UndoableActionStack &ApplicationManager::GetRedoableActionsStack()
 }
 void ApplicationManager::ClearUndoableActionsStack()
 {
-	for (int i = 0; i < UndoableActions.size(); i++) {
+	int size = UndoableActions.size();
+
+	for (int i = 0; i < size; i++) {
 		UndoableAction* pAct = UndoableActions.pop();
 
 		if (pAct->CanBeDeleted()) delete pAct;
@@ -316,7 +383,9 @@ void ApplicationManager::ClearUndoableActionsStack()
 }
 void ApplicationManager::ClearRedoableActionsStack()
 {
-	for (int i = 0; i < RedoableActions.size(); i++) {
+	int size = RedoableActions.size();
+
+	for (int i = 0; i < size; i++) {
 		UndoableAction* pAct = RedoableActions.pop();
 
 		if (pAct->CanBeDeleted()) delete pAct;

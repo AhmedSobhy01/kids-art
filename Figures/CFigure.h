@@ -11,6 +11,7 @@ using namespace std;
 class CFigure
 {
 protected:
+	int ReferenceCount;
 	int ID;		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
@@ -55,7 +56,24 @@ public:
 	//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
 	//virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
 
-	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
+	virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
+
+	// Reference
+	void IncrementReference()
+	{
+		ReferenceCount++;
+	}
+
+	void DecrementReference()
+	{
+		if (ReferenceCount > 0)
+			ReferenceCount--;
+	}
+
+	bool CanBeDeleted() const
+	{
+		return ReferenceCount == 0;
+	}
 };
 
 #endif
