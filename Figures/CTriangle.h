@@ -8,12 +8,15 @@ private:
 	Point P3;
 	double calcArea(Point, Point, Point);
 public:
+	CTriangle();
 	CTriangle(Point, Point, Point, GfxInfo FigureGfxInfo);
 	void Draw(Output* pOut) const;
 	bool CheckSelected(int x, int y);
 	Point GetCenter() const;
 	void SetCenter(Point);
 	bool Validate(Point);
+	void Save(ofstream&);
+	void Load(ifstream&);
 	void PrintInfo(Output* pOut);
 };
 

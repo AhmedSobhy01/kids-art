@@ -33,7 +33,7 @@ bool ChangeOutlineColorAction::Execute()
 	{
 		OldColor = Figure->GetDrawClr();
 		NewColor = pIn->GetSelectedColor(pOut);
-
+		UI.DrawColor = NewColor;
 		Figure->ChngDrawClr(NewColor);
 		UI.DrawColor = NewColor;
 		pOut->ClearStatusBar();

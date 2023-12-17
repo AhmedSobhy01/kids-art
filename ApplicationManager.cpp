@@ -22,10 +22,11 @@
 #include "Actions\PickByShapeAction.h"
 #include "Actions\PickByColorAction.h"
 #include "Actions\PickByShapeAndColorAction.h"
+#include "Actions\SaveAction.h"
+#include "Actions\LoadAction.h"
 #include "Actions\ToggleSoundAction.h"
 #include "Actions\ExitAction.h"
 #include "Actions\DragMoveAction.h"
-
 
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
@@ -116,6 +117,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case PICK_BY_SHAPE_COLOR:
 		pAct = new PickByShapeAndColorAction(this);
+		break;
+	case SAVE_GRAPH:
+		pAct = new SaveAction(this);
+		break;
+	case OPEN_GRAPH:
+		pAct = new LoadAction(this);
 		break;
 	case DRAG_MOVE:
 		pAct = new DragMoveAction(this);
@@ -262,6 +269,14 @@ void ApplicationManager::ClearFigures()
 
 	for (int i = 0; i < size; i++)
 		delete FigList.pop_back();
+}
+
+void ApplicationManager::SaveAll(ofstream& fout)
+{
+	fout << UI.DrawColor << " " << UI.FillColor << " " << UI.BkGrndColor << endl;
+	fout << FiguresCount() << endl;
+	for (int i = 0; i < FiguresCount(); i++)
+		FigList[i]->Save(fout);
 }
 
 int ApplicationManager::CountFigColor(CFigure *Fig)

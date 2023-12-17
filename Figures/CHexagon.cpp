@@ -2,6 +2,10 @@
 
 const int CHexagon::hexagonSize = 80;
 
+CHexagon::CHexagon() :CFigure()
+{
+}
+
 CHexagon::CHexagon(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	this->center = center;
 	type = HEXAGON;
@@ -55,6 +59,24 @@ void CHexagon::SetCenter(Point c) {
 
 bool CHexagon::Validate(Point c) {
 	return (c.y - hexagonSize / 2 * sqrt(3)) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3)) <= (UI.height - UI.StatusBarHeight);
+}
+
+void CHexagon::Save(ofstream& fout)
+{
+	if (fout.is_open())
+	{
+		fout << "HEXAGON" << " " << ID << " " << center.x << " " << center.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << FigGfxInfo.isFilled << " " << Selected << endl;
+		return;
+	}
+}
+
+void CHexagon::Load(ifstream& fin)
+{
+	if (fin.is_open())
+	{
+		fin >> ID >> center.x >> center.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
+		return;
+	}
 }
 
 void CHexagon::PrintInfo(Output* pOut) {

@@ -1,5 +1,9 @@
 #include "CRectangle.h"
 
+CRectangle::CRectangle() :CFigure()
+{
+}
+
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	Corner1 = P1;
@@ -44,6 +48,24 @@ bool CRectangle::Validate(Point c) {
 	bool cond2 = Corner2.y + dy >= UI.ToolBarHeight && Corner2.y + dy <= (UI.height - UI.StatusBarHeight);
 	return cond1 && cond2;
 
+}
+
+void CRectangle::Save(ofstream& fout)
+{
+	if (fout.is_open())
+	{
+		fout << "RECTANGLE" << " " << ID << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << FigGfxInfo.isFilled << " " << Selected << endl;
+		return;
+	}
+}
+
+void CRectangle::Load(ifstream& fin)
+{
+	if (fin.is_open())
+	{
+		fin >> ID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
+		return;
+	}
 }
 
 void CRectangle::PrintInfo(Output* pOut) {
