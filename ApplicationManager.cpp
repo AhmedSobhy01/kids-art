@@ -123,6 +123,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case OPEN_GRAPH:
 		pAct = new LoadAction(this);
+		break;
 	case DRAG_MOVE:
 		pAct = new DragMoveAction(this);
 		break;
