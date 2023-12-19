@@ -69,6 +69,11 @@ bool CFigure::operator==(CFigure& Fig2)
 	return (Type() == Fig2.Type())&& (GetFillClr() == Fig2.GetFillClr());
 }
 
+void CFigure::ResetID()
+{
+	last_ID = 0;
+}
+
 
 string CFigure::Type(){
 	return type;
