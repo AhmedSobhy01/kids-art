@@ -47,3 +47,10 @@ bool AddSquareAction::Execute() {
 
 	return false;
 }
+
+void AddSquareAction::PlayRecord()
+{
+	Output* pOut = pManager->GetOutput();
+	pManager->AddFigure(Figure);
+	Figure->Draw(pOut);
+}

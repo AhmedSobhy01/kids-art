@@ -77,3 +77,10 @@ bool AddRectAction::Execute()
 
 	return false;
 }
+
+void AddRectAction::PlayRecord()
+{
+	Output* pOut = pManager->GetOutput();
+	pManager->AddFigure(Figure);
+	Figure->Draw(pOut);
+}

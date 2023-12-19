@@ -16,6 +16,7 @@ class DeleteAction: public UndoableAction
 
 		virtual void Undo();
 		virtual void Redo();
+		virtual void PlayRecord();
 
 		~DeleteAction();
 };

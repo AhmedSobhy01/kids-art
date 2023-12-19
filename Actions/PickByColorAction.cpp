@@ -27,6 +27,11 @@ void PickByColorAction::SetColorName() {
 	else if (RandomColor == TRANSPARENT_COLOR) RandomColorName = "Transparent";
 }
 
+bool PickByColorAction::ShouldRecord() const
+{
+	return false;
+}
+
 void PickByColorAction::PrintMessage() {
 	Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Pick all the " + RandomColorName + " figures. " + to_string(RandomColorNumber) + " exist.");

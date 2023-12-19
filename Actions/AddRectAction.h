@@ -18,6 +18,7 @@ public:
 	
 	//Add rectangle to the ApplicationManager
 	virtual bool Execute();
+	virtual void PlayRecord();
 };
 
 #endif

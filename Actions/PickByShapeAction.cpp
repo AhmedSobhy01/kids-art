@@ -35,6 +35,11 @@ void PickByShapeAction::SetFigureName() {							// Returns the shape type (to be
 	}
 }
 
+bool PickByShapeAction::ShouldRecord() const
+{
+	return false;
+}
+
 void PickByShapeAction::PrintMessage() {						// Prints a message according to the random asked shape
 	Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Pick all the " + RandomFigureName + to_string(RandomFigureNumber) + " exist");

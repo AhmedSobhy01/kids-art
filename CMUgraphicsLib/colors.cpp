@@ -73,28 +73,28 @@ bool operator!=(color a, color b) {
   
 }
 
-string color::ReturnColor(color col)
+string color::ReturnColor()
 {
 	string c;
-	if (col == BLACK)
+	if (*this == BLACK)
 		c = "Black";
-	else if (col == RED)
+	else if (*this == RED)
 		c = "Red";
-	else if (col == BLUE)
+	else if (*this == BLUE)
 		c = "Blue";
-	else if (col == GREEN)
+	else if (*this == GREEN)
 		c = "Green";
-	else if (col == MAGENTA)
+	else if (*this == MAGENTA)
 		c = "Magenta";
-	else if (col == ORANGE)
+	else if (*this == ORANGE)
 		c = "Orange";
-	else if (col == BROWN)
+	else if (*this == BROWN)
 		c = "Brown";
-	else if (col == CYAN)
+	else if (*this == CYAN)
 		c = "Cyan";
-	else if (col == YELLOW)
+	else if (*this == YELLOW)
 		c = "Yellow";
-	else if (col == LIGHTGOLDENRODYELLOW)
+	else if (*this == LIGHTGOLDENRODYELLOW)
 		c = "Light Golden Or Yellow";
 	else
 		c = "Transparent color";

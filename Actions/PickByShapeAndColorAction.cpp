@@ -46,6 +46,11 @@ void PickByShapeAndColorAction::SetFigureStats() {
 	else if (RandomFigureColor == TRANSPARENT_COLOR) RandomColorName = "Transparent";
 }
 
+bool PickByShapeAndColorAction::ShouldRecord() const
+{
+	return false;
+}
+
 void PickByShapeAndColorAction::PrintMessage() {
 	Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Pick all the " + RandomColorName + " " + RandomFigureName + ". " + to_string(RandomColorFigNumber) + " exist");

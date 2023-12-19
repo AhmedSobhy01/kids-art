@@ -27,6 +27,7 @@
 #include "Actions\ToggleSoundAction.h"
 #include "Actions\ExitAction.h"
 #include "Actions\DragMoveAction.h"
+#include "Actions\PlayRecordingAction.h"
 
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
@@ -87,6 +88,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case STOP_RECORDING:
 		pAct = new StopRecordingAction(this);
+		break;
+	case PLAY_RECORDING:
+		pAct = new PlayRecordingAction(this);
 		break;
 	case UNDO:
 		pAct = new UndoAction(this);
@@ -221,6 +225,7 @@ void ApplicationManager::ClearRecordedActionsList()
 }
 void ApplicationManager::SetRecordingState(bool state)
 {
+	if (state) ClearRecordedActionsList();
 	IsRecording = state;
 }
 bool ApplicationManager::CanRecord() const

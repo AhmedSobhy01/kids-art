@@ -19,5 +19,6 @@ public:
 	virtual bool Execute();
 	void PrintMessage();		// Prints the starting message according to the shape type
 	void SetFigureName();	// Returns the shape name corresponding to its Enum ShapeType
+	virtual bool ShouldRecord() const;
 };
 #endif

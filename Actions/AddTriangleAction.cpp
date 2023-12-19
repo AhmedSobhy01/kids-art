@@ -73,3 +73,10 @@ bool AddTriangleAction::Execute() {
 
 	return false;
 }
+
+void AddTriangleAction::PlayRecord()
+{
+	Output* pOut = pManager->GetOutput();
+	pManager->AddFigure(Figure);
+	Figure->Draw(pOut);
+}

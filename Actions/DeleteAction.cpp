@@ -47,6 +47,12 @@ void DeleteAction::Redo()
 		RemovedFromIndex = pManager->RemoveFigure(Figure);
 }
 
+void DeleteAction::PlayRecord()
+{
+	if (Figure != NULL)
+		RemovedFromIndex = pManager->RemoveFigure(Figure);
+}
+
 DeleteAction::~DeleteAction()
 {
 	if (Figure != NULL) {

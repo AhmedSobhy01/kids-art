@@ -56,3 +56,9 @@ void ChangeFillColorAction::Redo()
 	if (Figure)
 		Figure->ChngFillClr(NewColor);
 }
+
+void ChangeFillColorAction::PlayRecord()
+{
+	if (Figure)
+		Figure->ChngFillClr(NewColor);
+}

@@ -65,6 +65,12 @@ void MoveAction::Redo()
 		Figure->SetCenter(NewCenter);
 }
 
+void MoveAction::PlayRecord()
+{
+	if (Figure != NULL)
+		Figure->SetCenter(NewCenter);
+}
+
 MoveAction::~MoveAction()
 {
 	if (Figure != NULL) {

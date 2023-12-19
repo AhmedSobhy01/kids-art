@@ -37,3 +37,14 @@ bool UndoAction::Execute()
 
 	return true;
 }
+
+void UndoAction::PlayRecord()
+{
+	UndoableActionStack& undoableActions = pManager->GetUndoableActionsStack();
+	UndoableActionStack& redoableActions = pManager->GetRedoableActionsStack();
+	UndoableAction* pAct = undoableActions.pop();
+
+	pAct->Undo();
+
+	redoableActions.push(pAct);
+}

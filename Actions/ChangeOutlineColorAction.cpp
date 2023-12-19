@@ -57,3 +57,9 @@ void ChangeOutlineColorAction::Redo()
 	if (Figure)
 		Figure->ChngDrawClr(NewColor);
 }
+
+void ChangeOutlineColorAction::PlayRecord()
+{
+	if (Figure)
+		Figure->ChngDrawClr(NewColor);
+}

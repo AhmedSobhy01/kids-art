@@ -23,5 +23,6 @@ public:
 	virtual bool Execute();
 	void PrintMessage();		// To print the starting message
 	void SetFigureStats(); // Converts the enum values of the figures properties and assigns them into the string members
+	virtual bool ShouldRecord() const;
 };
 #endif

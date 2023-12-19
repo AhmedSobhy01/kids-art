@@ -70,6 +70,12 @@ void DragMoveAction::Redo()
 		Figure->SetCenter(NewCenter);
 }
 
+void DragMoveAction::PlayRecord()
+{
+	if (Figure != NULL)
+		Figure->SetCenter(NewCenter);
+}
+
 DragMoveAction::~DragMoveAction()
 {
 	if (Figure != NULL) {

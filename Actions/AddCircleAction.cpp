@@ -55,3 +55,10 @@ bool AddCircleAction::Execute() {
 
 	return false;
 }
+
+void AddCircleAction::PlayRecord()
+{
+	Output* pOut = pManager->GetOutput();
+	pManager->AddFigure(Figure);
+	Figure->Draw(pOut);
+}

@@ -16,6 +16,7 @@ public:
 
 	virtual void Undo();
 	virtual void Redo();
+	virtual void PlayRecord();
 };
 
 #endif

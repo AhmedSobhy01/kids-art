@@ -18,9 +18,15 @@ bool ChangeBackgroundColorAction::Execute()
 	ReadActionParameters();
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
-
-	UI.BkGrndColor = pIn->GetSelectedColor(pOut);
+	
+	BkgndCol = pIn->GetSelectedColor(pOut);
+	UI.BkGrndColor = BkgndCol;
 	pOut->ClearStatusBar();
 
 	return true;
+}
+
+void ChangeBackgroundColorAction::PlayRecord()
+{
+	UI.BkGrndColor = BkgndCol;
 }

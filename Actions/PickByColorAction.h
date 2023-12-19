@@ -22,5 +22,6 @@ public:
 	virtual bool Execute();
 	void PrintMessage();					// Prints the starting message
 	void SetColorName();					// Returns the color of a figure as a string
+	virtual bool ShouldRecord() const;
 };
 #endif
