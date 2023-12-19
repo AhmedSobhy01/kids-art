@@ -4,6 +4,8 @@
 #include "..\defs.h"
 #include "..\GUI\Output.h"
 #include <fstream>
+#include <string>
+using namespace std;
 
 //Base class for all figures
 
@@ -15,7 +17,7 @@ protected:
 	int ID;		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-	ShapeType type;
+	string type;
 	bool Hidden;
 	
 	/// Add more parameters if needed.
@@ -40,9 +42,9 @@ public:
 	bool isHidden();				// Checks if a shape is hidden
 	void Hide();					// Hides the shape
 	void UnHide();					// Unhides the shape
-	ShapeType Type();				// Returns the type of a shape
+	string Type();				// Returns the type of a shape
 	bool isFilled();
-
+	bool operator==(CFigure&);
 
 	virtual bool CheckSelected(int x, int y) = 0;
 	virtual Point GetCenter() const = 0;

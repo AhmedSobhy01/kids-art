@@ -1,9 +1,7 @@
 #ifndef PICK_BY_COLOR_ACTION_H
 #define PICK_BY_COLOR_ACTION_H
 #include "Action.h"
-#include "..\GUI\UI_Info.h"
-#include "..\Figures\CFigure.h"
-
+#include "..\ApplicationManager.h"
 
 class PickByColorAction: public Action {
 private:
@@ -15,12 +13,14 @@ private:
 	int Counter;							// Counter for total picks made
 	int FiguresNumber;						// Integer to store total number of figures in FigList
 	int RandomColorNumber;					// Integer to store how many instances for the random color to be picked
-
+	bool ChangedAction;
+	bool EmptyClick;
 public:
 	PickByColorAction(ApplicationManager*);
 	virtual void ReadActionParameters();
 	virtual bool Execute();
-	void PrintMessage();					// Prints the starting message
-	void SetColorName();					// Returns the color of a figure as a string
+	void StartingMessage();					// Prints the starting message
+	void GetAction();						// Gets the user action
+	void FinalMsg();
 };
 #endif

@@ -1,4 +1,6 @@
 #include "CFigure.h"
+#include <string>
+using namespace std;
 
 int CFigure::last_ID = 0;
 
@@ -62,7 +64,12 @@ bool CFigure::isFilled()
 	return FigGfxInfo.isFilled;
 }
 
+bool CFigure::operator==(CFigure& Fig2)
+{
+	return (Type() == Fig2.Type())&& (GetFillClr() == Fig2.GetFillClr());
+}
 
-ShapeType CFigure::Type(){
+
+string CFigure::Type(){
 	return type;
 }

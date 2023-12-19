@@ -40,14 +40,6 @@ enum ActionType // The actions supported
 	EXIT				 // Exit
 };
 
-enum ShapeType{
-		RECTANGLE,
-		SQUARE,
-		TRIANGLE,
-		CIRCLE,
-		HEXAGON
-};
-
 struct Point // To be used for figures points
 {
 	int x, y;

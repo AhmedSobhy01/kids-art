@@ -8,7 +8,7 @@ CHexagon::CHexagon() :CFigure()
 
 CHexagon::CHexagon(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	this->center = center;
-	type = HEXAGON;
+	type = "Hexagon";
 }
 
 void CHexagon::Draw(Output* pOut) const {

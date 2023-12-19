@@ -9,7 +9,7 @@ CSquare::CSquare() :CFigure()
 
 CSquare::CSquare(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	this->center = center;
-	type = SQUARE;
+	type = "Square";
 }
 
 void CSquare::Draw(Output* pOut) const {

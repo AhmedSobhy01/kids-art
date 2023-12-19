@@ -20,6 +20,7 @@ public:
 	string GetString(Output *pO) const; // Returns a string entered by the user
 	bool GetLeftClickState(int& x, int& y)const;
 	ActionType GetUserAction(int * = NULL) const; // Read the user click and map to an action
+	ActionType GetAction(Point&);							// Gets the user action according to a given point
 
 	~Input();
 };
