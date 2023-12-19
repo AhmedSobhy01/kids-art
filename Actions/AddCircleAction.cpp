@@ -24,7 +24,7 @@ void AddCircleAction::ReadActionParameters() {
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("New Circle: Click at the center");
 	pIn->GetPointClicked(center.x, center.y);
-	pOut->PrintMessage("New Circle: //TODO: add a messege here :)");
+	pOut->PrintMessage("New Circle: Click at the radius");
 	pIn->GetPointClicked(radius.x, radius.y);
 	if (!Validate()) {
 		int x, y;
