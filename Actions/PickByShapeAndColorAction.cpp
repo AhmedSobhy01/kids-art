@@ -62,7 +62,11 @@ void PickByShapeAndColorAction::GetAction() {
 			EmptyClick = true;
 			return;
 		}
-		else if (*ClickedFigure == *RandomFigure)CorrectPicks++;
+		else if (*ClickedFigure == *RandomFigure) {
+			CorrectPicks++;
+			pOut->PrintMessage("Correct.");
+		}
+		else pOut->PrintMessage("Incorrect.");
 		ClickedFigure->Hide();
 	}
 }

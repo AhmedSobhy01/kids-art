@@ -48,7 +48,11 @@ void PickByShapeAction::GetAction()
 			EmptyClick = true;
 			return;
 		}
-		else if (ClickedFigure->Type() == RandomFigure->Type())CorrectPicks++;
+		else if (ClickedFigure->Type() == RandomFigure->Type()) {
+			CorrectPicks++;
+			pOut->PrintMessage("Correct.");
+		}
+		else pOut->PrintMessage("Incorrect.");
 		ClickedFigure->Hide();
 	}
 }

@@ -60,7 +60,11 @@ void PickByColorAction::GetAction(){
 			EmptyClick = true;
 			return;
 		}
-		else if (ClickedFigure->GetFillClr() == RandomColor)CorrectPicks++;
+		else if (ClickedFigure->GetFillClr() == RandomColor) {
+			CorrectPicks++;
+			pOut->PrintMessage("Correct.");
+		}
+		else pOut->PrintMessage("Incorrect.");
 		ClickedFigure->Hide();
 	}
 }
