@@ -29,39 +29,27 @@ void PickByShapeAction::FinalMsg() {
 
 void PickByShapeAction::GetAction()
 {
-	SwitchToDrawAction* SwitchToDraw;
-	PickByShapeAndColorAction* PickByShapeColor;
-	PickByColorAction* PickByColor;
-	ExitAction* Exit;
-	Output* pOut;
-	if (P.y >= 0 && P.y < UI.ToolBarHeight) {
-		int clickeditem = P.x / UI.MenuItemWidth;
-		switch (clickeditem) {
-		case ITM_DRAW_MODE:
-			SwitchToDraw = new SwitchToDrawAction(pManager);
-			SwitchToDraw->Execute();
-			pOut = pManager->GetOutput();
-			pOut->PrintMessage("Game over. Switched to Draw Mode");
+	ChangedAction = false;
+	EmptyClick = false;
+	Input* pIn = pManager->GetInput();
+	Output* pOut = pManager->GetOutput();
+	if (P.y >= 0 && P.y <= UI.StatusBarHeight) {
+		ActionType Act = pIn->GetAction(P);
+		if (Act == TO_DRAW || (Act >= PICK_BY_SHAPE && Act <= PICK_BY_SHAPE_COLOR)) {
+			pManager->ExecuteAction(Act);
 			ChangedAction = true;
-			delete SwitchToDraw;
-			return;
-		case ITM_PICKBYSHAPE:
-			this->Execute();
-			ChangedAction = true;
-			return;
-		case ITM_PICKBYCOLOR:
-			PickByColor = new PickByColorAction(pManager);
-			PickByColor->Execute();
-			ChangedAction = true;
-			delete PickByColor;
-			return;
-		case ITM_PICKBYSHAPEANDCOLOR:
-			PickByShapeColor = new PickByShapeAndColorAction(pManager);
-			PickByShapeColor->Execute();
-			ChangedAction = true;
-			delete PickByShapeColor;
+			if (Act == TO_DRAW) pOut->PrintMessage("Game Over. Switch to Draw Mode.");
+		}
+		else EmptyClick = true;
+	}
+	else {
+		CFigure* ClickedFigure = pManager->GetFigure(P.x, P.y);
+		if (ClickedFigure == NULL || ClickedFigure->isHidden()) {
+			EmptyClick = true;
 			return;
 		}
+		else if (ClickedFigure->Type() == RandomFigure->Type())CorrectPicks++;
+		ClickedFigure->Hide();
 	}
 }
 
@@ -70,6 +58,7 @@ bool PickByShapeAction::Execute() {
 	pManager->UpdateInterface();
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+
 	FiguresNumber = pManager->FiguresCount();
 	if (FiguresNumber == 0) {
 		pOut->PrintMessage("Switch to Draw Mode and draw some shapes to play with.");
@@ -80,15 +69,10 @@ bool PickByShapeAction::Execute() {
 
 	while (CorrectPicks < RandomFigureNumber && Counter != FiguresNumber) {
 		pIn->GetPointClicked(P.x, P.y);
-
-		CFigure* ClickedFigure = pManager->GetFigure(P.x, P.y);								// Get the clicked shape
 		GetAction();
-		if (ChangedAction) return false;
 
-		if (ClickedFigure == NULL || ClickedFigure->isHidden()) continue;					// If there's no clicked shape or the clicked shape is already hidden
-		else if (ClickedFigure->Type() == RandomFigureType) CorrectPicks++;					// Correct Shape picked
-
-		ClickedFigure->Hide();																// Hiding any clicked shape
+		if (EmptyClick) continue;
+		else if (ChangedAction) return false;
 		pManager->UpdateInterface();
 		Counter++;
 	}

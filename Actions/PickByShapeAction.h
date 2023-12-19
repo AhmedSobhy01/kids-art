@@ -13,6 +13,7 @@ private:
 	int FiguresNumber;					// Integer to store total number of figures in FigList
 	int RandomFigureNumber;				// Integer to store how many instances for the random figure to be picked
 	bool ChangedAction;
+	bool EmptyClick;
 
 public:
 	PickByShapeAction(ApplicationManager*);

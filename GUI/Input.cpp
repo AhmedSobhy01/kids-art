@@ -185,6 +185,20 @@ ActionType Input::GetUserAction(int *_ClickedItemOrder) const // This function r
 		return STATUS;
 	}
 }
+ActionType Input::GetAction(Point& P)
+{
+		int clickeditem = P.x / UI.MenuItemWidth;
+		switch (clickeditem) {
+		case ITM_DRAW_MODE:
+			return TO_DRAW;
+		case ITM_PICKBYSHAPE:
+			return PICK_BY_SHAPE;
+		case ITM_PICKBYCOLOR:
+			return PICK_BY_COLOR;
+		case ITM_PICKBYSHAPEANDCOLOR:
+			return PICK_BY_SHAPE_COLOR;
+	}
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 
 color Input::GetSelectedColor(Output* pO) const // This function reads the position where the user clicks to determine the selected color

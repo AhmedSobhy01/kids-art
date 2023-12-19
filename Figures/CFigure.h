@@ -41,7 +41,7 @@ public:
 	void UnHide();					// Unhides the shape
 	string Type();				// Returns the type of a shape
 	bool isFilled();
-
+	bool operator==(CFigure&);
 
 	virtual bool CheckSelected(int x, int y) = 0;
 	virtual Point GetCenter() const = 0;

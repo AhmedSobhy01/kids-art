@@ -52,6 +52,11 @@ bool CFigure::isFilled()
 	return FigGfxInfo.isFilled;
 }
 
+bool CFigure::operator==(CFigure& Fig2)
+{
+	return (Type() == Fig2.Type())&& (GetFillClr() == Fig2.GetFillClr());
+}
+
 
 string CFigure::Type(){
 	return type;

@@ -15,6 +15,7 @@ private:
 	int FiguresNumber;			// Integer that stores number of all figures
 	int RandomColorFigNumber;	// Integer that stores how many instances for the random properties to be picked
 	bool ChangedAction;
+	bool EmptyClick;
 public:
 	PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager*);
 	virtual void ReadActionParameters();

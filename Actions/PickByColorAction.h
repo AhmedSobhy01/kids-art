@@ -14,7 +14,7 @@ private:
 	int FiguresNumber;						// Integer to store total number of figures in FigList
 	int RandomColorNumber;					// Integer to store how many instances for the random color to be picked
 	bool ChangedAction;
-
+	bool EmptyClick;
 public:
 	PickByColorAction(ApplicationManager*);
 	virtual void ReadActionParameters();
