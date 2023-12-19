@@ -71,7 +71,9 @@ void CRectangle::Load(ifstream& fin)
 }
 
 void CRectangle::PrintInfo(Output* pOut) {
-	string info = "Rectangle: Corner1 = (";
+	string info = "Rectangle: ID = ";
+	info += to_string(ID);
+	info += ", Corner1 = (";
 	info += to_string(Corner1.x);
 	info += ", ";
 	info += to_string(Corner1.y);

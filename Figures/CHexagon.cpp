@@ -80,7 +80,9 @@ void CHexagon::Load(ifstream& fin)
 }
 
 void CHexagon::PrintInfo(Output* pOut) {
-	string info = "Hexagon: Center = (";
+	string info = "Hexagon: ID = ";
+	info += to_string(ID);
+	info += ", Center = (";
 	info += to_string(center.x);
 	info += ", ";
 	info += to_string(center.y);

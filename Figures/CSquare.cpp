@@ -63,7 +63,9 @@ void CSquare::Load(ifstream& fin)
 }
 
 void CSquare::PrintInfo(Output* pOut) {
-	string info = "Square: Center = (";
+	string info = "Square: ID = ";
+	info += to_string(ID);
+	info += ", Center = (";
 	info += to_string(center.x);
 	info += ", ";
 	info += to_string(center.y);

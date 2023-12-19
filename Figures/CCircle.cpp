@@ -55,7 +55,9 @@ void CCircle::Load(ifstream& fin)
 }
 
 void CCircle::PrintInfo(Output* pOut) {
-	string info = "Circle: Center = (";
+	string info = "Circle: ID = ";
+	info += to_string(ID);
+	info += ", Center = (";
 	info += to_string(center.x);
 	info += ", ";
 	info += to_string(center.y);
