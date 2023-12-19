@@ -7,9 +7,10 @@ Welcome to KidsArt, a delightful C++ program designed specifically for children 
 
 ## Features
 
-- Feature 1
-- Feature 2
-- Feature 3
+- Drawing basic shapes
+- Changing outline and fill color
+- Move shapes and resize
+- Play mode to select similar shapes or colors or both
 
 
 ## 🚀 About Us
