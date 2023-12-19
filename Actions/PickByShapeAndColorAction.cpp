@@ -14,26 +14,11 @@ void PickByShapeAndColorAction::ReadActionParameters() {
 	RandomFigureColor = RandomFigure->GetFillClr();
 	RandomColorFigNumber = pManager->CountFigColor(RandomFigure);
 	RandomFigureType = RandomFigure->Type();
-	SetFigureStats();
-}
-
-void PickByShapeAndColorAction::SetFigureStats() {
-	if (RandomFigureColor == BLACK) RandomColorName = "Black";
-	else if (RandomFigureColor == RED) RandomColorName = "Red";
-	else if (RandomFigureColor == BLUE) RandomColorName = "Blue";
-	else if (RandomFigureColor == GREEN) RandomColorName = "Green";
-	else if (RandomFigureColor == MAGENTA) RandomColorName = "Magenta";
-	else if (RandomFigureColor == ORANGE) RandomColorName = "Orange";
-	else if (RandomFigureColor == BROWN) RandomColorName = "Brown";
-	else if (RandomFigureColor == CYAN) RandomColorName = "Cyan";
-	else if (RandomFigureColor == YELLOW) RandomColorName = "Yellow";
-	else if (RandomFigureColor == GOLD) RandomColorName = "Gold";
-	else if (RandomFigureColor == TRANSPARENT_COLOR) RandomColorName = "Transparent";
 }
 
 void PickByShapeAndColorAction::StartingMessage() {
 	Output* pOut = pManager->GetOutput();
-	pOut->PrintMessage("Pick all the " + RandomColorName + " " + RandomFigureType + "s. " + to_string(RandomColorFigNumber) + " exist");
+	pOut->PrintMessage("Pick all the " + RandomFigureColor.ReturnColor() + " " + RandomFigureType + "s. " + to_string(RandomColorFigNumber) + " exist");
 }
 
 void PickByShapeAndColorAction::FinalMsg() {

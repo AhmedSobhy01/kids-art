@@ -20,7 +20,6 @@ public:
 	virtual void ReadActionParameters();
 	virtual bool Execute();
 	void StartingMessage();					// Prints the starting message
-	void SetColorName();					// Returns the color of a figure as a string
 	void GetAction();						// Gets the user action
 	void FinalMsg();
 };

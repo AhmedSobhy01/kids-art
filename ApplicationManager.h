@@ -52,6 +52,7 @@ public:
 	int RemoveFigure(CFigure*);		// Removes a figure from the FigList
 	CFigure *GetFigure(int, int) const; // Search for a figure given a point inside the figure
 	void ClearFigures();
+	void SaveAll(ofstream&);
 
 	CFigure* GetRandomFigure();				// Creates a random index and returns its corresponding figure in the FigList
 	int CountColor(color);
@@ -64,6 +65,7 @@ public:
 
 	void PlayActionSound(ActionType) const;
 	bool ShouldPlayActionSound() const;
+	void SetPlayActionSoundState(bool);
 
 	CFigure* GetSelected();
 	void SetSelected(CFigure*);

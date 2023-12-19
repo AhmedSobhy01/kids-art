@@ -69,7 +69,7 @@ public:
 			item->DecrementReference();
 
 			int i = index;
-			while (items[i + 1] != NULL && i < ItemsCount)
+			while (i < ItemsCount - 1 && items[i + 1] != NULL)
 			{
 				items[i] = items[i + 1];
 				items[i + 1] = NULL;

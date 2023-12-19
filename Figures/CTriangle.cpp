@@ -2,6 +2,10 @@
 
 
 
+CTriangle::CTriangle() :CFigure()
+{
+}
+
 CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	this->P1 = P1;
@@ -69,6 +73,24 @@ bool CTriangle::Validate(Point c) {
 	bool cond2 = P2.y + dy - FigGfxInfo.BorderWidth / 2 >= UI.ToolBarHeight && P2.y + dy + FigGfxInfo.BorderWidth / 2 < (UI.height - UI.StatusBarHeight);
 	bool cond3 = P3.y + dy - FigGfxInfo.BorderWidth / 2 >= UI.ToolBarHeight && P3.y + dy + FigGfxInfo.BorderWidth / 2 < (UI.height - UI.StatusBarHeight);
 	return cond1 && cond2 && cond3;
+}
+
+void CTriangle::Save(ofstream& fout)
+{
+	if (fout.is_open())
+	{
+		fout << "TRIANGLE" << " " << ID << " " << P1.x << " " << P1.y << " " << P2.x << " " << P2.y << " " << P3.x << " " << P3.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << FigGfxInfo.isFilled << " " << Selected << endl;
+		return;
+	}
+}
+
+void CTriangle::Load(ifstream& fin)
+{
+	if (fin.is_open())
+	{
+		fin >> ID >> P1.x >> P1.y >> P2.x >> P2.y >> P3.x >> P3.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
+		return;
+	}
 }
 
 void CTriangle::PrintInfo(Output* pOut) {

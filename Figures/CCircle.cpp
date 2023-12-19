@@ -2,6 +2,10 @@
 #include "..\GUI\Output.h"
 #include "..\ApplicationManager.h"
 
+CCircle::CCircle() :CFigure()
+{
+}
+
 CCircle::CCircle(Point center, Point radius, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	this->center = center;
 	this->radius = radius;
@@ -30,6 +34,24 @@ void CCircle::SetCenter(Point c) {
 bool CCircle::Validate(Point c) {
 	int radius = sqrt(pow(center.x - this->radius.x, 2) + pow(center.y - this->radius.y, 2));
 	return (c.y - radius) >= UI.ToolBarHeight && (c.y + radius) <= (UI.height - UI.StatusBarHeight);
+}
+
+void CCircle::Save(ofstream& fout)
+{
+	if (fout.is_open())
+	{
+		fout << "CIRCLE" << " " << ID << " " << center.x << " " << center.y << " " << radius.x << " " << radius.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << FigGfxInfo.isFilled << " " << Selected << endl;
+		return;
+	}
+}
+
+void CCircle::Load(ifstream& fin)
+{
+	if (fin.is_open())
+	{
+		fin >> ID >> center.x >> center.y >> radius.x >> radius.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
+		return;
+	}
 }
 
 void CCircle::PrintInfo(Output* pOut) {

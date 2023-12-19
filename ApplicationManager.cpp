@@ -22,6 +22,9 @@
 #include "Actions\PickByShapeAction.h"
 #include "Actions\PickByColorAction.h"
 #include "Actions\PickByShapeAndColorAction.h"
+#include "Actions\SaveAction.h"
+#include "Actions\LoadAction.h"
+#include "Actions\ToggleSoundAction.h"
 #include "Actions\ExitAction.h"
 #include "Actions\DragMoveAction.h"
 
@@ -115,8 +118,17 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case PICK_BY_SHAPE_COLOR:
 		pAct = new PickByShapeAndColorAction(this);
 		break;
+	case SAVE_GRAPH:
+		pAct = new SaveAction(this);
+		break;
+	case OPEN_GRAPH:
+		pAct = new LoadAction(this);
+		break;
 	case DRAG_MOVE:
 		pAct = new DragMoveAction(this);
+		break;
+	case TOGGLE_SOUND:
+		pAct = new ToggleSoundAction(this);
 		break;
 	case EXIT:
 		/// create ExitAction here
@@ -259,6 +271,14 @@ void ApplicationManager::ClearFigures()
 		delete FigList.pop_back();
 }
 
+void ApplicationManager::SaveAll(ofstream& fout)
+{
+	fout << UI.DrawColor << " " << UI.FillColor << " " << UI.BkGrndColor << endl;
+	fout << FiguresCount() << endl;
+	for (int i = 0; i < FiguresCount(); i++)
+		FigList[i]->Save(fout);
+}
+
 int ApplicationManager::CountFigColor(CFigure *Fig)
 {
 	int counter = 0;
@@ -350,6 +370,11 @@ void ApplicationManager::PlayActionSound(ActionType ActType) const
 bool ApplicationManager::ShouldPlayActionSound() const
 {
 	return PlayActionSoundEnabled;
+}
+
+void ApplicationManager::SetPlayActionSoundState(bool state)
+{
+	PlayActionSoundEnabled = state;
 }
 
 bool ApplicationManager::AddActionToUndoables(Action *pAct, bool flag)

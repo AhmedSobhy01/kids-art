@@ -21,15 +21,11 @@ enum DrawMenuItem // The items of the draw menu (ordered)
 	ITM_TRIANGLE,		  // Draw Triangle
 	ITM_CIRCLE,			  // Draw Circle
 	ITM_HEXAGON,		  // Draw Hexagon
-	ITM_BORDER_WIDTH,	  // Change Selected Shape Border Width
 	ITM_OUTLINE_COLOR,	  // Outline Color Menu
 	ITM_FILL_COLOR,		  // Fill Color Menu
 	ITM_SELECT,			  // Select Shape
-	ITM_OUTLINE,		  // Outline Selected Shape
-	ITM_FILL,			  // Fill Selected Shape
 	ITM_REMOVE,			  // Remove Selected Shape
 	ITM_MOVE,			  // Move Selected Shape
-	ITM_RESIZE,			  // Resize Selected Shape
 	ITM_DRAG_MOVE,		  // Move Selected Shape By Dragging
 	ITM_DRAG_RESIZE,	  // Resize Selected Shape By Dragging
 	ITM_START_RECORDING,  // Start Recording
@@ -41,6 +37,7 @@ enum DrawMenuItem // The items of the draw menu (ordered)
 	ITM_CLEAR_ALL,		  // Clear Canvas
 	ITM_OPEN,			  // Open Graph
 	ITM_SAVE,			  // Save Graph
+	ITM_TOGGLE_SOUND,	  // Toggle Action Sound Playing
 	ITM_EXIT,			  // Exit
 
 	DRAW_ITM_COUNT, // No of menu items

@@ -21,7 +21,6 @@ public:
 	virtual void ReadActionParameters();
 	virtual bool Execute();
 	void StartingMessage();		// To print the starting message
-	void SetFigureStats();		// Converts the enum values of the figures properties and assigns them into the string members
 	void GetAction();			// Gets the user action
 	void FinalMsg();
 };
