@@ -94,7 +94,9 @@ void CTriangle::Load(ifstream& fin)
 }
 
 void CTriangle::PrintInfo(Output* pOut) {
-	string info = "Triangle: Vertex1 = (";
+	string info = "Triangle: ID = ";
+	info += to_string(ID);
+	info += ", Vertex1 = (";
 	info += to_string(P1.x);
 	info += ", ";
 	info += to_string(P1.y);
