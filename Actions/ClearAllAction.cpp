@@ -2,6 +2,7 @@
 #include "..\Figures\CFigure.h"
 #include "..\ApplicationManager.h"
 #include "UndoableAction.h"
+#include "..\Figures\CFigure.h"
 
 ClearAllAction::ClearAllAction(ApplicationManager* pApp) :Action(pApp) {
 
@@ -19,6 +20,7 @@ bool ClearAllAction::Execute() {
 	pManager->ResetColors();
 	pManager->ClearFigures();
 	pManager->GetOutput()->ClearStatusBar();
+	CFigure::ResetID();
 
 	return true;
 }
