@@ -1,47 +1,37 @@
 #include "PickByShapeAction.h"
-#include "SwitchToDrawAction.h"
-#include "PickByColorAction.h"
-#include "PickByShapeAndColorAction.h"
-#include "ExitAction.h"
 
 PickByShapeAction::PickByShapeAction(ApplicationManager* pApp) : Action(pApp)
 { }
 
-void PickByShapeAction::ReadActionParameters() {				// Generates random figure and counts it
+void PickByShapeAction::ReadActionParameters() {				// Initializes the data members
 	CorrectPicks = 0;
 	Counter = 0;
-	ChangedAction = false;
 	RandomFigure = pManager->GetRandomFigure();
 	RandomFigureNumber = pManager->CountFigure(RandomFigure);
 	RandomFigureType = RandomFigure->Type();
 }
 
-void PickByShapeAction::StartingMessage() {						// Prints a message according to the random asked shape
+void PickByShapeAction::StartingMessage() {
 	Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Pick all the " + RandomFigureType + "s. " + to_string(RandomFigureNumber) + " exist");
 }
 
-void PickByShapeAction::FinalMsg() {
+void PickByShapeAction::FinalMsg(bool& ChangedAction) {
 	Output* pOut = pManager->GetOutput();
-	if (Counter == CorrectPicks) pOut->PrintMessage("Congratulations! All your picks are correct! (" + to_string(CorrectPicks) + "/" + to_string(CorrectPicks) + ")");
+	if (Counter == CorrectPicks && !ChangedAction) 
+		pOut->PrintMessage("Congratulations! All your picks are correct! (" + to_string(CorrectPicks) + "/" + to_string(CorrectPicks) + ")");
 	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks.");
 }
 
-void PickByShapeAction::GetAction()
-{
+void PickByShapeAction::GetClickedAction(bool& ChangedAction, bool& EmptyClick) {
 	ChangedAction = false;
 	EmptyClick = false;
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
-	if (P.y >= 0 && P.y <= UI.StatusBarHeight) {
-		ActionType Act = pIn->GetAction(P);
-		if (Act == TO_DRAW || (Act >= PICK_BY_SHAPE && Act <= PICK_BY_SHAPE_COLOR)) {
-			pManager->ExecuteAction(Act);
-			ChangedAction = true;
-			if (Act == TO_DRAW) pOut->PrintMessage("Game Over. Switch to Draw Mode.");
-		}
-		else EmptyClick = true;
-	}
+
+	ActionType Act = pIn->GetAction(P);
+	if (Act == TO_DRAW || (Act >= PICK_BY_COLOR && Act <= PICK_BY_SHAPE_COLOR) || Act == EXIT)
+		ChangedAction = true;
 	else {
 		CFigure* ClickedFigure = pManager->GetFigure(P.x, P.y);
 		if (ClickedFigure == NULL || ClickedFigure->isHidden()) {
@@ -58,12 +48,11 @@ void PickByShapeAction::GetAction()
 }
 
 bool PickByShapeAction::Execute() {
-	pManager->UnhideFigures();
-	pManager->UpdateInterface();
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+	bool ChangedAction, EmptyClick;
 
-	FiguresNumber = pManager->FiguresCount();
+	int FiguresNumber = pManager->FiguresCount();
 	if (FiguresNumber == 0) {
 		pOut->PrintMessage("Switch to Draw Mode and draw some shapes to play with.");
 		return false;
@@ -73,15 +62,16 @@ bool PickByShapeAction::Execute() {
 
 	while (CorrectPicks < RandomFigureNumber && Counter != FiguresNumber) {
 		pIn->GetPointClicked(P.x, P.y);
-		GetAction();
-
+		GetClickedAction(ChangedAction, EmptyClick);
 		if (EmptyClick) continue;
-		else if (ChangedAction) return false;
+		else if (ChangedAction) break;
+
 		pManager->UpdateInterface();
 		Counter++;
 	}
-	FinalMsg();
+	FinalMsg(ChangedAction);
 	pManager->UnhideFigures();
 	pManager->UpdateInterface();
+
 	return true;
 }

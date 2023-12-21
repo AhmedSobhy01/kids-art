@@ -20,7 +20,7 @@ void PickByColorAction::FinalMsg(bool& ChangedAction) {
 	Output* pOut = pManager->GetOutput();
 	if ((Counter == CorrectPicks) && !ChangedAction) 
 		pOut->PrintMessage("Congratulations! All your picks are correct! (" + to_string(CorrectPicks) + "/" + to_string(CorrectPicks) + ")");
-	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks");
+	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks.");
 }
 
 void PickByColorAction::GetClickedAction(bool& ChangedAction, bool& EmptyClick) {
