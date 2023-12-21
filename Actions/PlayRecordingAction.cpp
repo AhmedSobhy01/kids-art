@@ -22,6 +22,8 @@ bool PlayRecordingAction::Execute()
 	}
 	else
 	{
+		pManager->SetPlayingRecordingState(true);
+
 		Action* pClearAction = new ClearAllAction(pManager);
 		pClearAction->Execute();
 		delete pClearAction;
@@ -36,6 +38,8 @@ bool PlayRecordingAction::Execute()
 
 			pOut->PrintMessage("Replayed");
 		}
+
+		pManager->SetPlayingRecordingState(false);
 		return true;
 	}
 }

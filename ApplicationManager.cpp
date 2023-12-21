@@ -30,7 +30,7 @@
 #include "Actions\DragMoveAction.h"
 
 // Constructor
-ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
+ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), IsPlayingRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
 {
 	// Create Input and output
 	pOut = new Output;
@@ -234,6 +234,14 @@ bool ApplicationManager::CanRecord() const
 bool ApplicationManager::IsCurrentlyRecording() const
 {
 	return IsRecording;
+}
+void ApplicationManager::SetPlayingRecordingState(bool state)
+{
+	IsPlayingRecording = state;
+}
+bool ApplicationManager::IsCurrentlyPlayingRecording() const
+{
+	return IsPlayingRecording;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure *ApplicationManager::GetFigure(int x, int y) const
