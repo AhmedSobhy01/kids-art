@@ -14,8 +14,7 @@ void SwitchToDrawAction::ReadActionParameters()
 bool SwitchToDrawAction::Execute() {
 	Output* pOut = pManager->GetOutput();
 	pOut->CreateDrawToolBar();
-	pManager->UnhideFigures();
-	pManager->UpdateInterface();
+	pOut->ClearStatusBar();
 	return true;
 }
 

@@ -7,13 +7,12 @@ void PickByColorAction::ReadActionParameters() {												// Initializes the d
 	CorrectPicks = 0;
 	Counter = 0;
 	RandomFigure = pManager->GetRandomFigure();
-	RandomColor = RandomFigure->GetFillClr();
-	RandomColorNumber = pManager->CountColor(RandomColor);
+	RandomColorNumber = pManager->CountColor(RandomFigure->GetFillClr());
 }
 
 void PickByColorAction::StartingMessage() {
 	Output* pOut = pManager->GetOutput();
-	pOut->PrintMessage("Pick all the " + RandomColor.ReturnColor() + " figures. " + to_string(RandomColorNumber) + " exist.");
+	pOut->PrintMessage("Pick all the " + RandomFigure->GetFillClr().ReturnColor() + " figures. " + to_string(RandomColorNumber) + " exist.");
 }
 
 void PickByColorAction::FinalMsg(bool& ChangedAction) {
@@ -38,7 +37,7 @@ void PickByColorAction::GetClickedAction(bool& ChangedAction, bool& EmptyClick) 
 			EmptyClick = true;
 			return;
 		}
-		else if (ClickedFigure->GetFillClr() == RandomColor) {
+		else if (ClickedFigure->GetFillClr() == RandomFigure->GetFillClr()) {
 			CorrectPicks++;
 			pOut->PrintMessage("Correct.");
 		}

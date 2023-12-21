@@ -6,7 +6,6 @@
 class PickByColorAction: public Action {
 private:
 	Point P;
-	color RandomColor;
 	CFigure* RandomFigure;
 	int CorrectPicks;
 	int Counter;							// Counter for total picks made
