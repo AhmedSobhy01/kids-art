@@ -14,6 +14,7 @@ void SwitchToPlayAction::ReadActionParameters()
 bool SwitchToPlayAction::Execute() {
 	Output* pOut = pManager->GetOutput();
 	pOut->CreatePlayToolBar();
+	pOut->ClearStatusBar();
 
 	return true;
 }

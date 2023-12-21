@@ -194,6 +194,8 @@ ActionType Input::GetAction(Point& P)
 			return PICK_BY_SHAPE_COLOR;
 		case ITM_EXIT_PLAY:
 			return EXIT;
+		default:
+			return EMPTY;
 		}
 	}
 	else return DRAWING_AREA;

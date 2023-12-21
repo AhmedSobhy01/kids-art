@@ -15,6 +15,7 @@ bool SwitchToDrawAction::Execute() {
 	Output* pOut = pManager->GetOutput();
 	pOut->CreateDrawToolBar();
 	pOut->ClearStatusBar();
+
 	return true;
 }
 
