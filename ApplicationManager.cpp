@@ -267,8 +267,11 @@ void ApplicationManager::ClearFigures()
 {
 	int size = FigList.size();
 
-	for (int i = 0; i < size; i++)
-		delete FigList.pop_back();
+	for (int i = 0; i < size; i++) {
+		CFigure* pFig = FigList.pop_back();
+
+		if (pFig->CanBeDeleted()) delete pFig;
+	}
 }
 
 void ApplicationManager::SaveAll(ofstream& fout)
