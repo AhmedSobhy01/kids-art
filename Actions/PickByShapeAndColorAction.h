@@ -23,5 +23,7 @@ public:
 	void StartingMessage();		// To print the starting message
 	void GetAction();			// Gets the user action
 	void FinalMsg();
+
+	virtual bool ShouldRecord() const;
 };
 #endif

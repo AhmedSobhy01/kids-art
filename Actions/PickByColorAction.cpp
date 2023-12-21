@@ -82,3 +82,8 @@ bool PickByColorAction::Execute() {
 	pManager->UpdateInterface();
 	return true;
 }
+
+bool PickByColorAction::ShouldRecord() const
+{
+	return false;
+}

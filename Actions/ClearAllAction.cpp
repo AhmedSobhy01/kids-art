@@ -15,7 +15,7 @@ void ClearAllAction::ReadActionParameters() {
 bool ClearAllAction::Execute() {
 	pManager->ClearUndoableActionsStack();
 	pManager->ClearRedoableActionsStack();
-	pManager->ClearRecordedActionsList();
+	//pManager->ClearRecordedActionsList();
 	pManager->SetRecordingState(false);
 	pManager->ResetColors();
 	pManager->ClearFigures();

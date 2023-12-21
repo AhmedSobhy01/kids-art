@@ -27,3 +27,8 @@ bool SaveAction::Execute()
 	}
 	return 0;
 }
+
+bool SaveAction::ShouldRecord() const
+{
+	return false;
+}

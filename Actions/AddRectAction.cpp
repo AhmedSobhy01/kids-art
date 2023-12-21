@@ -77,3 +77,8 @@ bool AddRectAction::Execute()
 
 	return false;
 }
+
+void AddRectAction::PlayRecord()
+{
+	pManager->AddFigure(Figure);
+}

@@ -51,3 +51,8 @@ bool AddHexagonAction::Execute() {
 
 	return false;
 }
+
+void AddHexagonAction::PlayRecord()
+{
+	pManager->AddFigure(Figure);
+}

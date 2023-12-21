@@ -11,6 +11,8 @@ public:
 
     virtual void ReadActionParameters();
     virtual bool Execute();
+
+    virtual bool ShouldRecord() const;
 };
 
 #endif

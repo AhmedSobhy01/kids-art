@@ -73,3 +73,8 @@ bool AddTriangleAction::Execute() {
 
 	return false;
 }
+
+void AddTriangleAction::PlayRecord()
+{
+	pManager->AddFigure(Figure);
+}

@@ -47,3 +47,8 @@ bool AddSquareAction::Execute() {
 
 	return false;
 }
+
+void AddSquareAction::PlayRecord()
+{
+	pManager->AddFigure(Figure);
+}

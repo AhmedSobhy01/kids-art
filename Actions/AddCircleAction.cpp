@@ -55,3 +55,8 @@ bool AddCircleAction::Execute() {
 
 	return false;
 }
+
+void AddCircleAction::PlayRecord()
+{
+	pManager->AddFigure(Figure);
+}

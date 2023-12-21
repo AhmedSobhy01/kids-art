@@ -45,6 +45,12 @@ bool ChangeFillColorAction::Execute()
 	return false;
 }
 
+void ChangeFillColorAction::PlayRecord()
+{
+	if (Figure)
+		Figure->ChngFillClr(NewColor);
+}
+
 void ChangeFillColorAction::Undo()
 {
 	if (Figure)

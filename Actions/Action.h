@@ -28,6 +28,8 @@ public:
 		return true; // By default, record action
 	}
 
+	virtual void PlayRecord() {};
+
 	// Reference
 	void IncrementReference()
 	{
