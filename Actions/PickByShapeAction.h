@@ -7,7 +7,6 @@ class PickByShapeAction: public Action {
 private:
 	Point P;
 	CFigure* RandomFigure;
-	string RandomFigureType;
 	int CorrectPicks;
 	int Counter;							// Counter for total picks made
 	int RandomFigureNumber;					// Integer to store how many instances for the random figure to be picked

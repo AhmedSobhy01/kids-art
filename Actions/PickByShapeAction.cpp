@@ -8,12 +8,11 @@ void PickByShapeAction::ReadActionParameters() {				// Initializes the data memb
 	Counter = 0;
 	RandomFigure = pManager->GetRandomFigure();
 	RandomFigureNumber = pManager->CountFigure(RandomFigure);
-	RandomFigureType = RandomFigure->Type();
 }
 
 void PickByShapeAction::StartingMessage() {
 	Output* pOut = pManager->GetOutput();
-	pOut->PrintMessage("Pick all the " + RandomFigureType + "s. " + to_string(RandomFigureNumber) + " exist");
+	pOut->PrintMessage("Pick all the " + RandomFigure->Type() + "s. " + to_string(RandomFigureNumber) + " exist");
 }
 
 void PickByShapeAction::FinalMsg(bool& ChangedAction) {
