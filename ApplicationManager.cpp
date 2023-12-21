@@ -12,6 +12,7 @@
 #include "Actions\SwitchToPlayAction.h"
 #include "Actions\StartRecordingAction.h"
 #include "Actions\StopRecordingAction.h"
+#include "Actions\PlayRecordingAction.h"
 #include "Actions\UndoAction.h"
 #include "Actions\RedoAction.h"
 #include "Actions\ChangeFillColorAction.h"
@@ -87,6 +88,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case STOP_RECORDING:
 		pAct = new StopRecordingAction(this);
+		break;
+	case PLAY_RECORDING:
+		pAct = new PlayRecordingAction(this);
 		break;
 	case UNDO:
 		pAct = new UndoAction(this);
