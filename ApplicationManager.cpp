@@ -12,6 +12,7 @@
 #include "Actions\SwitchToPlayAction.h"
 #include "Actions\StartRecordingAction.h"
 #include "Actions\StopRecordingAction.h"
+#include "Actions\PlayRecordingAction.h"
 #include "Actions\UndoAction.h"
 #include "Actions\RedoAction.h"
 #include "Actions\ChangeFillColorAction.h"
@@ -30,7 +31,7 @@
 #include "Actions\DragResizeAction.h"
 
 // Constructor
-ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
+ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), IsPlayingRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
 {
 	// Create Input and output
 	pOut = new Output;
@@ -88,6 +89,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case STOP_RECORDING:
 		pAct = new StopRecordingAction(this);
+		break;
+	case PLAY_RECORDING:
+		pAct = new PlayRecordingAction(this);
 		break;
 	case UNDO:
 		pAct = new UndoAction(this);
@@ -235,6 +239,14 @@ bool ApplicationManager::IsCurrentlyRecording() const
 {
 	return IsRecording;
 }
+void ApplicationManager::SetPlayingRecordingState(bool state)
+{
+	IsPlayingRecording = state;
+}
+bool ApplicationManager::IsCurrentlyPlayingRecording() const
+{
+	return IsPlayingRecording;
+}
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
@@ -271,8 +283,11 @@ void ApplicationManager::ClearFigures()
 {
 	int size = FigList.size();
 
-	for (int i = 0; i < size; i++)
-		delete FigList.pop_back();
+	for (int i = 0; i < size; i++) {
+		CFigure* pFig = FigList.pop_back();
+
+		if (pFig->CanBeDeleted()) delete pFig;
+	}
 }
 
 void ApplicationManager::SaveAll(ofstream& fout)

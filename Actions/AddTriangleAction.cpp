@@ -73,3 +73,12 @@ bool AddTriangleAction::Execute() {
 
 	return false;
 }
+
+void AddTriangleAction::PlayRecord()
+{
+	Point center = { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
+	Figure->SetCenter(center);
+	Figure->ChngFillClr(UI.FillColor);
+	Figure->ChngDrawClr(UI.DrawColor);
+	pManager->AddFigure(Figure);
+}

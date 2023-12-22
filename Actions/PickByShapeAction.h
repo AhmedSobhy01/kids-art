@@ -22,5 +22,7 @@ public:
 	void StartingMessage();				// Prints the starting message according to the shape type
 	void GetAction();					// Gets the user action
 	void FinalMsg();
+
+	virtual bool ShouldRecord() const;
 };
 #endif

@@ -6,10 +6,12 @@
 
 class ChangeBackgroundColorAction : public Action
 {
+	color BkGrndColor;
 public:
 	ChangeBackgroundColorAction(ApplicationManager*);
 	virtual void ReadActionParameters();
 	virtual bool Execute();
+	virtual void PlayRecord();
 };
 
 #endif 

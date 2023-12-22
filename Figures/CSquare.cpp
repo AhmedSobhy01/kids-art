@@ -6,6 +6,7 @@ const int CSquare::squareSize = 150;
 CSquare::CSquare() :CFigure()
 {
 	currentSquareSize = squareSize;
+	type = "Square";
 }
 
 CSquare::CSquare(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
@@ -50,7 +51,7 @@ void CSquare::Save(ofstream& fout)
 {
 	if (fout.is_open())
 	{
-		fout << "SQUARE" << " " << ID << " " << center.x << " " << center.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << FigGfxInfo.isFilled << " " << Selected << endl;
+		fout << "SQUARE" << " " << ID << " " << center.x << " " << center.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
 		return;
 	}
 }
@@ -59,7 +60,9 @@ void CSquare::Load(ifstream& fin)
 {
 	if (fin.is_open())
 	{
-		fin >> ID >> center.x >> center.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
+		fin >> ID >> center.x >> center.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
+		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
+			FigGfxInfo.isFilled = false;
 		return;
 	}
 }

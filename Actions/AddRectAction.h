@@ -15,6 +15,7 @@ public:
 	bool Validate();
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();
+	virtual void PlayRecord();
 	
 	//Add rectangle to the ApplicationManager
 	virtual bool Execute();

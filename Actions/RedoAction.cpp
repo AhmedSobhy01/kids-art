@@ -35,3 +35,8 @@ bool RedoAction::Execute()
 
 	return true;
 }
+
+bool RedoAction::ShouldRecord() const
+{
+	return false;
+}

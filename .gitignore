@@ -236,3 +236,4 @@ MigrationBackup/
 FodyWeavers.xsd
 *.code-workspace
 *.sln.iml
+Saved Graphs/*

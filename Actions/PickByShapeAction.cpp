@@ -85,3 +85,8 @@ bool PickByShapeAction::Execute() {
 	pManager->UpdateInterface();
 	return true;
 }
+
+bool PickByShapeAction::ShouldRecord() const
+{
+	return false;
+}

@@ -2,6 +2,7 @@
 
 CRectangle::CRectangle() :CFigure()
 {
+	type = "Rectangle";
 }
 
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
@@ -56,7 +57,7 @@ void CRectangle::Save(ofstream& fout)
 {
 	if (fout.is_open())
 	{
-		fout << "RECTANGLE" << " " << ID << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << FigGfxInfo.isFilled << " " << Selected << endl;
+		fout << "RECTANGLE" << " " << ID << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
 		return;
 	}
 }
@@ -65,7 +66,9 @@ void CRectangle::Load(ifstream& fin)
 {
 	if (fin.is_open())
 	{
-		fin >> ID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
+		fin >> ID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
+		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
+			FigGfxInfo.isFilled = false;
 		return;
 	}
 }

@@ -46,14 +46,29 @@ bool ChangeOutlineColorAction::Execute()
 	return false;
 }
 
+void ChangeOutlineColorAction::PlayRecord()
+{
+	if (Figure)
+	{
+		Figure->ChngDrawClr(NewColor);
+		UI.DrawColor = NewColor;
+	}
+}
+
 void ChangeOutlineColorAction::Undo()
 {
 	if (Figure)
+	{
 		Figure->ChngDrawClr(OldColor);
+		UI.DrawColor = OldColor;
+	}
 }
 
 void ChangeOutlineColorAction::Redo()
 {
 	if (Figure)
+	{
 		Figure->ChngDrawClr(NewColor);
+		UI.DrawColor = NewColor;
+	}
 }
