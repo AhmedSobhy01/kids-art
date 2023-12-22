@@ -4,6 +4,7 @@ const int CHexagon::hexagonSize = 80;
 
 CHexagon::CHexagon() :CFigure()
 {
+	type = "Hexagon";
 }
 
 CHexagon::CHexagon(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
@@ -58,14 +59,14 @@ void CHexagon::SetCenter(Point c) {
 }
 
 bool CHexagon::Validate(Point c) {
-	return (c.y - hexagonSize / 2 * sqrt(3)) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3)) <= (UI.height - UI.StatusBarHeight);
+	return (c.y - hexagonSize / 2 * sqrt(3)-1) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3) +1) < (UI.height - UI.StatusBarHeight);
 }
 
 void CHexagon::Save(ofstream& fout)
 {
 	if (fout.is_open())
 	{
-		fout << "HEXAGON" << " " << ID << " " << center.x << " " << center.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << FigGfxInfo.isFilled << " " << Selected << endl;
+		fout << "HEXAGON" << " " << ID << " " << center.x << " " << center.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
 		return;
 	}
 }
@@ -74,7 +75,9 @@ void CHexagon::Load(ifstream& fin)
 {
 	if (fin.is_open())
 	{
-		fin >> ID >> center.x >> center.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
+		fin >> ID >> center.x >> center.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
+		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
+			FigGfxInfo.isFilled = false;
 		return;
 	}
 }

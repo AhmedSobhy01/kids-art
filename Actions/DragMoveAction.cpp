@@ -57,6 +57,12 @@ bool DragMoveAction::Execute() {
 	return true;
 }
 
+void DragMoveAction::PlayRecord()
+{
+	if (Figure != NULL)
+		Figure->SetCenter(NewCenter);
+}
+
 
 void DragMoveAction::Undo()
 {

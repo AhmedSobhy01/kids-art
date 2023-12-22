@@ -74,3 +74,8 @@ bool PickByShapeAndColorAction::Execute() {
 
 	return true;
 }
+
+bool PickByShapeAndColorAction::ShouldRecord() const
+{
+	return false;
+}

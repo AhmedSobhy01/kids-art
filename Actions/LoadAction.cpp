@@ -14,7 +14,7 @@ void LoadAction::ReadActionParameters()
 {
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
-	pOut->PrintMessage("Loading File: Enter File Name");
+	pOut->PrintMessage("Loading File: Enter File Name or Press esc to Cancel");
 	fName = pIn->GetString(pOut);
 }
 
@@ -23,7 +23,7 @@ bool LoadAction::Execute()
 	Output* pOut = pManager->GetOutput();
 	ReadActionParameters();
 	ifstream fin;
-	fin.open(fName);
+	fin.open("Saved Graphs/" + fName);
 	if (fin.is_open())
 	{
 		Action* pAct;

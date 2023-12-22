@@ -37,3 +37,8 @@ bool UndoAction::Execute()
 
 	return true;
 }
+
+bool UndoAction::ShouldRecord() const
+{
+	return false;
+}

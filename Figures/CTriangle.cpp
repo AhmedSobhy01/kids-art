@@ -4,6 +4,7 @@
 
 CTriangle::CTriangle() :CFigure()
 {
+	type = "Triangle";
 }
 
 CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
@@ -79,7 +80,7 @@ void CTriangle::Save(ofstream& fout)
 {
 	if (fout.is_open())
 	{
-		fout << "TRIANGLE" << " " << ID << " " << P1.x << " " << P1.y << " " << P2.x << " " << P2.y << " " << P3.x << " " << P3.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << FigGfxInfo.isFilled << " " << Selected << endl;
+		fout << "TRIANGLE" << " " << ID << " " << P1.x << " " << P1.y << " " << P2.x << " " << P2.y << " " << P3.x << " " << P3.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
 		return;
 	}
 }
@@ -88,7 +89,9 @@ void CTriangle::Load(ifstream& fin)
 {
 	if (fin.is_open())
 	{
-		fin >> ID >> P1.x >> P1.y >> P2.x >> P2.y >> P3.x >> P3.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
+		fin >> ID >> P1.x >> P1.y >> P2.x >> P2.y >> P3.x >> P3.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
+		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
+			FigGfxInfo.isFilled = false;
 		return;
 	}
 }

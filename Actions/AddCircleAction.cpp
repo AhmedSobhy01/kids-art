@@ -55,3 +55,11 @@ bool AddCircleAction::Execute() {
 
 	return false;
 }
+
+void AddCircleAction::PlayRecord()
+{
+	Figure->SetCenter(center);
+	Figure->ChngFillClr(UI.FillColor);
+	Figure->ChngDrawClr(UI.DrawColor);
+	pManager->AddFigure(Figure);
+}

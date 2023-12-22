@@ -74,3 +74,8 @@ bool PickByColorAction::Execute() {
 
 	return true;
 }
+
+bool PickByColorAction::ShouldRecord() const
+{
+	return false;
+}

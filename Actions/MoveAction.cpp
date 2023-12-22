@@ -53,6 +53,12 @@ bool MoveAction::Execute(){
 	return false;
 }
 
+void MoveAction::PlayRecord()
+{
+	if (Figure != NULL)
+		Figure->SetCenter(NewCenter);
+}
+
 void MoveAction::Undo()
 {
 	if (Figure != NULL)

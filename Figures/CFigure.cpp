@@ -10,6 +10,7 @@ CFigure::CFigure()
 	Hidden = false;
 	last_ID++;
 	ID = last_ID;
+	ReferenceCount = 0;
 }
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)

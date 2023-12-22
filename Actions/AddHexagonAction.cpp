@@ -51,3 +51,11 @@ bool AddHexagonAction::Execute() {
 
 	return false;
 }
+
+void AddHexagonAction::PlayRecord()
+{
+	Figure->SetCenter(center);
+	Figure->ChngFillClr(UI.FillColor);
+	Figure->ChngDrawClr(UI.DrawColor);
+	pManager->AddFigure(Figure);
+}

@@ -1,8 +1,6 @@
 #include "Output.h"
 #include <cmath>
 
-#include <iostream>
-
 Output::Output()
 {
 	// Initialize user interface parameters
