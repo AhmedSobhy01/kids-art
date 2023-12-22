@@ -2,6 +2,7 @@
 
 CRectangle::CRectangle() :CFigure()
 {
+	type = "Rectangle";
 }
 
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)

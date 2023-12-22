@@ -5,6 +5,7 @@ const int CSquare::squareSize = 150;
 
 CSquare::CSquare() :CFigure()
 {
+	type = "Square";
 }
 
 CSquare::CSquare(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {

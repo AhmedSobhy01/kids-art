@@ -4,6 +4,7 @@
 
 CCircle::CCircle() :CFigure()
 {
+	type = "Circle";
 }
 
 CCircle::CCircle(Point center, Point radius, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
