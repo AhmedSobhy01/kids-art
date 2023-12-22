@@ -12,7 +12,7 @@ AddHexagonAction::AddHexagonAction(ApplicationManager* pApp): UndoableFigureActi
 	center.y = 200;
 }
 bool AddHexagonAction::Validate() {
-	int hexagonSize = CHexagon::getHexagonSize();
+	int hexagonSize = CHexagon::GetHexagonSize();
 
 	return (center.y - hexagonSize / 2 * sqrt(3)) > UI.ToolBarHeight && (center.y + hexagonSize / 2 * sqrt(3)) <= (UI.height - UI.StatusBarHeight);
 }

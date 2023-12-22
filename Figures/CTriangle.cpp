@@ -113,3 +113,6 @@ void CTriangle::PrintInfo(Output* pOut) {
 	info += ")";
 	pOut->PrintMessage(info);
 }
+
+bool CTriangle::GetCorner(Point, int&) { return false; }
+void CTriangle::SetCorner(Point, int) {}

@@ -89,3 +89,6 @@ void CRectangle::PrintInfo(Output* pOut) {
 	info += to_string(abs(Corner1.x - Corner2.x));
 	pOut->PrintMessage(info);
 }
+
+bool CRectangle::GetCorner(Point, int&) { return false; }
+void CRectangle::SetCorner(Point, int) {}

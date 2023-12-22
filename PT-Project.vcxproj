@@ -150,6 +150,7 @@
     <ClCompile Include="Actions\DeleteAction.cpp" />
     <ClCompile Include="Actions\DragMoveAction.cpp" />
     <ClCompile Include="Actions\ExitAction.cpp" />
+    <ClCompile Include="Actions\DragResizeAction.cpp" />
     <ClCompile Include="Figures\CHexagon.cpp" />
     <ClCompile Include="Figures\CCircle.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
@@ -228,6 +229,7 @@
     <ClInclude Include="Actions\DeleteAction.h" />
     <ClInclude Include="Actions\DragMoveAction.h" />
     <ClInclude Include="Actions\ExitAction.h" />
+    <ClInclude Include="Actions\DragResizeAction.h" />
     <ClInclude Include="Figures\CHexagon.h" />
     <ClInclude Include="Figures\CCircle.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />

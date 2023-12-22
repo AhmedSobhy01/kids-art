@@ -5,18 +5,20 @@ const int CSquare::squareSize = 150;
 
 CSquare::CSquare() :CFigure()
 {
+	currentSquareSize = squareSize;
 }
 
 CSquare::CSquare(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	this->center = center;
 	type = "Square";
+	currentSquareSize = squareSize;
 }
 
 void CSquare::Draw(Output* pOut) const {
-	pOut->DrawSquare(center, squareSize, FigGfxInfo, Selected);
+	pOut->DrawSquare(center, currentSquareSize, FigGfxInfo, Selected);
 }
 
-int CSquare::getSquareSize() {
+int CSquare::GetSquareSize() {
 	return squareSize;
 }
 
@@ -24,10 +26,10 @@ bool CSquare::CheckSelected(int x, int y) {
 	if (Hidden) return false;
 
 	Point p1, p2;
-	p1.x = center.x - squareSize / 2;
-	p1.y = center.y - squareSize / 2;
-	p2.x = center.x + squareSize / 2;
-	p2.y = center.y + squareSize / 2;
+	p1.x = center.x - currentSquareSize / 2;
+	p1.y = center.y - currentSquareSize / 2;
+	p2.x = center.x + currentSquareSize / 2;
+	p2.y = center.y + currentSquareSize / 2;
 	bool cond1 = (p1.x <= x) && (x <= p2.x);
 	bool cond2 = (p1.y <= y) && (y <= p2.y);
 	return cond1 && cond2;
@@ -41,7 +43,7 @@ void CSquare::SetCenter(Point center) {
 	this->center = center;
 }
 bool CSquare::Validate(Point c) {
-	return (c.y - squareSize / 2 +1) > UI.ToolBarHeight && (c.y + squareSize / 2 -1) < (UI.height - UI.StatusBarHeight);
+	return (c.y - currentSquareSize / 2 +1) > UI.ToolBarHeight && (c.y + currentSquareSize / 2 -1) < (UI.height - UI.StatusBarHeight);
 }
 
 void CSquare::Save(ofstream& fout)
@@ -72,6 +74,29 @@ void CSquare::PrintInfo(Output* pOut) {
 	info += ", ";
 	info += to_string(center.y);
 	info += "), Length = ";
-	info += to_string(squareSize);
+	info += to_string(currentSquareSize);
 	pOut->PrintMessage(info);
+}
+bool CSquare::GetCorner(Point p, int& index) { 
+	int Xarr[2] = { center.x - currentSquareSize / 2 , center.x + currentSquareSize / 2 };
+	int Yarr[2] = { center.y - currentSquareSize / 2 , center.y + currentSquareSize / 2 };
+	int errx, erry;
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 2; j++) {
+			errx = abs(p.x - Xarr[i]);
+			erry = abs(p.y - Yarr[j]);
+			if (errx < 2 && erry < 2) {
+				index = 0;
+				return true;
+			}
+		}
+	}
+	return false; 
+}
+void CSquare::SetCorner(Point p, int index) {
+	int size = currentSquareSize;
+	currentSquareSize = sqrt((pow(p.x - center.x, 2) + pow(p.y - center.y, 2))*2);
+	if (!Validate(center))currentSquareSize = size;
+
+
 }

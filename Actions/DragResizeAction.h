@@ -1,9 +1,9 @@
 #ifndef DRAGRESIZEACTION_H
 #define DRAGRESIZEACTION_H
-#include "Action.h"
+#include "UndoableAction.h"
 #include "../Figures/CFigure.h"
 class DragResizeAction :
-    public Action
+    public UndoableAction
 {
     Point NewCorner;
     Point OldCorner;
