@@ -28,7 +28,7 @@ ostream& operator<<(ostream& c, const color& col)
 	else if (col == LIGHTGOLDENRODYELLOW)
 		c << "LIGHTGOLDENRODYELLOW";
 	else
-		c << "TRANSPARENT_COLOR";
+		c << "NO_FILL";
 	return c;
 }
 
