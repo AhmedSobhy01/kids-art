@@ -8,7 +8,6 @@ class DragMoveAction : public UndoableAction
 {
     Point NewCenter;
     Point OldCenter;
-    Point ValidCenter;
     CFigure* Figure;
 
 public:
