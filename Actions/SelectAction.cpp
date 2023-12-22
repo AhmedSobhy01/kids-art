@@ -41,3 +41,8 @@ bool SelectAction::Execute() {
 	return true;
 
 }
+
+bool SelectAction::ShouldRecord() const
+{
+	return false;
+}

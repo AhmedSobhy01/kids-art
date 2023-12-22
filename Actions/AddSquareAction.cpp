@@ -47,3 +47,11 @@ bool AddSquareAction::Execute() {
 
 	return false;
 }
+
+void AddSquareAction::PlayRecord()
+{
+	Figure->SetCenter(center);
+	Figure->ChngFillClr(UI.FillColor);
+	Figure->ChngDrawClr(UI.DrawColor);
+	pManager->AddFigure(Figure);
+}

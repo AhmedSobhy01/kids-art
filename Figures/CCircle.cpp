@@ -4,6 +4,7 @@
 
 CCircle::CCircle() :CFigure()
 {
+	type = "Circle";
 }
 
 CCircle::CCircle(Point center, Point radius, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
@@ -40,7 +41,7 @@ void CCircle::Save(ofstream& fout)
 {
 	if (fout.is_open())
 	{
-		fout << "CIRCLE" << " " << ID << " " << center.x << " " << center.y << " " << radius.x << " " << radius.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << " " << FigGfxInfo.isFilled << " " << Selected << endl;
+		fout << "CIRCLE" << " " << ID << " " << center.x << " " << center.y << " " << radius.x << " " << radius.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
 		return;
 	}
 }
@@ -49,7 +50,9 @@ void CCircle::Load(ifstream& fin)
 {
 	if (fin.is_open())
 	{
-		fin >> ID >> center.x >> center.y >> radius.x >> radius.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr >> FigGfxInfo.isFilled >> Selected;
+		fin >> ID >> center.x >> center.y >> radius.x >> radius.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
+		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
+			FigGfxInfo.isFilled = false;
 		return;
 	}
 }

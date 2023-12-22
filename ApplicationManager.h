@@ -25,6 +25,7 @@ private:
 
 	List<Action> RecordedActions; // List of recorded actions
 	bool IsRecording;
+	bool IsPlayingRecording;
 
 	UndoableActionStack UndoableActions; // Stack of actions that can be undone
 	UndoableActionStack RedoableActions; // Stack of actions that can be redone
@@ -79,6 +80,8 @@ public:
 	void SetRecordingState(bool);
 	bool CanRecord() const;
 	bool IsCurrentlyRecording() const;
+	void SetPlayingRecordingState(bool);
+	bool IsCurrentlyPlayingRecording() const;
 
 	// -- Undo & Redo Stacks
 	bool AddActionToUndoables(Action*, bool);

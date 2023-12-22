@@ -45,14 +45,29 @@ bool ChangeFillColorAction::Execute()
 	return false;
 }
 
+void ChangeFillColorAction::PlayRecord()
+{
+	if (Figure)
+	{
+		Figure->ChngFillClr(NewColor);
+		UI.FillColor = NewColor;
+	}
+}
+
 void ChangeFillColorAction::Undo()
 {
 	if (Figure)
+	{
 		Figure->ChngFillClr(OldColor);
+		UI.FillColor = OldColor;
+	}
 }
 
 void ChangeFillColorAction::Redo()
 {
 	if (Figure)
+	{
 		Figure->ChngFillClr(NewColor);
+		UI.FillColor = NewColor;
+	}
 }

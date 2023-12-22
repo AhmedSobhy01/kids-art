@@ -35,6 +35,12 @@ bool DeleteAction::Execute() {
 	return false;
 }
 
+void DeleteAction::PlayRecord()
+{
+	if (Figure != NULL)
+		RemovedFromIndex = pManager->RemoveFigure(Figure);
+}
+
 void DeleteAction::Undo()
 {
 	if (Figure != NULL)
