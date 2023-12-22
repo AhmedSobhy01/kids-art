@@ -54,7 +54,7 @@ public:
 	virtual void Save(ofstream& OutFile) = 0; //Save the figure parameters to the file
 	virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
 	virtual bool GetCorner(Point, int&) = 0;
-	virtual void SetCorner(Point, int) = 0;
+	virtual bool SetCorner(Point, int) = 0;
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
 

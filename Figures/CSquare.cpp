@@ -95,10 +95,13 @@ bool CSquare::GetCorner(Point p, int& index) {
 	}
 	return false;
 }
-void CSquare::SetCorner(Point p, int index) {
+bool CSquare::SetCorner(Point p, int index) {
 	int size = currentSquareSize;
 	currentSquareSize = sqrt((pow(p.x - center.x, 2) + pow(p.y - center.y, 2)) * 2);
-	if (!Validate(center))currentSquareSize = size;
-
+	if (!Validate(center)) { 
+		currentSquareSize = size;
+		return false;
+	};
+	return true;
 
 }

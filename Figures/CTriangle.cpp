@@ -129,13 +129,14 @@ bool CTriangle::GetCorner(Point p, int& index) {
 	}
 	return false;
 }
-void CTriangle::SetCorner(Point p, int index) {
+bool CTriangle::SetCorner(Point p, int index) {
 	Point center = { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
 	Point* Corners[3] = { &P1,&P2,&P3 };
 	Point temp = *Corners[index];
 	*Corners[index] = p;
 	if (!Validate(center)) {
 		*Corners[index] = temp;
+		return false;
 	}
-
+	return true;
 }

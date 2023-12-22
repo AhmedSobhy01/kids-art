@@ -78,8 +78,12 @@ bool CCircle::GetCorner(Point p, int& index) {
 	}
 	return false;
 }
-void CCircle::SetCorner(Point p, int) {
+bool CCircle::SetCorner(Point p, int) {
 	Point radius = this->radius;
 	this->radius = p;
-	if (!Validate(center))this->radius = radius;
+	if (!Validate(center)) {
+		this->radius = radius;
+		return false;
+	}
+	return true;
 }

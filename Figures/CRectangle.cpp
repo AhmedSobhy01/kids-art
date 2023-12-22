@@ -47,8 +47,8 @@ bool CRectangle::Validate(Point c) {
 	Point center = { (Corner1.x + Corner2.x) / 2,(Corner1.y + Corner2.y) / 2 };
 	int dy = c.y - center.y;
 	int dx = c.x - center.x;
-	bool cond1 = Corner1.y + dy >= UI.ToolBarHeight && Corner1.y + dy <= (UI.height - UI.StatusBarHeight);
-	bool cond2 = Corner2.y + dy >= UI.ToolBarHeight && Corner2.y + dy <= (UI.height - UI.StatusBarHeight);
+	bool cond1 = (Corner1.y + dy) > UI.ToolBarHeight && (Corner1.y + dy) < (UI.height - UI.StatusBarHeight);
+	bool cond2 = (Corner2.y + dy) > UI.ToolBarHeight && (Corner2.y + dy) < (UI.height - UI.StatusBarHeight);
 	return cond1 && cond2;
 
 }
@@ -107,7 +107,7 @@ bool CRectangle::GetCorner(Point p, int& index) {
 	}
 	return false;
 }
-void CRectangle::SetCorner(Point p, int index) {
+bool CRectangle::SetCorner(Point p, int index) {
 	Point OldC1, OldC2;
 	OldC1 = Corner1;
 	OldC2 = Corner2;
@@ -119,6 +119,8 @@ void CRectangle::SetCorner(Point p, int index) {
 	if (!Validate(Center)) {
 		Corner1 = OldC1;
 		Corner2 = OldC2;
+		return false;
 	}
+	return true;
 
 }
