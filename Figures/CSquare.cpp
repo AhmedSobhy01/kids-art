@@ -41,7 +41,7 @@ void CSquare::SetCenter(Point center) {
 	this->center = center;
 }
 bool CSquare::Validate(Point c) {
-	return (c.y - squareSize / 2) > UI.ToolBarHeight && (c.y + squareSize / 2) <= (UI.height - UI.StatusBarHeight);
+	return (c.y - squareSize / 2 +1) > UI.ToolBarHeight && (c.y + squareSize / 2 -1) < (UI.height - UI.StatusBarHeight);
 }
 
 void CSquare::Save(ofstream& fout)

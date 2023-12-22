@@ -58,7 +58,7 @@ void CHexagon::SetCenter(Point c) {
 }
 
 bool CHexagon::Validate(Point c) {
-	return (c.y - hexagonSize / 2 * sqrt(3)) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3)) <= (UI.height - UI.StatusBarHeight);
+	return (c.y - hexagonSize / 2 * sqrt(3)-1) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3) +1) < (UI.height - UI.StatusBarHeight);
 }
 
 void CHexagon::Save(ofstream& fout)
