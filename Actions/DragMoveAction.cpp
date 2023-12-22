@@ -31,7 +31,6 @@ bool DragMoveAction::Execute() {
 	bool buttonDown = false;
 	while (!buttonDown || !Figure->CheckSelected(NewCenter.x, NewCenter.y)) {
 		buttonDown = pIn->GetLeftClickState(NewCenter.x, NewCenter.y);
-
 	}
 
 	OldCenter = Figure->GetCenter();

@@ -27,14 +27,15 @@ bool PlayRecordingAction::Execute()
 		Action* pClearAction = new ClearAllAction(pManager);
 		pClearAction->Execute();
 		delete pClearAction;
+		pManager->UpdateInterface();
 
 		pOut->PrintMessage("Playing Recording");
 
 		for (int i = 0; i < RecordedActionsList.size(); i++)
 		{
+			Pause(1000);
 			RecordedActionsList[i]->PlayRecord();
 			pManager->UpdateInterface();
-			Pause(1000);
 		}
 		pOut->PrintMessage("Recording Finished");
 		pManager->SetPlayingRecordingState(false);
