@@ -35,10 +35,8 @@ bool PlayRecordingAction::Execute()
 			RecordedActionsList[i]->PlayRecord();
 			pManager->UpdateInterface();
 			Pause(1000);
-
-			pOut->PrintMessage("Replayed");
 		}
-
+		pOut->PrintMessage("Recording Finished");
 		pManager->SetPlayingRecordingState(false);
 		return true;
 	}
