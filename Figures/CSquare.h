@@ -12,7 +12,7 @@ public:
 	static int getSquareSize();
 	bool CheckSelected(int x, int y);
 	Point GetCenter() const;
-	void SetCenter(Point);
+	bool SetCenter(Point);
 	bool Validate(Point);
 	void Save(ofstream&);
 	void Load(ifstream&);

@@ -53,8 +53,8 @@ Point CTriangle::GetCenter() const
 	return { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
 }
 
-void CTriangle::SetCenter(Point c) {
-	if (!Validate(c))return;
+bool CTriangle::SetCenter(Point c) {
+	if (!Validate(c))return false;
 	Point center = { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
 	int dx = c.x - center.x;
 	int dy = c.y - center.y;
@@ -64,7 +64,7 @@ void CTriangle::SetCenter(Point c) {
 	P1.y += dy;
 	P2.y += dy;
 	P3.y += dy;
-
+	return true;
 }
 bool CTriangle::Validate(Point c) {
 	Point center = { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };

@@ -36,20 +36,24 @@ bool DragMoveAction::Execute() {
 
 	OldCenter = Figure->GetCenter();
 	Point CurrentCenter = OldCenter;
+	Point ValidCenter = NewCenter;
 	int dx = OldCenter.x - NewCenter.x;
 	int dy = OldCenter.y - NewCenter.y;
 	int err = 0;
+	bool isValidCenter = false;
 	while (buttonDown) {
 		buttonDown = pIn->GetLeftClickState(NewCenter.x, NewCenter.y);
 		NewCenter.x += dx;
 		NewCenter.y += dy;
-		Figure->SetCenter(NewCenter);
+		isValidCenter = Figure->SetCenter(NewCenter);
 		err = sqrt(pow(CurrentCenter.x - NewCenter.x, 2) + pow(CurrentCenter.y - NewCenter.y, 2));
 		if (err) { // check if it moved by a pixel before updating interface
 			pManager->UpdateInterface();
 		}
+		if (isValidCenter)ValidCenter = NewCenter;
 		CurrentCenter = NewCenter;
 	}
+	NewCenter = ValidCenter;
 	Figure->SetSelected(false);
 	pManager->SetSelected(NULL);
 	pOut->ClearStatusBar();

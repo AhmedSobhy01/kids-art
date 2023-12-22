@@ -37,9 +37,10 @@ Point CSquare::GetCenter() const
 {
 	return center;
 }
-void CSquare::SetCenter(Point center) {
-	if (!Validate(center))return;
+bool CSquare::SetCenter(Point center) {
+	if (!Validate(center))return false;
 	this->center = center;
+	return true;
 }
 bool CSquare::Validate(Point c) {
 	return (c.y - squareSize / 2 +1) > UI.ToolBarHeight && (c.y + squareSize / 2 -1) < (UI.height - UI.StatusBarHeight);

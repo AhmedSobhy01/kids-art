@@ -66,6 +66,7 @@ string Input::GetString(Output *pO) const
 ActionType Input::GetUserAction(int *_ClickedItemOrder) const // This function reads the position where the user clicks to determine the desired action
 {
 	int x, y;
+	pWind->FlushMouseQueue();
 	pWind->WaitMouseClick(x, y); // Get the coordinates of the user click
 
 	if (UI.InterfaceMode == MODE_DRAW) // GUI in the DRAW mode
