@@ -87,3 +87,35 @@ void CRectangle::PrintInfo(Output* pOut) {
 	info += to_string(abs(Corner1.x - Corner2.x));
 	pOut->PrintMessage(info);
 }
+
+bool CRectangle::GetCorner(Point p, int& index) {
+	int Xarr[2] = { Corner1.x ,Corner2.x };
+	int Yarr[2] = { Corner1.y ,Corner2.y };
+	int errx, erry;
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 2; j++) {
+			erry = abs(p.y - Yarr[i]);
+			errx = abs(p.x - Xarr[j]);
+			if (errx < 5 && erry < 5) {
+				index = 2 * i + j;
+				return true;
+			}
+		}
+	}
+	return false;
+}
+void CRectangle::SetCorner(Point p, int index) {
+	Point OldC1, OldC2;
+	OldC1 = Corner1;
+	OldC2 = Corner2;
+	Point Center = { (Corner1.x + Corner2.x) / 2, (Corner1.y + Corner2.y) / 2 };
+	int* Xarr[2] = { &Corner1.x ,&Corner2.x };
+	int* Yarr[2] = { &Corner1.y ,&Corner2.y };
+	*Xarr[index % 2] = p.x;
+	*Yarr[index / 2] = p.y;
+	if (!Validate(Center)) {
+		Corner1 = OldC1;
+		Corner2 = OldC2;
+	}
+
+}

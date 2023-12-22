@@ -5,6 +5,7 @@ class CSquare : public CFigure
 private:
 	Point center;
 	static const int squareSize;
+	int currentSquareSize;
 public:
 	CSquare();
 	CSquare(Point, GfxInfo);
@@ -17,5 +18,7 @@ public:
 	void Save(ofstream&);
 	void Load(ifstream&);
 	void PrintInfo(Output* pOut);
+	bool GetCorner(Point, int&);
+	void SetCorner(Point, int);
 };
 

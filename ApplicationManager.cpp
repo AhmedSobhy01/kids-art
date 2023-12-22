@@ -27,6 +27,7 @@
 #include "Actions\ToggleSoundAction.h"
 #include "Actions\ExitAction.h"
 #include "Actions\DragMoveAction.h"
+#include "Actions\DragResizeAction.h"
 
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
@@ -126,6 +127,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case DRAG_MOVE:
 		pAct = new DragMoveAction(this);
+		break;
+	case DRAG_RESIZE:
+		pAct = new DragResizeAction(this);
 		break;
 	case TOGGLE_SOUND:
 		pAct = new ToggleSoundAction(this);
