@@ -8,7 +8,7 @@ void SaveAction::ReadActionParameters()
 {
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
-	pOut->PrintMessage("Saving File: Enter File Name");
+	pOut->PrintMessage("Saving File: Enter File Name or Press esc to Cancel ");
 	fName = pIn->GetString(pOut);
 }
 
@@ -24,7 +24,8 @@ bool SaveAction::Execute()
 		pManager->SaveAll(fout);
 		fout.close();
 		return 1;
-	}
+	}	
+	pOut->PrintMessage("Did not Create a File");
 	return 0;
 }
 

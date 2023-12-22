@@ -31,7 +31,7 @@ bool LoadAction::Execute()
 		pAct->Execute();
 		delete pAct;
 		pAct = NULL;
-		pOut->PrintMessage("Opened Load File Successfully");
+		pOut->PrintMessage("Opened Load File Successfully or Press esc to Cancel");
 		string x;
 		CFigure* Figure;
 		while (!fin.eof())
