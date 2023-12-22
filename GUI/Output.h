@@ -38,6 +38,7 @@ public:
 	color getCrntDrawColor() const; // Get current drawing color
 	color getCrntFillColor() const; // Get current filling color
 	int getCurrentPenWidth() const;	   // Get current pen width
+	void updateBuffer();
 
 	~Output();
 };

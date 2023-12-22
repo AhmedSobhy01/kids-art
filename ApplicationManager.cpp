@@ -36,6 +36,7 @@ ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions
 	pOut = new Output;
 	pIn = pOut->CreateInput();
 
+
 	SelectedFig = NULL;
 }
 
@@ -425,6 +426,7 @@ void ApplicationManager::ClearRedoableActionsStack()
 {
 	int size = RedoableActions.size();
 
+
 	for (int i = 0; i < size; i++) {
 		UndoableAction* pAct = RedoableActions.pop();
 
@@ -439,12 +441,12 @@ void ApplicationManager::ClearRedoableActionsStack()
 void ApplicationManager::UpdateInterface() const
 {
 	pOut->ClearDrawArea();
-
 	for (int i = 0; i < FigList.size(); i++)
 	{
 		if (!FigList[i]->isHidden())
 			FigList[i]->Draw(pOut); // Call Draw function (virtual member fn)
 	}
+	pOut->updateBuffer();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // Return a pointer to the input
