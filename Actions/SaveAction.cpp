@@ -17,7 +17,7 @@ bool SaveAction::Execute()
 	Output* pOut = pManager->GetOutput();
 	ReadActionParameters();
 	ofstream fout;
-	fout.open("Save Files/" + fName);
+	fout.open("Saved Graphs/" + fName);
 	if (fout.is_open())
 	{
 		pOut->PrintMessage("Created Save File Successfully");

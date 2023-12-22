@@ -23,7 +23,7 @@ bool LoadAction::Execute()
 	Output* pOut = pManager->GetOutput();
 	ReadActionParameters();
 	ifstream fin;
-	fin.open("Save Files/" + fName);
+	fin.open("Saved Graphs/" + fName);
 	if (fin.is_open())
 	{
 		Action* pAct;
