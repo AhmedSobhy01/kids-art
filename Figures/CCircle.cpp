@@ -34,7 +34,7 @@ void CCircle::SetCenter(Point c) {
 
 bool CCircle::Validate(Point c) {
 	int radius = sqrt(pow(center.x - this->radius.x, 2) + pow(center.y - this->radius.y, 2));
-	return (c.y - radius) >= UI.ToolBarHeight && (c.y + radius) <= (UI.height - UI.StatusBarHeight);
+	return (c.y - radius) > UI.ToolBarHeight && (c.y + radius) < (UI.height - UI.StatusBarHeight);
 }
 
 void CCircle::Save(ofstream& fout)

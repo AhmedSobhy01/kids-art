@@ -70,9 +70,9 @@ bool CTriangle::Validate(Point c) {
 	Point center = { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
 	int dx = c.x - center.x;
 	int dy = c.y - center.y;
-	bool cond1 = P1.y + dy - FigGfxInfo.BorderWidth / 2 >= UI.ToolBarHeight && P1.y + dy + FigGfxInfo.BorderWidth / 2 < (UI.height - UI.StatusBarHeight);
-	bool cond2 = P2.y + dy - FigGfxInfo.BorderWidth / 2 >= UI.ToolBarHeight && P2.y + dy + FigGfxInfo.BorderWidth / 2 < (UI.height - UI.StatusBarHeight);
-	bool cond3 = P3.y + dy - FigGfxInfo.BorderWidth / 2 >= UI.ToolBarHeight && P3.y + dy + FigGfxInfo.BorderWidth / 2 < (UI.height - UI.StatusBarHeight);
+	bool cond1 = (P1.y + dy - 1 - FigGfxInfo.BorderWidth / 2) >= UI.ToolBarHeight && (P1.y + dy + 1 + FigGfxInfo.BorderWidth / 2) < (UI.height - UI.StatusBarHeight);
+	bool cond2 = (P2.y + dy - 1 - FigGfxInfo.BorderWidth / 2) >= UI.ToolBarHeight && (P2.y + dy + 1 + FigGfxInfo.BorderWidth / 2) < (UI.height - UI.StatusBarHeight);
+	bool cond3 = (P3.y + dy - 1 - FigGfxInfo.BorderWidth / 2) >= UI.ToolBarHeight && (P3.y + dy + 1 + FigGfxInfo.BorderWidth / 2) < (UI.height - UI.StatusBarHeight);
 	return cond1 && cond2 && cond3;
 }
 

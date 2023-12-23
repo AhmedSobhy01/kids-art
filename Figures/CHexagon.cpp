@@ -56,12 +56,13 @@ Point CHexagon::GetCenter() const
 }
 
 void CHexagon::SetCenter(Point c) {
-	if (!Validate(c))return;
+	Point temp = this->center;
 	this->center = c;
+	if (!Validate(this->center))this->center = temp;
 }
 
 bool CHexagon::Validate(Point c) {
-	return (c.y - currentHexagonSize / 2 * sqrt(3)-1) > UI.ToolBarHeight && (c.y + currentHexagonSize / 2 * sqrt(3) +1) < (UI.height - UI.StatusBarHeight);
+	return (c.y - currentHexagonSize / 2 * sqrt(3)-2) > UI.ToolBarHeight && (c.y + currentHexagonSize / 2 * sqrt(3) +2) < (UI.height - UI.StatusBarHeight);
 }
 
 void CHexagon::Save(ofstream& fout)
