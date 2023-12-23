@@ -1,4 +1,4 @@
-/* 
+/*
 See "version.h" for version info and copyright information
 This file was last modified on 05.16.1999
 */
@@ -12,20 +12,20 @@ using namespace std;
 
 class color {
 
-  public:
+public:
 
-    // Default constructor creates black
-    color(unsigned char Red = 0, unsigned char Green = 0, unsigned char Blue = 0) { 
-        ucRed = Red;  ucGreen = Green;  ucBlue = Blue; 
-    }
-    friend ostream& operator<<(ostream&, const color&);
-    friend istream& operator>>(istream&, color&);
-    string ReturnColor();
+	// Default constructor creates black
+	color(unsigned char Red = 0, unsigned char Green = 0, unsigned char Blue = 0) {
+		ucRed = Red;  ucGreen = Green;  ucBlue = Blue;
+	}
+	friend ostream& operator<<(ostream&, const color&);
+	friend istream& operator>>(istream&, color&);
+	string ReturnColor();
 
-    // Color components.  0 = no intensity, 255 = full intensity
-    unsigned char ucRed;
-    unsigned char ucGreen;
-    unsigned char ucBlue;
+	// Color components.  0 = no intensity, 255 = full intensity
+	unsigned char ucRed;
+	unsigned char ucGreen;
+	unsigned char ucBlue;
 
 };
 
@@ -37,7 +37,7 @@ bool operator!=(color a, color b);
   Predefine some color objects...  Data was liberally borrowed from the
   Open Group's X11 rbg.txt file
 
-  $XConsortium: rgb.txt,v 10.41 94/02/20 18:39:36 rws Exp 
+  $XConsortium: rgb.txt,v 10.41 94/02/20 18:39:36 rws Exp
 
 */
 const color TRANSPARENT_COLOR = color(-1, -1, -1);
@@ -185,6 +185,32 @@ const color DARKCYAN = color(0, 139, 139);
 const color DARKMAGENTA = color(139, 0, 139);
 const color DARKRED = color(139, 0, 0);
 const color LIGHTGREEN = color(144, 238, 144);
+const color Rosewater = color(220, 138, 120);
+const color Flamingo = color(221, 120, 120);
+const color Pink = color(234, 118, 203);
+const color Mauve = color(136, 57, 239);
+const color Red = color(210, 15, 57);
+const color Maroon = color(230, 69, 83);
+const color Peach = color(254, 100, 11);
+const color Yellow = color(223, 142, 29);
+const color Green = color(64, 160, 43);
+const color Teal = color(23, 146, 153);
+const color Sky = color(4, 165, 229);
+const color Sapphire = color(32, 159, 181);
+const color Blue = color(30, 102, 245);
+const color Lavender = color(114, 135, 253);
+const color Text = color(76, 79, 105);
+const color Subtext1 = color(92, 95, 119);
+const color Subtext0 = color(108, 111, 133);
+const color Overlay2 = color(124, 127, 147);
+const color Overlay1 = color(140, 143, 161);
+const color Overlay0 = color(156, 160, 176);
+const color Surface2 = color(172, 176, 190);
+const color Surface1 = color(188, 192, 204);
+const color Surface0 = color(204, 208, 218);
+const color Base = color(239, 241, 245);
+const color Mantle = color(230, 233, 239);
+const color Crust = color(220, 224, 232);
 
 
 #endif //COLOR_H

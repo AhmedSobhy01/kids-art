@@ -213,31 +213,31 @@ color Input::GetSelectedColor(Output* pO) const // This function reads the posit
 				selectedColor = BLACK;
 				break;
 			case COLOR_MENU_ITM_RED:
-				selectedColor = RED;
+				selectedColor = Red;
 				break;
 			case COLOR_MENU_ITM_BLUE:
-				selectedColor = BLUE;
+				selectedColor = Blue;
 				break;
 			case COLOR_MENU_ITM_GREEN:
-				selectedColor = GREEN;
+				selectedColor = Green;
 				break;
-			case COLOR_MENU_ITM_MAGENTA:
-				selectedColor = MAGENTA;
+			case COLOR_MENU_ITM_LAVENDER:
+				selectedColor = Lavender;
 				break;
 			case COLOR_MENU_ITM_ORANGE:
-				selectedColor = ORANGE;
+				selectedColor = Peach;
 				break;
-			case COLOR_MENU_ITM_BROWN:
-				selectedColor = BROWN;
+			case COLOR_MENU_ITM_PINK:
+				selectedColor = Pink;
 				break;
-			case COLOR_MENU_ITM_CYAN:
-				selectedColor = CYAN;
+			case COLOR_MENU_ITM_SKY:
+				selectedColor = Sky;
 				break;
 			case COLOR_MENU_ITM_YELLOW:
-				selectedColor = YELLOW;
+				selectedColor = Yellow;
 				break;
-			case COLOR_MENU_ITM_GOLD:
-				selectedColor = LIGHTGOLDENRODYELLOW;
+			case COLOR_MENU_ITM_BASE:
+				selectedColor = Base;
 				break;
 
 			default:

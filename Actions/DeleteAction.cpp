@@ -23,7 +23,8 @@ void DeleteAction::ReadActionParameters() {
 bool DeleteAction::Execute() {
 	ReadActionParameters();
 	Figure = pManager->GetSelected();
-
+	Output* pOut = pManager->GetOutput();
+	pOut->ClearStatusBar();
 	if (Figure != NULL) {
 		Figure->IncrementReference();
 		RemovedFromIndex = pManager->RemoveFigure(Figure);
