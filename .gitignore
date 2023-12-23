@@ -237,3 +237,5 @@ FodyWeavers.xsd
 *.code-workspace
 *.sln.iml
 Saved Graphs/*
+cmake-build-debug
+.idea

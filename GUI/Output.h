@@ -1,6 +1,7 @@
 #ifndef OUPTUT_H
 #define OUPTUT_H
 #include "Input.h"
+#include <cmath>
 
 class Output // The application manager should have a pointer to this class
 {
