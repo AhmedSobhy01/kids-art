@@ -181,6 +181,7 @@ ActionType Input::GetUserAction(int *_ClickedItemOrder) const // This function r
 }
 ActionType Input::GetAction(Point& P)
 {
+	if (P.y >= 0 && P.y <= UI.StatusBarHeight) {
 		int clickeditem = P.x / UI.MenuItemWidth;
 		switch (clickeditem) {
 		case ITM_DRAW_MODE:
@@ -191,7 +192,13 @@ ActionType Input::GetAction(Point& P)
 			return PICK_BY_COLOR;
 		case ITM_PICKBYSHAPEANDCOLOR:
 			return PICK_BY_SHAPE_COLOR;
+		case ITM_EXIT_PLAY:
+			return EXIT;
+		default:
+			return EMPTY;
+		}
 	}
+	else return DRAWING_AREA;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
