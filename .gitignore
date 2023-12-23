@@ -239,3 +239,5 @@ FodyWeavers.xsd
 Saved Graphs/*
 cmake-build-debug
 .idea
+build
+.vscode

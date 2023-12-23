@@ -153,5 +153,6 @@ add_executable(kids_art
         main.cpp)
 
 target_link_libraries(kids_art winmm.lib)
-file(COPY "images" DESTINATION ${CMAKE_BINARY_DIR}/bin)
-file(COPY "sounds" DESTINATION ${CMAKE_BINARY_DIR}/bin)
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+file(COPY "images" DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY "sounds" DESTINATION ${CMAKE_BINARY_DIR})
