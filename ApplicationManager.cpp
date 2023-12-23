@@ -307,8 +307,8 @@ int ApplicationManager::CountFigColor(CFigure *Fig)
 
 void ApplicationManager::ResetColors()
 {
-	UI.DrawColor = Blue;
-	UI.BkGrndColor = Base;
+	UI.DrawColor = BLUE;
+	UI.BkGrndColor = BASE;
 	UI.FillColor = TRANSPARENT_COLOR;
 }
 
