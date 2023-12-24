@@ -39,6 +39,11 @@ color CFigure::GetFillClr() const
 	return FigGfxInfo.FillClr;
 }
 
+int CFigure::GetBorderWidth() const
+{
+	return FigGfxInfo.BorderWidth;
+}
+
 void CFigure::ChngDrawClr(color Dclr)
 {	FigGfxInfo.DrawClr = Dclr; }
 
@@ -46,6 +51,11 @@ void CFigure::ChngFillClr(color Fclr)
 {
 	FigGfxInfo.isFilled = Fclr != TRANSPARENT_COLOR;
 	FigGfxInfo.FillClr = Fclr; 
+}
+
+void CFigure::ChngBorderWidth(int BWidth)
+{
+	FigGfxInfo.BorderWidth = BWidth;
 }
 
 bool CFigure::isHidden() {

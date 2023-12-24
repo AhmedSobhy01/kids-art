@@ -132,6 +132,7 @@
     <ClCompile Include="Actions\AddTriangleAction.cpp" />
     <ClCompile Include="Actions\AddCircleAction.cpp" />
     <ClCompile Include="Actions\AddHexagonAction.cpp" />
+    <ClCompile Include="Actions\ChangeBorderWidthAction.cpp" />
     <ClCompile Include="Actions\ChangeFillColorAction.cpp" />
     <ClCompile Include="Actions\ChangeOutlineColorAction.cpp" />
     <ClCompile Include="Actions\ClearAllAction.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="Actions\AddCircleAction.h" />
     <ClInclude Include="Actions\AddHexagonAction.h" />
     <ClInclude Include="Actions\ChangeBackgroundColorAction.h" />
+    <ClInclude Include="Actions\ChangeBorderWidthAction.h" />
     <ClInclude Include="Actions\ChangeFillColorAction.h" />
     <ClInclude Include="Actions\ChangeOutlineColorAction.h" />
     <ClInclude Include="Actions\ClearAllAction.h" />

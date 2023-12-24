@@ -23,6 +23,7 @@ bool StartRecordingAction::Execute()
 		pManager->SetRecordingState(true);
 
 		pOut->PrintMessage("Recording started...");
+		pOut->ToggleRecording(1);
 
 		return true;
 	}

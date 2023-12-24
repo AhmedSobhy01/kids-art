@@ -28,6 +28,7 @@
 #include "Actions\ToggleSoundAction.h"
 #include "Actions\ExitAction.h"
 #include "Actions\DragMoveAction.h"
+#include "Actions\ChangeBorderWidthAction.h"
 
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), IsPlayingRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
@@ -97,6 +98,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case REDO:
 		pAct = new RedoAction(this);
+		break;
+	case BORDER_WIDTH:
+		pAct = new ChangeBorderWidthAction(this);
 		break;
 	case OUTLINE_COLOR:
 		pAct = new ChangeOutlineColorAction(this);

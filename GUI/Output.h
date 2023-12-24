@@ -18,13 +18,16 @@ public:
 	void CloseColorMenuWind();					  // Closes the color menu window
 	window *GetColorMenuWind() const;			  // Returns pointer to the color menu window or NULL if it doesn't exist
 	 
-	void CreateDrawToolBar() const; // Creates Draw mode toolbar & menu
-	void CreatePlayToolBar() const; // Creates Play mode toolbar & menu
-	void CreateStatusBar() const;	// Create the status bar
+	void CreateDrawToolBar() const;		// Creates Draw mode toolbar & menu
+	void ToggleSound(bool) const;		// Changes toggle sound icon
+	void ToggleRecording(bool) const;   // Changes Start Recording icon
+	void ToggleBorderWidth(int) const;  // Changes Border width Icon
+	void CreatePlayToolBar() const;		// Creates Play mode toolbar & menu
+	void CreateStatusBar() const;		// Create the status bar
 
-	Input *CreateInput() const;	 // Creates a pointer to the Input object
-	void ClearStatusBar() const; // Clears the status bar
-	void ClearDrawArea() const;	 // Clears the drawing area
+	Input *CreateInput() const;			// Creates a pointer to the Input object
+	void ClearStatusBar() const;		// Clears the status bar
+	void ClearDrawArea() const;			// Clears the drawing area
 
 	// Figures drawing functions
 	void DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected = false) const;				   // Draw a rectangle

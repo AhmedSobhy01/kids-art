@@ -96,6 +96,8 @@ ActionType Input::GetUserAction(int *_ClickedItemOrder) const // This function r
 				return DRAW_TRIANGLE;
 			case ITM_HEXAGON:
 				return DRAW_HEXAGON;
+			case ITM_BORDER_WIDTH:
+				return BORDER_WIDTH;
 			case ITM_SELECT:
 				return SELECT;
 			case ITM_OUTLINE_COLOR:

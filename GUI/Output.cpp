@@ -159,6 +159,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_SQUARE] = "images\\DrawMode\\Square.jpg";
 	MenuItemImages[ITM_TRIANGLE] = "images\\DrawMode\\Triangle.jpg";
 	MenuItemImages[ITM_HEXAGON] = "images\\DrawMode\\Hexagon.jpg";
+	MenuItemImages[ITM_BORDER_WIDTH] = "images\\DrawMode\\BorderWidthMed.jpg";
 	MenuItemImages[ITM_OUTLINE_COLOR] = "images\\DrawMode\\ForegroundColor.jpg";
 	MenuItemImages[ITM_FILL_COLOR] = "images\\DrawMode\\BackgroundColor.jpg";
 	MenuItemImages[ITM_SELECT] = "images\\DrawMode\\Select.jpg";
@@ -181,6 +182,35 @@ void Output::CreateDrawToolBar() const
 	// Draw menu item one image at a time
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+}
+void Output::ToggleSound(bool isMuted) const
+{
+	if (isMuted)
+		pWind->DrawImage("images\\DrawMode\\ToggleSoundMute.jpg", ITM_TOGGLE_SOUND * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	else
+		pWind->DrawImage("images\\DrawMode\\ToggleSound.jpg", ITM_TOGGLE_SOUND * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+}
+void Output::ToggleRecording(bool isRecording) const
+{
+	if (isRecording)
+		pWind->DrawImage("images\\DrawMode\\StartRecordingPressed.jpg", ITM_START_RECORDING * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	else
+		pWind->DrawImage("images\\DrawMode\\StartRecording.jpg", ITM_START_RECORDING * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+}
+void Output::ToggleBorderWidth(int width) const
+{
+	switch (width)
+	{
+	case 2:
+		pWind->DrawImage("images\\DrawMode\\BorderWidthThin.jpg", ITM_BORDER_WIDTH * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+		break;
+	case 3:
+		pWind->DrawImage("images\\DrawMode\\BorderWidthMed.jpg", ITM_BORDER_WIDTH * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+		break;
+	case 4:
+		pWind->DrawImage("images\\DrawMode\\BorderWidthThick.jpg", ITM_BORDER_WIDTH * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+		break;
+	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -253,7 +283,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, UI.PenWidth);
+	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWidth);
 	drawstyle style;
 	if (RectGfxInfo.isFilled)
 	{
@@ -275,7 +305,7 @@ void Output::DrawSquare(Point P1, int squareSize, GfxInfo SquareGfxInfo, bool se
 	else
 		DrawingClr = SquareGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, UI.PenWidth);
+	pWind->SetPen(DrawingClr, SquareGfxInfo.BorderWidth);
 	drawstyle style;
 
 	if (SquareGfxInfo.isFilled)
@@ -305,7 +335,7 @@ void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo,
 	else
 		DrawingClr = TriangleGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, UI.PenWidth);
+	pWind->SetPen(DrawingClr, TriangleGfxInfo.BorderWidth);
 	if (TriangleGfxInfo.isFilled)
 	{
 		pWind->SetBrush(TriangleGfxInfo.FillClr);
@@ -327,7 +357,7 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected
 	else
 		drawcolor = CircleGfxInfo.DrawClr;
 
-	pWind->SetPen(drawcolor, UI.PenWidth);
+	pWind->SetPen(drawcolor, CircleGfxInfo.BorderWidth);
 	if (CircleGfxInfo.isFilled)
 	{
 		style = FILLED;
@@ -351,7 +381,7 @@ void Output::DrawHexagon(Point P1, int hexagonSize, GfxInfo HexagonGfxInfo, bool
 	else
 		drawcolor = HexagonGfxInfo.DrawClr;
 
-	pWind->SetPen(drawcolor, UI.PenWidth);
+	pWind->SetPen(drawcolor, HexagonGfxInfo.BorderWidth);
 	if (HexagonGfxInfo.isFilled)
 	{
 		style = FILLED;

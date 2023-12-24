@@ -33,9 +33,11 @@ public:
 
 	color GetDrawClr() const;	//returns the figure's drawing color
 	color GetFillClr() const;	//returns the figure's filling color
+	int GetBorderWidth() const; //returns the figure's Border Width
 
-	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
-	void ChngFillClr(color Fclr);	//changes the figure's filling color
+	void ChngDrawClr(color Dclr);		//changes the figure's drawing color
+	void ChngFillClr(color Fclr);		//changes the figure's filling color
+	void ChngBorderWidth(int BWidth);   //changes the figure's Border Width
 
 
 	///				Play Mode Functions			///
