@@ -55,10 +55,10 @@ Point CHexagon::GetCenter() const
 	return center;
 }
 
-void CHexagon::SetCenter(Point c) {
-	Point temp = this->center;
+bool CHexagon::SetCenter(Point c) {
+	if (!Validate(c))return false;
 	this->center = c;
-	if (!Validate(this->center))this->center = temp;
+	return true;
 }
 
 bool CHexagon::Validate(Point c) {

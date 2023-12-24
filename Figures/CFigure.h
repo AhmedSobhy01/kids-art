@@ -49,7 +49,7 @@ public:
 
 	virtual bool CheckSelected(int x, int y) = 0;
 	virtual Point GetCenter() const = 0;
-	virtual void SetCenter(Point) = 0;
+	virtual bool SetCenter(Point) = 0;
 	virtual bool Validate(Point) = 0;
 	virtual void Save(ofstream& OutFile) = 0; //Save the figure parameters to the file
 	virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file

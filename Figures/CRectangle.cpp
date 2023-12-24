@@ -32,8 +32,8 @@ Point CRectangle::GetCenter() const
 {
 	return { (Corner1.x + Corner2.x) / 2, (Corner1.y + Corner2.y) / 2 };
 }
-void CRectangle::SetCenter(Point c) {
-	if (!Validate(c))return;
+bool CRectangle::SetCenter(Point c) {
+	if (!Validate(c))return false;
 	Point center = { (Corner1.x + Corner2.x) / 2,(Corner1.y + Corner2.y) / 2 };
 	int dy = c.y - center.y;
 	int dx = c.x - center.x;
@@ -41,6 +41,7 @@ void CRectangle::SetCenter(Point c) {
 	Corner2.x += dx;
 	Corner1.y += dy;
 	Corner2.y += dy;
+	return true;
 }
 
 bool CRectangle::Validate(Point c) {
