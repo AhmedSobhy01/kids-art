@@ -250,7 +250,9 @@
     <ClCompile Include="Actions\PlayRecordingAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\PlayMode.cpp" />
+    <ClCompile Include="Actions\PlayMode.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -443,7 +445,9 @@
     <ClInclude Include="Actions\PlayRecordingAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\PlayMode.h" />
+    <ClInclude Include="Actions\PlayMode.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
