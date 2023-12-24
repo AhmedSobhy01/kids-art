@@ -52,7 +52,7 @@ Input *Output::CreateInput() const
 //======================================================================================//
 
 
-void Output::updateBuffer() {
+void Output::UpdateBuffer() {
 	pWind->UpdateBuffer();
 }
 
@@ -255,11 +255,11 @@ int Output::getCurrentPenWidth() const // Get current pen width
 	return UI.PenWidth;
 }
 
-void Output::updateStatusBar() {
+void Output::UpdateStatusBar() {
 	PrintMessage(lastMessage);
 }
 
-void Output::updateToolBar() {
+void Output::UpdateToolBar() {
 	if (UI.InterfaceMode == MODE_DRAW)CreateDrawToolBar();
 	else CreatePlayToolBar();
 }
@@ -290,10 +290,10 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) //
 	int MinY = min(P1.y, P2.y);
 	int MaxY = max(P1.y, P2.y);
 	if (MinY <= UI.ToolBarHeight)
-		updateToolBar();
+		UpdateToolBar();
 	
 	if (MaxY >= UI.height - UI.StatusBarHeight)
-		updateStatusBar();
+		UpdateStatusBar();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -324,9 +324,9 @@ void Output::DrawSquare(Point P1, int DefaultSquareSize, GfxInfo SquareGfxInfo, 
 
 	pWind->DrawRectangle(p1.x, p1.y, p2.x, p2.y, style);
 	if (p2.y <= UI.ToolBarHeight)
-		updateToolBar();
+		UpdateToolBar();
 	if (p1.y >= UI.height - UI.StatusBarHeight)
-		updateStatusBar();
+		UpdateStatusBar();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -354,9 +354,9 @@ void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo,
 	int MaxY = max(P1.y, P2.y);
 	MaxY = max(MaxY, P3.y);
 	if (MinY <= UI.ToolBarHeight)
-		updateToolBar();
+		UpdateToolBar();
 	if (MaxY >= (UI.height - UI.StatusBarHeight))
-		updateStatusBar();
+		UpdateStatusBar();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -380,10 +380,10 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected
 	int radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
 	pWind->DrawCircle(P1.x, P1.y, radius, style);
 	if ((P1.y - radius) <= UI.ToolBarHeight)
-		updateToolBar();
+		UpdateToolBar();
 	
 	if ((P1.y + radius) >= (UI.height - UI.StatusBarHeight)) 
-		updateStatusBar();
+		UpdateStatusBar();
 	
 
 }
@@ -420,10 +420,10 @@ void Output::DrawHexagon(Point P1, int hexagonSize, GfxInfo HexagonGfxInfo, bool
 	}
 	pWind->DrawPolygon(xPointsArray, yPointsArray, 6, style);
 	if ((P1.y - hexagonSize / 2 * sqrt(3) - 2) <= UI.ToolBarHeight) 
-		updateToolBar();
+		UpdateToolBar();
 	
 	if ((P1.y + hexagonSize / 2 * sqrt(3) + 2) >= (UI.height - UI.StatusBarHeight)) 
-		updateStatusBar();
+		UpdateStatusBar();
 	
 }
 //////////////////////////////////////////////////////////////////////////////////////////
