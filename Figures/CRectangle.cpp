@@ -82,7 +82,7 @@ void CRectangle::PrintInfo(Output* pOut) {
 	pOut->PrintMessage(info);
 }
 
-bool CRectangle::GetCorner(Point p, int& index) {
+bool CRectangle::GetCorner(Point& p, int& index) {
 	int Xarr[2] = { Corner1.x ,Corner2.x };
 	int Yarr[2] = { Corner1.y ,Corner2.y };
 	int errx = 100, erry = 100;
@@ -92,8 +92,10 @@ bool CRectangle::GetCorner(Point p, int& index) {
 		errx = abs(p.x - Xarr[i % 2]);
 		++i;
 	}
+	--i;
 	if (errx < 6 && erry < 6) {
-		index = i - 1;
+		index = i;
+		p = { Xarr[i % 2],Yarr[i / 2] };
 		return true;
 	}
 	return false;

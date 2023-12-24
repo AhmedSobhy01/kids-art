@@ -104,7 +104,7 @@ void CTriangle::PrintInfo(Output* pOut) {
 	pOut->PrintMessage(info);
 }
 
-bool CTriangle::GetCorner(Point p, int& index) {
+bool CTriangle::GetCorner(Point& p, int& index) {
 	Point Corners[3] = { P1,P2,P3 };
 	int errx = 100, erry = 100;
 	int i = 0;
@@ -113,8 +113,10 @@ bool CTriangle::GetCorner(Point p, int& index) {
 		errx = abs(p.x - Corners[i].x);
 		++i;
 	}
+	--i;
 	if (errx < 6 && erry < 6) {
-		index = i - 1;
+		index = i;
+		p = Corners[i];
 		return true;
 	}
 	return false;

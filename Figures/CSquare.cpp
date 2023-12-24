@@ -76,23 +76,28 @@ void CSquare::PrintInfo(Output* pOut) {
 	pOut->PrintMessage(info);
 }
 
-bool CSquare::GetCorner(Point p, int& index) {
+bool CSquare::GetCorner(Point& p, int& index) {
 	int Xarr[2] = { center.x - squareSize / 2 , center.x + squareSize / 2 };
 	int Yarr[2] = { center.y - squareSize / 2 , center.y + squareSize / 2 };
-	int errx, erry;
+	int errx = 100, erry = 100;
+	int i = 0;
+	while (i < 4 && (errx >= 6 || erry >= 6)) {
+		errx = abs(p.x - Xarr[i % 2]);
+		erry = abs(p.y - Yarr[i / 2]);
+		++i;
+	}
+	--i;
+	if (errx < 6 && erry < 6) {
+		index = 0;
+		p = { center.x + squareSize / 2, center.y + squareSize / 2 };
+		return true;
+	}
 	for (int i = 0; i < 2; i++) {
 		for (int j = 0; j < 2; j++) {
-			errx = abs(p.x - Xarr[i]);
-			erry = abs(p.y - Yarr[j]);
-			if (errx < 6 && erry < 6) {
-				index = 0;
-				return true;
-			}
 		}
 	}
 	return false;
 }
 void CSquare::SetCorner(Point p, int index) {
-	int size = squareSize;
 	squareSize = sqrt((pow(p.x - center.x, 2) + pow(p.y - center.y, 2)) * 2);
 }

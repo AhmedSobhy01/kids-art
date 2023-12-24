@@ -89,7 +89,7 @@ void CHexagon::PrintInfo(Output* pOut) {
 	info += to_string(hexagonSize);
 	pOut->PrintMessage(info);
 }
-bool CHexagon::GetCorner(Point p, int& index) {
+bool CHexagon::GetCorner(Point& p, int& index) {
 	double angle = 2.0 * cdPi / 6.0; // Angle between each side of the hexagon in radians
 	double errx = 100, erry = 100;
 	int i = 0;
@@ -100,6 +100,7 @@ bool CHexagon::GetCorner(Point p, int& index) {
 	}
 	if (errx < 6 && erry < 6) {
 		index = 0;
+		p = { center.x + hexagonSize,center.y };
 		return true;
 	}
 

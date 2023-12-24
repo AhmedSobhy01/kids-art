@@ -34,7 +34,6 @@ bool DragResizeAction::Execute() {
 	}
 	OldCorner = NewCorner;
 	Point CurrentCorner = OldCorner;
-	Point ValidCorner = NewCorner;
 	int err;
 	while (buttonDown) {
 		buttonDown = pIn->GetLeftClickState(NewCorner.x, NewCorner.y);
