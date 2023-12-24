@@ -114,7 +114,7 @@ bool CTriangle::GetCorner(Point p, int& index) {
 		++i;
 	}
 	if (errx < 6 && erry < 6) {
-		index = i-1;
+		index = i - 1;
 		return true;
 	}
 	return false;

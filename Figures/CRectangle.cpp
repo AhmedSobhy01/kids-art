@@ -13,7 +13,7 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(Figur
 }
 
 
-void CRectangle::Draw(Output* pOut) 
+void CRectangle::Draw(Output* pOut)
 {
 	//Call Output::DrawRect to draw a rectangle on the screen
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
@@ -24,7 +24,7 @@ bool CRectangle::IsPointInside(Point P) {
 	int length = abs(Corner1.y - Corner2.y);
 	int width = abs(Corner1.x - Corner2.x);
 
-	bool cond1 = Corner1.x + Corner2.x - width <= 2 * P.x && 2 * P.x <= Corner1.x + Corner2.x + width; 
+	bool cond1 = Corner1.x + Corner2.x - width <= 2 * P.x && 2 * P.x <= Corner1.x + Corner2.x + width;
 	bool cond2 = Corner1.y + Corner2.y - length <= 2 * P.y && 2 * P.y <= Corner1.y + Corner2.y + length;
 	return cond1 && cond2;
 }
@@ -88,12 +88,12 @@ bool CRectangle::GetCorner(Point p, int& index) {
 	int errx = 100, erry = 100;
 	int i = 0;
 	while (i < 4 && (errx >= 6 || erry >= 6)) {
-		erry = abs(p.y - Yarr[i/2]);
-		errx = abs(p.x - Xarr[i%2]);
+		erry = abs(p.y - Yarr[i / 2]);
+		errx = abs(p.x - Xarr[i % 2]);
 		++i;
 	}
 	if (errx < 6 && erry < 6) {
-		index = i-1;
+		index = i - 1;
 		return true;
 	}
 	return false;
