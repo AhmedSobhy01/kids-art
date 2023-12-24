@@ -104,7 +104,7 @@ bool CHexagon::GetCorner(Point p, int& index) {
 
 		errx = abs(p.x - (center.x + hexagonSize * cos(i * angle)));
 		erry = abs(p.y - (center.y + hexagonSize * sin(i * angle)));
-		if (errx < 2 && erry < 2) {
+		if (errx < 6 && erry < 6) {
 			index == 0;
 			return true;
 		}

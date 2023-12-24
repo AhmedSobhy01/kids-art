@@ -121,7 +121,7 @@ bool CTriangle::GetCorner(Point p, int& index) {
 	for (int i = 0; i < 3; i++) {
 		erry = abs(p.y - Corners[i].y);
 		errx = abs(p.x - Corners[i].x);
-		if (errx < 5 && erry < 5) {
+		if (errx < 6 && erry < 6) {
 			index = i;
 			return true;
 

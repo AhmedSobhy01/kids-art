@@ -99,7 +99,7 @@ bool CRectangle::GetCorner(Point p, int& index) {
 		for (int j = 0; j < 2; j++) {
 			erry = abs(p.y - Yarr[i]);
 			errx = abs(p.x - Xarr[j]);
-			if (errx < 5 && erry < 5) {
+			if (errx < 8 && erry < 8) {
 				index = 2 * i + j;
 				return true;
 			}
