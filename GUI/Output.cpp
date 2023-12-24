@@ -158,7 +158,6 @@ void Output::ClearStatusBar()
 
 void Output::CreateDrawToolBar() const
 {
-	std::cout << "test\n";
 	UI.InterfaceMode = MODE_DRAW;
 	pWind->SetPen(SURFACE0, 1);
 	pWind->SetBrush(SURFACE0);
