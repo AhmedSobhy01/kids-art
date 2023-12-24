@@ -171,7 +171,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_SQUARE] = "images\\DrawMode\\Square.jpg";
 	MenuItemImages[ITM_TRIANGLE] = "images\\DrawMode\\Triangle.jpg";
 	MenuItemImages[ITM_HEXAGON] = "images\\DrawMode\\Hexagon.jpg";
-	MenuItemImages[ITM_BORDER_WIDTH] = "images\\DrawMode\\BorderWidthMed.jpg";
+	MenuItemImages[ITM_BORDER_WIDTH] = "images\\DrawMode\\BorderWidth" + to_string(UI.PenWidth - 1) + ".jpg";
 	MenuItemImages[ITM_OUTLINE_COLOR] = "images\\DrawMode\\ForegroundColor.jpg";
 	MenuItemImages[ITM_FILL_COLOR] = "images\\DrawMode\\BackgroundColor.jpg";
 	MenuItemImages[ITM_SELECT] = "images\\DrawMode\\Select.jpg";
