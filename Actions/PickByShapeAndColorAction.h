@@ -3,20 +3,12 @@
 #include "Action.h"
 #include "..\ApplicationManager.h"
 
-class PickByShapeAndColorAction :public Action {
-private:
-	Point P;
-	CFigure* RandomFigure;
-	int CorrectPicks;
-	int Counter;				// Counter for total picks made
-	int RandomColorFigNumber;	// Integer that stores how many instances for the random properties to be picked
+#include "PlayMode.h"
+class PickByShapeAndColorAction: public PlayMode
+{
 public:
 	PickByShapeAndColorAction(ApplicationManager*);
-	virtual void ReadActionParameters();
+	virtual void StartingMessage();
 	virtual bool Execute();
-	void StartingMessage();		// To print the starting message
-	void GetClickedAction(bool&, bool&);			// Gets the user action
-	void FinalMsg(bool&);
-	virtual bool ShouldRecord() const;
 };
 #endif

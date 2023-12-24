@@ -29,6 +29,7 @@
 #include "Actions\ExitAction.h"
 #include "Actions\DragMoveAction.h"
 #include "Actions\DragResizeAction.h"
+#include "Actions\PickByColorAction.h"
 
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), IsPlayingRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
