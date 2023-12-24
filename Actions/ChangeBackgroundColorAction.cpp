@@ -9,7 +9,7 @@ void ChangeBackgroundColorAction::ReadActionParameters()
 {
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
-	pOut->OpenColorMenuWind(ITM_BACKGROUND_COLOR * UI.ColorMenuItemWidth);
+	pOut->OpenColorMenuWind(ITM_BACKGROUND_COLOR * UI.ColorMenuItemWidth, false);
 	pOut->PrintMessage("Change Background Color: Select a color.");
 }
 

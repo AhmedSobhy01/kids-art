@@ -45,16 +45,16 @@ enum DrawMenuItem // The items of the draw menu (ordered)
 
 enum ColorMenuItem // The items of the color menu (ordered)
 {
-	COLOR_MENU_ITM_BLACK,		// Black
+	COLOR_MENU_ITM_PINK,		// Brown
 	COLOR_MENU_ITM_RED,			// Red
-	COLOR_MENU_ITM_BLUE,		// Blue
-	COLOR_MENU_ITM_GREEN,		// Green
-	COLOR_MENU_ITM_MAGENTA,		// Magenta
 	COLOR_MENU_ITM_ORANGE,		// Orange
-	COLOR_MENU_ITM_BROWN,		// Brown
-	COLOR_MENU_ITM_CYAN,		// Cyan
 	COLOR_MENU_ITM_YELLOW,		// Yellow
-	COLOR_MENU_ITM_GOLD,		// Gold
+	COLOR_MENU_ITM_GREEN,		// Green
+	COLOR_MENU_ITM_SKY,		// Cyan
+	COLOR_MENU_ITM_BLUE,		// Blue
+	COLOR_MENU_ITM_LAVENDER,		// Magenta
+	COLOR_MENU_ITM_BASE,		// Base
+	COLOR_MENU_ITM_BLACK,		// Black
 	COLOR_MENU_ITM_TRANSPARENT, // Transparent
 	COLOR_MENU_ITM_COUNT,		// No of color menu items
 };

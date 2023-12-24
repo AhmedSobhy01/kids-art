@@ -16,16 +16,16 @@ Output::Output()
 	UI.MenuItemWidth = 45;
 
 	UI.ColorMenuItemWidth = 40;
-	UI.ColorMenuWidth = COLOR_MENU_ITM_COUNT * UI.ColorMenuItemWidth + 13;
-	UI.ColorMenuHeight = 60;
+	UI.ColorMenuWidth = COLOR_MENU_ITM_COUNT * UI.ColorMenuItemWidth + 40;
+	UI.ColorMenuHeight = UI.ColorMenuItemWidth + 16;
 
-	UI.DrawColor = BLUE;				   // Drawing color
-	UI.FillColor = TRANSPARENT_COLOR;		// Filling color
-	UI.MsgColor = RED;					   // Messages color
-	UI.BkGrndColor = LIGHTGOLDENRODYELLOW; // Background color
-	UI.HighlightColor = MAGENTA;		   // This color should NOT be used to draw figures, use if for highlight only
-	UI.StatusBarColor = TURQUOISE;		   // Status bar background color
-	UI.PenWidth = 3;					   // Width of the figures frames
+	UI.DrawColor = BLUE;			  // Drawing color
+	UI.FillColor = TRANSPARENT_COLOR; // Filling color
+	UI.MsgColor = TEXT;				  // Messages color
+	UI.BkGrndColor = BASE;			  // Background color
+	UI.HighlightColor = MAUVE;		  // This color should NOT be used to draw figures, use if for highlight only
+	UI.StatusBarColor = SURFACE0;	  // Status bar background color
+	UI.PenWidth = 3;				  // Width of the figures frames
 
 	// Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
@@ -37,6 +37,7 @@ Output::Output()
 
 	CreateDrawToolBar();
 	CreateStatusBar();
+	pWind->UpdateBuffer();
 	lastMessage = "";
 }
 
@@ -50,12 +51,20 @@ Input *Output::CreateInput() const
 //								Interface Functions										//
 //======================================================================================//
 
+
+void Output::updateBuffer() {
+	pWind->UpdateBuffer();
+}
+
 window *Output::CreateWind(int w, int h, int x, int y) const
 {
 	window *pW = new window(w, h, x, y);
+	pW->SetBuffering(true);
 	pW->SetBrush(UI.BkGrndColor);
 	pW->SetPen(UI.BkGrndColor, 1);
+
 	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);
+	pW->UpdateBuffer();
 	return pW;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -73,27 +82,32 @@ void Output::CreateColorMenuWind(int x, bool withTransparent)
 
 void Output::DrawColorMenuItems(bool withTransparent) const
 {
-	int arraySize = (withTransparent ? COLOR_MENU_ITM_COUNT : COLOR_MENU_ITM_COUNT - 1);
-	string *ColorMenuItemImages = new string[arraySize];
+	const int arraySize = COLOR_MENU_ITM_COUNT - 1;
+	color colors[arraySize] = {PINK, RED, PEACH, YELLOW, GREEN, SKY, BLUE, LAVENDER, BASE, BLACK};
 
-	ColorMenuItemImages[COLOR_MENU_ITM_BLACK] = "images\\Colors\\Black.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_RED] = "images\\Colors\\Red.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_BLUE] = "images\\Colors\\Blue.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_GREEN] = "images\\Colors\\Green.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_MAGENTA] = "images\\Colors\\Magenta.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_ORANGE] = "images\\Colors\\Orange.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_BROWN] = "images\\Colors\\Brown.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_CYAN] = "images\\Colors\\Cyan.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_YELLOW] = "images\\Colors\\Yellow.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_GOLD] = "images\\Colors\\Gold.jpg";
-
-	if (withTransparent)
-		ColorMenuItemImages[COLOR_MENU_ITM_TRANSPARENT] = "images\\Colors\\Transparent.jpg";
-
+	colorMenuWind->DrawRectangle(0, 0, UI.ColorMenuWidth, UI.ColorMenuHeight);
 	for (int i = 0; i < arraySize; i++)
-		colorMenuWind->DrawImage(ColorMenuItemImages[i], i * UI.ColorMenuItemWidth, 0, UI.ColorMenuItemWidth, UI.ColorMenuItemWidth);
-
-	delete[] ColorMenuItemImages;
+	{
+		colorMenuWind->SetBrush(colors[i]);
+		colorMenuWind->SetPen(BLACK, 1);
+		colorMenuWind->DrawCircle(i * UI.ColorMenuItemWidth + (UI.ColorMenuItemWidth / 2), UI.ColorMenuItemWidth / 2, UI.ColorMenuItemWidth / 2 - 4, FILLED);
+	}
+	if (withTransparent)
+	{
+		int xArray[12] = {-8, 0, 8, 16, 8, 16, 8, 0, -8, -16, -8, -16};
+		int yArray[12] = {-16, -8, -16, -8, 0, 8, 16, 8, 16, 8, 0, -8};
+		for (int i = 0; i < 12; i++)
+		{
+			xArray[i] *= 0.9;
+			yArray[i] *= 0.9;
+			xArray[i] += (arraySize)*UI.ColorMenuItemWidth + (UI.ColorMenuItemWidth / 2) - 2;
+			yArray[i] += (UI.ColorMenuItemWidth / 2);
+		}
+		colorMenuWind->SetBrush(BLACK);
+		colorMenuWind->SetPen(BLACK, 1);
+		colorMenuWind->DrawPolygon(xArray, yArray, 12, FILLED);
+	}
+	pWind->UpdateBuffer();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -142,8 +156,8 @@ void Output::ClearStatusBar()
 void Output::CreateDrawToolBar() const
 {
 	UI.InterfaceMode = MODE_DRAW;
-	pWind->SetPen(WHITE, 1);
-	pWind->SetBrush(WHITE);
+	pWind->SetPen(SURFACE0, 1);
+	pWind->SetBrush(SURFACE0);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 
 	// Draw mode toolbar images
@@ -176,14 +190,15 @@ void Output::CreateDrawToolBar() const
 	// Draw menu item one image at a time
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	pWind->UpdateBuffer();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::CreatePlayToolBar() const
 {
 	// Clear toolbar
-	pWind->SetPen(WHITE, 1);
-	pWind->SetBrush(WHITE);
+	pWind->SetPen(SURFACE0, 1);
+	pWind->SetBrush(SURFACE0);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 	UI.InterfaceMode = MODE_PLAY;
 
@@ -198,6 +213,7 @@ void Output::CreatePlayToolBar() const
 	// Draw menu item one image at a time
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)
 		pWind->DrawImage(PlayMenuItems[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	pWind->UpdateBuffer();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -206,6 +222,7 @@ void Output::ClearDrawArea() const
 	pWind->SetPen(UI.BkGrndColor, 1);
 	pWind->SetBrush(UI.BkGrndColor);
 	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
+	//pWind->UpdateBuffer();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -216,7 +233,8 @@ void Output::PrintMessage(string msg) // Prints a message on status bar
 	CreateStatusBar(); // First clear the status bar
 	pWind->SetPen(UI.MsgColor, 50);
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
-	pWind->DrawString(10, UI.height - int(UI.StatusBarHeight / 1.2),lastMessage);
+	pWind->DrawString(10, UI.height - int(UI.StatusBarHeight / 1.2), msg);
+	pWind->UpdateBuffer();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -272,7 +290,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawSquare(Point P1, int squareSize, GfxInfo SquareGfxInfo, bool selected) const // Drawing square
+void Output::DrawSquare(Point P1, int DefaultSquareSize, GfxInfo SquareGfxInfo, bool selected) const // Drawing square
 {
 	color DrawingClr;
 	if (selected)
@@ -292,10 +310,10 @@ void Output::DrawSquare(Point P1, int squareSize, GfxInfo SquareGfxInfo, bool se
 		style = FRAME;
 
 	Point p1, p2;
-	p1.x = P1.x + squareSize / 2;
-	p1.y = P1.y + squareSize / 2;
-	p2.x = P1.x - squareSize / 2;
-	p2.y = P1.y - squareSize / 2;
+	p1.x = P1.x + DefaultSquareSize / 2;
+	p1.y = P1.y + DefaultSquareSize / 2;
+	p2.x = P1.x - DefaultSquareSize / 2;
+	p2.y = P1.y - DefaultSquareSize / 2;
 
 	pWind->DrawRectangle(p1.x, p1.y, p2.x, p2.y, style);
 }
@@ -347,7 +365,7 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawHexagon(Point P1, int hexagonSize, GfxInfo HexagonGfxInfo, bool selected) const
+void Output::DrawHexagon(Point P1, int DefaultHexagonSize, GfxInfo HexagonGfxInfo, bool selected) const
 {
 
 	color drawcolor;
@@ -373,8 +391,8 @@ void Output::DrawHexagon(Point P1, int hexagonSize, GfxInfo HexagonGfxInfo, bool
 
 	for (int i = 0; i < 6; i++)
 	{
-		xPointsArray[i] = P1.x + hexagonSize * cos(i * angle);
-		yPointsArray[i] = P1.y + hexagonSize * sin(i * angle);
+		xPointsArray[i] = P1.x + DefaultHexagonSize * cos(i * angle);
+		yPointsArray[i] = P1.y + DefaultHexagonSize * sin(i * angle);
 	}
 
 	pWind->DrawPolygon(xPointsArray, yPointsArray, 6, style);

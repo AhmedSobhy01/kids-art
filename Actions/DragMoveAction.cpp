@@ -42,6 +42,7 @@ bool DragMoveAction::Execute() {
 	int dx = OldCenter.x - NewCenter.x;
 	int dy = OldCenter.y - NewCenter.y;
 	int err = 0;
+  
 	while (buttonDown) {
 		buttonDown = pIn->GetLeftClickState(NewCenter.x, NewCenter.y);
 		NewCenter.x += dx;

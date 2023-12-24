@@ -5,13 +5,15 @@ class CHexagon : public CFigure
 {
 private:
 	Point center;
-	static const int hexagonSize;
+	static const int DefaultHexagonSize;
+	int hexagonSize;
+
 	double calcTriangleArea(double x1, double y1, double x2, double y2, double x3, double y3);
 public:
 	CHexagon();
 	CHexagon(Point, GfxInfo);
 	void Draw(Output* pOut);
-	static int getHexagonSize();
+	static int GetDefaultHexagonSize();
 	bool IsPointInside(Point);
 	Point GetCenter() const;
 	void SetCenter(Point);
@@ -19,6 +21,8 @@ public:
 	void Save(ofstream&);
 	void Load(ifstream&);
 	void PrintInfo(Output* pOut);
+	bool GetCorner(Point, int&);
+	bool SetCorner(Point, int);
 };
 
 

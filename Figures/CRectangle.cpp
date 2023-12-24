@@ -51,8 +51,8 @@ bool CRectangle::Validate(Point c) {
 	Point center = { (Corner1.x + Corner2.x) / 2,(Corner1.y + Corner2.y) / 2 };
 	int dy = c.y - center.y;
 	int dx = c.x - center.x;
-	bool cond1 = Corner1.y + dy >= UI.ToolBarHeight && Corner1.y + dy <= (UI.height - UI.StatusBarHeight);
-	bool cond2 = Corner2.y + dy >= UI.ToolBarHeight && Corner2.y + dy <= (UI.height - UI.StatusBarHeight);
+	bool cond1 = (Corner1.y + dy - 1) > UI.ToolBarHeight && (Corner1.y + dy + 1) < (UI.height - UI.StatusBarHeight);
+	bool cond2 = (Corner2.y + dy - 1) > UI.ToolBarHeight && (Corner2.y + dy + 1) < (UI.height - UI.StatusBarHeight);
 	return cond1 && cond2;
 
 }
@@ -89,8 +89,42 @@ void CRectangle::PrintInfo(Output* pOut) {
 	info += ", ";
 	info += to_string(Corner2.y);
 	info += "), Vertical Length = ";
-	info += to_string(abs(Corner1.y-Corner2.y));
+	info += to_string(abs(Corner1.y - Corner2.y));
 	info += ", Horizontal Width = ";
 	info += to_string(abs(Corner1.x - Corner2.x));
 	pOut->PrintMessage(info);
+}
+
+bool CRectangle::GetCorner(Point p, int& index) {
+	int Xarr[2] = { Corner1.x ,Corner2.x };
+	int Yarr[2] = { Corner1.y ,Corner2.y };
+	int errx, erry;
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 2; j++) {
+			erry = abs(p.y - Yarr[i]);
+			errx = abs(p.x - Xarr[j]);
+			if (errx < 8 && erry < 8) {
+				index = 2 * i + j;
+				return true;
+			}
+		}
+	}
+	return false;
+}
+bool CRectangle::SetCorner(Point p, int index) {
+	Point OldC1, OldC2;
+	OldC1 = Corner1;
+	OldC2 = Corner2;
+	Point Center = { (Corner1.x + Corner2.x) / 2, (Corner1.y + Corner2.y) / 2 };
+	int* Xarr[2] = { &Corner1.x ,&Corner2.x };
+	int* Yarr[2] = { &Corner1.y ,&Corner2.y };
+	*Xarr[index % 2] = p.x;
+	*Yarr[index / 2] = p.y;
+	if (!Validate(Center)) {
+		Corner1 = OldC1;
+		Corner2 = OldC2;
+		return false;
+	}
+	return true;
+
 }

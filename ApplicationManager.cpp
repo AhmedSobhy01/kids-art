@@ -28,6 +28,7 @@
 #include "Actions\ToggleSoundAction.h"
 #include "Actions\ExitAction.h"
 #include "Actions\DragMoveAction.h"
+#include "Actions\DragResizeAction.h"
 
 // Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), IsPlayingRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
@@ -35,6 +36,7 @@ ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions
 	// Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
+
 
 	SelectedFig = NULL;
 }
@@ -130,6 +132,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case DRAG_MOVE:
 		pAct = new DragMoveAction(this);
+		break;
+	case DRAG_RESIZE:
+		pAct = new DragResizeAction(this);
 		break;
 	case TOGGLE_SOUND:
 		pAct = new ToggleSoundAction(this);
@@ -309,7 +314,7 @@ int ApplicationManager::CountFigColor(CFigure *Fig)
 void ApplicationManager::ResetColors()
 {
 	UI.DrawColor = BLUE;
-	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;
+	UI.BkGrndColor = BASE;
 	UI.FillColor = TRANSPARENT_COLOR;
 }
 
@@ -426,6 +431,7 @@ void ApplicationManager::ClearRedoableActionsStack()
 {
 	int size = RedoableActions.size();
 
+
 	for (int i = 0; i < size; i++) {
 		UndoableAction* pAct = RedoableActions.pop();
 
@@ -440,12 +446,12 @@ void ApplicationManager::ClearRedoableActionsStack()
 void ApplicationManager::UpdateInterface() const
 {
 	pOut->ClearDrawArea();
-
 	for (int i = 0; i < FigList.size(); i++)
 	{
 		if (!FigList[i]->isHidden())
 			FigList[i]->Draw(pOut); // Call Draw function (virtual member fn)
 	}
+	pOut->updateBuffer();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // Return a pointer to the input

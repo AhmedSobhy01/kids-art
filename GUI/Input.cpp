@@ -66,6 +66,7 @@ string Input::GetString(Output *pO) const
 ActionType Input::GetUserAction(int *_ClickedItemOrder) const // This function reads the position where the user clicks to determine the desired action
 {
 	int x, y;
+	pWind->FlushMouseQueue();
 	pWind->WaitMouseClick(x, y); // Get the coordinates of the user click
 
 	if (UI.InterfaceMode == MODE_DRAW) // GUI in the DRAW mode
@@ -228,23 +229,23 @@ color Input::GetSelectedColor(Output* pO) const // This function reads the posit
 			case COLOR_MENU_ITM_GREEN:
 				selectedColor = GREEN;
 				break;
-			case COLOR_MENU_ITM_MAGENTA:
-				selectedColor = MAGENTA;
+			case COLOR_MENU_ITM_LAVENDER:
+				selectedColor = LAVENDER;
 				break;
 			case COLOR_MENU_ITM_ORANGE:
-				selectedColor = ORANGE;
+				selectedColor = PEACH;
 				break;
-			case COLOR_MENU_ITM_BROWN:
-				selectedColor = BROWN;
+			case COLOR_MENU_ITM_PINK:
+				selectedColor = PINK;
 				break;
-			case COLOR_MENU_ITM_CYAN:
-				selectedColor = CYAN;
+			case COLOR_MENU_ITM_SKY:
+				selectedColor = SKY;
 				break;
 			case COLOR_MENU_ITM_YELLOW:
 				selectedColor = YELLOW;
 				break;
-			case COLOR_MENU_ITM_GOLD:
-				selectedColor = LIGHTGOLDENRODYELLOW;
+			case COLOR_MENU_ITM_BASE:
+				selectedColor = BASE;
 				break;
 
 			default:

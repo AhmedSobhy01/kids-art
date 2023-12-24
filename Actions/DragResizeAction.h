@@ -1,17 +1,16 @@
-#ifndef DRAGMOVEACTION_H
-#define DRAGMOVEACTION_H
-
+#ifndef DRAGRESIZEACTION_H
+#define DRAGRESIZEACTION_H
 #include "UndoableAction.h"
 #include "../Figures/CFigure.h"
-
-class DragMoveAction : public UndoableAction
+class DragResizeAction :
+    public UndoableAction
 {
-    Point NewCenter;
-    Point OldCenter;
+    Point NewCorner;
+    Point OldCorner;
+    int PointIndex;
     CFigure* Figure;
-
 public:
-    DragMoveAction(ApplicationManager* pApp);
+    DragResizeAction(ApplicationManager* pApp);
     virtual void ReadActionParameters();
     virtual bool Execute();
     virtual void PlayRecord();
@@ -19,8 +18,8 @@ public:
     virtual void Undo();
     virtual void Redo();
 
-    ~DragMoveAction();
-};
+    ~DragResizeAction();
 
+};
 
 #endif

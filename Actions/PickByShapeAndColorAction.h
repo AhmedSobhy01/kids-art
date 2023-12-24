@@ -1,5 +1,5 @@
 #ifndef PICK_BY_SHAPE_AND_COLOR_ACTION_H
-#define PICK_BY_SHAPE_AND_COLOR_ACTION_H_
+#define PICK_BY_SHAPE_AND_COLOR_ACTION_H
 #include "Action.h"
 #include "..\ApplicationManager.h"
 
@@ -11,7 +11,7 @@ private:
 	int Counter;				// Counter for total picks made
 	int RandomColorFigNumber;	// Integer that stores how many instances for the random properties to be picked
 public:
-	PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager*);
+	PickByShapeAndColorAction(ApplicationManager*);
 	virtual void ReadActionParameters();
 	virtual bool Execute();
 	void StartingMessage();		// To print the starting message
