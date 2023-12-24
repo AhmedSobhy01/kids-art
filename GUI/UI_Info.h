@@ -21,6 +21,7 @@ enum DrawMenuItem // The items of the draw menu (ordered)
 	ITM_TRIANGLE,		  // Draw Triangle
 	ITM_CIRCLE,			  // Draw Circle
 	ITM_HEXAGON,		  // Draw Hexagon
+	ITM_BORDER_WIDTH,	  // Change Border width
 	ITM_OUTLINE_COLOR,	  // Outline Color Menu
 	ITM_FILL_COLOR,		  // Fill Color Menu
 	ITM_SELECT,			  // Select Shape

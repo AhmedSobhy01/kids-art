@@ -250,6 +250,9 @@
     <ClCompile Include="Actions\PlayRecordingAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ChangeBorderWidthAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -440,6 +443,9 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\PlayRecordingAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ChangeBorderWidthAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>
