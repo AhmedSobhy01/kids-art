@@ -72,7 +72,7 @@ void CCircle::PrintInfo(Output* pOut) {
 bool CCircle::GetCorner(Point p, int& index) {
 	int CurrentRadius = sqrt(pow(center.x - this->radius.x, 2) + pow(center.y - this->radius.y, 2));
 	int PointRadius = sqrt(pow(center.x - p.x, 2) + pow(center.y - p.y, 2));
-	if (abs(CurrentRadius - PointRadius) < 1) {
+	if (abs(CurrentRadius - PointRadius) < 4) {
 		index = 0;
 		return true;
 	}
