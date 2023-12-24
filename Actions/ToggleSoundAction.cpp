@@ -12,16 +12,8 @@ bool ToggleSoundAction::Execute() {
 
 	pManager->SetPlayActionSoundState(!pManager->ShouldPlayActionSound());
 
-	if (pManager->ShouldPlayActionSound())
-	{
-		pOut->PrintMessage("Action sound turned on.");
-		pOut->ToggleSound(0);
-	}
-	else
-	{
-		pOut->PrintMessage("Action sound turned off.");
-		pOut->ToggleSound(1);
-	}
+	pOut->PrintMessage(pManager->ShouldPlayActionSound() ? "Action sound turned on." : "Action sound turned off.");
+
 	return true;
 }
 

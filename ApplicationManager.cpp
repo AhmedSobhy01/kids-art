@@ -236,6 +236,7 @@ void ApplicationManager::ClearRecordedActionsList()
 void ApplicationManager::SetRecordingState(bool state)
 {
 	IsRecording = state;
+	pOut->SetRecordingState(state);
 }
 bool ApplicationManager::CanRecord() const
 {
@@ -405,6 +406,7 @@ bool ApplicationManager::ShouldPlayActionSound() const
 void ApplicationManager::SetPlayActionSoundState(bool state)
 {
 	PlayActionSoundEnabled = state;
+	pOut->SetPlayActionState(state);
 }
 
 bool ApplicationManager::AddActionToUndoables(Action *pAct, bool flag)

@@ -18,7 +18,6 @@ bool StopRecordingAction::Execute()
 		pManager->SetRecordingState(false);
 
 		pOut->PrintMessage("Recording stopped (operations: " + to_string(pManager->GetRecordedActionsList().size()) + ").");
-		pOut->ToggleRecording(0);
 
 		return true;
 	}

@@ -35,6 +35,9 @@ Output::Output()
 	// Initialize Color Menu Window Pointer
 	colorMenuWind = NULL;
 
+	IsPlayingRecording = false;
+	PlayActionSoundEnabled = true;
+
 	CreateDrawToolBar();
 	CreateStatusBar();
 	pWind->UpdateBuffer();
@@ -155,6 +158,7 @@ void Output::ClearStatusBar()
 
 void Output::CreateDrawToolBar() const
 {
+	std::cout << "test\n";
 	UI.InterfaceMode = MODE_DRAW;
 	pWind->SetPen(SURFACE0, 1);
 	pWind->SetBrush(SURFACE0);
@@ -176,50 +180,40 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_MOVE] = "images\\DrawMode\\Move.jpg";
 	MenuItemImages[ITM_DRAG_MOVE] = "images\\DrawMode\\DragMove.jpg";
 	MenuItemImages[ITM_DRAG_RESIZE] = "images\\DrawMode\\DragResize.jpg";
+	MenuItemImages[ITM_PLAY_RECORDING] = "images\\DrawMode\\PlayRecording.jpg";
 	MenuItemImages[ITM_UNDO] = "images\\DrawMode\\Undo.jpg";
 	MenuItemImages[ITM_REDO] = "images\\DrawMode\\Redo.jpg";
 	MenuItemImages[ITM_CLEAR_ALL] = "images\\DrawMode\\ClearAll.jpg";
-	MenuItemImages[ITM_START_RECORDING] = "images\\DrawMode\\StartRecording.jpg";
-	MenuItemImages[ITM_STOP_RECORDING] = "images\\DrawMode\\StopRecording.jpg";
-	MenuItemImages[ITM_PLAY_RECORDING] = "images\\DrawMode\\PlayRecording.jpg";
 	MenuItemImages[ITM_BACKGROUND_COLOR] = "images\\DrawMode\\ArtboardBackground.jpg";
-	MenuItemImages[ITM_TOGGLE_SOUND] = "images\\DrawMode\\ToggleSound.jpg";
 	MenuItemImages[ITM_OPEN] = "images\\DrawMode\\Open.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\DrawMode\\Save.jpg";
+	MenuItemImages[ITM_TOGGLE_SOUND] = PlayActionSoundEnabled ? "images\\DrawMode\\ToggleSoundOn.jpg" : "images\\DrawMode\\ToggleSoundOff.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\DrawMode\\Exit.jpg";
+
+	if (IsPlayingRecording) {
+		MenuItemImages[ITM_START_RECORDING] = "images\\DrawMode\\StartRecordingFaded.jpg";
+		MenuItemImages[ITM_STOP_RECORDING] = "images\\DrawMode\\StopRecording.jpg";
+	}
+	else {
+		MenuItemImages[ITM_START_RECORDING] = "images\\DrawMode\\StartRecording.jpg";
+		MenuItemImages[ITM_STOP_RECORDING] = "images\\DrawMode\\StopRecordingFaded.jpg";
+	}
 
 	// Draw menu item one image at a time
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 }
-void Output::ToggleSound(bool isMuted) const
+
+void Output::SetPlayActionState(bool state)
 {
-	if (isMuted)
-		pWind->DrawImage("images\\DrawMode\\ToggleSoundMute.jpg", ITM_TOGGLE_SOUND * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-	else
-		pWind->DrawImage("images\\DrawMode\\ToggleSound.jpg", ITM_TOGGLE_SOUND * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	PlayActionSoundEnabled = state;
+	UpdateToolBar();
 }
-void Output::ToggleRecording(bool isRecording) const
+
+void Output::SetRecordingState(bool state)
 {
-	if (isRecording)
-		pWind->DrawImage("images\\DrawMode\\StartRecordingPressed.jpg", ITM_START_RECORDING * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-	else
-		pWind->DrawImage("images\\DrawMode\\StartRecording.jpg", ITM_START_RECORDING * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-}
-void Output::ToggleBorderWidth(int width) const
-{
-	switch (width)
-	{
-	case 2:
-		pWind->DrawImage("images\\DrawMode\\BorderWidthThin.jpg", ITM_BORDER_WIDTH * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-		break;
-	case 3:
-		pWind->DrawImage("images\\DrawMode\\BorderWidthMed.jpg", ITM_BORDER_WIDTH * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-		break;
-	case 4:
-		pWind->DrawImage("images\\DrawMode\\BorderWidthThick.jpg", ITM_BORDER_WIDTH * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-		break;
-	}
+	IsPlayingRecording = state;
+	UpdateToolBar();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 

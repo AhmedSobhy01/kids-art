@@ -10,6 +10,8 @@ private:
 	window *colorMenuWind; // Pointer to the Color Menu Window
 	string lastMessage;
 
+	bool IsPlayingRecording;
+	bool PlayActionSoundEnabled;
 public:
 	Output();
 
@@ -22,14 +24,14 @@ public:
 	window *GetColorMenuWind() const;			  // Returns pointer to the color menu window or NULL if it doesn't exist
 
 	void CreateDrawToolBar() const;	   // Creates Draw mode toolbar & menu
-	void ToggleSound(bool) const;	   // Changes toggle sound icon
-	void ToggleRecording(bool) const;  // Changes Start Recording icon
-	void ToggleBorderWidth(int) const; // Changes Border width Icon
 	void CreatePlayToolBar() const;	   // Creates Play mode toolbar & menu
 	void CreateStatusBar() const;	   // Create the status bar
 
+	void SetRecordingState(bool);			// Changes toggle sound icon
+	void SetPlayActionState(bool);			// Changes start recording icon
+
 	Input *CreateInput() const;	 // Creates a pointer to the Input object
-	void ClearStatusBar() const; // Clears the status bar
+	void ClearStatusBar(); // Clears the status bar
 	void ClearDrawArea() const;	 // Clears the drawing area
 
 	// Figures drawing functions

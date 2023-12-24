@@ -30,7 +30,6 @@ bool ChangeBorderWidthAction::Execute()
 			UI.PenWidth = 2;
 		NewWidth = UI.PenWidth;
 		Figure->ChngBorderWidth(NewWidth);
-		pOut->ToggleBorderWidth(NewWidth);
 		pOut->ClearStatusBar();
 		Figure->SetSelected(false);
 		pManager->SetSelected(NULL);
@@ -48,7 +47,6 @@ void ChangeBorderWidthAction::PlayRecord()
 		Output* pOut = pManager->GetOutput();
 		UI.PenWidth = NewWidth;
 		Figure->ChngBorderWidth(NewWidth);
-		pOut->ToggleBorderWidth(NewWidth);
 	}
 }
 
@@ -59,7 +57,6 @@ void ChangeBorderWidthAction::Undo()
 		Output* pOut = pManager->GetOutput();
 		UI.PenWidth = OldWidth;
 		Figure->ChngBorderWidth(OldWidth);
-		pOut->ToggleBorderWidth(OldWidth);
 	}
 }
 
@@ -70,6 +67,5 @@ void ChangeBorderWidthAction::Redo()
 		Output* pOut = pManager->GetOutput();
 		UI.PenWidth = NewWidth;
 		Figure->ChngBorderWidth(NewWidth);
-		pOut->ToggleBorderWidth(NewWidth);
 	}
 }
