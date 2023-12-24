@@ -35,6 +35,9 @@ Output::Output()
 	// Initialize Color Menu Window Pointer
 	colorMenuWind = NULL;
 
+	IsPlayingRecording = false;
+	PlayActionSoundEnabled = true;
+
 	CreateDrawToolBar();
 	CreateStatusBar();
 	pWind->UpdateBuffer();
@@ -168,6 +171,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_SQUARE] = "images\\DrawMode\\Square.jpg";
 	MenuItemImages[ITM_TRIANGLE] = "images\\DrawMode\\Triangle.jpg";
 	MenuItemImages[ITM_HEXAGON] = "images\\DrawMode\\Hexagon.jpg";
+	MenuItemImages[ITM_BORDER_WIDTH] = "images\\DrawMode\\BorderWidth" + to_string(UI.PenWidth - 1) + ".jpg";
 	MenuItemImages[ITM_OUTLINE_COLOR] = "images\\DrawMode\\ForegroundColor.jpg";
 	MenuItemImages[ITM_FILL_COLOR] = "images\\DrawMode\\BackgroundColor.jpg";
 	MenuItemImages[ITM_SELECT] = "images\\DrawMode\\Select.jpg";
@@ -175,21 +179,40 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_MOVE] = "images\\DrawMode\\Move.jpg";
 	MenuItemImages[ITM_DRAG_MOVE] = "images\\DrawMode\\DragMove.jpg";
 	MenuItemImages[ITM_DRAG_RESIZE] = "images\\DrawMode\\DragResize.jpg";
+	MenuItemImages[ITM_PLAY_RECORDING] = "images\\DrawMode\\PlayRecording.jpg";
 	MenuItemImages[ITM_UNDO] = "images\\DrawMode\\Undo.jpg";
 	MenuItemImages[ITM_REDO] = "images\\DrawMode\\Redo.jpg";
 	MenuItemImages[ITM_CLEAR_ALL] = "images\\DrawMode\\ClearAll.jpg";
-	MenuItemImages[ITM_START_RECORDING] = "images\\DrawMode\\StartRecording.jpg";
-	MenuItemImages[ITM_STOP_RECORDING] = "images\\DrawMode\\StopRecording.jpg";
-	MenuItemImages[ITM_PLAY_RECORDING] = "images\\DrawMode\\PlayRecording.jpg";
 	MenuItemImages[ITM_BACKGROUND_COLOR] = "images\\DrawMode\\ArtboardBackground.jpg";
-	MenuItemImages[ITM_TOGGLE_SOUND] = "images\\DrawMode\\ToggleSound.jpg";
 	MenuItemImages[ITM_OPEN] = "images\\DrawMode\\Open.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\DrawMode\\Save.jpg";
+	MenuItemImages[ITM_TOGGLE_SOUND] = PlayActionSoundEnabled ? "images\\DrawMode\\ToggleSoundOn.jpg" : "images\\DrawMode\\ToggleSoundOff.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\DrawMode\\Exit.jpg";
+
+	if (IsPlayingRecording) {
+		MenuItemImages[ITM_START_RECORDING] = "images\\DrawMode\\StartRecordingFaded.jpg";
+		MenuItemImages[ITM_STOP_RECORDING] = "images\\DrawMode\\StopRecording.jpg";
+	}
+	else {
+		MenuItemImages[ITM_START_RECORDING] = "images\\DrawMode\\StartRecording.jpg";
+		MenuItemImages[ITM_STOP_RECORDING] = "images\\DrawMode\\StopRecordingFaded.jpg";
+	}
 
 	// Draw menu item one image at a time
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+}
+
+void Output::SetPlayActionState(bool state)
+{
+	PlayActionSoundEnabled = state;
+	UpdateToolBar();
+}
+
+void Output::SetRecordingState(bool state)
+{
+	IsPlayingRecording = state;
+	UpdateToolBar();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -274,7 +297,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) //
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, UI.PenWidth);
+	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWidth);
 	drawstyle style;
 	if (RectGfxInfo.isFilled)
 	{
@@ -303,7 +326,7 @@ void Output::DrawSquare(Point P1, int DefaultSquareSize, GfxInfo SquareGfxInfo, 
 	else
 		DrawingClr = SquareGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, UI.PenWidth);
+	pWind->SetPen(DrawingClr, SquareGfxInfo.BorderWidth);
 	drawstyle style;
 
 	if (SquareGfxInfo.isFilled)
@@ -337,7 +360,7 @@ void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo,
 	else
 		DrawingClr = TriangleGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, UI.PenWidth);
+	pWind->SetPen(DrawingClr, TriangleGfxInfo.BorderWidth);
 	if (TriangleGfxInfo.isFilled)
 	{
 		pWind->SetBrush(TriangleGfxInfo.FillClr);
@@ -367,7 +390,7 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected
 	else
 		drawcolor = CircleGfxInfo.DrawClr;
 
-	pWind->SetPen(drawcolor, UI.PenWidth);
+	pWind->SetPen(drawcolor, CircleGfxInfo.BorderWidth);
 	if (CircleGfxInfo.isFilled)
 	{
 		style = FILLED;
@@ -397,7 +420,7 @@ void Output::DrawHexagon(Point P1, int hexagonSize, GfxInfo HexagonGfxInfo, bool
 	else
 		drawcolor = HexagonGfxInfo.DrawClr;
 
-	pWind->SetPen(drawcolor, UI.PenWidth);
+	pWind->SetPen(drawcolor, HexagonGfxInfo.BorderWidth);
 	if (HexagonGfxInfo.isFilled)
 	{
 		style = FILLED;
