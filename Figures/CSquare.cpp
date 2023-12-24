@@ -17,10 +17,6 @@ CSquare::CSquare(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 
 void CSquare::Draw(Output* pOut) {
 	pOut->DrawSquare(center, squareSize, FigGfxInfo, Selected);
-	if (!Validate(center)) {
-		pOut->updateStatusBar();
-		pOut->updateToolBar();
-	}
 }
 
 int CSquare::GetDefaultSquareSize() {
@@ -46,9 +42,7 @@ Point CSquare::GetCenter() const
 void CSquare::SetCenter(Point center) {
 	this->center = center;
 }
-bool CSquare::Validate(Point c) {
-	return (c.y - squareSize / 2 + 1) > UI.ToolBarHeight && (c.y + squareSize / 2 - 1) < (UI.height - UI.StatusBarHeight);
-}
+
 
 void CSquare::Save(ofstream& fout)
 {
@@ -98,13 +92,7 @@ bool CSquare::GetCorner(Point p, int& index) {
 	}
 	return false;
 }
-bool CSquare::SetCorner(Point p, int index) {
+void CSquare::SetCorner(Point p, int index) {
 	int size = squareSize;
 	squareSize = sqrt((pow(p.x - center.x, 2) + pow(p.y - center.y, 2)) * 2);
-	if (!Validate(center)) { 
-		squareSize = size;
-		return false;
-	};
-	return true;
-
 }

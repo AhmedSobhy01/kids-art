@@ -268,7 +268,7 @@ void Output::updateToolBar() {
 //								Figures Drawing Functions								//
 //======================================================================================//
 
-void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const // Drawing Rectangle
+void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) // Drawing Rectangle
 {
 	color DrawingClr;
 	if (selected)
@@ -287,10 +287,17 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 		style = FRAME;
 
 	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
+	int MinY = min(P1.y, P2.y);
+	int MaxY = max(P1.y, P2.y);
+	if (MinY <= UI.ToolBarHeight)
+		updateToolBar();
+	
+	if (MaxY >= UI.height - UI.StatusBarHeight)
+		updateStatusBar();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawSquare(Point P1, int DefaultSquareSize, GfxInfo SquareGfxInfo, bool selected) const // Drawing square
+void Output::DrawSquare(Point P1, int DefaultSquareSize, GfxInfo SquareGfxInfo, bool selected) // Drawing square
 {
 	color DrawingClr;
 	if (selected)
@@ -316,10 +323,14 @@ void Output::DrawSquare(Point P1, int DefaultSquareSize, GfxInfo SquareGfxInfo, 
 	p2.y = P1.y - DefaultSquareSize / 2;
 
 	pWind->DrawRectangle(p1.x, p1.y, p2.x, p2.y, style);
+	if (p2.y <= UI.ToolBarHeight)
+		updateToolBar();
+	if (p1.y >= UI.height - UI.StatusBarHeight)
+		updateStatusBar();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected) const // Drawing Triangle
+void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected) // Drawing Triangle
 {
 	color DrawingClr;
 	drawstyle style;
@@ -338,10 +349,18 @@ void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo,
 		style = FRAME;
 
 	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
+	int MinY = min(P1.y, P2.y);
+	MinY = min(MinY, P3.y);
+	int MaxY = max(P1.y, P2.y);
+	MaxY = max(MaxY, P3.y);
+	if (MinY <= UI.ToolBarHeight)
+		updateToolBar();
+	if (MaxY >= (UI.height - UI.StatusBarHeight))
+		updateStatusBar();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected) const
+void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected)
 {
 	color drawcolor;
 	drawstyle style;
@@ -358,14 +377,19 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected
 	}
 	else
 		style = FRAME;
-
 	int radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
 	pWind->DrawCircle(P1.x, P1.y, radius, style);
+	if ((P1.y - radius) <= UI.ToolBarHeight)
+		updateToolBar();
+	
+	if ((P1.y + radius) >= (UI.height - UI.StatusBarHeight)) 
+		updateStatusBar();
+	
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawHexagon(Point P1, int DefaultHexagonSize, GfxInfo HexagonGfxInfo, bool selected) const
+void Output::DrawHexagon(Point P1, int hexagonSize, GfxInfo HexagonGfxInfo, bool selected)
 {
 
 	color drawcolor;
@@ -391,11 +415,16 @@ void Output::DrawHexagon(Point P1, int DefaultHexagonSize, GfxInfo HexagonGfxInf
 
 	for (int i = 0; i < 6; i++)
 	{
-		xPointsArray[i] = P1.x + DefaultHexagonSize * cos(i * angle);
-		yPointsArray[i] = P1.y + DefaultHexagonSize * sin(i * angle);
+		xPointsArray[i] = P1.x + hexagonSize * cos(i * angle);
+		yPointsArray[i] = P1.y + hexagonSize * sin(i * angle);
 	}
-
 	pWind->DrawPolygon(xPointsArray, yPointsArray, 6, style);
+	if ((P1.y - hexagonSize / 2 * sqrt(3) - 2) <= UI.ToolBarHeight) 
+		updateToolBar();
+	
+	if ((P1.y + hexagonSize / 2 * sqrt(3) + 2) >= (UI.height - UI.StatusBarHeight)) 
+		updateStatusBar();
+	
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 

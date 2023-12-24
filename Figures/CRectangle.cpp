@@ -17,11 +17,6 @@ void CRectangle::Draw(Output* pOut)
 {
 	//Call Output::DrawRect to draw a rectangle on the screen
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
-	Point center = { (Corner1.x + Corner2.x) / 2,(Corner1.y + Corner2.y) / 2 };
-	if (!Validate(center)) {
-		pOut->updateStatusBar();
-		pOut->updateToolBar();
-	}
 }
 
 bool CRectangle::IsPointInside(Point P) {
@@ -47,15 +42,7 @@ void CRectangle::SetCenter(Point c) {
 	Corner2.y += dy;
 }
 
-bool CRectangle::Validate(Point c) {
-	Point center = { (Corner1.x + Corner2.x) / 2,(Corner1.y + Corner2.y) / 2 };
-	int dy = c.y - center.y;
-	int dx = c.x - center.x;
-	bool cond1 = (Corner1.y + dy - 1) > UI.ToolBarHeight && (Corner1.y + dy + 1) < (UI.height - UI.StatusBarHeight);
-	bool cond2 = (Corner2.y + dy - 1) > UI.ToolBarHeight && (Corner2.y + dy + 1) < (UI.height - UI.StatusBarHeight);
-	return cond1 && cond2;
 
-}
 
 void CRectangle::Save(ofstream& fout)
 {
@@ -111,20 +98,10 @@ bool CRectangle::GetCorner(Point p, int& index) {
 	}
 	return false;
 }
-bool CRectangle::SetCorner(Point p, int index) {
-	Point OldC1, OldC2;
-	OldC1 = Corner1;
-	OldC2 = Corner2;
+void CRectangle::SetCorner(Point p, int index) {
 	Point Center = { (Corner1.x + Corner2.x) / 2, (Corner1.y + Corner2.y) / 2 };
 	int* Xarr[2] = { &Corner1.x ,&Corner2.x };
 	int* Yarr[2] = { &Corner1.y ,&Corner2.y };
 	*Xarr[index % 2] = p.x;
 	*Yarr[index / 2] = p.y;
-	if (!Validate(Center)) {
-		Corner1 = OldC1;
-		Corner2 = OldC2;
-		return false;
-	}
-	return true;
-
 }

@@ -16,10 +16,6 @@ CHexagon::CHexagon(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) 
 
 void CHexagon::Draw(Output* pOut) {
 	pOut->DrawHexagon(center, hexagonSize, FigGfxInfo, Selected);
-	if (!Validate(center)) {
-		pOut->updateStatusBar();
-		pOut->updateToolBar();
-	}
 }
 
 int CHexagon::GetDefaultHexagonSize() {
@@ -63,9 +59,7 @@ void CHexagon::SetCenter(Point c) {
 	this->center = c;
 }
 
-bool CHexagon::Validate(Point c) {
-	return (c.y - hexagonSize / 2 * sqrt(3)-2) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3) +2) < (UI.height - UI.StatusBarHeight);
-}
+
 
 void CHexagon::Save(ofstream& fout)
 {
@@ -114,12 +108,6 @@ bool CHexagon::GetCorner(Point p, int& index) {
 
 	return false;
 }
-bool CHexagon::SetCorner(Point p, int index) {
-	int size = hexagonSize;
+void CHexagon::SetCorner(Point p, int index) {
 	hexagonSize = sqrt(pow(p.x - center.x, 2) + pow(p.y - center.y, 2));
-	if (!Validate(center)) { 
-		hexagonSize = size;
-		return false;
-	}
-	return true;
 }

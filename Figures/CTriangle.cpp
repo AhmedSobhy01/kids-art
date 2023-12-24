@@ -19,11 +19,6 @@ CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigu
 void CTriangle::Draw(Output* pOut)
 {
 	pOut->DrawTriangle(P1, P2, P3, FigGfxInfo, Selected);
-	Point center =  { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
-	if (!Validate(center)) {
-		pOut->updateStatusBar();
-		pOut->updateToolBar();
-	}
 }
 
 
@@ -68,15 +63,7 @@ void CTriangle::SetCenter(Point c) {
 	P2.y += dy;
 	P3.y += dy;
 }
-bool CTriangle::Validate(Point c) {
-	Point center = { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
-	int dx = c.x - center.x;
-	int dy = c.y - center.y;
-	bool cond1 = (P1.y + dy - 1 - FigGfxInfo.BorderWidth / 2) >= UI.ToolBarHeight && (P1.y + dy + 1 + FigGfxInfo.BorderWidth / 2) < (UI.height - UI.StatusBarHeight);
-	bool cond2 = (P2.y + dy - 1 - FigGfxInfo.BorderWidth / 2) >= UI.ToolBarHeight && (P2.y + dy + 1 + FigGfxInfo.BorderWidth / 2) < (UI.height - UI.StatusBarHeight);
-	bool cond3 = (P3.y + dy - 1 - FigGfxInfo.BorderWidth / 2) >= UI.ToolBarHeight && (P3.y + dy + 1 + FigGfxInfo.BorderWidth / 2) < (UI.height - UI.StatusBarHeight);
-	return cond1 && cond2 && cond3;
-}
+
 
 void CTriangle::Save(ofstream& fout)
 {
@@ -131,14 +118,7 @@ bool CTriangle::GetCorner(Point p, int& index) {
 	}
 	return false;
 }
-bool CTriangle::SetCorner(Point p, int index) {
-	Point center = { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
+void CTriangle::SetCorner(Point p, int index) {
 	Point* Corners[3] = { &P1,&P2,&P3 };
-	Point temp = *Corners[index];
 	*Corners[index] = p;
-	if (!Validate(center)) {
-		*Corners[index] = temp;
-		return false;
-	}
-	return true;
 }
