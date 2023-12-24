@@ -11,16 +11,15 @@ private:
 public:
 	CRectangle();
 	CRectangle(Point, Point, GfxInfo FigureGfxInfo);
-	virtual void Draw(Output* pOut) const;
-	bool CheckSelected(int x, int y);
+	virtual void Draw(Output* pOut) ;
+	bool IsPointInside(Point);
 	Point GetCenter() const;
-	bool SetCenter(Point);
-	bool Validate(Point);
+	void SetCenter(Point);
 	void Save(ofstream&);
 	void Load(ifstream&);
 	void PrintInfo(Output* pOut);
 	bool GetCorner(Point, int&);
-	bool SetCorner(Point, int);
+	void SetCorner(Point, int);
 };
 
 #endif

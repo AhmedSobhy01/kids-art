@@ -6,46 +6,37 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddSquareAction::AddSquareAction(ApplicationManager* pApp): UndoableFigureAction(pApp)
+AddSquareAction::AddSquareAction(ApplicationManager* pApp) : UndoableFigureAction(pApp)
 {}
-bool AddSquareAction::Validate() {
-	int DefaultSquareSize = CSquare::GetDefaultSquareSize();
-	return (center.y - DefaultSquareSize / 2) > UI.ToolBarHeight && (center.y + DefaultSquareSize / 2) <= (UI.height - UI.StatusBarHeight);
-}
 
 void AddSquareAction::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+
+	//Getting Coordinates for the shape position
 	pOut->PrintMessage("New Square: Click at the center");
 	pIn->GetPointClicked(center.x, center.y);
-	if (!Validate()) {
-		int x, y;
-		pOut->PrintMessage("ERROR: Invalid Point Location. Click anywhere to continue.");
-		pIn->GetPointClicked(x, y);
-		pOut->ClearStatusBar();
-		return;
-	}
-	SquareGfxInfo.DrawClr = pOut->getCrntDrawColor();
-	SquareGfxInfo.FillClr = pOut->getCrntFillColor();
+
+	//Get drawing, filling colors and pen width from the interface
+	SquareGfxInfo.DrawClr = pOut->GetCurrentDrawColor();
+	SquareGfxInfo.FillClr = pOut->GetCurrentFillColor();
 	SquareGfxInfo.isFilled = (SquareGfxInfo.FillClr != TRANSPARENT_COLOR);
-	SquareGfxInfo.BorderWidth = pOut->getCurrentPenWidth();
+	SquareGfxInfo.BorderWidth = pOut->GetCurrentPenWidth();
 	pOut->ClearStatusBar();
 }
 
 bool AddSquareAction::Execute() {
 	ReadActionParameters();
-	if (Validate()) {
-		//Create a square with the parameters read from the user
-		Figure = new CSquare(center, SquareGfxInfo);
-		Figure->IncrementReference();
 
-		//Add the square to the list of figures
-		pManager->AddFigure(Figure);
+	//Create a square with the parameters read from the user
+	Figure = new CSquare(center, SquareGfxInfo);
+	Figure->IncrementReference();
 
-		return true;
-	}
+	//Add the square to the list of figures
+	pManager->AddFigure(Figure);
 
-	return false;
+	return true;
+
 }
 
 void AddSquareAction::PlayRecord()

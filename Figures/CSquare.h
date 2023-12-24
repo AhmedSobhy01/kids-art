@@ -9,16 +9,15 @@ private:
 public:
 	CSquare();
 	CSquare(Point, GfxInfo);
-	void Draw(Output* pOut)const;
+	void Draw(Output* pOut);
 	static int GetDefaultSquareSize();
-	bool CheckSelected(int x, int y);
+	bool IsPointInside(Point);
 	Point GetCenter() const;
-	bool SetCenter(Point);
-	bool Validate(Point);
+	void SetCenter(Point);
 	void Save(ofstream&);
 	void Load(ifstream&);
 	void PrintInfo(Output* pOut);
 	bool GetCorner(Point, int&);
-	bool SetCorner(Point, int);
+	void SetCorner(Point, int);
 };
 

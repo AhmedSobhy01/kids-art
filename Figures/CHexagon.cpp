@@ -14,7 +14,7 @@ CHexagon::CHexagon(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) 
 	type = "Hexagon";
 }
 
-void CHexagon::Draw(Output* pOut) const {
+void CHexagon::Draw(Output* pOut) {
 	pOut->DrawHexagon(center, hexagonSize, FigGfxInfo, Selected);
 }
 
@@ -26,7 +26,7 @@ double CHexagon::calcTriangleArea(double x1, double y1, double x2, double y2, do
 	return  abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2;
 }
 
-bool CHexagon::CheckSelected(int x, int y) {
+bool CHexagon::IsPointInside(Point P) {
 	if (Hidden) return false;
 
 	//double r = sqrt(pow(center.x - x, 2) + pow(center.y - y, 2));
@@ -44,7 +44,7 @@ bool CHexagon::CheckSelected(int x, int y) {
 		yPointsArray[i] = center.y + hexagonSize * sin(i * angle);
 	}
 	for (int i = 0; i < 6; i++) {
-		PArea += calcTriangleArea(x, y, xPointsArray[i], yPointsArray[i], xPointsArray[(i + 1) % 6], yPointsArray[(i + 1) % 6]);
+		PArea += calcTriangleArea(P.x, P.y, xPointsArray[i], yPointsArray[i], xPointsArray[(i + 1) % 6], yPointsArray[(i + 1) % 6]);
 	}
 	double err = totalArea - PArea;
 	return -0.001 < err && err < 0.001;
@@ -55,15 +55,11 @@ Point CHexagon::GetCenter() const
 	return center;
 }
 
-bool CHexagon::SetCenter(Point c) {
-	if (!Validate(c))return false;
+void CHexagon::SetCenter(Point c) {
 	this->center = c;
-	return true;
 }
 
-bool CHexagon::Validate(Point c) {
-	return (c.y - hexagonSize / 2 * sqrt(3)-2) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3) +2) < (UI.height - UI.StatusBarHeight);
-}
+
 
 void CHexagon::Save(ofstream& fout)
 {
@@ -112,12 +108,6 @@ bool CHexagon::GetCorner(Point p, int& index) {
 
 	return false;
 }
-bool CHexagon::SetCorner(Point p, int index) {
-	int size = hexagonSize;
+void CHexagon::SetCorner(Point p, int index) {
 	hexagonSize = sqrt(pow(p.x - center.x, 2) + pow(p.y - center.y, 2));
-	if (!Validate(center)) { 
-		hexagonSize = size;
-		return false;
-	}
-	return true;
 }

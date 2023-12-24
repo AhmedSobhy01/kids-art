@@ -11,8 +11,6 @@ private:
 	GfxInfo SquareGfxInfo;
 public:
 	AddSquareAction(ApplicationManager* pApp);
-	bool Validate();
-
 	virtual void ReadActionParameters();
 	virtual bool Execute();
 	virtual void PlayRecord();

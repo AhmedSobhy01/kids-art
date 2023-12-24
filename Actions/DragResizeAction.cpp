@@ -36,18 +36,15 @@ bool DragResizeAction::Execute() {
 	Point CurrentCorner = OldCorner;
 	Point ValidCorner = NewCorner;
 	int err;
-	bool isValidCorner = false;
 	while (buttonDown) {
 		buttonDown = pIn->GetLeftClickState(NewCorner.x, NewCorner.y);
-		isValidCorner = Figure->SetCorner(NewCorner,PointIndex);
+		Figure->SetCorner(NewCorner,PointIndex);
 		err = sqrt(pow(CurrentCorner.x - NewCorner.x, 2) + pow(CurrentCorner.y - NewCorner.y, 2));
 		if (err) { // check if it moved by a pixel before updating interface
 			pManager->UpdateInterface();
 		}
 		CurrentCorner = NewCorner;
-		if (isValidCorner)ValidCorner = NewCorner;
 	}
-	NewCorner = ValidCorner;
 	Figure->SetSelected(false);
 	pManager->SetSelected(NULL);
 	pOut->ClearStatusBar();

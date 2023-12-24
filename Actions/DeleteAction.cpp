@@ -3,37 +3,32 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-DeleteAction::DeleteAction(ApplicationManager* pApp): UndoableAction(pApp), RemovedFromIndex(0) {
+DeleteAction::DeleteAction(ApplicationManager* pApp) : UndoableAction(pApp), RemovedFromIndex(0) {
 	Figure = NULL;
 }
 
 void DeleteAction::ReadActionParameters() {
-	CFigure* F = pManager->GetSelected();
+	Figure = pManager->GetSelected();
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
-	if (F == NULL) {
+	if (Figure == NULL) {
 		int x, y;
-		pOut->PrintMessage("Error:Select a shape before deleting. Click anywhere to continue.");
+		pOut->PrintMessage("Error: Select a shape before deleting. Click anywhere to continue.");
 		pIn->GetPointClicked(x, y);
-		pOut->ClearStatusBar();
 	}
+	pOut->ClearStatusBar();
 	return;
 }
 
 bool DeleteAction::Execute() {
 	ReadActionParameters();
-	Figure = pManager->GetSelected();
-	Output* pOut = pManager->GetOutput();
-	pOut->ClearStatusBar();
-	if (Figure != NULL) {
-		Figure->IncrementReference();
-		RemovedFromIndex = pManager->RemoveFigure(Figure);
-		Figure->SetSelected(false);
-		pManager->SetSelected(NULL);
 
-		return true;
-	}
-	return false;
+	if (Figure == NULL)return false;
+	Figure->IncrementReference();
+	RemovedFromIndex = pManager->RemoveFigure(Figure);
+	Figure->SetSelected(false);
+	pManager->SetSelected(NULL);
+	return true;
 }
 
 void DeleteAction::PlayRecord()

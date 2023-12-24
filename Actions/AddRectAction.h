@@ -12,7 +12,6 @@ private:
 	GfxInfo RectGfxInfo;
 public:
 	AddRectAction(ApplicationManager *pApp);
-	bool Validate();
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();
 	virtual void PlayRecord();

@@ -13,11 +13,11 @@ CCircle::CCircle(Point center, Point radius, GfxInfo FigureGfxInfo) :CFigure(Fig
 	type = "Circle";
 }
 
-void CCircle::Draw(Output* pOut) const {
+void CCircle::Draw(Output* pOut) {
 	pOut->DrawCircle(center, radius, FigGfxInfo, Selected);
 }
-bool CCircle::CheckSelected(int x, int y) {
-	return !Hidden && (sqrt(pow(center.x - x, 2) + pow(center.y - y, 2)) <= sqrt(pow(center.x - radius.x, 2) + pow(center.y - radius.y, 2)));
+bool CCircle::IsPointInside(Point P) {
+	return !Hidden && (sqrt(pow(center.x - P.x, 2) + pow(center.y - P.y, 2)) <= sqrt(pow(center.x - radius.x, 2) + pow(center.y - radius.y, 2)));
 }
 
 Point CCircle::GetCenter() const
@@ -25,18 +25,13 @@ Point CCircle::GetCenter() const
 	return center;
 }
 
-bool CCircle::SetCenter(Point c) {
-	if (!Validate(c))return false;
+void CCircle::SetCenter(Point c) {
+	//if (!Validate(c))return;
 	this->radius.x += (c.x - this->center.x);
 	this->radius.y += (c.y - this->center.y);
 	this->center = c;
-	return true;
 }
 
-bool CCircle::Validate(Point c) {
-	int radius = sqrt(pow(center.x - this->radius.x, 2) + pow(center.y - this->radius.y, 2));
-	return (c.y - radius) > UI.ToolBarHeight && (c.y + radius) < (UI.height - UI.StatusBarHeight);
-}
 
 void CCircle::Save(ofstream& fout)
 {
@@ -79,12 +74,6 @@ bool CCircle::GetCorner(Point p, int& index) {
 	}
 	return false;
 }
-bool CCircle::SetCorner(Point p, int) {
-	Point radius = this->radius;
+void CCircle::SetCorner(Point p, int) {
 	this->radius = p;
-	if (!Validate(center)) {
-		this->radius = radius;
-		return false;
-	}
-	return true;
 }

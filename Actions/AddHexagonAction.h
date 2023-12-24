@@ -11,7 +11,6 @@ private:
 	GfxInfo HexagonGfxInfo;
 public:
 	AddHexagonAction(ApplicationManager* pApp);
-	bool Validate();
 
 	virtual void ReadActionParameters();
 	virtual bool Execute();

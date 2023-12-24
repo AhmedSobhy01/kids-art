@@ -29,7 +29,7 @@ public:
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 
-	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
+	virtual void Draw(Output* pOut)  = 0 ;		//Draw the figure
 
 	color GetDrawClr() const;	//returns the figure's drawing color
 	color GetFillClr() const;	//returns the figure's filling color
@@ -47,14 +47,13 @@ public:
 	bool operator==(CFigure&);
 	static void ResetID();
 
-	virtual bool CheckSelected(int x, int y) = 0;
+	virtual bool IsPointInside(Point) = 0;
 	virtual Point GetCenter() const = 0;
-	virtual bool SetCenter(Point) = 0;
-	virtual bool Validate(Point) = 0;
+	virtual void SetCenter(Point) = 0;
 	virtual void Save(ofstream& OutFile) = 0; //Save the figure parameters to the file
 	virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
 	virtual bool GetCorner(Point, int&) = 0;
-	virtual bool SetCorner(Point, int) = 0;
+	virtual void SetCorner(Point, int) = 0;
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
 
