@@ -1,7 +1,6 @@
 #ifndef UNDOABLE_ACTION_STACK_H
 #define UNDOABLE_ACTION_STACK_H
 
-#define NULL 0
 
 class UndoableAction;
 

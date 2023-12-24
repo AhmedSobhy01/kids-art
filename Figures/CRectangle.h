@@ -14,11 +14,13 @@ public:
 	virtual void Draw(Output* pOut) const;
 	bool CheckSelected(int x, int y);
 	Point GetCenter() const;
-	void SetCenter(Point);
+	bool SetCenter(Point);
 	bool Validate(Point);
 	void Save(ofstream&);
 	void Load(ifstream&);
 	void PrintInfo(Output* pOut);
+	bool GetCorner(Point, int&);
+	bool SetCorner(Point, int);
 };
 
 #endif
