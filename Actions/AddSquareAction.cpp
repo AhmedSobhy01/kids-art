@@ -18,10 +18,10 @@ void AddSquareAction::ReadActionParameters() {
 	pIn->GetPointClicked(center.x, center.y);
 
 	//Get drawing, filling colors and pen width from the interface
-	SquareGfxInfo.DrawClr = pOut->getCrntDrawColor();
-	SquareGfxInfo.FillClr = pOut->getCrntFillColor();
+	SquareGfxInfo.DrawClr = pOut->GetCurrentDrawColor();
+	SquareGfxInfo.FillClr = pOut->GetCurrentFillColor();
 	SquareGfxInfo.isFilled = (SquareGfxInfo.FillClr != TRANSPARENT_COLOR);
-	SquareGfxInfo.BorderWidth = pOut->getCurrentPenWidth();
+	SquareGfxInfo.BorderWidth = pOut->GetCurrentPenWidth();
 	pOut->ClearStatusBar();
 }
 

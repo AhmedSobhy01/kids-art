@@ -35,11 +35,11 @@ public:
 	void DrawHexagon(Point P1, int DefaultHexagonSize, GfxInfo HexagonGfxInfo, bool selected = false);					   // Draw a hexagon
 	void DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected = false);			   // Draw a circle
 
-	void PrintMessage(string msg); // Print a message on status bar
+	void PrintMessage(string msg,bool update = true); // Print a message on status bar
 
-	color getCrntDrawColor() const; // Get current drawing color
-	color getCrntFillColor() const; // Get current filling color
-	int getCurrentPenWidth() const;	   // Get current pen width
+	color GetCurrentDrawColor() const; // Get current drawing color
+	color GetCurrentFillColor() const; // Get current filling color
+	int GetCurrentPenWidth() const;	   // Get current pen width
 	void UpdateBuffer();
 
 	void UpdateStatusBar();

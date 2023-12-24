@@ -21,10 +21,10 @@ void AddHexagonAction::ReadActionParameters() {
 	pIn->GetPointClicked(center.x, center.y);
 
 	//Get drawing, filling colors and pen width from the interface
-	HexagonGfxInfo.DrawClr = pOut->getCrntDrawColor();
-	HexagonGfxInfo.FillClr = pOut->getCrntFillColor();
+	HexagonGfxInfo.DrawClr = pOut->GetCurrentDrawColor();
+	HexagonGfxInfo.FillClr = pOut->GetCurrentFillColor();
 	HexagonGfxInfo.isFilled = (HexagonGfxInfo.FillClr != TRANSPARENT_COLOR);
-	HexagonGfxInfo.BorderWidth = pOut->getCurrentPenWidth();
+	HexagonGfxInfo.BorderWidth = pOut->GetCurrentPenWidth();
 	pOut->ClearStatusBar();
 }
 

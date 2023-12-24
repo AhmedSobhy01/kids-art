@@ -190,7 +190,6 @@ void Output::CreateDrawToolBar() const
 	// Draw menu item one image at a time
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-	pWind->UpdateBuffer();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -213,7 +212,6 @@ void Output::CreatePlayToolBar() const
 	// Draw menu item one image at a time
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)
 		pWind->DrawImage(PlayMenuItems[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-	pWind->UpdateBuffer();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -222,11 +220,10 @@ void Output::ClearDrawArea() const
 	pWind->SetPen(UI.BkGrndColor, 1);
 	pWind->SetBrush(UI.BkGrndColor);
 	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
-	//pWind->UpdateBuffer();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::PrintMessage(string msg) // Prints a message on status bar
+void Output::PrintMessage(string msg,bool update) // Prints a message on status bar
 {
 	
 	lastMessage = msg;
@@ -234,29 +231,30 @@ void Output::PrintMessage(string msg) // Prints a message on status bar
 	pWind->SetPen(UI.MsgColor, 50);
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
 	pWind->DrawString(10, UI.height - int(UI.StatusBarHeight / 1.2), msg);
-	pWind->UpdateBuffer();
+	if(update)
+		pWind->UpdateBuffer();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-color Output::getCrntDrawColor() const // Get current drawing color
+color Output::GetCurrentDrawColor() const // Get current drawing color
 {
 	return UI.DrawColor;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-color Output::getCrntFillColor() const // Get current filling color
+color Output::GetCurrentFillColor() const // Get current filling color
 {
 	return UI.FillColor;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-int Output::getCurrentPenWidth() const // Get current pen width
+int Output::GetCurrentPenWidth() const // Get current pen width
 {
 	return UI.PenWidth;
 }
 
 void Output::UpdateStatusBar() {
-	PrintMessage(lastMessage);
+	PrintMessage(lastMessage,false);
 }
 
 void Output::UpdateToolBar() {
