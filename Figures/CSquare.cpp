@@ -87,7 +87,7 @@ bool CSquare::GetCorner(Point p, int& index) {
 		for (int j = 0; j < 2; j++) {
 			errx = abs(p.x - Xarr[i]);
 			erry = abs(p.y - Yarr[j]);
-			if (errx < 2 && erry < 2) {
+			if (errx < 4 && erry < 4) {
 				index = 0;
 				return true;
 			}

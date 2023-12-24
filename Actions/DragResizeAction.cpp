@@ -25,8 +25,12 @@ bool DragResizeAction::Execute() {
 	pOut->PrintMessage("DragMove: Drag the selected shape to resize");
 
 	bool buttonDown = false;
-	while (!buttonDown || !Figure->GetCorner(NewCorner,PointIndex)) {
+	while (!buttonDown) {
 		buttonDown = pIn->GetLeftClickState(NewCorner.x, NewCorner.y);
+	}
+	if (!Figure->GetCorner(NewCorner, PointIndex)) {
+		pOut->ClearStatusBar();
+		return false;
 	}
 	OldCorner = NewCorner;
 	Point CurrentCorner = OldCorner;
