@@ -29,7 +29,6 @@
 #include "Actions\ExitAction.h"
 #include "Actions\DragMoveAction.h"
 #include "Actions\DragResizeAction.h"
-#include "Actions\PickByColorAction.h"
 #include "Actions\ChangeBorderWidthAction.h"
 
 // Constructor
