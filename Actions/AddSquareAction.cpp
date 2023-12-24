@@ -6,25 +6,14 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddSquareAction::AddSquareAction(ApplicationManager* pApp): UndoableFigureAction(pApp)
+AddSquareAction::AddSquareAction(ApplicationManager* pApp) : UndoableFigureAction(pApp)
 {}
-bool AddSquareAction::Validate() {
-	int squareSize = CSquare::getSquareSize();
-	return (center.y - squareSize / 2) > UI.ToolBarHeight && (center.y + squareSize / 2) <= (UI.height - UI.StatusBarHeight);
-}
 
 void AddSquareAction::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("New Square: Click at the center");
 	pIn->GetPointClicked(center.x, center.y);
-	if (!Validate()) {
-		int x, y;
-		pOut->PrintMessage("ERROR: Invalid Point Location. Click anywhere to continue.");
-		pIn->GetPointClicked(x, y);
-		pOut->ClearStatusBar();
-		return;
-	}
 	SquareGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	SquareGfxInfo.FillClr = pOut->getCrntFillColor();
 	SquareGfxInfo.isFilled = (SquareGfxInfo.FillClr != TRANSPARENT_COLOR);
@@ -34,18 +23,15 @@ void AddSquareAction::ReadActionParameters() {
 
 bool AddSquareAction::Execute() {
 	ReadActionParameters();
-	if (Validate()) {
-		//Create a square with the parameters read from the user
-		Figure = new CSquare(center, SquareGfxInfo);
-		Figure->IncrementReference();
+	//Create a square with the parameters read from the user
+	Figure = new CSquare(center, SquareGfxInfo);
+	Figure->IncrementReference();
 
-		//Add the square to the list of figures
-		pManager->AddFigure(Figure);
+	//Add the square to the list of figures
+	pManager->AddFigure(Figure);
 
-		return true;
-	}
+	return true;
 
-	return false;
 }
 
 void AddSquareAction::PlayRecord()

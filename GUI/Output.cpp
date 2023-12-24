@@ -37,6 +37,7 @@ Output::Output()
 
 	CreateDrawToolBar();
 	CreateStatusBar();
+	lastMessage = "";
 }
 
 Input *Output::CreateInput() const
@@ -209,13 +210,14 @@ void Output::ClearDrawArea() const
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::PrintMessage(string msg) const // Prints a message on status bar
+void Output::PrintMessage(string msg) // Prints a message on status bar
 {
+	
+	lastMessage = msg;
 	ClearStatusBar(); // First clear the status bar
-
 	pWind->SetPen(UI.MsgColor, 50);
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
-	pWind->DrawString(10, UI.height - int(UI.StatusBarHeight / 1.2), msg);
+	pWind->DrawString(10, UI.height - int(UI.StatusBarHeight / 1.2),lastMessage);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -234,6 +236,15 @@ color Output::getCrntFillColor() const // Get current filling color
 int Output::getCurrentPenWidth() const // Get current pen width
 {
 	return UI.PenWidth;
+}
+
+void Output::updateStatusBar() {
+	PrintMessage(lastMessage);
+}
+
+void Output::updateToolBar() {
+	if (UI.InterfaceMode == MODE_DRAW)CreateDrawToolBar();
+	else CreatePlayToolBar();
 }
 
 //======================================================================================//
@@ -318,7 +329,7 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected
 	color drawcolor;
 	drawstyle style;
 	if (selected)
-		drawcolor = UI.HighlightColor;
+		drawcolor = UI.HighlightColor; 
 	else
 		drawcolor = CircleGfxInfo.DrawClr;
 
@@ -333,6 +344,7 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected
 
 	int radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
 	pWind->DrawCircle(P1.x, P1.y, radius, style);
+
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 

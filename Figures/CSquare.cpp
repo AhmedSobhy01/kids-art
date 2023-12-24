@@ -13,8 +13,12 @@ CSquare::CSquare(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	type = "Square";
 }
 
-void CSquare::Draw(Output* pOut) const {
+void CSquare::Draw(Output* pOut)  {
 	pOut->DrawSquare(center, squareSize, FigGfxInfo, Selected);
+	if (!Validate(center)) {
+		pOut->updateStatusBar();
+		pOut->updateToolBar();
+	}
 }
 
 int CSquare::getSquareSize() {
@@ -38,7 +42,6 @@ Point CSquare::GetCenter() const
 	return center;
 }
 void CSquare::SetCenter(Point center) {
-	if (!Validate(center))return;
 	this->center = center;
 }
 bool CSquare::Validate(Point c) {

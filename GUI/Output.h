@@ -7,6 +7,7 @@ class Output // The application manager should have a pointer to this class
 private:
 	window *pWind;		   // Pointer to the Graphics Window
 	window *colorMenuWind; // Pointer to the Color Menu Window
+	string lastMessage;
 public:
 	Output();
 
@@ -33,11 +34,14 @@ public:
 	void DrawHexagon(Point P1, int hexagonSize, GfxInfo HexagonGfxInfo, bool selected = false) const;					   // Draw a hexagon
 	void DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected = false) const;			   // Draw a circle
 
-	void PrintMessage(string msg) const; // Print a message on status bar
+	void PrintMessage(string msg); // Print a message on status bar
 
 	color getCrntDrawColor() const; // Get current drawing color
 	color getCrntFillColor() const; // Get current filling color
 	int getCurrentPenWidth() const;	   // Get current pen width
+
+	void updateStatusBar();
+	void updateToolBar();
 
 	~Output();
 };

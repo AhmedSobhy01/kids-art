@@ -15,8 +15,6 @@ protected:
 public:
 	Action(ApplicationManager *pApp) : pManager(pApp), ReferenceCount(0) {} // constructor
 
-	virtual bool Validate() { return true; };
-
 	// Reads parameters required for action to execute (code depends on action type)
 	virtual void ReadActionParameters() = 0;
 

@@ -8,7 +8,7 @@ private:
 public:
 	CSquare();
 	CSquare(Point, GfxInfo);
-	void Draw(Output* pOut)const;
+	void Draw(Output* pOut);
 	static int getSquareSize();
 	bool CheckSelected(int x, int y);
 	Point GetCenter() const;

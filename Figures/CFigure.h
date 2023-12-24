@@ -29,7 +29,7 @@ public:
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 
-	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
+	virtual void Draw(Output* pOut)  = 0 ;		//Draw the figure
 
 	color GetDrawClr() const;	//returns the figure's drawing color
 	color GetFillClr() const;	//returns the figure's filling color

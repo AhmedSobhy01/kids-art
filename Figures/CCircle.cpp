@@ -13,8 +13,12 @@ CCircle::CCircle(Point center, Point radius, GfxInfo FigureGfxInfo) :CFigure(Fig
 	type = "Circle";
 }
 
-void CCircle::Draw(Output* pOut) const {
+void CCircle::Draw(Output* pOut) {
 	pOut->DrawCircle(center, radius, FigGfxInfo, Selected);
+	if (!Validate(center)) {
+		pOut->updateStatusBar();
+		pOut->updateToolBar();
+	}
 }
 bool CCircle::CheckSelected(int x, int y) {
 	return !Hidden && (sqrt(pow(center.x - x, 2) + pow(center.y - y, 2)) <= sqrt(pow(center.x - radius.x, 2) + pow(center.y - radius.y, 2)));
@@ -26,7 +30,7 @@ Point CCircle::GetCenter() const
 }
 
 void CCircle::SetCenter(Point c) {
-	if (!Validate(c))return;
+	//if (!Validate(c))return;
 	this->radius.x += (c.x - this->center.x);
 	this->radius.y += (c.y - this->center.y);
 	this->center = c;

@@ -12,7 +12,6 @@ private:
     GfxInfo CircleGfxInfo;
 public:
     AddCircleAction(ApplicationManager* pApp);
-    bool Validate();
 
     virtual void ReadActionParameters();
     virtual bool Execute();

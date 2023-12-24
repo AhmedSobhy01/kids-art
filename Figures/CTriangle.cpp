@@ -16,9 +16,14 @@ CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigu
 }
 
 
-void CTriangle::Draw(Output* pOut) const
+void CTriangle::Draw(Output* pOut)
 {
 	pOut->DrawTriangle(P1, P2, P3, FigGfxInfo, Selected);
+	Point center =  { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
+	if (!Validate(center)) {
+		pOut->updateStatusBar();
+		pOut->updateToolBar();
+	}
 }
 
 
@@ -54,7 +59,6 @@ Point CTriangle::GetCenter() const
 }
 
 void CTriangle::SetCenter(Point c) {
-	if (!Validate(c))return;
 	Point center = { (P1.x + P2.x + P3.x) / 3,(P1.y + P2.y + P3.y) / 3 };
 	int dx = c.x - center.x;
 	int dy = c.y - center.y;

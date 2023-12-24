@@ -10,7 +10,7 @@ private:
 public:
 	CTriangle();
 	CTriangle(Point, Point, Point, GfxInfo FigureGfxInfo);
-	void Draw(Output* pOut) const;
+	void Draw(Output* pOut) ;
 	bool CheckSelected(int x, int y);
 	Point GetCenter() const;
 	void SetCenter(Point);

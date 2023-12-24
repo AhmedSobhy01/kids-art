@@ -10,7 +10,7 @@ private:
 public:
 	CHexagon();
 	CHexagon(Point, GfxInfo);
-	void Draw(Output* pOut)const;
+	void Draw(Output* pOut);
 	static int getHexagonSize();
 	bool CheckSelected(int x, int y);
 	Point GetCenter() const;

@@ -13,10 +13,15 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(Figur
 }
 
 
-void CRectangle::Draw(Output* pOut) const
+void CRectangle::Draw(Output* pOut) 
 {
 	//Call Output::DrawRect to draw a rectangle on the screen
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
+	Point center = { (Corner1.x + Corner2.x) / 2,(Corner1.y + Corner2.y) / 2 };
+	if (!Validate(center)) {
+		pOut->updateStatusBar();
+		pOut->updateToolBar();
+	}
 }
 
 bool CRectangle::CheckSelected(int x, int y) {
@@ -33,7 +38,6 @@ Point CRectangle::GetCenter() const
 	return { (Corner1.x + Corner2.x) / 2, (Corner1.y + Corner2.y) / 2 };
 }
 void CRectangle::SetCenter(Point c) {
-	if (!Validate(c))return;
 	Point center = { (Corner1.x + Corner2.x) / 2,(Corner1.y + Corner2.y) / 2 };
 	int dy = c.y - center.y;
 	int dx = c.x - center.x;

@@ -12,8 +12,12 @@ CHexagon::CHexagon(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) 
 	type = "Hexagon";
 }
 
-void CHexagon::Draw(Output* pOut) const {
+void CHexagon::Draw(Output* pOut) {
 	pOut->DrawHexagon(center, hexagonSize, FigGfxInfo, Selected);
+	if (!Validate(center)) {
+		pOut->updateStatusBar();
+		pOut->updateToolBar();
+	}
 }
 
 int CHexagon::getHexagonSize() {
@@ -54,7 +58,6 @@ Point CHexagon::GetCenter() const
 }
 
 void CHexagon::SetCenter(Point c) {
-	if (!Validate(c))return;
 	this->center = c;
 }
 
