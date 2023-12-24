@@ -14,6 +14,7 @@ enum ActionType // The actions supported
 	DRAW_SQUARE,		 // Draw Square
 	DRAW_TRIANGLE,		 // Draw Triangle
 	DRAW_HEXAGON,		 // Draw Hexagon
+	BORDER_WIDTH,		 // Change Border Width
 	SELECT,				 // Select Shape
 	OUTLINE_COLOR,		 // Outline Color Menu
 	FILL_COLOR,			 // Fill Color Menu

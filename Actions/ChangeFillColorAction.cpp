@@ -8,10 +8,10 @@ ChangeFillColorAction::ChangeFillColorAction(ApplicationManager* pApp): Undoable
 
 void ChangeFillColorAction::ReadActionParameters()
 {
-	CFigure* F = pManager->GetSelected();
+	Figure = pManager->GetSelected();
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
-	if (F == NULL) {
+	if (Figure == NULL) {
 		int x, y;
 		pOut->PrintMessage("Error:Please select a shape to change it's fill color. Click anywhere to continue.");
 		pIn->GetPointClicked(x, y);
@@ -25,7 +25,6 @@ void ChangeFillColorAction::ReadActionParameters()
 bool ChangeFillColorAction::Execute()
 {
 	ReadActionParameters();
-	Figure = pManager->GetSelected();
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
 	if (Figure != NULL)
