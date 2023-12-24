@@ -45,5 +45,6 @@ void AddHexagonAction::PlayRecord()
 	Figure->SetCenter(center);
 	Figure->ChngFillClr(UI.FillColor);
 	Figure->ChngDrawClr(UI.DrawColor);
+	Figure->ChngBorderWidth(UI.PenWidth);
 	pManager->AddFigure(Figure);
 }

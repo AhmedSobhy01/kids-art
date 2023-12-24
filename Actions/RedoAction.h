@@ -13,7 +13,7 @@ public:
 
 	virtual bool Execute();
 
-	virtual bool ShouldRecord() const;
+	virtual void PlayRecord();
 };
 
 #endif
