@@ -65,7 +65,7 @@ void CHexagon::Save(ofstream& fout)
 {
 	if (fout.is_open())
 	{
-		fout << "HEXAGON" << " " << ID << " " << center.x << " " << center.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
+		fout << "HEXAGON" << " " << ID << " " << center.x << " " << center.y << " " << hexagonSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
 		return;
 	}
 }
@@ -74,9 +74,10 @@ void CHexagon::Load(ifstream& fin)
 {
 	if (fin.is_open())
 	{
-		fin >> ID >> center.x >> center.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
+		fin >> ID >> center.x >> center.y >> hexagonSize >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
 		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
 			FigGfxInfo.isFilled = false;
+		FigGfxInfo.BorderWidth = 3;
 		return;
 	}
 }

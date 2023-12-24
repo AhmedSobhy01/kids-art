@@ -48,7 +48,7 @@ void CSquare::Save(ofstream& fout)
 {
 	if (fout.is_open())
 	{
-		fout << "SQUARE" << " " << ID << " " << center.x << " " << center.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
+		fout << "SQUARE" << " " << ID << " " << center.x << " " << center.y << " " << squareSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
 		return;
 	}
 }
@@ -57,9 +57,10 @@ void CSquare::Load(ifstream& fin)
 {
 	if (fin.is_open())
 	{
-		fin >> ID >> center.x >> center.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
+		fin >> ID >> center.x >> center.y >> squareSize >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
 		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
 			FigGfxInfo.isFilled = false;
+		FigGfxInfo.BorderWidth = 3;
 		return;
 	}
 }

@@ -8,10 +8,10 @@ ChangeOutlineColorAction::ChangeOutlineColorAction(ApplicationManager* pApp): Un
 
 void ChangeOutlineColorAction::ReadActionParameters()
 {
-	CFigure* F = pManager->GetSelected();
+	Figure = pManager->GetSelected();
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
-	if (F == NULL) {
+	if (Figure == NULL) {
 		int x, y;
 		pOut->PrintMessage("Error:Please select a shape to change it's outline color. Click anywhere to continue.");
 		pIn->GetPointClicked(x, y);
@@ -25,7 +25,6 @@ void ChangeOutlineColorAction::ReadActionParameters()
 bool ChangeOutlineColorAction::Execute()
 {
 	ReadActionParameters();
-	Figure = pManager->GetSelected();
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
 

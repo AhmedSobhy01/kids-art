@@ -4,9 +4,6 @@
 #include "Action.h"
 #include "..\ApplicationManager.h"
 
-#include <iostream>
-using namespace std;
-
 class LoadAction : public Action
 {
 private:
@@ -15,6 +12,8 @@ public:
 	LoadAction(ApplicationManager*);
 	void ReadActionParameters();
 	bool Execute();
+
+	virtual bool ShouldRecord() const;
 };
 
 #endif

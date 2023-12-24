@@ -44,5 +44,6 @@ void AddCircleAction::PlayRecord()
 	Figure->ChngFillClr(UI.FillColor);
 	Figure->ChngDrawClr(UI.DrawColor);
 	Figure->ChngBorderWidth(UI.PenWidth);
+	Figure->SetCorner(radius, 0);
 	pManager->AddFigure(Figure);
 }

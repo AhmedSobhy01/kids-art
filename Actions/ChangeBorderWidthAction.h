@@ -11,6 +11,7 @@ private:
 	int OldWidth;
 	int NewWidth;
 	CFigure* Figure;
+	Output* pOut;
 public:
 	ChangeBorderWidthAction(ApplicationManager*);
 	virtual void ReadActionParameters();

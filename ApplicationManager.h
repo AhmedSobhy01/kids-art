@@ -8,7 +8,7 @@
 #include "Containers\List.h"
 #include "Containers\UndoableActionStack.h"
 #include "Actions\Action.h"
-#include "Figures/CFigure.h"
+#include "Figures\CFigure.h"
 
 // Main class that manages everything in the application.
 class ApplicationManager

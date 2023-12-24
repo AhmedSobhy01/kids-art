@@ -81,6 +81,7 @@ void CTriangle::Load(ifstream& fin)
 		fin >> ID >> P1.x >> P1.y >> P2.x >> P2.y >> P3.x >> P3.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
 		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
 			FigGfxInfo.isFilled = false;
+		FigGfxInfo.BorderWidth = 3;
 		return;
 	}
 }

@@ -49,6 +49,7 @@ void CCircle::Load(ifstream& fin)
 		fin >> ID >> center.x >> center.y >> radius.x >> radius.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
 		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
 			FigGfxInfo.isFilled = false;
+		FigGfxInfo.BorderWidth = 3;
 		return;
 	}
 }

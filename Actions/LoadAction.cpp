@@ -1,6 +1,4 @@
 #include "LoadAction.h"
-#include "..\GUI\Input.h"
-#include "..\GUI\Output.h"
 #include "..\Figures\CCircle.h"
 #include "..\Figures\CRectangle.h"
 #include "..\Figures\CSquare.h"
@@ -31,9 +29,12 @@ bool LoadAction::Execute()
 		pAct->Execute();
 		delete pAct;
 		pAct = NULL;
+
 		pOut->PrintMessage("Opened Load File Successfully");
 		string x;
 		CFigure* Figure;
+		UI.PenWidth = 3;
+		pOut->CreateDrawToolBar(); // To update border width icon
 		while (!fin.eof())
 		{
 			fin >> UI.DrawColor >> UI.FillColor >> UI.BkGrndColor;
@@ -62,4 +63,9 @@ bool LoadAction::Execute()
 	}
 	pOut->PrintMessage("Please Enter a Valid File Name");
 	return 0;
+}
+
+bool LoadAction::ShouldRecord() const
+{
+	return false;
 }

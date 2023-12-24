@@ -1,6 +1,8 @@
 #ifndef CCIRCLE_H
 #define CCIRCLE_H
+
 #include "CFigure.h"
+
 class CCircle : public CFigure
 {
 private:

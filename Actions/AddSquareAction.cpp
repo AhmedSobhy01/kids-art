@@ -45,5 +45,6 @@ void AddSquareAction::PlayRecord()
 	Figure->ChngFillClr(UI.FillColor);
 	Figure->ChngDrawClr(UI.DrawColor);
 	Figure->ChngBorderWidth(UI.PenWidth);
+
 	pManager->AddFigure(Figure);
 }

@@ -1,5 +1,4 @@
 #include "PlayRecordingAction.h"
-#include "../GUI/Output.h"
 #include "../Actions/ClearAllAction.h"
 #include "../Actions/UndoableAction.h"
 #include "../CMUgraphicsLib/auxil.h"
@@ -29,19 +28,21 @@ bool PlayRecordingAction::Execute()
 		Action* pClearAction = new ClearAllAction(pManager);
 		pClearAction->Execute();
 		delete pClearAction;
+
+		pManager->UpdateInterface();
 		UI.PenWidth = 3;
 		pOut->PrintMessage("Playing Recording");
 
 		for (int i = 0; i < RecordedActionsList.size(); i++)
 		{
-				if (!dynamic_cast<UndoAction*>(RecordedActionsList[i]) && !dynamic_cast<RedoAction*>(RecordedActionsList[i]))
-					pManager->ClearRedoableActionsStack();
+			if (!dynamic_cast<UndoAction*>(RecordedActionsList[i]) && !dynamic_cast<RedoAction*>(RecordedActionsList[i]))
+				pManager->ClearRedoableActionsStack();
 
-				bool b = pManager->AddActionToUndoables(RecordedActionsList[i], 1);
+			bool b = pManager->AddActionToUndoables(RecordedActionsList[i], 1);
 
-			pManager->UpdateInterface();
-			Pause(1000);
 			RecordedActionsList[i]->PlayRecord();
+			Pause(1000);
+			pManager->UpdateInterface();
 		}
 		Pause(1000);
 		pOut->PrintMessage("Recording Finished");
