@@ -1,25 +1,25 @@
 #include "CHexagon.h"
 
-const int CHexagon::hexagonSize = 80;
+const int CHexagon::DefaultHexagonSize = 80;
 
 CHexagon::CHexagon() :CFigure()
 {
-	currentHexagonSize = hexagonSize;
+	hexagonSize = DefaultHexagonSize;
 	type = "Hexagon";
 }
 
 CHexagon::CHexagon(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	this->center = center;
-	currentHexagonSize = hexagonSize;
+	hexagonSize = DefaultHexagonSize;
 	type = "Hexagon";
 }
 
 void CHexagon::Draw(Output* pOut) const {
-	pOut->DrawHexagon(center, currentHexagonSize, FigGfxInfo, Selected);
+	pOut->DrawHexagon(center, hexagonSize, FigGfxInfo, Selected);
 }
 
-int CHexagon::getHexagonSize() {
-	return hexagonSize;
+int CHexagon::GetDefaultHexagonSize() {
+	return DefaultHexagonSize;
 }
 
 double CHexagon::calcTriangleArea(double x1, double y1, double x2, double y2, double x3, double y3) {
@@ -32,16 +32,16 @@ bool CHexagon::CheckSelected(int x, int y) {
 	//double r = sqrt(pow(center.x - x, 2) + pow(center.y - y, 2));
 	//double theta = atan2((y - center.y), (x - center.x));
 	//const int n = 6;
-	//return r/currentHexagonSize - cos(cdPi / n) / cos(acos(cos(n * theta + cdPi)) / n)<=0;
-	double totalArea = 3 * sqrt(3) * currentHexagonSize * currentHexagonSize / 2;
+	//return r/hexagonSize - cos(cdPi / n) / cos(acos(cos(n * theta + cdPi)) / n)<=0;
+	double totalArea = 3 * sqrt(3) * hexagonSize * hexagonSize / 2;
 	double xPointsArray[6];
 	double yPointsArray[6];
 	double PArea = 0;
 	double angle = 2.0 * cdPi / 6.0; // Angle between each side of the hexagon in radians
 	for (int i = 0; i < 6; i++)
 	{
-		xPointsArray[i] = center.x + currentHexagonSize * cos(i * angle);
-		yPointsArray[i] = center.y + currentHexagonSize * sin(i * angle);
+		xPointsArray[i] = center.x + hexagonSize * cos(i * angle);
+		yPointsArray[i] = center.y + hexagonSize * sin(i * angle);
 	}
 	for (int i = 0; i < 6; i++) {
 		PArea += calcTriangleArea(x, y, xPointsArray[i], yPointsArray[i], xPointsArray[(i + 1) % 6], yPointsArray[(i + 1) % 6]);
@@ -62,7 +62,7 @@ void CHexagon::SetCenter(Point c) {
 }
 
 bool CHexagon::Validate(Point c) {
-	return (c.y - currentHexagonSize / 2 * sqrt(3)-2) > UI.ToolBarHeight && (c.y + currentHexagonSize / 2 * sqrt(3) +2) < (UI.height - UI.StatusBarHeight);
+	return (c.y - hexagonSize / 2 * sqrt(3)-2) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3) +2) < (UI.height - UI.StatusBarHeight);
 }
 
 void CHexagon::Save(ofstream& fout)
@@ -93,7 +93,7 @@ void CHexagon::PrintInfo(Output* pOut) {
 	info += ", ";
 	info += to_string(center.y);
 	info += "), SideLength = ";
-	info += to_string(currentHexagonSize);
+	info += to_string(hexagonSize);
 	pOut->PrintMessage(info);
 }
 bool CHexagon::GetCorner(Point p, int& index) {
@@ -102,8 +102,8 @@ bool CHexagon::GetCorner(Point p, int& index) {
 	for (int i = 0; i < 6; i++)
 	{
 
-		errx = abs(p.x - (center.x + currentHexagonSize * cos(i * angle)));
-		erry = abs(p.y - (center.y + currentHexagonSize * sin(i * angle)));
+		errx = abs(p.x - (center.x + hexagonSize * cos(i * angle)));
+		erry = abs(p.y - (center.y + hexagonSize * sin(i * angle)));
 		if (errx < 2 && erry < 2) {
 			index == 0;
 			return true;
@@ -113,10 +113,10 @@ bool CHexagon::GetCorner(Point p, int& index) {
 	return false;
 }
 bool CHexagon::SetCorner(Point p, int index) {
-	int size = currentHexagonSize;
-	currentHexagonSize = sqrt(pow(p.x - center.x, 2) + pow(p.y - center.y, 2));
+	int size = hexagonSize;
+	hexagonSize = sqrt(pow(p.x - center.x, 2) + pow(p.y - center.y, 2));
 	if (!Validate(center)) { 
-		currentHexagonSize = size;
+		hexagonSize = size;
 		return false;
 	}
 	return true;

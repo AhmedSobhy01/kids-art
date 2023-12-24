@@ -9,8 +9,8 @@
 AddSquareAction::AddSquareAction(ApplicationManager* pApp): UndoableFigureAction(pApp)
 {}
 bool AddSquareAction::Validate() {
-	int squareSize = CSquare::getSquareSize();
-	return (center.y - squareSize / 2) > UI.ToolBarHeight && (center.y + squareSize / 2) <= (UI.height - UI.StatusBarHeight);
+	int DefaultSquareSize = CSquare::GetDefaultSquareSize();
+	return (center.y - DefaultSquareSize / 2) > UI.ToolBarHeight && (center.y + DefaultSquareSize / 2) <= (UI.height - UI.StatusBarHeight);
 }
 
 void AddSquareAction::ReadActionParameters() {
