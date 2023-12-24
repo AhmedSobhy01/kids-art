@@ -12,8 +12,12 @@ AddSquareAction::AddSquareAction(ApplicationManager* pApp) : UndoableFigureActio
 void AddSquareAction::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+
+	//Getting Coordinates for the shape position
 	pOut->PrintMessage("New Square: Click at the center");
 	pIn->GetPointClicked(center.x, center.y);
+
+	//Get drawing, filling colors and pen width from the interface
 	SquareGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	SquareGfxInfo.FillClr = pOut->getCrntFillColor();
 	SquareGfxInfo.isFilled = (SquareGfxInfo.FillClr != TRANSPARENT_COLOR);
@@ -23,6 +27,7 @@ void AddSquareAction::ReadActionParameters() {
 
 bool AddSquareAction::Execute() {
 	ReadActionParameters();
+
 	//Create a square with the parameters read from the user
 	Figure = new CSquare(center, SquareGfxInfo);
 	Figure->IncrementReference();

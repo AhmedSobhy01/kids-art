@@ -20,8 +20,7 @@ void AddHexagonAction::ReadActionParameters() {
 	pOut->PrintMessage("New Hexagon: Click at the center");
 	pIn->GetPointClicked(center.x, center.y);
 
-	//Setting up Graphics info for the shape
-	//Such as outline and fill color and outline width
+	//Get drawing, filling colors and pen width from the interface
 	HexagonGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	HexagonGfxInfo.FillClr = pOut->getCrntFillColor();
 	HexagonGfxInfo.isFilled = (HexagonGfxInfo.FillClr != TRANSPARENT_COLOR);

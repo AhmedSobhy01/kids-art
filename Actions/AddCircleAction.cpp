@@ -18,8 +18,7 @@ void AddCircleAction::ReadActionParameters() {
 	pOut->PrintMessage("New Circle: Click at the radius");
 	pIn->GetPointClicked(radius.x, radius.y);
 
-	//Setting up Graphics info for the shape
-	//Such as outline and fill color and outline width
+	//Get drawing, filling colors and pen width from the interface
 	CircleGfxInfo.DrawClr = pOut->getCrntDrawColor(); 
 	CircleGfxInfo.FillClr = pOut->getCrntFillColor(); 
 	CircleGfxInfo.isFilled = (CircleGfxInfo.FillClr != TRANSPARENT_COLOR); 

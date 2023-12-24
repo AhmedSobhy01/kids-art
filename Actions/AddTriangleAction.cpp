@@ -12,12 +12,16 @@ AddTriangleAction::AddTriangleAction(ApplicationManager* pApp) : UndoableFigureA
 void AddTriangleAction::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+
+	//Getting Coordinates for the shape position
 	pOut->PrintMessage("New Triangle: Click at the first corner");
 	pIn->GetPointClicked(P1.x, P1.y);
 	pOut->PrintMessage("New Triangle: Click at the second corner");
 	pIn->GetPointClicked(P2.x, P2.y);
 	pOut->PrintMessage("New Triangle: Click at the third corner");
 	pIn->GetPointClicked(P3.x, P3.y);
+
+	//Get drawing, filling colors and pen width from the interface
 	TriangleGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	TriangleGfxInfo.FillClr = pOut->getCrntFillColor();
 	TriangleGfxInfo.isFilled = (TriangleGfxInfo.FillClr != TRANSPARENT_COLOR);

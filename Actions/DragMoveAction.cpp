@@ -18,7 +18,7 @@ bool DragMoveAction::Execute() {
 	Figure = pManager->GetSelected();
 	if (Figure == NULL) {
 		int x, y;
-		pOut->PrintMessage("Error:Select a shape before moving. Click anywhere to continue.");
+		pOut->PrintMessage("Error: Select a shape before moving. Click anywhere to continue.");
 		pIn->GetPointClicked(x, y);
 		pOut->ClearStatusBar();
 		return false;
@@ -29,9 +29,12 @@ bool DragMoveAction::Execute() {
 	pOut->PrintMessage("DragMove: Drag the selected shape to move");
 
 	bool buttonDown = false;
-	while (!buttonDown || !Figure->CheckSelected(NewCenter.x, NewCenter.y)) {
+	while (!buttonDown) {
 		buttonDown = pIn->GetLeftClickState(NewCenter.x, NewCenter.y);
-
+	}
+	if (!Figure->CheckSelected(NewCenter.x, NewCenter.y)) { 
+		pOut->ClearStatusBar();
+		return false;
 	}
 
 	OldCenter = Figure->GetCenter();

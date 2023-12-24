@@ -7,10 +7,10 @@
 MoveAction::MoveAction(ApplicationManager* pApp) : UndoableAction(pApp) {}
 
 void MoveAction::ReadActionParameters() {
-	CFigure* F = pManager->GetSelected();
+	Figure = pManager->GetSelected();
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
-	if (F == NULL) {
+	if (Figure == NULL) {
 		int x, y;
 		pOut->PrintMessage("Error:Select a shape before moving. Click anywhere to continue.");
 		pIn->GetPointClicked(x, y);
@@ -23,10 +23,10 @@ void MoveAction::ReadActionParameters() {
 }
 bool MoveAction::Execute() {
 	ReadActionParameters();
-	Figure = pManager->GetSelected();
-	if (Figure == NULL)return false;
-	Figure->IncrementReference();
 
+	if (Figure == NULL)return false;
+
+	Figure->IncrementReference();
 	OldCenter = Figure->GetCenter();
 	Figure->SetCenter(NewCenter);
 	Figure->SetSelected(false);
