@@ -58,6 +58,7 @@ void ChangeBorderWidthAction::Undo()
 		Output* pOut = pManager->GetOutput();
 		UI.PenWidth = OldWidth;
 		Figure->ChngBorderWidth(OldWidth);
+		pOut->CreateDrawToolBar(); // To update border width icon
 	}
 }
 
@@ -68,5 +69,6 @@ void ChangeBorderWidthAction::Redo()
 		Output* pOut = pManager->GetOutput();
 		UI.PenWidth = NewWidth;
 		Figure->ChngBorderWidth(NewWidth);
+		pOut->CreateDrawToolBar(); // To update border width icon
 	}
 }
