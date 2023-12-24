@@ -6,12 +6,12 @@
 class PlayMode: public Action {
 protected:
 	Point P;
-	CFigure* RandomFigure;
+	CFigure* RandomFigure;	/// used in derived
 	CFigure* ClickedFigure;
-	ActionType Mode;
+	ActionType Mode;		/// used in derived
 	int CorrectPicks;
 	int Counter;
-	int Target;
+	int Target;				/// used in derived
 	bool CorrectCondition;
 public:
 	PlayMode(ApplicationManager*);
@@ -20,7 +20,7 @@ public:
 	virtual void StartingMessage() = 0;
 	void FinalMessage(bool&);
 	void GetClickedAction(bool&, bool&);
-	bool ShouldRecord() const;
 	void SetCorrectCondition();
+
 };
 #endif

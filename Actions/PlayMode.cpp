@@ -85,8 +85,3 @@ bool PlayMode::Execute() {
 
 	return true;
 }
-
-bool PlayMode::ShouldRecord() const
-{
-	return false;
-}
