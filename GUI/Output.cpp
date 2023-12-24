@@ -16,16 +16,16 @@ Output::Output()
 	UI.MenuItemWidth = 45;
 
 	UI.ColorMenuItemWidth = 40;
-	UI.ColorMenuWidth = COLOR_MENU_ITM_COUNT * UI.ColorMenuItemWidth + 13;
-	UI.ColorMenuHeight = 60;
+	UI.ColorMenuWidth = COLOR_MENU_ITM_COUNT * UI.ColorMenuItemWidth + 40;
+	UI.ColorMenuHeight = UI.ColorMenuItemWidth + 16;
 
-	UI.DrawColor = BLUE;				   // Drawing color
-	UI.FillColor = TRANSPARENT_COLOR;		// Filling color
-	UI.MsgColor = RED;					   // Messages color
-	UI.BkGrndColor = LIGHTGOLDENRODYELLOW; // Background color
-	UI.HighlightColor = MAGENTA;		   // This color should NOT be used to draw figures, use if for highlight only
-	UI.StatusBarColor = TURQUOISE;		   // Status bar background color
-	UI.PenWidth = 3;					   // Width of the figures frames
+	UI.DrawColor = BLUE;			  // Drawing color
+	UI.FillColor = TRANSPARENT_COLOR; // Filling color
+	UI.MsgColor = TEXT;				  // Messages color
+	UI.BkGrndColor = BASE;			  // Background color
+	UI.HighlightColor = MAUVE;		  // This color should NOT be used to draw figures, use if for highlight only
+	UI.StatusBarColor = SURFACE0;	  // Status bar background color
+	UI.PenWidth = 3;				  // Width of the figures frames
 
 	// Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
@@ -60,6 +60,7 @@ window *Output::CreateWind(int w, int h, int x, int y) const
 	pW->SetBuffering(true);
 	pW->SetBrush(UI.BkGrndColor);
 	pW->SetPen(UI.BkGrndColor, 1);
+
 	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);
 	pW->UpdateBuffer();
 	return pW;
@@ -79,27 +80,31 @@ void Output::CreateColorMenuWind(int x, bool withTransparent)
 
 void Output::DrawColorMenuItems(bool withTransparent) const
 {
-	int arraySize = (withTransparent ? COLOR_MENU_ITM_COUNT : COLOR_MENU_ITM_COUNT - 1);
-	string *ColorMenuItemImages = new string[arraySize];
+	const int arraySize = COLOR_MENU_ITM_COUNT - 1;
+	color colors[arraySize] = {PINK, RED, PEACH, YELLOW, GREEN, SKY, BLUE, LAVENDER, BASE, BLACK};
 
-	ColorMenuItemImages[COLOR_MENU_ITM_BLACK] = "images\\Colors\\Black.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_RED] = "images\\Colors\\Red.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_BLUE] = "images\\Colors\\Blue.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_GREEN] = "images\\Colors\\Green.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_MAGENTA] = "images\\Colors\\Magenta.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_ORANGE] = "images\\Colors\\Orange.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_BROWN] = "images\\Colors\\Brown.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_CYAN] = "images\\Colors\\Cyan.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_YELLOW] = "images\\Colors\\Yellow.jpg";
-	ColorMenuItemImages[COLOR_MENU_ITM_GOLD] = "images\\Colors\\Gold.jpg";
-
-	if (withTransparent)
-		ColorMenuItemImages[COLOR_MENU_ITM_TRANSPARENT] = "images\\Colors\\Transparent.jpg";
-
+	colorMenuWind->DrawRectangle(0, 0, UI.ColorMenuWidth, UI.ColorMenuHeight);
 	for (int i = 0; i < arraySize; i++)
-		colorMenuWind->DrawImage(ColorMenuItemImages[i], i * UI.ColorMenuItemWidth, 0, UI.ColorMenuItemWidth, UI.ColorMenuItemWidth);
-
-	delete[] ColorMenuItemImages;
+	{
+		colorMenuWind->SetBrush(colors[i]);
+		colorMenuWind->SetPen(BLACK, 1);
+		colorMenuWind->DrawCircle(i * UI.ColorMenuItemWidth + (UI.ColorMenuItemWidth / 2), UI.ColorMenuItemWidth / 2, UI.ColorMenuItemWidth / 2 - 4, FILLED);
+	}
+	if (withTransparent)
+	{
+		int xArray[12] = {-8, 0, 8, 16, 8, 16, 8, 0, -8, -16, -8, -16};
+		int yArray[12] = {-16, -8, -16, -8, 0, 8, 16, 8, 16, 8, 0, -8};
+		for (int i = 0; i < 12; i++)
+		{
+			xArray[i] *= 0.9;
+			yArray[i] *= 0.9;
+			xArray[i] += (arraySize)*UI.ColorMenuItemWidth + (UI.ColorMenuItemWidth / 2) - 2;
+			yArray[i] += (UI.ColorMenuItemWidth / 2);
+		}
+		colorMenuWind->SetBrush(BLACK);
+		colorMenuWind->SetPen(BLACK, 1);
+		colorMenuWind->DrawPolygon(xArray, yArray, 12, FILLED);
+	}
 	pWind->UpdateBuffer();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -152,8 +157,8 @@ void Output::ClearStatusBar() const
 void Output::CreateDrawToolBar() const
 {
 	UI.InterfaceMode = MODE_DRAW;
-	pWind->SetPen(WHITE, 1);
-	pWind->SetBrush(WHITE);
+	pWind->SetPen(SURFACE0, 1);
+	pWind->SetBrush(SURFACE0);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 
 	// Draw mode toolbar images
@@ -193,8 +198,8 @@ void Output::CreateDrawToolBar() const
 void Output::CreatePlayToolBar() const
 {
 	// Clear toolbar
-	pWind->SetPen(WHITE, 1);
-	pWind->SetBrush(WHITE);
+	pWind->SetPen(SURFACE0, 1);
+	pWind->SetBrush(SURFACE0);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 	UI.InterfaceMode = MODE_PLAY;
 

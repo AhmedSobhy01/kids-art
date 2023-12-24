@@ -1,4 +1,4 @@
-/* 
+/*
 See "version.h" for version info and copyright information
 This file was last modified on 05.16.1999
 */
@@ -10,23 +10,25 @@ This file was last modified on 05.16.1999
 #include <iostream>
 using namespace std;
 
-class color {
+class color
+{
 
-  public:
+public:
+	// Default constructor creates black
+	color(unsigned char Red = 0, unsigned char Green = 0, unsigned char Blue = 0)
+	{
+		ucRed = Red;
+		ucGreen = Green;
+		ucBlue = Blue;
+	}
+	friend ostream &operator<<(ostream &, const color &);
+	friend istream &operator>>(istream &, color &);
+	string ReturnColor();
 
-    // Default constructor creates black
-    color(unsigned char Red = 0, unsigned char Green = 0, unsigned char Blue = 0) { 
-        ucRed = Red;  ucGreen = Green;  ucBlue = Blue; 
-    }
-    friend ostream& operator<<(ostream&, const color&);
-    friend istream& operator>>(istream&, color&);
-    string ReturnColor();
-
-    // Color components.  0 = no intensity, 255 = full intensity
-    unsigned char ucRed;
-    unsigned char ucGreen;
-    unsigned char ucBlue;
-
+	// Color components.  0 = no intensity, 255 = full intensity
+	unsigned char ucRed;
+	unsigned char ucGreen;
+	unsigned char ucBlue;
 };
 
 bool operator==(color a, color b);
@@ -37,7 +39,7 @@ bool operator!=(color a, color b);
   Predefine some color objects...  Data was liberally borrowed from the
   Open Group's X11 rbg.txt file
 
-  $XConsortium: rgb.txt,v 10.41 94/02/20 18:39:36 rws Exp 
+  $XConsortium: rgb.txt,v 10.41 94/02/20 18:39:36 rws Exp
 
 */
 const color TRANSPARENT_COLOR = color(-1, -1, -1);
@@ -63,7 +65,6 @@ const color HONEYDEW = color(240, 255, 240);
 const color MINTCREAM = color(245, 255, 250);
 const color AZURE = color(240, 255, 255);
 const color ALICEBLUE = color(240, 248, 255);
-const color LAVENDER = color(230, 230, 250);
 const color LAVENDERBLUSH = color(255, 240, 245);
 const color MISTYROSE = color(255, 228, 225);
 const color WHITE = color(255, 255, 255);
@@ -90,7 +91,6 @@ const color MEDIUMSLATEBLUE = color(123, 104, 238);
 const color LIGHTSLATEBLUE = color(132, 112, 255);
 const color MEDIUMBLUE = color(0, 0, 205);
 const color ROYALBLUE = color(65, 105, 225);
-const color BLUE = color(0, 0, 255);
 const color DODGERBLUE = color(30, 144, 255);
 const color DEEPSKYBLUE = color(0, 191, 255);
 const color SKYBLUE = color(135, 206, 235);
@@ -117,7 +117,6 @@ const color LIGHTSEAGREEN = color(32, 178, 170);
 const color PALEGREEN = color(152, 251, 152);
 const color SPRINGGREEN = color(0, 255, 127);
 const color LAWNGREEN = color(124, 252, 0);
-const color GREEN = color(0, 255, 0);
 const color CHARTREUSE = color(127, 255, 0);
 const color MEDIUMSPRINGGREEN = color(0, 250, 154);
 const color GREENYELLOW = color(173, 255, 47);
@@ -130,7 +129,6 @@ const color KHAKI = color(240, 230, 140);
 const color PALEGOLDENROD = color(238, 232, 170);
 const color LIGHTGOLDENRODYELLOW = color(250, 250, 210);
 const color LIGHTYELLOW = color(255, 255, 224);
-const color YELLOW = color(255, 255, 0);
 const color GOLD = color(255, 215, 0);
 const color LIGHTGOLDENROD = color(238, 221, 130);
 const color GOLDENROD = color(218, 165, 32);
@@ -158,13 +156,10 @@ const color CORAL = color(255, 127, 80);
 const color LIGHTCORAL = color(240, 128, 128);
 const color TOMATO = color(255, 99, 71);
 const color ORANGERED = color(255, 69, 0);
-const color RED = color(255, 0, 0);
 const color HOTPINK = color(255, 105, 180);
 const color DEEPPINK = color(255, 20, 147);
-const color PINK = color(255, 192, 203);
 const color LIGHTPINK = color(255, 182, 193);
 const color PALEVIOLETRED = color(219, 112, 147);
-const color MAROON = color(176, 48, 96);
 const color MEDIUMVIOLETRED = color(199, 21, 133);
 const color VIOLETRED = color(208, 32, 144);
 const color MAGENTA = color(255, 0, 255);
@@ -185,6 +180,31 @@ const color DARKCYAN = color(0, 139, 139);
 const color DARKMAGENTA = color(139, 0, 139);
 const color DARKRED = color(139, 0, 0);
 const color LIGHTGREEN = color(144, 238, 144);
+const color ROSEWATER = color(220, 138, 120);
+const color FLAMINGO = color(221, 120, 120);
+const color PINK = color(234, 118, 203);
+const color MAUVE = color(136, 57, 239);
+const color RED = color(210, 15, 57);
+const color MAROON = color(230, 69, 83);
+const color PEACH = color(254, 100, 11);
+const color YELLOW = color(223, 142, 29);
+const color GREEN = color(64, 160, 43);
+const color TEAL = color(23, 146, 153);
+const color SKY = color(4, 165, 229);
+const color SAPPHIRE = color(32, 159, 181);
+const color BLUE = color(30, 102, 245);
+const color LAVENDER = color(114, 135, 253);
+const color TEXT = color(76, 79, 105);
+const color SUBTEXT0 = color(108, 111, 133);
+const color SUBTEXT1 = color(92, 95, 119);
+const color OVERLAY0 = color(156, 160, 176);
+const color OVERLAY1 = color(140, 143, 161);
+const color OVERLAY2 = color(124, 127, 147);
+const color SURFACE0 = color(204, 208, 218);
+const color SURFACE1 = color(188, 192, 204);
+const color SURFACE2 = color(172, 176, 190);
+const color BASE = color(239, 241, 245);
+const color MANTLE = color(230, 233, 239);
+const color CRUST = color(220, 224, 232);
 
-
-#endif //COLOR_H
+#endif // COLOR_H
