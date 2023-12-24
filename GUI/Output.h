@@ -28,9 +28,9 @@ public:
 
 	// Figures drawing functions
 	void DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected = false) const;				   // Draw a rectangle
-	void DrawSquare(Point P1,int squareSize ,GfxInfo SquareGfxInfo, bool selected = false) const;						   // Draw a square
+	void DrawSquare(Point P1,int DefaultSquareSize ,GfxInfo SquareGfxInfo, bool selected = false) const;						   // Draw a square
 	void DrawTriangle(Point P1 ,Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected = false) const; // Draw a triangle
-	void DrawHexagon(Point P1, int hexagonSize, GfxInfo HexagonGfxInfo, bool selected = false) const;					   // Draw a hexagon
+	void DrawHexagon(Point P1, int DefaultHexagonSize, GfxInfo HexagonGfxInfo, bool selected = false) const;					   // Draw a hexagon
 	void DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected = false) const;			   // Draw a circle
 
 	void PrintMessage(string msg) const; // Print a message on status bar
@@ -38,6 +38,7 @@ public:
 	color getCrntDrawColor() const; // Get current drawing color
 	color getCrntFillColor() const; // Get current filling color
 	int getCurrentPenWidth() const;	   // Get current pen width
+	void updateBuffer();
 
 	~Output();
 };
