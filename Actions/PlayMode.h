@@ -5,14 +5,15 @@
 #include "Action.h"
 class PlayMode: public Action {
 protected:
-	Point P;
 	CFigure* RandomFigure;	/// used in derived
-	CFigure* ClickedFigure;
 	ActionType Mode;		/// used in derived
-	int CorrectPicks;
-	int Counter;
 	int Target;				/// used in derived
+private:
 	bool CorrectCondition;
+	int Counter;
+	int CorrectPicks;
+	CFigure* ClickedFigure;
+	Point P;
 public:
 	PlayMode(ApplicationManager*);
 	bool Execute();

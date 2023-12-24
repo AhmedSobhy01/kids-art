@@ -97,6 +97,6 @@ string color::ReturnColor()
 	else if (*this == LIGHTGOLDENRODYELLOW)
 		c = "Light Golden Rod Yellow";
 	else
-		c = "Transparent color";
+		c = "Transparent";
 	return c;
 }
