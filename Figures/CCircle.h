@@ -17,6 +17,8 @@ public:
 	void Save(ofstream&);
 	void Load(ifstream&);
 	void PrintInfo(Output* pOut);
+	bool GetCorner(Point, int&);
+	bool SetCorner(Point, int);
 };
 #endif
 

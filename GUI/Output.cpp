@@ -262,7 +262,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawSquare(Point P1, int squareSize, GfxInfo SquareGfxInfo, bool selected) const // Drawing square
+void Output::DrawSquare(Point P1, int DefaultSquareSize, GfxInfo SquareGfxInfo, bool selected) const // Drawing square
 {
 	color DrawingClr;
 	if (selected)
@@ -282,10 +282,10 @@ void Output::DrawSquare(Point P1, int squareSize, GfxInfo SquareGfxInfo, bool se
 		style = FRAME;
 
 	Point p1, p2;
-	p1.x = P1.x + squareSize / 2;
-	p1.y = P1.y + squareSize / 2;
-	p2.x = P1.x - squareSize / 2;
-	p2.y = P1.y - squareSize / 2;
+	p1.x = P1.x + DefaultSquareSize / 2;
+	p1.y = P1.y + DefaultSquareSize / 2;
+	p2.x = P1.x - DefaultSquareSize / 2;
+	p2.y = P1.y - DefaultSquareSize / 2;
 
 	pWind->DrawRectangle(p1.x, p1.y, p2.x, p2.y, style);
 }
@@ -336,7 +336,7 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawHexagon(Point P1, int hexagonSize, GfxInfo HexagonGfxInfo, bool selected) const
+void Output::DrawHexagon(Point P1, int DefaultHexagonSize, GfxInfo HexagonGfxInfo, bool selected) const
 {
 
 	color drawcolor;
@@ -362,8 +362,8 @@ void Output::DrawHexagon(Point P1, int hexagonSize, GfxInfo HexagonGfxInfo, bool
 
 	for (int i = 0; i < 6; i++)
 	{
-		xPointsArray[i] = P1.x + hexagonSize * cos(i * angle);
-		yPointsArray[i] = P1.y + hexagonSize * sin(i * angle);
+		xPointsArray[i] = P1.x + DefaultHexagonSize * cos(i * angle);
+		yPointsArray[i] = P1.y + DefaultHexagonSize * sin(i * angle);
 	}
 
 	pWind->DrawPolygon(xPointsArray, yPointsArray, 6, style);

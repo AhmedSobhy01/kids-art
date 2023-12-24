@@ -1,14 +1,16 @@
 #include "CHexagon.h"
 
-const int CHexagon::hexagonSize = 80;
+const int CHexagon::DefaultHexagonSize = 80;
 
 CHexagon::CHexagon() :CFigure()
 {
+	hexagonSize = DefaultHexagonSize;
 	type = "Hexagon";
 }
 
 CHexagon::CHexagon(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	this->center = center;
+	hexagonSize = DefaultHexagonSize;
 	type = "Hexagon";
 }
 
@@ -16,8 +18,8 @@ void CHexagon::Draw(Output* pOut) const {
 	pOut->DrawHexagon(center, hexagonSize, FigGfxInfo, Selected);
 }
 
-int CHexagon::getHexagonSize() {
-	return hexagonSize;
+int CHexagon::GetDefaultHexagonSize() {
+	return DefaultHexagonSize;
 }
 
 double CHexagon::calcTriangleArea(double x1, double y1, double x2, double y2, double x3, double y3) {
@@ -54,12 +56,13 @@ Point CHexagon::GetCenter() const
 }
 
 void CHexagon::SetCenter(Point c) {
-	if (!Validate(c))return;
+	Point temp = this->center;
 	this->center = c;
+	if (!Validate(this->center))this->center = temp;
 }
 
 bool CHexagon::Validate(Point c) {
-	return (c.y - hexagonSize / 2 * sqrt(3)-1) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3) +1) < (UI.height - UI.StatusBarHeight);
+	return (c.y - hexagonSize / 2 * sqrt(3)-2) > UI.ToolBarHeight && (c.y + hexagonSize / 2 * sqrt(3) +2) < (UI.height - UI.StatusBarHeight);
 }
 
 void CHexagon::Save(ofstream& fout)
@@ -92,4 +95,29 @@ void CHexagon::PrintInfo(Output* pOut) {
 	info += "), SideLength = ";
 	info += to_string(hexagonSize);
 	pOut->PrintMessage(info);
+}
+bool CHexagon::GetCorner(Point p, int& index) {
+	double angle = 2.0 * cdPi / 6.0; // Angle between each side of the hexagon in radians
+	double errx, erry;
+	for (int i = 0; i < 6; i++)
+	{
+
+		errx = abs(p.x - (center.x + hexagonSize * cos(i * angle)));
+		erry = abs(p.y - (center.y + hexagonSize * sin(i * angle)));
+		if (errx < 6 && erry < 6) {
+			index == 0;
+			return true;
+		}
+	}
+
+	return false;
+}
+bool CHexagon::SetCorner(Point p, int index) {
+	int size = hexagonSize;
+	hexagonSize = sqrt(pow(p.x - center.x, 2) + pow(p.y - center.y, 2));
+	if (!Validate(center)) { 
+		hexagonSize = size;
+		return false;
+	}
+	return true;
 }

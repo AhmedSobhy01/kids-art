@@ -34,7 +34,7 @@ void CCircle::SetCenter(Point c) {
 
 bool CCircle::Validate(Point c) {
 	int radius = sqrt(pow(center.x - this->radius.x, 2) + pow(center.y - this->radius.y, 2));
-	return (c.y - radius) >= UI.ToolBarHeight && (c.y + radius) <= (UI.height - UI.StatusBarHeight);
+	return (c.y - radius) > UI.ToolBarHeight && (c.y + radius) < (UI.height - UI.StatusBarHeight);
 }
 
 void CCircle::Save(ofstream& fout)
@@ -68,4 +68,22 @@ void CCircle::PrintInfo(Output* pOut) {
 	int radius = sqrt(pow(center.x - this->radius.x, 2) + pow(center.y - this->radius.y, 2));
 	info += to_string(radius);
 	pOut->PrintMessage(info);
+}
+bool CCircle::GetCorner(Point p, int& index) {
+	int CurrentRadius = sqrt(pow(center.x - this->radius.x, 2) + pow(center.y - this->radius.y, 2));
+	int PointRadius = sqrt(pow(center.x - p.x, 2) + pow(center.y - p.y, 2));
+	if (abs(CurrentRadius - PointRadius) < 6) {
+		index = 0;
+		return true;
+	}
+	return false;
+}
+bool CCircle::SetCorner(Point p, int) {
+	Point radius = this->radius;
+	this->radius = p;
+	if (!Validate(center)) {
+		this->radius = radius;
+		return false;
+	}
+	return true;
 }
