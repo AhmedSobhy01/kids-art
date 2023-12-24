@@ -1,6 +1,17 @@
 #pragma once
 #include "CFigure.h"
 
+struct PointDouble {
+	double x, y;
+	PointDouble(Point P) {
+		x = P.x;
+		y = P.y;
+	};
+	PointDouble() {
+		x = 0; y = 0;
+	}
+};
+
 class CHexagon : public CFigure
 {
 private:
@@ -8,7 +19,7 @@ private:
 	static const int DefaultHexagonSize;
 	int hexagonSize;
 
-	double calcTriangleArea(double x1, double y1, double x2, double y2, double x3, double y3);
+	double calcTriangleArea(PointDouble, PointDouble, PointDouble);
 public:
 	CHexagon();
 	CHexagon(Point, GfxInfo);

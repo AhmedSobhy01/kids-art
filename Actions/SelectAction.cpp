@@ -35,9 +35,9 @@ bool SelectAction::Execute() {
 		F->SetSelected(false);
 		pManager->SetSelected(NULL);
 	}
-
-	F->PrintInfo(pManager->GetOutput());
-
+	else
+		F->PrintInfo(pManager->GetOutput());
+	
 	return true;
 
 }

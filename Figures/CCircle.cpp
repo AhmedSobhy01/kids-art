@@ -26,7 +26,6 @@ Point CCircle::GetCenter() const
 }
 
 void CCircle::SetCenter(Point c) {
-	//if (!Validate(c))return;
 	this->radius.x += (c.x - this->center.x);
 	this->radius.y += (c.y - this->center.y);
 	this->center = c;

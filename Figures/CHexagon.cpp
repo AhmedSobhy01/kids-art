@@ -22,29 +22,26 @@ int CHexagon::GetDefaultHexagonSize() {
 	return DefaultHexagonSize;
 }
 
-double CHexagon::calcTriangleArea(double x1, double y1, double x2, double y2, double x3, double y3) {
-	return  abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2;
+double CHexagon::calcTriangleArea(PointDouble P1, PointDouble P2, PointDouble P3) {
+	return  abs(P1.x * (P2.y - P3.y) + P2.x * (P3.y - P1.y) + P3.x * (P1.y - P2.y)) / 2;
 }
 
 bool CHexagon::IsPointInside(Point P) {
 	if (Hidden) return false;
 
-	//double r = sqrt(pow(center.x - x, 2) + pow(center.y - y, 2));
-	//double theta = atan2((y - center.y), (x - center.x));
-	//const int n = 6;
-	//return r/hexagonSize - cos(cdPi / n) / cos(acos(cos(n * theta + cdPi)) / n)<=0;
 	double totalArea = 3 * sqrt(3) * hexagonSize * hexagonSize / 2;
-	double xPointsArray[6];
-	double yPointsArray[6];
+	PointDouble P1, P2;
 	double PArea = 0;
 	double angle = 2.0 * cdPi / 6.0; // Angle between each side of the hexagon in radians
-	for (int i = 0; i < 6; i++)
+	P1.x = center.x + hexagonSize;
+	P1.y = center.y;
+	for (int i = 1; i <= 6; i++)
 	{
-		xPointsArray[i] = center.x + hexagonSize * cos(i * angle);
-		yPointsArray[i] = center.y + hexagonSize * sin(i * angle);
-	}
-	for (int i = 0; i < 6; i++) {
-		PArea += calcTriangleArea(P.x, P.y, xPointsArray[i], yPointsArray[i], xPointsArray[(i + 1) % 6], yPointsArray[(i + 1) % 6]);
+		P2.x = center.x + hexagonSize * cos(i * angle);
+		P2.y = center.y + hexagonSize * sin(i * angle);
+		PArea += calcTriangleArea(P, P1, P2);
+		P1.x = P2.x;
+		P1.y = P2.y;
 	}
 	double err = totalArea - PArea;
 	return -0.001 < err && err < 0.001;
@@ -94,16 +91,16 @@ void CHexagon::PrintInfo(Output* pOut) {
 }
 bool CHexagon::GetCorner(Point p, int& index) {
 	double angle = 2.0 * cdPi / 6.0; // Angle between each side of the hexagon in radians
-	double errx, erry;
-	for (int i = 0; i < 6; i++)
-	{
-
+	double errx = 100, erry = 100;
+	int i = 0;
+	while (i < 6 && (errx >= 6 || erry >= 6)) {
 		errx = abs(p.x - (center.x + hexagonSize * cos(i * angle)));
 		erry = abs(p.y - (center.y + hexagonSize * sin(i * angle)));
-		if (errx < 6 && erry < 6) {
-			index == 0;
-			return true;
-		}
+		++i;
+	}
+	if (errx < 6 && erry < 6) {
+		index = 0;
+		return true;
 	}
 
 	return false;
