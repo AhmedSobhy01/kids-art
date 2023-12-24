@@ -19,7 +19,7 @@ private:
 	static const int DefaultHexagonSize;
 	int hexagonSize;
 
-	double calcTriangleArea(PointDouble, PointDouble, PointDouble);
+	double CalcTriangleArea(PointDouble, PointDouble, PointDouble);
 public:
 	CHexagon();
 	CHexagon(Point, GfxInfo);

@@ -22,21 +22,21 @@ void CTriangle::Draw(Output* pOut)
 }
 
 
-double CTriangle::calcArea(Point P1, Point P2, Point P3) {
-	return  abs(P1.x * (P2.y - P3.y) + P2.x * (P3.y - P1.y) + P3.x * (P1.y - P2.y)) / 2;
+double CTriangle::CalcTriangleArea(Point P1, Point P2, Point P3) {
+	return  abs(P1.x * (P2.y - P3.y) + P2.x * (P3.y - P1.y) + P3.x * (P1.y - P2.y)) / 2.0;
 }
 
 bool CTriangle::IsPointInside(Point P) {
 	if (Hidden) return false;
 
-	double totalArea = calcArea(P1, P2, P3);
-	double A1 = calcArea(P, P2, P3);
-	double A2 = calcArea(P, P1, P3);
-	double A3 = calcArea(P, P2, P1);
+	double totalArea = CalcTriangleArea(P1, P2, P3);
+	double A1 = CalcTriangleArea(P, P2, P3);
+	double A2 = CalcTriangleArea(P, P1, P3);
+	double A3 = CalcTriangleArea(P, P2, P1);
 	double err = totalArea - A1 - A2 - A3;
 	return -2 < err && err < 2;
 
-	///another way to find a point inside a triangle using barycantric corrdinates
+	///another way to find a point inside a triangle using barycentric corrdinates
 
 	//int ACx = P3.x - P1.x;
 	//int ACy = P3.y - P1.y;

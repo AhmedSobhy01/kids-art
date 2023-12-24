@@ -6,7 +6,7 @@ private:
 	Point P1;
 	Point P2;
 	Point P3;
-	double calcArea(Point, Point, Point);
+	double CalcTriangleArea(Point, Point, Point);
 public:
 	CTriangle();
 	CTriangle(Point, Point, Point, GfxInfo FigureGfxInfo);

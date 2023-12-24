@@ -22,8 +22,8 @@ int CHexagon::GetDefaultHexagonSize() {
 	return DefaultHexagonSize;
 }
 
-double CHexagon::calcTriangleArea(PointDouble P1, PointDouble P2, PointDouble P3) {
-	return  abs(P1.x * (P2.y - P3.y) + P2.x * (P3.y - P1.y) + P3.x * (P1.y - P2.y)) / 2;
+double CHexagon::CalcTriangleArea(PointDouble P1, PointDouble P2, PointDouble P3) {
+	return  abs(P1.x * (P2.y - P3.y) + P2.x * (P3.y - P1.y) + P3.x * (P1.y - P2.y)) / 2.0;
 }
 
 bool CHexagon::IsPointInside(Point P) {
@@ -39,7 +39,7 @@ bool CHexagon::IsPointInside(Point P) {
 	{
 		P2.x = center.x + hexagonSize * cos(i * angle);
 		P2.y = center.y + hexagonSize * sin(i * angle);
-		PArea += calcTriangleArea(P, P1, P2);
+		PArea += CalcTriangleArea(P, P1, P2);
 		P1.x = P2.x;
 		P1.y = P2.y;
 	}
