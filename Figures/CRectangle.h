@@ -12,7 +12,7 @@ public:
 	CRectangle();
 	CRectangle(Point, Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) ;
-	bool CheckSelected(int x, int y);
+	bool IsPointInside(Point);
 	Point GetCenter() const;
 	void SetCenter(Point);
 	bool Validate(Point);

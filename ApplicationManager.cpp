@@ -248,11 +248,12 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
 	// If a figure is found return a pointer to it.
 	// if this point (x,y) does not belong to any figure return NULL
+	Point P = { x,y };
 	bool found = false;
 	int i = FigList.size() - 1;
 	while (i >= 0 && !found)
 	{
-		if (FigList[i]->CheckSelected(x, y))
+		if (FigList[i]->IsPointInside(P))
 		{
 			found = true;
 		}

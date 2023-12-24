@@ -13,7 +13,7 @@ CSquare::CSquare(Point center, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
 	type = "Square";
 }
 
-void CSquare::Draw(Output* pOut)  {
+void CSquare::Draw(Output* pOut) {
 	pOut->DrawSquare(center, squareSize, FigGfxInfo, Selected);
 	if (!Validate(center)) {
 		pOut->updateStatusBar();
@@ -25,7 +25,7 @@ int CSquare::getSquareSize() {
 	return squareSize;
 }
 
-bool CSquare::CheckSelected(int x, int y) {
+bool CSquare::IsPointInside(Point P) {
 	if (Hidden) return false;
 
 	Point p1, p2;
@@ -33,8 +33,8 @@ bool CSquare::CheckSelected(int x, int y) {
 	p1.y = center.y - squareSize / 2;
 	p2.x = center.x + squareSize / 2;
 	p2.y = center.y + squareSize / 2;
-	bool cond1 = (p1.x <= x) && (x <= p2.x);
-	bool cond2 = (p1.y <= y) && (y <= p2.y);
+	bool cond1 = (p1.x <= P.x) && (P.x <= p2.x);
+	bool cond2 = (p1.y <= P.y) && (P.y <= p2.y);
 	return cond1 && cond2;
 }
 Point CSquare::GetCenter() const
@@ -45,7 +45,7 @@ void CSquare::SetCenter(Point center) {
 	this->center = center;
 }
 bool CSquare::Validate(Point c) {
-	return (c.y - squareSize / 2 +1) > UI.ToolBarHeight && (c.y + squareSize / 2 -1) < (UI.height - UI.StatusBarHeight);
+	return (c.y - squareSize / 2 + 1) > UI.ToolBarHeight && (c.y + squareSize / 2 - 1) < (UI.height - UI.StatusBarHeight);
 }
 
 void CSquare::Save(ofstream& fout)

@@ -47,7 +47,7 @@ public:
 	bool operator==(CFigure&);
 	static void ResetID();
 
-	virtual bool CheckSelected(int x, int y) = 0;
+	virtual bool IsPointInside(Point) = 0;
 	virtual Point GetCenter() const = 0;
 	virtual void SetCenter(Point) = 0;
 	virtual bool Validate(Point) = 0;

@@ -24,7 +24,7 @@ public:
 	void CreateStatusBar() const;	// Create the status bar
 
 	Input *CreateInput() const;	 // Creates a pointer to the Input object
-	void ClearStatusBar() const; // Clears the status bar
+	void ClearStatusBar(); // Clears the status bar
 	void ClearDrawArea() const;	 // Clears the drawing area
 
 	// Figures drawing functions

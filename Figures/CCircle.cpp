@@ -20,8 +20,8 @@ void CCircle::Draw(Output* pOut) {
 		pOut->updateToolBar();
 	}
 }
-bool CCircle::CheckSelected(int x, int y) {
-	return !Hidden && (sqrt(pow(center.x - x, 2) + pow(center.y - y, 2)) <= sqrt(pow(center.x - radius.x, 2) + pow(center.y - radius.y, 2)));
+bool CCircle::IsPointInside(Point P) {
+	return !Hidden && (sqrt(pow(center.x - P.x, 2) + pow(center.y - P.y, 2)) <= sqrt(pow(center.x - radius.x, 2) + pow(center.y - radius.y, 2)));
 }
 
 Point CCircle::GetCenter() const

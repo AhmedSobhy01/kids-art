@@ -31,10 +31,9 @@ double CTriangle::calcArea(Point P1, Point P2, Point P3) {
 	return  abs(P1.x * (P2.y - P3.y) + P2.x * (P3.y - P1.y) + P3.x * (P1.y - P2.y)) / 2;
 }
 
-bool CTriangle::CheckSelected(int x, int y) {
+bool CTriangle::IsPointInside(Point P) {
 	if (Hidden) return false;
 
-	Point P = { x,y };
 	double totalArea = calcArea(P1, P2, P3);
 	double A1 = calcArea(P, P2, P3);
 	double A2 = calcArea(P, P1, P3);

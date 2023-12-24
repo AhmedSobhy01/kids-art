@@ -24,13 +24,13 @@ void CRectangle::Draw(Output* pOut)
 	}
 }
 
-bool CRectangle::CheckSelected(int x, int y) {
+bool CRectangle::IsPointInside(Point P) {
 	if (Hidden) return false;
 	int length = abs(Corner1.y - Corner2.y);
 	int width = abs(Corner1.x - Corner2.x);
 
-	bool cond1 = Corner1.x + Corner2.x - width <= 2 * x && 2 * x <= Corner1.x + Corner2.x + width; 
-	bool cond2 = Corner1.y + Corner2.y - length <= 2 * y && 2 * y <= Corner1.y + Corner2.y + length;
+	bool cond1 = Corner1.x + Corner2.x - width <= 2 * P.x && 2 * P.x <= Corner1.x + Corner2.x + width; 
+	bool cond2 = Corner1.y + Corner2.y - length <= 2 * P.y && 2 * P.y <= Corner1.y + Corner2.y + length;
 	return cond1 && cond2;
 }
 Point CRectangle::GetCenter() const

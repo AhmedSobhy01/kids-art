@@ -10,7 +10,7 @@ public:
 	CSquare(Point, GfxInfo);
 	void Draw(Output* pOut);
 	static int getSquareSize();
-	bool CheckSelected(int x, int y);
+	bool IsPointInside(Point);
 	Point GetCenter() const;
 	void SetCenter(Point);
 	bool Validate(Point);

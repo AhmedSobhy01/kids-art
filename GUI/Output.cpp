@@ -131,12 +131,11 @@ void Output::CreateStatusBar() const
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::ClearStatusBar() const
+void Output::ClearStatusBar()
 {
 	// Clear Status bar by drawing a filled white rectangle
-	pWind->SetPen(UI.StatusBarColor, 1);
-	pWind->SetBrush(UI.StatusBarColor);
-	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
+	lastMessage = "";
+	CreateStatusBar();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -214,7 +213,7 @@ void Output::PrintMessage(string msg) // Prints a message on status bar
 {
 	
 	lastMessage = msg;
-	ClearStatusBar(); // First clear the status bar
+	CreateStatusBar(); // First clear the status bar
 	pWind->SetPen(UI.MsgColor, 50);
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
 	pWind->DrawString(10, UI.height - int(UI.StatusBarHeight / 1.2),lastMessage);

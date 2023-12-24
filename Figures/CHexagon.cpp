@@ -28,7 +28,7 @@ double CHexagon::calcTriangleArea(double x1, double y1, double x2, double y2, do
 	return  abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2;
 }
 
-bool CHexagon::CheckSelected(int x, int y) {
+bool CHexagon::IsPointInside(Point P) {
 	if (Hidden) return false;
 
 	//double r = sqrt(pow(center.x - x, 2) + pow(center.y - y, 2));
@@ -46,7 +46,7 @@ bool CHexagon::CheckSelected(int x, int y) {
 		yPointsArray[i] = center.y + hexagonSize * sin(i * angle);
 	}
 	for (int i = 0; i < 6; i++) {
-		PArea += calcTriangleArea(x, y, xPointsArray[i], yPointsArray[i], xPointsArray[(i + 1) % 6], yPointsArray[(i + 1) % 6]);
+		PArea += calcTriangleArea(P.x, P.y, xPointsArray[i], yPointsArray[i], xPointsArray[(i + 1) % 6], yPointsArray[(i + 1) % 6]);
 	}
 	double err = totalArea - PArea;
 	return -0.001 < err && err < 0.001;

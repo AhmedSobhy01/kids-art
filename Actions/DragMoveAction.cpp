@@ -32,7 +32,7 @@ bool DragMoveAction::Execute() {
 	while (!buttonDown) {
 		buttonDown = pIn->GetLeftClickState(NewCenter.x, NewCenter.y);
 	}
-	if (!Figure->CheckSelected(NewCenter.x, NewCenter.y)) { 
+	if (!Figure->IsPointInside(NewCenter)) { 
 		pOut->ClearStatusBar();
 		return false;
 	}

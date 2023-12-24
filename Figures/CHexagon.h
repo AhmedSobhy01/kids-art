@@ -12,7 +12,7 @@ public:
 	CHexagon(Point, GfxInfo);
 	void Draw(Output* pOut);
 	static int getHexagonSize();
-	bool CheckSelected(int x, int y);
+	bool IsPointInside(Point);
 	Point GetCenter() const;
 	void SetCenter(Point);
 	bool Validate(Point);
