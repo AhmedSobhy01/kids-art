@@ -18,6 +18,7 @@ void SelectAction::ReadActionParameters() {
 
 bool SelectAction::Execute() {
 	ReadActionParameters();
+	pManager->SetSelected(NULL);
 
 	CFigure* F = pManager->GetFigure(P.x, P.y);
 	if (F == NULL)
@@ -27,19 +28,12 @@ bool SelectAction::Execute() {
 	if(S != NULL)
 		S->SetSelected(false);
 
-	F->SetSelected(true);
-
-	pManager->SetSelected(F);
-
-	if (F == S) {
-		F->SetSelected(false);
-		pManager->SetSelected(NULL);
-	}
-	else
+	if (F != S) {
+		F->SetSelected(true);
+		pManager->SetSelected(F);
 		F->PrintInfo(pManager->GetOutput());
-	
+	}
 	return true;
-
 }
 
 bool SelectAction::ShouldRecord() const
