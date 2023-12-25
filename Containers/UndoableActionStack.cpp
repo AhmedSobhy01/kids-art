@@ -14,7 +14,7 @@ int UndoableActionStack::Size() const
 	return ItemsCount;
 }
 
-void UndoableActionStack::push(UndoableAction *item)
+void UndoableActionStack::Push(UndoableAction *item)
 {
 	if (item)
 	{

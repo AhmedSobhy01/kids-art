@@ -33,7 +33,7 @@ bool UndoAction::Execute()
 
 	pAct->Undo();
 
-	RedoableActions.push(pAct);
+	RedoableActions.Push(pAct);
 
 	return true;
 }

@@ -31,7 +31,7 @@ bool RedoAction::Execute()
 	UndoableAction* pAct = RedoableActions.Pop();
 
 	pAct->Redo();
-	UndoableActions.push(pAct);
+	UndoableActions.Push(pAct);
 
 	return true;
 }

@@ -13,7 +13,7 @@ public:
 	UndoableActionStack(int);
 
 	int Size() const;
-	void push(UndoableAction *);
+	void Push(UndoableAction *);
 	UndoableAction *Pop();
 	UndoableAction *Top() const;
 	bool Empty() const;

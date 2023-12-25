@@ -413,7 +413,7 @@ bool ApplicationManager::AddActionToUndoables(Action *pAct, bool Flag)
 {
 	if (Flag && dynamic_cast<UndoableAction *>(pAct) != NULL)
 	{
-		UndoableActions.push(dynamic_cast<UndoableAction *>(pAct));
+		UndoableActions.Push(dynamic_cast<UndoableAction *>(pAct));
 
 		return true;
 	}
