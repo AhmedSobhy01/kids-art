@@ -141,6 +141,7 @@
     <ClCompile Include="Actions\PickByColorAction.cpp" />
     <ClCompile Include="Actions\PickByShapeAction.cpp" />
     <ClCompile Include="Actions\PickByShapeAndColorAction.cpp" />
+    <ClCompile Include="Actions\PlayMode.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
     <ClCompile Include="Actions\ChangeBackgroundColorAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\PickByShapeAction.h" />
     <ClInclude Include="Actions\PickByShapeAndColorAction.h" />
+    <ClInclude Include="Actions\PlayMode.h" />
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Containers\List.h" />
     <ClInclude Include="Actions\RedoAction.h" />

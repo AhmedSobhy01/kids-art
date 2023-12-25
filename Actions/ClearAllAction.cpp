@@ -17,6 +17,7 @@ bool ClearAllAction::Execute() {
 	pManager->ClearRedoableActionsStack();
 	pManager->ResetColors();
 	pManager->ClearFigures();
+  pManager->SetPlayActionSoundState(true);
 
 	if (!pManager->IsCurrentlyPlayingRecording() && !pManager->IsCurrentlyRecording()) {
 		pManager->SetRecordingState(false);
