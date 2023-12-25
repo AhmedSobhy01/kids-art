@@ -15,11 +15,11 @@ void AddTriangleAction::ReadActionParameters()
 	Input *pIn = pManager->GetInput();
 
 	// Getting Coordinates for the shape position
-	pOut->PrintMessage("New Triangle: Click at the first corner");
+	pOut->PrintMessage("New Triangle: Click at the first point");
 	pIn->GetPointClicked(P1.x, P1.y);
-	pOut->PrintMessage("New Triangle: Click at the second corner");
+	pOut->PrintMessage("New Triangle: Click at the second point");
 	pIn->GetPointClicked(P2.x, P2.y);
-	pOut->PrintMessage("New Triangle: Click at the third corner");
+	pOut->PrintMessage("New Triangle: Click at the third point");
 	pIn->GetPointClicked(P3.x, P3.y);
 
 	// Get drawing, filling colors and pen width from the interface
