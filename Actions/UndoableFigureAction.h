@@ -8,10 +8,10 @@
 class UndoableFigureAction : public UndoableAction
 {
 protected:
-	CFigure* Figure;
+	CFigure *Figure;
 
 public:
-	UndoableFigureAction(ApplicationManager* pApp);
+	UndoableFigureAction(ApplicationManager *);
 
 	virtual void Undo();
 	virtual void Redo();

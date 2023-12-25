@@ -2,20 +2,19 @@
 
 CRectangle::CRectangle() :CFigure()
 {
-	type = "Rectangle";
+	TypeName = "Rectangle";
 }
 
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	Corner1 = P1;
 	Corner2 = P2;
-	type = "Rectangle";
+	TypeName = "Rectangle";
 }
 
 
-void CRectangle::Draw(Output* pOut) 
+void CRectangle::Draw(Output* pOut)
 {
-	//Call Output::DrawRect to draw a rectangle on the screen
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
 }
 
@@ -23,8 +22,8 @@ bool CRectangle::IsPointInside(Point P) {
 	if (Hidden) return false;
 	int length = abs(Corner1.y - Corner2.y);
 	int width = abs(Corner1.x - Corner2.x);
-
-	bool cond1 = Corner1.x + Corner2.x - width <= 2 * P.x && 2 * P.x <= Corner1.x + Corner2.x + width; 
+	
+	bool cond1 = Corner1.x + Corner2.x - width <= 2 * P.x && 2 * P.x <= Corner1.x + Corner2.x + width;
 	bool cond2 = Corner1.y + Corner2.y - length <= 2 * P.y && 2 * P.y <= Corner1.y + Corner2.y + length;
 	return cond1 && cond2;
 }
@@ -33,9 +32,9 @@ Point CRectangle::GetCenter() const
 	return { (Corner1.x + Corner2.x) / 2, (Corner1.y + Corner2.y) / 2 };
 }
 void CRectangle::SetCenter(Point c) {
-	Point center = { (Corner1.x + Corner2.x) / 2,(Corner1.y + Corner2.y) / 2 };
-	int dy = c.y - center.y;
-	int dx = c.x - center.x;
+	Point Center = { (Corner1.x + Corner2.x) / 2,(Corner1.y + Corner2.y) / 2 };
+	int dy = c.y - Center.y;
+	int dx = c.x - Center.x;
 	Corner1.x += dx;
 	Corner2.x += dx;
 	Corner1.y += dy;
@@ -44,11 +43,11 @@ void CRectangle::SetCenter(Point c) {
 
 
 
-void CRectangle::Save(ofstream& fout)
+void CRectangle::Save(ofstream& FileOutputStream)
 {
-	if (fout.is_open())
+	if (FileOutputStream.is_open())
 	{
-		fout << "RECTANGLE" << " " << ID << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
+		FileOutputStream << "RECTANGLE" << " " << ID << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
 		return;
 	}
 }
@@ -59,7 +58,7 @@ void CRectangle::Load(ifstream& fin)
 	{
 		fin >> ID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
 		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
-			FigGfxInfo.isFilled = false;
+			FigGfxInfo.IsFilled = false;
 		return;
 	}
 }
@@ -82,24 +81,34 @@ void CRectangle::PrintInfo(Output* pOut) {
 	pOut->PrintMessage(info);
 }
 
-bool CRectangle::GetCorner(Point p, int& index) {
+bool CRectangle::GetCorner(Point& p, int& index) {
+	//the index is encoded by the function as a binary value
+	// 00 means Corner1.x Corner1.y
+	// 01 means Corner2.x Corner1.y
+	// 10 means Corner1.x Corner2.y
+	// 11 means Corner2.x Corner2.y
+	// which can be easily get decoded by the SetCorner function to set the apppropriate corner
+
+
 	int Xarr[2] = { Corner1.x ,Corner2.x };
 	int Yarr[2] = { Corner1.y ,Corner2.y };
-	int errx, erry;
-	for (int i = 0; i < 2; i++) {
-		for (int j = 0; j < 2; j++) {
-			erry = abs(p.y - Yarr[i]);
-			errx = abs(p.x - Xarr[j]);
-			if (errx < 8 && erry < 8) {
-				index = 2 * i + j;
-				return true;
-			}
-		}
+	int ErrX = 100, ErrY = 100;
+	int i = 0;
+	while (i < 4 && (ErrX >= 6 || ErrY >= 6)) {
+		ErrX = abs(p.x - Xarr[i % 2]);
+		ErrY = abs(p.y - Yarr[i / 2]);
+		++i;
+	}
+	--i;
+	if (ErrX < 6 && ErrY < 6) {
+		index = i;
+		p = { Xarr[i % 2],Yarr[i / 2] };
+		return true;
 	}
 	return false;
 }
 void CRectangle::SetCorner(Point p, int index) {
-	Point Center = { (Corner1.x + Corner2.x) / 2, (Corner1.y + Corner2.y) / 2 };
+
 	int* Xarr[2] = { &Corner1.x ,&Corner2.x };
 	int* Yarr[2] = { &Corner1.y ,&Corner2.y };
 	*Xarr[index % 2] = p.x;

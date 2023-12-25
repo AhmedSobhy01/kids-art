@@ -177,16 +177,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 // Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure *pFig)
 {
-	FigList.push_back(pFig);
+	FigList.PushBack(pFig);
 }
-void ApplicationManager::AddFigure(CFigure *pFig, int index)
+void ApplicationManager::AddFigure(CFigure *pFig, int Index)
 {
-	FigList.push_back(pFig, index);
+	FigList.PushBack(pFig, Index);
 }
 ///////s/////////////////////////////////////////////////////////////////////////////
 int ApplicationManager::RemoveFigure(CFigure *pFig)
 {
-	return FigList.remove(pFig);
+	return FigList.Remove(pFig);
 }
 CFigure *ApplicationManager::GetSelected()
 {
@@ -197,17 +197,17 @@ void ApplicationManager::SetSelected(CFigure *c)
 	SelectedFig = c;
 }
 
-bool ApplicationManager::AddActionToRecordings(Action *pAct, bool flag)
+bool ApplicationManager::AddActionToRecordings(Action *pAct, bool Flag)
 {
-	if (IsCurrentlyRecording() && flag && pAct->ShouldRecord())
+	if (IsCurrentlyRecording() && Flag && pAct->ShouldRecord())
 	{
-		RecordedActions.push_back(pAct);
+		RecordedActions.PushBack(pAct);
 
-		if (RecordedActions.size() == MaxRecordableActions)
+		if (RecordedActions.Size() == MaxRecordableActions)
 		{
 			SetRecordingState(false);
 
-			pOut->PrintMessage("Recording stopped (operations: " + to_string(RecordedActions.size()) + ").");
+			pOut->PrintMessage("Recording stopped (operations: " + to_string(RecordedActions.Size()) + ").");
 		}
 
 		return true;
@@ -223,32 +223,32 @@ List<Action> &ApplicationManager::GetRecordedActionsList()
 
 void ApplicationManager::ClearRecordedActionsList()
 {
-	int size = RecordedActions.size();
+	int size = RecordedActions.Size();
 
 	for (int i = 0; i < size; i++)
 	{
-		Action *pAct = RecordedActions.pop_back();
+		Action *pAct = RecordedActions.PopBack();
 
 		if (pAct->CanBeDeleted())
 			delete pAct;
 	}
 }
-void ApplicationManager::SetRecordingState(bool state)
+void ApplicationManager::SetRecordingState(bool State)
 {
-	IsRecording = state;
-	pOut->SetRecordingState(state);
+	IsRecording = State;
+	pOut->SetRecordingState(State);
 }
 bool ApplicationManager::CanRecord() const
 {
-	return FigList.empty() && UndoableActions.empty() && RedoableActions.empty();
+	return FigList.Empty() && UndoableActions.Empty() && RedoableActions.Empty();
 }
 bool ApplicationManager::IsCurrentlyRecording() const
 {
 	return IsRecording;
 }
-void ApplicationManager::SetPlayingRecordingState(bool state)
+void ApplicationManager::SetPlayingRecordingState(bool State)
 {
-	IsPlayingRecording = state;
+	IsPlayingRecording = State;
 }
 bool ApplicationManager::IsCurrentlyPlayingRecording() const
 {
@@ -260,19 +260,19 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	// If a figure is found return a pointer to it.
 	// if this point (x,y) does not belong to any figure return NULL
 	Point P = {x, y};
-	bool found = false;
-	int i = FigList.size() - 1;
-	while (i >= 0 && !found)
+	bool Found = false;
+	int i = FigList.Size() - 1;
+	while (i >= 0 && !Found)
 	{
 		if (FigList[i]->IsPointInside(P))
 		{
-			found = true;
+			Found = true;
 		}
 		else
 			i--;
 	}
 
-	if (found)
+	if (Found)
 		return FigList[i];
 
 	// Add your code here to search for a figure given a point x,y
@@ -283,40 +283,40 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 
 CFigure *ApplicationManager::GetRandomFigure()
 {
-	int j = rand() % FigList.size();
+	int j = rand() % FigList.Size();
 	return FigList[j];
 }
 
 void ApplicationManager::ClearFigures()
 {
-	int size = FigList.size();
+	int size = FigList.Size();
 
 	for (int i = 0; i < size; i++)
 	{
-		CFigure *pFig = FigList.pop_back();
+		CFigure *pFig = FigList.PopBack();
 
 		if (pFig->CanBeDeleted())
 			delete pFig;
 	}
 }
 
-void ApplicationManager::SaveAll(ofstream &fout)
+void ApplicationManager::SaveAll(ofstream &FileOutputStream)
 {
-	fout << UI.DrawColor << " " << UI.FillColor << " " << UI.BkGrndColor << endl;
-	fout << FiguresCount() << endl;
+	FileOutputStream << UI.DrawColor << " " << UI.FillColor << " " << UI.BkGrndColor << endl;
+	FileOutputStream << FiguresCount() << endl;
 	for (int i = 0; i < FiguresCount(); i++)
-		FigList[i]->Save(fout);
+		FigList[i]->Save(FileOutputStream);
 }
 
 int ApplicationManager::CountFigColor(CFigure *Fig)
 {
-	int counter = 0;
-	for (int i = 0; i < FigList.size(); i++)
+	int Counter = 0;
+	for (int i = 0; i < FigList.Size(); i++)
 	{
-		if (FigList[i]->Type() == Fig->Type() && FigList[i]->GetFillClr() == Fig->GetFillClr())
-			counter++;
+		if (FigList[i]->Type() == Fig->Type() && FigList[i]->GetFillColor() == Fig->GetFillColor())
+			Counter++;
 	}
-	return counter;
+	return Counter;
 }
 
 void ApplicationManager::ResetColors()
@@ -328,73 +328,73 @@ void ApplicationManager::ResetColors()
 
 int ApplicationManager::CountFigure(CFigure *fig)
 {
-	int counter = 0;
-	for (int i = 0; i < FigList.size(); i++)
+	int Counter = 0;
+	for (int i = 0; i < FigList.Size(); i++)
 	{
 		if (FigList[i]->Type() == fig->Type())
-			counter++;
+			Counter++;
 	}
-	return counter;
+	return Counter;
 }
 
 int ApplicationManager::CountColor(color RandomColor)
 {
-	int counter = 0;
-	for (int i = 0; i < FigList.size(); i++)
+	int Counter = 0;
+	for (int i = 0; i < FigList.Size(); i++)
 	{
-		if (FigList[i]->GetFillClr() == RandomColor)
-			counter++;
+		if (FigList[i]->GetFillColor() == RandomColor)
+			Counter++;
 	}
-	return counter;
+	return Counter;
 }
 
 int ApplicationManager::FiguresCount()
 {
-	return FigList.size();
+	return FigList.Size();
 }
 
 void ApplicationManager::UnhideFigures()
 {
-	for (int i = 0; i < FigList.size(); i++)
-		FigList[i]->UnHide();
+	for (int i = 0; i < FigList.Size(); i++)
+		FigList[i]->Unhide();
 }
 
 void ApplicationManager::PlayActionSound(ActionType ActType) const
 {
 	if (ShouldPlayActionSound())
 	{
-		char *filename = NULL;
+		char *Filename = NULL;
 
 		switch (ActType)
 		{
 		case DRAW_RECT:
-			filename = "sounds\\Rectangle.wav";
+			Filename = "sounds\\Rectangle.wav";
 			break;
 		case DRAW_SQUARE:
-			filename = "sounds\\Square.wav";
+			Filename = "sounds\\Square.wav";
 			break;
 		case DRAW_TRIANGLE:
-			filename = "sounds\\Triangle.wav";
+			Filename = "sounds\\Triangle.wav";
 			break;
 		case DRAW_CIRCLE:
-			filename = "sounds\\Circle.wav";
+			Filename = "sounds\\Circle.wav";
 			break;
 		case DRAW_HEXAGON:
-			filename = "sounds\\Hexagon.wav";
+			Filename = "sounds\\Hexagon.wav";
 			break;
 		case OUTLINE_COLOR:
-			filename = "sounds\\OutlineColorChanged.wav";
+			Filename = "sounds\\OutlineColorChanged.wav";
 			break;
 		case FILL_COLOR:
-			filename = "sounds\\FillColorChanged.wav";
+			Filename = "sounds\\FillColorChanged.wav";
 			break;
 		case REMOVE:
-			filename = "sounds\\Deleted.wav";
+			Filename = "sounds\\Deleted.wav";
 			break;
 		}
 
-		if (filename != NULL)
-			PlaySound(filename, NULL, SND_FILENAME | SND_ASYNC);
+		if (Filename != NULL)
+			PlaySound(Filename, NULL, SND_FILENAME | SND_ASYNC);
 	}
 }
 
@@ -403,17 +403,17 @@ bool ApplicationManager::ShouldPlayActionSound() const
 	return PlayActionSoundEnabled;
 }
 
-void ApplicationManager::SetPlayActionSoundState(bool state)
+void ApplicationManager::SetPlayActionSoundState(bool State)
 {
-	PlayActionSoundEnabled = state;
-	pOut->SetPlayActionState(state);
+	PlayActionSoundEnabled = State;
+	pOut->SetPlayActionState(State);
 }
 
-bool ApplicationManager::AddActionToUndoables(Action *pAct, bool flag)
+bool ApplicationManager::AddActionToUndoables(Action *pAct, bool Flag)
 {
-	if (flag && dynamic_cast<UndoableAction *>(pAct) != NULL)
+	if (Flag && dynamic_cast<UndoableAction *>(pAct) != NULL)
 	{
-		UndoableActions.push(dynamic_cast<UndoableAction *>(pAct));
+		UndoableActions.Push(dynamic_cast<UndoableAction *>(pAct));
 
 		return true;
 	}
@@ -430,11 +430,11 @@ UndoableActionStack &ApplicationManager::GetRedoableActionsStack()
 }
 void ApplicationManager::ClearUndoableActionsStack()
 {
-	int size = UndoableActions.size();
+	int Size = UndoableActions.Size();
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < Size; i++)
 	{
-		UndoableAction *pAct = UndoableActions.pop();
+		UndoableAction *pAct = UndoableActions.Pop();
 
 		if (pAct->CanBeDeleted())
 			delete pAct;
@@ -442,11 +442,11 @@ void ApplicationManager::ClearUndoableActionsStack()
 }
 void ApplicationManager::ClearRedoableActionsStack()
 {
-	int size = RedoableActions.size();
+	int Size = RedoableActions.Size();
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < Size; i++)
 	{
-		UndoableAction *pAct = RedoableActions.pop();
+		UndoableAction *pAct = RedoableActions.Pop();
 
 		if (pAct->CanBeDeleted())
 			delete pAct;
@@ -460,12 +460,12 @@ void ApplicationManager::ClearRedoableActionsStack()
 void ApplicationManager::UpdateInterface() const
 {
 	pOut->ClearDrawArea();
-	for (int i = 0; i < FigList.size(); i++)
+	for (int i = 0; i < FigList.Size(); i++)
 	{
-		if (!FigList[i]->isHidden())
+		if (!FigList[i]->IsHidden())
 			FigList[i]->Draw(pOut); // Call Draw function (virtual member fn)
 	}
-	pOut->UpdateBuffer();
+	pOut->UpdateInterface();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // Return a pointer to the input
@@ -482,9 +482,6 @@ Output *ApplicationManager::GetOutput() const
 // Destructor
 ApplicationManager::~ApplicationManager()
 {
-	for (int i = 0; i < FigList.size(); i++)
-		delete FigList[i];
-
 	delete pIn;
 	delete pOut;
 }

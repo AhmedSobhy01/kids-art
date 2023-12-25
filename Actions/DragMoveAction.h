@@ -8,10 +8,10 @@ class DragMoveAction : public UndoableAction
 {
     Point NewCenter;
     Point OldCenter;
-    CFigure* Figure;
+    CFigure *Figure;
 
 public:
-    DragMoveAction(ApplicationManager* pApp);
+    DragMoveAction(ApplicationManager *);
     virtual void ReadActionParameters();
     virtual bool Execute();
     virtual void PlayRecord();
@@ -21,6 +21,5 @@ public:
 
     ~DragMoveAction();
 };
-
 
 #endif

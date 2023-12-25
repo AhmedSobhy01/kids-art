@@ -2,39 +2,43 @@
 #include <string>
 using namespace std;
 
-int CFigure::last_ID = 0;
+int CFigure::LastID = 0;
 
 CFigure::CFigure()
 {
 	Selected = false;
 	Hidden = false;
-	last_ID++;
-	ID = last_ID;
+	LastID++;
+	ID = LastID;
 	ReferenceCount = 0;
 }
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
-{ 
+{
 	ReferenceCount = 0;
-	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
+	FigGfxInfo = FigureGfxInfo; // Default status is non-filled.
 	Selected = false;
 	Hidden = false;
-	last_ID++;
-	ID = last_ID;
+	LastID++;
+	ID = LastID;
 }
 
 void CFigure::SetSelected(bool s)
-{	Selected = s; }
+{
+	Selected = s;
+}
 
 bool CFigure::IsSelected() const
-{	return Selected; }
+{
+	return Selected;
+}
 
-color CFigure::GetDrawClr() const
+color CFigure::GetDrawColor() const
 {
 	return FigGfxInfo.DrawClr;
 }
 
-color CFigure::GetFillClr() const
+color CFigure::GetFillColor() const
 {
 	return FigGfxInfo.FillClr;
 }
@@ -44,48 +48,53 @@ int CFigure::GetBorderWidth() const
 	return FigGfxInfo.BorderWidth;
 }
 
-void CFigure::ChngDrawClr(color Dclr)
-{	FigGfxInfo.DrawClr = Dclr; }
-
-void CFigure::ChngFillClr(color Fclr)
+void CFigure::ChangeDrawColor(color Dclr)
 {
-	FigGfxInfo.isFilled = Fclr != TRANSPARENT_COLOR;
-	FigGfxInfo.FillClr = Fclr; 
+	FigGfxInfo.DrawClr = Dclr;
 }
 
-void CFigure::ChngBorderWidth(int BWidth)
+void CFigure::ChangeFillColor(color Fclr)
+{
+	FigGfxInfo.IsFilled = Fclr != TRANSPARENT_COLOR;
+	FigGfxInfo.FillClr = Fclr;
+}
+
+void CFigure::ChangeBorderWidth(int BWidth)
 {
 	FigGfxInfo.BorderWidth = BWidth;
 }
 
-bool CFigure::isHidden() {
+bool CFigure::IsHidden()
+{
 	return Hidden;
 }
 
-void CFigure::Hide() {
+void CFigure::Hide()
+{
 	Hidden = true;
 }
 
-void CFigure::UnHide() {
+void CFigure::Unhide()
+{
 	Hidden = false;
 }
 
-bool CFigure::isFilled()
+bool CFigure::IsFilled()
 {
-	return FigGfxInfo.isFilled;
+	return FigGfxInfo.IsFilled;
 }
 
 bool CFigure::operator==(CFigure& Fig2)				// Compares the type and the color of the figures
 {
-	return (Type() == Fig2.Type())&& (GetFillClr() == Fig2.GetFillClr());
+	return (Type() == Fig2.Type()) && (GetFillColor() == Fig2.GetFillColor());
 }
 
 void CFigure::ResetID()
 {
-	last_ID = 0;
+	LastID = 0;
 }
 
-
-string CFigure::Type(){
-	return type;
+string CFigure::Type()
+{
+	return TypeName;
 }
