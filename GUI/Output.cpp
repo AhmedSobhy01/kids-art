@@ -21,7 +21,7 @@ Output::Output()
 	UI.DrawColor = BLUE;			  // Drawing color
 	UI.FillColor = TRANSPARENT_COLOR; // Filling color
 	UI.MsgColor = TEXT;				  // Messages color
-	UI.BackgroundColor = BASE;		  // Background color
+	UI.BackgroundColor = BASE-5;		  // Background color
 	UI.HighlightColor = MAUVE;		  // This color should NOT be used to draw figures, use if for highlight only
 	UI.StatusBarColor = SURFACE0;	  // Status bar background color
 	UI.PenWidth = 3;				  // Width of the figures frames
@@ -77,7 +77,6 @@ window *Output::CreateWind(int w, int h, int x, int y) const
 	pW->SetBuffering(true);
 	pW->SetBrush(UI.BackgroundColor);
 	pW->SetPen(UI.BackgroundColor, 1);
-
 	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);
 	pW->UpdateBuffer();
 	return pW;

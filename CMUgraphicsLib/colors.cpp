@@ -73,6 +73,13 @@ bool operator!=(color a, color b)
 	return !(a == b);
 }
 
+color color::operator-(unsigned char c) const {
+	unsigned char r = ucRed <= c ? 0 : ucRed - c;
+	unsigned char g = ucGreen <= c ? 0 : ucGreen - c;
+	unsigned char b = ucBlue <= c ? 0 : ucBlue - c;
+	return color(r,g,b);
+}
+
 std::string color::ReturnColor()
 {
 	std::string c;
