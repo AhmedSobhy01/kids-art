@@ -17,6 +17,5 @@ public:
 	void StartingMessage();					// Prints the starting message
 	void GetClickedAction(bool&, bool&);	// Gets the user action
 	void FinalMsg(bool&);
-	virtual bool ShouldRecord() const;
 };
 #endif

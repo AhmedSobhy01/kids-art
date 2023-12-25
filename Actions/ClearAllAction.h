@@ -7,7 +7,6 @@ public:
 	ClearAllAction(ApplicationManager* );
 	void ReadActionParameters();
 	virtual bool Execute();
-	virtual bool ShouldRecord() const;
 };
 #endif
 

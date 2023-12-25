@@ -5,7 +5,7 @@
 #include "..\GUI\Output.h"
 
 SelectAction::SelectAction(ApplicationManager* pApp): Action(pApp) {
-
+	RecordEnabled = false;
 }
 
 void SelectAction::ReadActionParameters() {
@@ -40,9 +40,4 @@ bool SelectAction::Execute() {
 
 	return true;
 
-}
-
-bool SelectAction::ShouldRecord() const
-{
-	return false;
 }

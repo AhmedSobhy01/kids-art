@@ -1,7 +1,9 @@
 #include "PickByShapeAction.h"
 
 PickByShapeAction::PickByShapeAction(ApplicationManager* pApp) : Action(pApp)
-{ }
+{
+	RecordEnabled = false;
+}
 
 void PickByShapeAction::ReadActionParameters() {				// Initializes the data members
 	CorrectPicks = 0;
@@ -73,9 +75,4 @@ bool PickByShapeAction::Execute() {
 	pManager->UpdateInterface();
 
 	return true;
-}
-
-bool PickByShapeAction::ShouldRecord() const
-{
-	return false;
 }

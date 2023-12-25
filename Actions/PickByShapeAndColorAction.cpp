@@ -1,7 +1,9 @@
 #include "PickByShapeAndColorAction.h"
 
 PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager* pApp) : Action(pApp)
-{ }
+{
+	RecordEnabled = false;
+}
 
 void PickByShapeAndColorAction::ReadActionParameters() {			// Initializes data members
 	CorrectPicks = 0;
@@ -73,9 +75,4 @@ bool PickByShapeAndColorAction::Execute() {
 	pManager->UpdateInterface();
 
 	return true;
-}
-
-bool PickByShapeAndColorAction::ShouldRecord() const
-{
-	return false;
 }

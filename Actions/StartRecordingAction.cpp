@@ -3,6 +3,7 @@
 
 StartRecordingAction::StartRecordingAction(ApplicationManager* pApp): Action(pApp)
 {
+	RecordEnabled = false;
 }
 
 void StartRecordingAction::ReadActionParameters()
@@ -29,9 +30,5 @@ bool StartRecordingAction::Execute()
 
 	pOut->PrintMessage("Can't start recording right now.");
 
-	return false;
-}
-
-bool StartRecordingAction::ShouldRecord() const {
 	return false;
 }
