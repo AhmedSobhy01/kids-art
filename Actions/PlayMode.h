@@ -3,25 +3,25 @@
 
 #include "..\ApplicationManager.h"
 #include "Action.h"
+
 class PlayMode: public Action {
 protected:
-	CFigure* RandomFigure;	/// used in derived
-	ActionType Mode;		/// used in derived
-	int Target;				/// used in derived
+	CFigure* RandomFigure;
+	ActionType Mode;
+	int Target;			// Target number of choices
 private:
-	bool CorrectCondition;
-	int Counter;
-	int CorrectPicks;
 	CFigure* ClickedFigure;
 	Point P;
+	bool CorrectCondition;
+	int Counter;		// Counts how many picks are made
+	int CorrectPicks;	// Counts how many correct picks are made
 public:
 	PlayMode(ApplicationManager*);
 	bool Execute();
 	void ReadActionParameters();
-	virtual void StartingMessage() = 0;
+	virtual void StartingMessage() =0;
 	void FinalMessage(bool&);
 	void GetClickedAction(bool&, bool&);
 	void SetCorrectCondition();
-
 };
 #endif

@@ -75,7 +75,7 @@ bool CFigure::isFilled()
 	return FigGfxInfo.isFilled;
 }
 
-bool CFigure::operator==(CFigure& Fig2)
+bool CFigure::operator==(CFigure& Fig2)				// Compares the type and the color of the figures
 {
 	return (Type() == Fig2.Type())&& (GetFillClr() == Fig2.GetFillClr());
 }

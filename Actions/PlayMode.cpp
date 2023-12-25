@@ -2,23 +2,23 @@
 
 PlayMode::PlayMode(ApplicationManager* pApp) :Action(pApp)
 {
-	RandomFigure = pManager->GetRandomFigure();
-	ClickedFigure = pManager->GetFigure(P.x, P.y);
+	if(pManager->FiguresCount() !=0)
+		RandomFigure = pManager->GetRandomFigure();				// Getting random figure
 }
 
-void PlayMode::ReadActionParameters() {
+void PlayMode::ReadActionParameters() {							// Initializes the data members
 	CorrectPicks = 0;
 	Counter = 0;
 }
 
-void PlayMode::FinalMessage(bool& ChangedAction) {
+void PlayMode::FinalMessage(bool& ChangedAction) {				// Displays the final message
 	Output* pOut = pManager->GetOutput();
 	if ((Counter == CorrectPicks) && !ChangedAction)
 		pOut->PrintMessage("Congratulations! All your picks are correct! (" + to_string(CorrectPicks) + "/" + to_string(CorrectPicks) + ")");
 	else pOut->PrintMessage("Game over. You made " + to_string(CorrectPicks) + " correct picks out of " + to_string(Counter) + " picks.");
 }
 
-void PlayMode::SetCorrectCondition() {
+void PlayMode::SetCorrectCondition() {							// Sets the correct condition depending on which mode is chosen
 	if(ClickedFigure!=NULL)
 	switch (Mode) {
 	case PICK_BY_COLOR:
@@ -70,7 +70,7 @@ bool PlayMode::Execute() {
 	ReadActionParameters();
 	StartingMessage();
 
-	while (CorrectPicks < Target && Counter != FiguresNumber) {
+	while (CorrectPicks < Target && Counter != FiguresNumber) {			// Main loop
 		pIn->GetPointClicked(P.x, P.y);
 		GetClickedAction(ChangedAction, EmptyClick);
 		if (EmptyClick) continue;
