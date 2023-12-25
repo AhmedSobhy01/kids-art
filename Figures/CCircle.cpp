@@ -65,6 +65,8 @@ void CCircle::PrintInfo(Output* pOut) {
 	pOut->PrintMessage(info);
 }
 bool CCircle::GetCorner(Point& p, int& index) {
+	
+	//check if the point is on the circle circumeference
 	int CurrentRadius = sqrt(pow(center.x - this->radius.x, 2) + pow(center.y - this->radius.y, 2));
 	int PointRadius = sqrt(pow(center.x - p.x, 2) + pow(center.y - p.y, 2));
 	if (abs(CurrentRadius - PointRadius) < 6) {

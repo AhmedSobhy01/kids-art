@@ -44,26 +44,19 @@ public:
 	bool isHidden();				// Checks if a shape is hidden
 	void Hide();					// Hides the shape
 	void UnHide();					// Unhides the shape
-	string Type();				// Returns the type of a shape
+	string Type();					// Returns the type of a shape
 	bool isFilled();
 	bool operator==(CFigure&);
 	static void ResetID();
 
-	virtual bool IsPointInside(Point) = 0;
-	virtual Point GetCenter() const = 0;
-	virtual void SetCenter(Point) = 0;
-	virtual void Save(ofstream& OutFile) = 0; //Save the figure parameters to the file
+	virtual bool IsPointInside(Point) = 0;		//Check's if the point is inside the shape
+	virtual Point GetCenter() const = 0;		//Get the shape's current center
+	virtual void SetCenter(Point) = 0;			//Set the Shape's new center
+	virtual void Save(ofstream& OutFile) = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
-	virtual bool GetCorner(Point&, int&) = 0;
-	virtual void SetCorner(Point, int) = 0;
-	///The following functions should be supported by the figure class
-	///It should be overridden by each inherited figure
-
-	///Decide the parameters that you should pass to each function	
-
-
-
-	virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
+	virtual bool GetCorner(Point&, int&) = 0;	//Get the shape sorner and its index
+	virtual void SetCorner(Point, int) = 0;		//Sets the shape Corner given the point and its index
+	virtual void PrintInfo(Output* pOut) = 0;	//Print all figure info on the status bar
 
 	// Reference
 	void IncrementReference()

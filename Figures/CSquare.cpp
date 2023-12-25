@@ -92,10 +92,6 @@ bool CSquare::GetCorner(Point& p, int& index) {
 		p = { center.x + squareSize / 2, center.y + squareSize / 2 };
 		return true;
 	}
-	for (int i = 0; i < 2; i++) {
-		for (int j = 0; j < 2; j++) {
-		}
-	}
 	return false;
 }
 void CSquare::SetCorner(Point p, int index) {

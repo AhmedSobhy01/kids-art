@@ -29,6 +29,9 @@ double CTriangle::CalcTriangleArea(Point P1, Point P2, Point P3) {
 bool CTriangle::IsPointInside(Point P) {
 	if (Hidden) return false;
 
+	//Checks if the whole triangle area is equal to the 3 triangles made by
+	// the point P and every 2 adjecent points on the triangle
+
 	double totalArea = CalcTriangleArea(P1, P2, P3);
 	double A1 = CalcTriangleArea(P, P2, P3);
 	double A2 = CalcTriangleArea(P, P1, P3);

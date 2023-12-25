@@ -29,6 +29,9 @@ double CHexagon::CalcTriangleArea(PointDouble P1, PointDouble P2, PointDouble P3
 bool CHexagon::IsPointInside(Point P) {
 	if (Hidden) return false;
 
+	// check if the area made by the triangle of P and 2 adjecent verticies of the hexagon
+	// are equal to the total area of the hexagon
+
 	double totalArea = 3 * sqrt(3) * hexagonSize * hexagonSize / 2;
 	PointDouble P1, P2;
 	double PArea = 0;
@@ -90,14 +93,18 @@ void CHexagon::PrintInfo(Output* pOut) {
 	pOut->PrintMessage(info);
 }
 bool CHexagon::GetCorner(Point& p, int& index) {
-	double angle = 2.0 * cdPi / 6.0; // Angle between each side of the hexagon in radians
+	double angle = 2.0 * cdPi / 6.0;
 	double errx = 100, erry = 100;
 	int i = 0;
 	while (i < 6 && (errx >= 6 || erry >= 6)) {
+
+		//calculate the distance between the mouse and every vertex
 		errx = abs(p.x - (center.x + hexagonSize * cos(i * angle)));
 		erry = abs(p.y - (center.y + hexagonSize * sin(i * angle)));
 		++i;
 	}
+	
+	//if the distance is less than 6 pixels: 
 	if (errx < 6 && erry < 6) {
 		index = 0;
 		p = { center.x + hexagonSize,center.y };

@@ -15,7 +15,6 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(Figur
 
 void CRectangle::Draw(Output* pOut)
 {
-	//Call Output::DrawRect to draw a rectangle on the screen
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
 }
 
@@ -23,7 +22,7 @@ bool CRectangle::IsPointInside(Point P) {
 	if (Hidden) return false;
 	int length = abs(Corner1.y - Corner2.y);
 	int width = abs(Corner1.x - Corner2.x);
-
+	
 	bool cond1 = Corner1.x + Corner2.x - width <= 2 * P.x && 2 * P.x <= Corner1.x + Corner2.x + width;
 	bool cond2 = Corner1.y + Corner2.y - length <= 2 * P.y && 2 * P.y <= Corner1.y + Corner2.y + length;
 	return cond1 && cond2;
@@ -83,13 +82,21 @@ void CRectangle::PrintInfo(Output* pOut) {
 }
 
 bool CRectangle::GetCorner(Point& p, int& index) {
+	//the index is encoded by the function as a binary value
+	// 00 means Corner1.x Corner1.y
+	// 01 means Corner2.x Corner1.y
+	// 10 means Corner1.x Corner2.y
+	// 11 means Corner2.x Corner2.y
+	// which can be easily get decoded by the SetCorner function to set the apppropriate corner
+
+
 	int Xarr[2] = { Corner1.x ,Corner2.x };
 	int Yarr[2] = { Corner1.y ,Corner2.y };
 	int errx = 100, erry = 100;
 	int i = 0;
 	while (i < 4 && (errx >= 6 || erry >= 6)) {
-		erry = abs(p.y - Yarr[i / 2]);
 		errx = abs(p.x - Xarr[i % 2]);
+		erry = abs(p.y - Yarr[i / 2]);
 		++i;
 	}
 	--i;
@@ -101,6 +108,7 @@ bool CRectangle::GetCorner(Point& p, int& index) {
 	return false;
 }
 void CRectangle::SetCorner(Point p, int index) {
+
 	int* Xarr[2] = { &Corner1.x ,&Corner2.x };
 	int* Yarr[2] = { &Corner1.y ,&Corner2.y };
 	*Xarr[index % 2] = p.x;
