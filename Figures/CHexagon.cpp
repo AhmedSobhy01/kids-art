@@ -71,34 +71,34 @@ void CHexagon::Save(ofstream &FileOutputStream)
 	if (FileOutputStream.is_open())
 	{
 		FileOutputStream << "HEXAGON"
-						 << " " << ID << " " << Center.x << " " << Center.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
+						 << " " << ID << " " << Center.x << " " << Center.y << " " << HexagonSize << " " << FigGfxInfo.DrawColor << " " << FigGfxInfo.FillColor << endl; // added figure size to handle resized figures
 		return;
 	}
 }
 
-void CHexagon::Load(ifstream &fin)
+void CHexagon::Load(ifstream &FileInputStream)
 {
-	if (fin.is_open())
+	if (FileInputStream.is_open())
 	{
-		fin >> ID >> Center.x >> Center.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
-		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
+		FileInputStream >> ID >> Center.x >> Center.y >> HexagonSize >> FigGfxInfo.DrawColor >> FigGfxInfo.FillColor;
+		if (FigGfxInfo.FillColor == TRANSPARENT_COLOR)
 			FigGfxInfo.IsFilled = false;
+		FigGfxInfo.BorderWidth = 3;
+
 		return;
 	}
 }
 
 void CHexagon::PrintInfo(Output *pOut)
 {
-	string Info = "Hexagon: ID = ";
-	Info += to_string(ID);
-	Info += ", Center = (";
-	Info += to_string(Center.x);
-	Info += ", ";
-	Info += to_string(Center.y);
-	Info += "), SideLength = ";
-	Info += to_string(HexagonSize);
+	std::string Info = "Hexagon: ID = " + to_string(ID);
+	Info += ", Center = (" + to_string(Center.x) + ", " + to_string(Center.y) + ")";
+	Info += ", SideLength = " + to_string(HexagonSize);
+	Info += ", Outline Color: " + FigGfxInfo.DrawColor.ReturnColor();
+	Info += ", Fill Color: " + FigGfxInfo.FillColor.ReturnColor();
 	pOut->PrintMessage(Info);
 }
+
 bool CHexagon::GetCorner(Point &p, int &index)
 {
 	double angle = 2.0 * cdPi / 6.0;
@@ -106,12 +106,12 @@ bool CHexagon::GetCorner(Point &p, int &index)
 	int i = 0;
 	while (i < 6 && (ErrX >= 6 || ErrY >= 6))
 	{
-		//calculate the distance between the mouse and every vertex
+		// calculate the distance between the mouse and every vertex
 		ErrX = abs(p.x - (Center.x + HexagonSize * cos(i * angle)));
 		ErrY = abs(p.y - (Center.y + HexagonSize * sin(i * angle)));
 		++i;
 	}
-	//if the distance is less than 6 pixels: 
+	// if the distance is less than 6 pixels:
 	if (ErrX < 6 && ErrY < 6)
 	{
 		index = 0;

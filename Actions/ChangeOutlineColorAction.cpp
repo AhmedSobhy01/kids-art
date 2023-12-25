@@ -8,11 +8,11 @@ ChangeOutlineColorAction::ChangeOutlineColorAction(ApplicationManager *pApp) : U
 
 void ChangeOutlineColorAction::ReadActionParameters()
 {
-	CFigure *Figure = pManager->GetSelected();
-	Input *pIn = pManager->GetInput();
-	Output *pOut = pManager->GetOutput();
-	if (Figure == NULL)
-	{
+	Figure = pManager->GetSelected();
+	Input* pIn = pManager->GetInput();
+	Output* pOut = pManager->GetOutput();
+	if (Figure == NULL) {
+
 		int x, y;
 		pOut->PrintMessage("Error:Please select a shape to change it's outline color. Click anywhere to continue.");
 		pIn->GetPointClicked(x, y);
@@ -26,9 +26,8 @@ void ChangeOutlineColorAction::ReadActionParameters()
 bool ChangeOutlineColorAction::Execute()
 {
 	ReadActionParameters();
-	Figure = pManager->GetSelected();
-	Input *pIn = pManager->GetInput();
-	Output *pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
+	Output* pOut = pManager->GetOutput();
 
 	if (Figure != NULL)
 	{
@@ -49,27 +48,19 @@ bool ChangeOutlineColorAction::Execute()
 
 void ChangeOutlineColorAction::PlayRecord()
 {
-	if (Figure)
-	{
-		Figure->ChangeDrawColor(NewColor);
-		UI.DrawColor = NewColor;
-	}
+	Figure->ChangeDrawColor(NewColor);
+	UI.DrawColor = NewColor;
 }
 
 void ChangeOutlineColorAction::Undo()
 {
-	if (Figure)
-	{
-		Figure->ChangeDrawColor(OldColor);
-		UI.DrawColor = OldColor;
-	}
+	Figure->ChangeDrawColor(OldColor);
+	UI.DrawColor = OldColor;
+
 }
 
-void ChangeOutlineColorAction::Redo()
+void ChangeOutlineColorAction::Redo()			//we could just call PlayRecord() insted of writing the same code but for the sake of readability we left it as it is
 {
-	if (Figure)
-	{
-		Figure->ChangeDrawColor(NewColor);
-		UI.DrawColor = NewColor;
-	}
+	Figure->ChangeDrawColor(NewColor);
+	UI.DrawColor = NewColor;
 }

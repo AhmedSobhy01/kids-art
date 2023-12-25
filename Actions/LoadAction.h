@@ -4,17 +4,17 @@
 #include "Action.h"
 #include "..\ApplicationManager.h"
 
-#include <iostream>
-using namespace std;
-
 class LoadAction : public Action
 {
 private:
-	string FileName;
+	std::string FileName;
+
 public:
-	LoadAction(ApplicationManager*);
+	LoadAction(ApplicationManager *);
 	void ReadActionParameters();
 	bool Execute();
+
+	virtual bool ShouldRecord() const;
 };
 
 #endif

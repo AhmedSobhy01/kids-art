@@ -6,7 +6,7 @@ void ChangeBorderWidthAction::ReadActionParameters()
 {
 	Figure = pManager->GetSelected();
 	Input* pIn = pManager->GetInput();
-	Output* pOut = pManager->GetOutput();
+	pOut = pManager->GetOutput();
 	if (Figure == NULL) {
 		int x, y;
 		pOut->PrintMessage("Error:Please select a shape to change it's Border Width. Click anywhere to continue.");
@@ -19,12 +19,10 @@ void ChangeBorderWidthAction::ReadActionParameters()
 bool ChangeBorderWidthAction::Execute()
 {
 	ReadActionParameters();
-	Input* pIn = pManager->GetInput();
-	Output* pOut = pManager->GetOutput();
 	if (Figure != NULL)
 	{
 		OldWidth = Figure->GetBorderWidth();
-		if (UI.PenWidth < 4)
+		if (UI.PenWidth < 4)					// if width == maximum -> width = minimum else width++
 			UI.PenWidth++;
 		else
 			UI.PenWidth = 2;
@@ -41,34 +39,23 @@ bool ChangeBorderWidthAction::Execute()
 	return false;
 }
 
-void ChangeBorderWidthAction::PlayRecord()
+void ChangeBorderWidthAction::PlayRecord()		
 {
-	if (Figure)
-	{
-		Output* pOut = pManager->GetOutput();
-		UI.PenWidth = NewWidth;
-		Figure->ChangeBorderWidth(NewWidth);
-	}
+	UI.PenWidth = NewWidth;
+	Figure->ChangeBorderWidth(NewWidth);
+	pOut->CreateDrawToolBar(); // To update border width icon
 }
 
 void ChangeBorderWidthAction::Undo()
 {
-	if (Figure)
-	{
-		Output* pOut = pManager->GetOutput();
-		UI.PenWidth = OldWidth;
-		Figure->ChangeBorderWidth(OldWidth);
-		pOut->CreateDrawToolBar(); // To update border width icon
-	}
+	UI.PenWidth = OldWidth;
+	Figure->ChangeBorderWidth(OldWidth);
+	pOut->CreateDrawToolBar(); // To update border width icon
 }
 
-void ChangeBorderWidthAction::Redo()
+void ChangeBorderWidthAction::Redo()	//we could just call PlayRecord() insted of writing the same code but for the sake of readability we left it as it is
 {
-	if (Figure)
-	{
-		Output* pOut = pManager->GetOutput();
-		UI.PenWidth = NewWidth;
-		Figure->ChangeBorderWidth(NewWidth);
-		pOut->CreateDrawToolBar(); // To update border width icon
-	}
+	UI.PenWidth = NewWidth;
+	Figure->ChangeBorderWidth(NewWidth);
+	pOut->CreateDrawToolBar(); // To update border width icon
 }

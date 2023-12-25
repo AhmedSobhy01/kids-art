@@ -22,9 +22,9 @@ void AddRectAction::ReadActionParameters()
 	pIn->GetPointClicked(P2.x, P2.y);
 
 	// Get drawing, filling colors and pen width from the interface
-	RectGfxInfo.DrawClr = pOut->GetCurrentDrawColor();
-	RectGfxInfo.FillClr = pOut->GetCurrentFillColor();
-	RectGfxInfo.IsFilled = (RectGfxInfo.FillClr != TRANSPARENT_COLOR);
+	RectGfxInfo.DrawColor = pOut->GetCurrentDrawColor();
+	RectGfxInfo.FillColor = pOut->GetCurrentFillColor();
+	RectGfxInfo.IsFilled = (RectGfxInfo.FillColor != TRANSPARENT_COLOR);
 	RectGfxInfo.BorderWidth = pOut->GetCurrentPenWidth();
 
 	pOut->ClearStatusBar();
@@ -45,9 +45,10 @@ bool AddRectAction::Execute()
 
 void AddRectAction::PlayRecord()
 {
-	Point Center = {(P1.x + P2.x) / 2, (P1.y + P2.y) / 2};
-	Figure->SetCenter(Center);
 	Figure->ChangeFillColor(UI.FillColor);
 	Figure->ChangeDrawColor(UI.DrawColor);
+	Figure->ChangeBorderWidth(UI.PenWidth);
+	Figure->SetCorner(P1, 0);
+	Figure->SetCorner(P2, 3);
 	pManager->AddFigure(Figure);
 }

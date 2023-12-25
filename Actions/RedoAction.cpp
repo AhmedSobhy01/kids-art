@@ -2,9 +2,8 @@
 #include "UndoableAction.h"
 #include "../Containers/UndoableActionStack.h"
 
-RedoAction::RedoAction(ApplicationManager* pApp) : Action(pApp)
+RedoAction::RedoAction(ApplicationManager *pApp) : Action(pApp)
 {
-	RecordEnabled = false;
 }
 
 void RedoAction::ReadActionParameters()
@@ -13,11 +12,12 @@ void RedoAction::ReadActionParameters()
 
 bool RedoAction::Execute()
 {
-	UndoableActionStack& RedoableActions = pManager->GetRedoableActionsStack();
+	UndoableActionStack &RedoableActions = pManager->GetRedoableActionsStack();
 
-	if (RedoableActions.Empty()) {
-		Output* pOut = pManager->GetOutput();
-		Input* pIn = pManager->GetInput();
+	if (RedoableActions.Empty())
+	{
+		Output *pOut = pManager->GetOutput();
+		Input *pIn = pManager->GetInput();
 		int x, y;
 
 		pOut->PrintMessage("Nothing to redo ... click anywhere to continue");
@@ -27,12 +27,23 @@ bool RedoAction::Execute()
 		return false;
 	}
 
-	UndoableActionStack& UndoableActions = pManager->GetUndoableActionsStack();
+	UndoableActionStack &UndoableActions = pManager->GetUndoableActionsStack();
 
-	UndoableAction* pAct = RedoableActions.Pop();
+	UndoableAction *pAct = RedoableActions.Pop();
 
 	pAct->Redo();
 	UndoableActions.Push(pAct);
 
 	return true;
+}
+
+void RedoAction::PlayRecord()
+{
+	UndoableActionStack &RedoableActions = pManager->GetRedoableActionsStack();
+	UndoableActionStack &UndoableActions = pManager->GetUndoableActionsStack();
+
+	UndoableAction *pAct = RedoableActions.Pop();
+
+	pAct->Redo();
+	UndoableActions.Push(pAct);
 }

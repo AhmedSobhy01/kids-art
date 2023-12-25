@@ -1,4 +1,6 @@
-#pragma once
+#ifndef C_SQUARE_H
+#define C_SQUARE_H
+
 #include "CFigure.h"
 class CSquare : public CFigure
 {
@@ -21,3 +23,4 @@ public:
 	bool GetCorner(Point &, int &);
 	void SetCorner(Point, int);
 };
+#endif

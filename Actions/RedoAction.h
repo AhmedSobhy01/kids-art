@@ -12,6 +12,9 @@ public:
 	virtual void ReadActionParameters();
 
 	virtual bool Execute();
+
+	virtual void PlayRecord();
+
 };
 
 #endif

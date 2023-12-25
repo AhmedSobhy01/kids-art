@@ -23,9 +23,9 @@ void AddTriangleAction::ReadActionParameters()
 	pIn->GetPointClicked(P3.x, P3.y);
 
 	// Get drawing, filling colors and pen width from the interface
-	TriangleGfxInfo.DrawClr = pOut->GetCurrentDrawColor();
-	TriangleGfxInfo.FillClr = pOut->GetCurrentFillColor();
-	TriangleGfxInfo.IsFilled = (TriangleGfxInfo.FillClr != TRANSPARENT_COLOR);
+	TriangleGfxInfo.DrawColor = pOut->GetCurrentDrawColor();
+	TriangleGfxInfo.FillColor = pOut->GetCurrentFillColor();
+	TriangleGfxInfo.IsFilled = (TriangleGfxInfo.FillColor != TRANSPARENT_COLOR);
 	TriangleGfxInfo.BorderWidth = pOut->GetCurrentPenWidth();
 	pOut->ClearStatusBar();
 }
@@ -45,9 +45,11 @@ bool AddTriangleAction::Execute()
 
 void AddTriangleAction::PlayRecord()
 {
-	Point Center = {(P1.x + P2.x + P3.x) / 3, (P1.y + P2.y + P3.y) / 3};
-	Figure->SetCenter(Center);
 	Figure->ChangeFillColor(UI.FillColor);
 	Figure->ChangeDrawColor(UI.DrawColor);
+	Figure->ChangeBorderWidth(UI.PenWidth);
+	Figure->SetCorner(P1, 0);
+	Figure->SetCorner(P2, 1);
+	Figure->SetCorner(P3, 2);
 	pManager->AddFigure(Figure);
 }

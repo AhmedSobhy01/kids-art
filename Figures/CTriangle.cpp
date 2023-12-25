@@ -28,8 +28,8 @@ bool CTriangle::IsPointInside(Point P)
 	if (Hidden)
 		return false;
 
-	//Checks if the whole triangle area is equal to the 3 triangles made by
-	// the point P and every 2 adjecent points on the triangle
+	// Checks if the whole triangle area is equal to the 3 triangles made by
+	//  the point P and every 2 adjecent points on the triangle
 
 	double totalArea = CalcTriangleArea(P1, P2, P3);
 	double A1 = CalcTriangleArea(P, P2, P3);
@@ -72,39 +72,31 @@ void CTriangle::Save(ofstream &FileOutputStream)
 	if (FileOutputStream.is_open())
 	{
 		FileOutputStream << "TRIANGLE"
-						 << " " << ID << " " << P1.x << " " << P1.y << " " << P2.x << " " << P2.y << " " << P3.x << " " << P3.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
+						 << " " << ID << " " << P1.x << " " << P1.y << " " << P2.x << " " << P2.y << " " << P3.x << " " << P3.y << " " << FigGfxInfo.DrawColor << " " << FigGfxInfo.FillColor << endl; // added figure size to handle resized figures
 		return;
 	}
 }
 
-void CTriangle::Load(ifstream &fin)
+void CTriangle::Load(ifstream &FileInputStream)
 {
-	if (fin.is_open())
+	if (FileInputStream.is_open())
 	{
-		fin >> ID >> P1.x >> P1.y >> P2.x >> P2.y >> P3.x >> P3.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
-		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
+		FileInputStream >> ID >> P1.x >> P1.y >> P2.x >> P2.y >> P3.x >> P3.y >> FigGfxInfo.DrawColor >> FigGfxInfo.FillColor;
+		if (FigGfxInfo.FillColor == TRANSPARENT_COLOR)
 			FigGfxInfo.IsFilled = false;
+		FigGfxInfo.BorderWidth = 3;
 		return;
 	}
 }
 
 void CTriangle::PrintInfo(Output *pOut)
 {
-	string Info = "Triangle: ID = ";
-	Info += to_string(ID);
-	Info += ", Vertex1 = (";
-	Info += to_string(P1.x);
-	Info += ", ";
-	Info += to_string(P1.y);
-	Info += "), Vertex2 = (";
-	Info += to_string(P2.x);
-	Info += ", ";
-	Info += to_string(P2.y);
-	Info += "), Vertex3 = (";
-	Info += to_string(P3.x);
-	Info += ", ";
-	Info += to_string(P3.y);
-	Info += ")";
+	std::string Info = "Triangle: ID = " + to_string(ID);
+	Info += ", Vertex1 = (" + to_string(P1.x) + ", " + to_string(P1.y) + ")";
+	Info += ", Vertex2 = (" + to_string(P2.x) + ", " + to_string(P2.y) + ")";
+	Info += ", Vertex3 = (" + to_string(P3.x) + ", " + to_string(P3.y) + ")";
+	Info += ", Outline Color: " + FigGfxInfo.DrawColor.ReturnColor();
+	Info += ", Fill Color: " + FigGfxInfo.FillColor.ReturnColor();
 	pOut->PrintMessage(Info);
 }
 

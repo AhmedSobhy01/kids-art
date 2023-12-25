@@ -4,7 +4,6 @@
 
 UndoAction::UndoAction(ApplicationManager *pApp) : Action(pApp)
 {
-	RecordEnabled = false;
 }
 
 void UndoAction::ReadActionParameters()
@@ -37,4 +36,16 @@ bool UndoAction::Execute()
 	RedoableActions.Push(pAct);
 
 	return true;
+}
+
+void UndoAction::PlayRecord()
+{
+	UndoableActionStack &UndoableActions = pManager->GetUndoableActionsStack();
+	UndoableActionStack &RedoableActions = pManager->GetRedoableActionsStack();
+
+	UndoableAction *pAct = UndoableActions.Pop();
+
+	pAct->Undo();
+
+	RedoableActions.Push(pAct);
 }

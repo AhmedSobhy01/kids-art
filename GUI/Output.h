@@ -8,7 +8,7 @@ class Output // The application manager should have a pointer to this class
 private:
 	window *pWind;			// Pointer to the Graphics Window
 	window *pColorMenuWind; // Pointer to the Color Menu Window
-	string LastMessage;
+	std::string LastMessage;
 	bool UpdateToolBar;
 	bool UpdateStatusBar;
 	bool IsPlayingRecording;
@@ -43,7 +43,7 @@ public:
 	void DrawHexagon(Point, int, GfxInfo, bool = false);		   // Draw a hexagon
 	void DrawCircle(Point, Point, GfxInfo, bool = false);		   // Draw a circle
 
-	void PrintMessage(string, bool = true); // Print a message on status bar
+	void PrintMessage(std::string, bool = true); // Print a message on status bar
 
 	color GetCurrentDrawColor() const; // Get current drawing color
 	color GetCurrentFillColor() const; // Get current filling color

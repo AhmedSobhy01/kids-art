@@ -40,38 +40,38 @@ void CCircle::Save(ofstream &FileOutputStream)
 	if (FileOutputStream.is_open())
 	{
 		FileOutputStream << "CIRCLE"
-						 << " " << ID << " " << Center.x << " " << Center.y << " " << Radius.x << " " << Radius.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
+						 << " " << ID << " " << Center.x << " " << Center.y << " " << Radius.x << " " << Radius.y << " " << FigGfxInfo.DrawColor << " " << FigGfxInfo.FillColor << endl; // added figure size to handle resized figures
 		return;
 	}
 }
 
-void CCircle::Load(ifstream &fin)
+void CCircle::Load(ifstream &FileInputStream)
 {
-	if (fin.is_open())
+	if (FileInputStream.is_open())
 	{
-		fin >> ID >> Center.x >> Center.y >> Radius.x >> Radius.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
-		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
+		FileInputStream >> ID >> Center.x >> Center.y >> Radius.x >> Radius.y >> FigGfxInfo.DrawColor >> FigGfxInfo.FillColor;
+		if (FigGfxInfo.FillColor == TRANSPARENT_COLOR)
 			FigGfxInfo.IsFilled = false;
+		FigGfxInfo.BorderWidth = 3;
 		return;
 	}
 }
 
 void CCircle::PrintInfo(Output *pOut)
 {
-	string info = "Circle: ID = ";
-	info += to_string(ID);
-	info += ", Center = (";
-	info += to_string(Center.x);
-	info += ", ";
-	info += to_string(Center.y);
-	info += "), Radius = ";
 	int Radius = sqrt(pow(Center.x - this->Radius.x, 2) + pow(Center.y - this->Radius.y, 2));
-	info += to_string(Radius);
-	pOut->PrintMessage(info);
+
+	std::string Info = "Circle: ID = " + to_string(ID);
+	Info += ", Center = (" + to_string(Center.x) + ", " + to_string(Center.y) + ")";
+	Info += ", Radius = " + to_string(Radius);
+	Info += ", Outline Color: " + FigGfxInfo.DrawColor.ReturnColor();
+	Info += ", Fill Color: " + FigGfxInfo.FillColor.ReturnColor();
+
+	pOut->PrintMessage(Info);
 }
 bool CCircle::GetCorner(Point &p, int &index)
 {
-	//check if the point is on the circle circumeference
+	// check if the point is on the circle circumeference
 	int CurrentRadius = sqrt(pow(Center.x - this->Radius.x, 2) + pow(Center.y - this->Radius.y, 2));
 	int PointRadius = sqrt(pow(Center.x - p.x, 2) + pow(Center.y - p.y, 2));
 	if (abs(CurrentRadius - PointRadius) < 6)
@@ -82,7 +82,7 @@ bool CCircle::GetCorner(Point &p, int &index)
 	}
 	return false;
 }
-void CCircle::SetCorner(Point p, int)
+void CCircle::SetCorner(Point P, int)
 {
-	this->Radius = p;
+	this->Radius = P;
 }

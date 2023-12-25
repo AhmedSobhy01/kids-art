@@ -1,40 +1,40 @@
-/* 
+/*
 See "version.h" for version info and copyright information
 This file was last modified on 05.16.1999
 */
 
 #include "colors.h"
 
-ostream& operator<<(ostream& c, const color& col)
+ostream &operator<<(ostream &c, const color &col)
 {
-	if (col == BLACK)
-		c << "BLACK";
+	if (col == PINK)
+		c << "PINK";
 	else if (col == RED)
 		c << "RED";
-	else if (col == BLUE)
-		c << "BLUE";
-	else if (col == GREEN)
-		c << "GREEN";
-	else if (col == MAGENTA)
-		c << "MAGENTA";
 	else if (col == ORANGE)
 		c << "ORANGE";
-	else if (col == BROWN)
-		c << "BROWN";
-	else if (col == CYAN)
-		c << "CYAN";
 	else if (col == YELLOW)
 		c << "YELLOW";
-	else if (col == LIGHTGOLDENRODYELLOW)
-		c << "LIGHTGOLDENRODYELLOW";
+	else if (col == GREEN)
+		c << "GREEN";
+	else if (col == SKY)
+		c << "SKY";
+	else if (col == BLUE)
+		c << "BLUE";
+	else if (col == LAVENDER)
+		c << "LAVENDER";
+	else if (col == BASE)
+		c << "WHITE";
+	else if (col == BLACK)
+		c << "BLACK";
 	else
 		c << "NO_FILL";
 	return c;
 }
 
-istream& operator>>(istream& c, color& col)
+istream &operator>>(istream &c, color &col)
 {
-	string x;
+	std::string x;
 	c >> x;
 	if (x == "BLACK")
 		col = BLACK;
@@ -44,38 +44,38 @@ istream& operator>>(istream& c, color& col)
 		col = BLUE;
 	else if (x == "GREEN")
 		col = GREEN;
-	else if (x == "MAGENTA")
-		col = MAGENTA;
+	else if (x == "PINK")
+		col = PINK;
 	else if (x == "ORANGE")
 		col = ORANGE;
-	else if (x == "BROWN")
-		col = BROWN;
-	else if (x == "CYAN")
-		col = CYAN;
+	else if (x == "SKY")
+		col = SKY;
+	else if (x == "LAVENDER")
+		col = LAVENDER;
 	else if (x == "YELLOW")
 		col = YELLOW;
-	else if (x == "LIGHTGOLDENRODYELLOW")
-		col = LIGHTGOLDENRODYELLOW;
+	else if (x == "WHITE")
+		col = BASE;
 	else
 		col = TRANSPARENT_COLOR;
 	return c;
 }
 
-bool operator==(color a, color b) {
-
-  return ((a.ucRed == b.ucRed) && (a.ucGreen == b.ucGreen) && (a.ucBlue == b.ucBlue));
-
-}
-
-bool operator!=(color a, color b) {
-
-  return !(a == b);
-  
-}
-
-string color::ReturnColor()
+bool operator==(color a, color b)
 {
-	string c;
+
+	return ((a.ucRed == b.ucRed) && (a.ucGreen == b.ucGreen) && (a.ucBlue == b.ucBlue));
+}
+
+bool operator!=(color a, color b)
+{
+
+	return !(a == b);
+}
+
+std::string color::ReturnColor()
+{
+	std::string c;
 	if (*this == BLACK)
 		c = "Black";
 	else if (*this == RED)
@@ -84,19 +84,19 @@ string color::ReturnColor()
 		c = "Blue";
 	else if (*this == GREEN)
 		c = "Green";
-	else if (*this == MAGENTA)
-		c = "Magenta";
+	else if (*this == PINK)
+		c = "Pink";
 	else if (*this == ORANGE)
 		c = "Orange";
-	else if (*this == BROWN)
-		c = "Brown";
-	else if (*this == CYAN)
-		c = "Cyan";
+	else if (*this == SKY)
+		c = "Sky";
+	else if (*this == LAVENDER)
+		c = "Lavender";
 	else if (*this == YELLOW)
 		c = "Yellow";
-	else if (*this == LIGHTGOLDENRODYELLOW)
-		c = "Light Golden Rod Yellow";
+	else if (*this == BASE)
+		c = "White";
 	else
-		c = "Transparent color";
+		c = "Transparent";
 	return c;
 }

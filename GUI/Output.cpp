@@ -21,7 +21,7 @@ Output::Output()
 	UI.DrawColor = BLUE;			  // Drawing color
 	UI.FillColor = TRANSPARENT_COLOR; // Filling color
 	UI.MsgColor = TEXT;				  // Messages color
-	UI.BkGrndColor = BASE;			  // Background color
+	UI.BackgroundColor = BASE;		  // Background color
 	UI.HighlightColor = MAUVE;		  // This color should NOT be used to draw figures, use if for highlight only
 	UI.StatusBarColor = SURFACE0;	  // Status bar background color
 	UI.PenWidth = 3;				  // Width of the figures frames
@@ -75,8 +75,8 @@ window *Output::CreateWind(int w, int h, int x, int y) const
 {
 	window *pW = new window(w, h, x, y);
 	pW->SetBuffering(true);
-	pW->SetBrush(UI.BkGrndColor);
-	pW->SetPen(UI.BkGrndColor, 1);
+	pW->SetBrush(UI.BackgroundColor);
+	pW->SetPen(UI.BackgroundColor, 1);
 
 	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);
 	pW->UpdateBuffer();
@@ -98,7 +98,7 @@ void Output::CreateColorMenuWind(int x, bool withTransparent)
 void Output::DrawColorMenuItems(bool withTransparent) const
 {
 	const int ArraySize = COLOR_MENU_ITM_COUNT - 1;
-	color colors[ArraySize] = {PINK, RED, PEACH, YELLOW, GREEN, SKY, BLUE, LAVENDER, BASE, BLACK};
+	color colors[ArraySize] = {PINK, RED, ORANGE, YELLOW, GREEN, SKY, BLUE, LAVENDER, BASE, BLACK};
 
 	pColorMenuWind->DrawRectangle(0, 0, UI.ColorMenuWidth, UI.ColorMenuHeight);
 	for (int i = 0; i < ArraySize; i++)
@@ -174,7 +174,7 @@ void Output::CreateDrawToolBar() const
 	pWind->SetPen(SURFACE0, 1);
 	pWind->SetBrush(SURFACE0);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
-	string MenuItemImages[DRAW_ITM_COUNT];
+	std::string MenuItemImages[DRAW_ITM_COUNT];
 	// Draw mode toolbar images
 	MenuItemImages[ITM_PLAY_MODE] = "images\\DrawMode\\PlayMode.jpg";
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Rectangle.jpg";
@@ -237,7 +237,7 @@ void Output::CreatePlayToolBar() const
 	UI.InterfaceMode = MODE_PLAY;
 
 	// Draw mode toolbar images
-	string PlayMenuItems[PLAY_ITM_COUNT];
+	std::string PlayMenuItems[PLAY_ITM_COUNT];
 	PlayMenuItems[ITM_DRAW_MODE] = "images\\PlayMode\\DrawMode.jpg";
 	PlayMenuItems[ITM_PICKBYSHAPE] = "images\\PlayMode\\PickByShape.jpg";
 	PlayMenuItems[ITM_PICKBYCOLOR] = "images\\PlayMode\\PickByColor.jpg";
@@ -252,13 +252,13 @@ void Output::CreatePlayToolBar() const
 
 void Output::ClearDrawArea() const
 {
-	pWind->SetPen(UI.BkGrndColor, 1);
-	pWind->SetBrush(UI.BkGrndColor);
+	pWind->SetPen(UI.BackgroundColor, 1);
+	pWind->SetBrush(UI.BackgroundColor);
 	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::PrintMessage(string Message, bool Update) // Prints a message on status bar
+void Output::PrintMessage(std::string Message, bool Update) // Prints a message on status bar
 {
 	LastMessage = Message;
 	CreateStatusBar(); // First clear the status bar
@@ -297,14 +297,14 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool Selected) //
 	if (Selected)
 		DrawingColor = UI.HighlightColor; // Figure should be drawn highlighted
 	else
-		DrawingColor = RectGfxInfo.DrawClr;
+		DrawingColor = RectGfxInfo.DrawColor;
 
 	pWind->SetPen(DrawingColor, RectGfxInfo.BorderWidth);
 	drawstyle Style;
 	if (RectGfxInfo.IsFilled)
 	{
 		Style = FILLED;
-		pWind->SetBrush(RectGfxInfo.FillClr);
+		pWind->SetBrush(RectGfxInfo.FillColor);
 	}
 	else
 		Style = FRAME;
@@ -320,13 +320,13 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool Selected) //
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawSquare(Point P1, int DefaultSquareSize, GfxInfo SquareGfxInfo, bool Selected) // Drawing square
+void Output::DrawSquare(Point _P1, int DefaultSquareSize, GfxInfo SquareGfxInfo, bool Selected) // Drawing square
 {
 	color DrawingColor;
 	if (Selected)
 		DrawingColor = UI.HighlightColor;
 	else
-		DrawingColor = SquareGfxInfo.DrawClr;
+		DrawingColor = SquareGfxInfo.DrawColor;
 
 	pWind->SetPen(DrawingColor, SquareGfxInfo.BorderWidth);
 	drawstyle Style;
@@ -334,21 +334,21 @@ void Output::DrawSquare(Point P1, int DefaultSquareSize, GfxInfo SquareGfxInfo, 
 	if (SquareGfxInfo.IsFilled)
 	{
 		Style = FILLED;
-		pWind->SetBrush(SquareGfxInfo.FillClr);
+		pWind->SetBrush(SquareGfxInfo.FillColor);
 	}
 	else
 		Style = FRAME;
 
-	Point p1, p2;
-	p1.x = P1.x + DefaultSquareSize / 2;
-	p1.y = P1.y + DefaultSquareSize / 2;
-	p2.x = P1.x - DefaultSquareSize / 2;
-	p2.y = P1.y - DefaultSquareSize / 2;
+	Point P1, P2;
+	P1.x = _P1.x + DefaultSquareSize / 2;
+	P1.y = _P1.y + DefaultSquareSize / 2;
+	P2.x = _P1.x - DefaultSquareSize / 2;
+	P2.y = _P1.y - DefaultSquareSize / 2;
 
-	pWind->DrawRectangle(p1.x, p1.y, p2.x, p2.y, Style);
-	if (p2.y <= UI.ToolBarHeight)
+	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, Style);
+	if (P2.y <= UI.ToolBarHeight)
 		UpdateToolBar = true;
-	if (p1.y >= UI.height - UI.StatusBarHeight)
+	if (P1.y >= UI.height - UI.StatusBarHeight)
 		UpdateStatusBar = true;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -360,12 +360,12 @@ void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo,
 	if (Selected)
 		DrawingColor = UI.HighlightColor;
 	else
-		DrawingColor = TriangleGfxInfo.DrawClr;
+		DrawingColor = TriangleGfxInfo.DrawColor;
 
 	pWind->SetPen(DrawingColor, TriangleGfxInfo.BorderWidth);
 	if (TriangleGfxInfo.IsFilled)
 	{
-		pWind->SetBrush(TriangleGfxInfo.FillClr);
+		pWind->SetBrush(TriangleGfxInfo.FillColor);
 		Style = FILLED;
 	}
 	else
@@ -390,13 +390,13 @@ void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool Selected
 	if (Selected)
 		DrawColor = UI.HighlightColor;
 	else
-		DrawColor = CircleGfxInfo.DrawClr;
+		DrawColor = CircleGfxInfo.DrawColor;
 
 	pWind->SetPen(DrawColor, CircleGfxInfo.BorderWidth);
 	if (CircleGfxInfo.IsFilled)
 	{
 		Style = FILLED;
-		pWind->SetBrush(CircleGfxInfo.FillClr);
+		pWind->SetBrush(CircleGfxInfo.FillColor);
 	}
 	else
 		Style = FRAME;
@@ -418,13 +418,13 @@ void Output::DrawHexagon(Point P1, int HexagonSize, GfxInfo HexagonGfxInfo, bool
 	if (Selected)
 		DrawColor = UI.HighlightColor;
 	else
-		DrawColor = HexagonGfxInfo.DrawClr;
+		DrawColor = HexagonGfxInfo.DrawColor;
 
 	pWind->SetPen(DrawColor, HexagonGfxInfo.BorderWidth);
 	if (HexagonGfxInfo.IsFilled)
 	{
 		Style = FILLED;
-		pWind->SetBrush(HexagonGfxInfo.FillClr);
+		pWind->SetBrush(HexagonGfxInfo.FillColor);
 	}
 	else
 		Style = FRAME;

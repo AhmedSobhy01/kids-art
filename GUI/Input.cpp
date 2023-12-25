@@ -29,12 +29,12 @@ bool Input::GetLeftClickState(int &x, int &y) const
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
-string Input::GetString(Output *pO) const
+std::string Input::GetString(Output *pO) const
 {
 	pWind->FlushKeyQueue();
 	pWind->FlushMouseQueue();
 
-	string Label;
+	std::string Label;
 	char Key;
 	while (1)
 	{
@@ -241,7 +241,7 @@ color Input::GetSelectedColor(Output *pO) const // This function reads the posit
 				SelectedColor = LAVENDER;
 				break;
 			case COLOR_MENU_ITM_ORANGE:
-				SelectedColor = PEACH;
+				SelectedColor = ORANGE;
 				break;
 			case COLOR_MENU_ITM_PINK:
 				SelectedColor = PINK;

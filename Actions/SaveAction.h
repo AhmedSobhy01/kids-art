@@ -4,13 +4,10 @@
 #include "Action.h"
 #include "..\ApplicationManager.h"
 
-#include <iostream>
-using namespace std;
-
 class SaveAction : public Action
 {
 private:
-	string FileName;
+	std::string FileName;
 
 public:
 	SaveAction(ApplicationManager *);
