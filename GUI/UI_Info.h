@@ -88,7 +88,7 @@ __declspec(selectany) // This line to prevent "redefinition error"
 	color FillColor;	  // Filling color
 	color HighlightColor; // Highlighting color
 	color MsgColor;		  // Messages color
-	color BkGrndColor;	  // Background color
+	color BackgroundColor;	  // Background color
 	color StatusBarColor; // Status bar color
 	int PenWidth;		  // Width of the pen that draws shapes
 } UI;					  // Create a global object UI

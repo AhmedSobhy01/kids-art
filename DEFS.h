@@ -48,8 +48,8 @@ struct Point // To be used for figures points
 
 struct GfxInfo // Graphical info of each figure
 {
-	color DrawClr;	 // Draw color of the figure
-	color FillClr;	 // Fill color of the figure
+	color DrawColor;	 // Draw color of the figure
+	color FillColor;	 // Fill color of the figure
 	bool IsFilled;	 // Figure Filled or not
 	int BorderWidth; // Width of figure borders
 };

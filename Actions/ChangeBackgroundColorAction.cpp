@@ -19,9 +19,9 @@ bool ChangeBackgroundColorAction::Execute()
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
 
-	OldColor = UI.BkGrndColor;
+	OldColor = UI.BackgroundColor;
 	NewColor = pIn->GetSelectedColor(pOut);
-	UI.BkGrndColor = NewColor;
+	UI.BackgroundColor = NewColor;
 	pOut->ClearStatusBar();
 
 	return true;
@@ -29,15 +29,15 @@ bool ChangeBackgroundColorAction::Execute()
 
 void ChangeBackgroundColorAction::PlayRecord()
 {
-	UI.BkGrndColor = NewColor;
+	UI.BackgroundColor = NewColor;
 }
 
 void ChangeBackgroundColorAction::Undo()
 {
-	UI.BkGrndColor = OldColor;
+	UI.BackgroundColor = OldColor;
 }
 
 void ChangeBackgroundColorAction::Redo()
 {
-	UI.BkGrndColor = NewColor;
+	UI.BackgroundColor = NewColor;
 }

@@ -223,9 +223,9 @@ List<Action> &ApplicationManager::GetRecordedActionsList()
 
 void ApplicationManager::ClearRecordedActionsList()
 {
-	int size = RecordedActions.Size();
+	int Size = RecordedActions.Size();
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < Size; i++)
 	{
 		Action *pAct = RecordedActions.PopBack();
 
@@ -289,9 +289,9 @@ CFigure *ApplicationManager::GetRandomFigure()
 
 void ApplicationManager::ClearFigures()
 {
-	int size = FigList.Size();
+	int Size = FigList.Size();
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < Size; i++)
 	{
 		CFigure *pFig = FigList.PopBack();
 
@@ -302,7 +302,7 @@ void ApplicationManager::ClearFigures()
 
 void ApplicationManager::SaveAll(ofstream &FileOutputStream)
 {
-	FileOutputStream << UI.DrawColor << " " << UI.FillColor << " " << UI.BkGrndColor << endl;
+	FileOutputStream << UI.DrawColor << " " << UI.FillColor << " " << UI.BackgroundColor << endl;
 	FileOutputStream << FiguresCount() << endl;
 	for (int i = 0; i < FiguresCount(); i++)
 		FigList[i]->Save(FileOutputStream);
@@ -322,7 +322,7 @@ int ApplicationManager::CountFigColor(CFigure *Fig)
 void ApplicationManager::ResetColors()
 {
 	UI.DrawColor = BLUE;
-	UI.BkGrndColor = BASE;
+	UI.BackgroundColor = BASE;
 	UI.FillColor = TRANSPARENT_COLOR;
 }
 

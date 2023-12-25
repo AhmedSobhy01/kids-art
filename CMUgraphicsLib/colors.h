@@ -23,7 +23,7 @@ public:
 	}
 	friend ostream &operator<<(ostream &, const color &);
 	friend istream &operator>>(istream &, color &);
-	string ReturnColor();
+	std::string ReturnColor();
 
 	// Color components.  0 = no intensity, 255 = full intensity
 	unsigned char ucRed;

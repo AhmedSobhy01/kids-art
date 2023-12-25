@@ -22,9 +22,9 @@ void AddRectAction::ReadActionParameters()
 	pIn->GetPointClicked(P2.x, P2.y);
 
 	// Get drawing, filling colors and pen width from the interface
-	RectGfxInfo.DrawClr = pOut->GetCurrentDrawColor();
-	RectGfxInfo.FillClr = pOut->GetCurrentFillColor();
-	RectGfxInfo.IsFilled = (RectGfxInfo.FillClr != TRANSPARENT_COLOR);
+	RectGfxInfo.DrawColor = pOut->GetCurrentDrawColor();
+	RectGfxInfo.FillColor = pOut->GetCurrentFillColor();
+	RectGfxInfo.IsFilled = (RectGfxInfo.FillColor != TRANSPARENT_COLOR);
 	RectGfxInfo.BorderWidth = pOut->GetCurrentPenWidth();
 
 	pOut->ClearStatusBar();

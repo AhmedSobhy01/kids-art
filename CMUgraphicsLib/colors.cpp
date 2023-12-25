@@ -1,11 +1,11 @@
-/* 
+/*
 See "version.h" for version info and copyright information
 This file was last modified on 05.16.1999
 */
 
 #include "colors.h"
 
-ostream& operator<<(ostream& c, const color& col)
+ostream &operator<<(ostream &c, const color &col)
 {
 	if (col == PINK)
 		c << "PINK";
@@ -32,9 +32,9 @@ ostream& operator<<(ostream& c, const color& col)
 	return c;
 }
 
-istream& operator>>(istream& c, color& col)
+istream &operator>>(istream &c, color &col)
 {
-	string x;
+	std::string x;
 	c >> x;
 	if (x == "BLACK")
 		col = BLACK;
@@ -61,21 +61,21 @@ istream& operator>>(istream& c, color& col)
 	return c;
 }
 
-bool operator==(color a, color b) {
-
-  return ((a.ucRed == b.ucRed) && (a.ucGreen == b.ucGreen) && (a.ucBlue == b.ucBlue));
-
-}
-
-bool operator!=(color a, color b) {
-
-  return !(a == b);
-  
-}
-
-string color::ReturnColor()
+bool operator==(color a, color b)
 {
-	string c;
+
+	return ((a.ucRed == b.ucRed) && (a.ucGreen == b.ucGreen) && (a.ucBlue == b.ucBlue));
+}
+
+bool operator!=(color a, color b)
+{
+
+	return !(a == b);
+}
+
+std::string color::ReturnColor()
+{
+	std::string c;
 	if (*this == BLACK)
 		c = "Black";
 	else if (*this == RED)

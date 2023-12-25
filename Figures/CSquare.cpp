@@ -30,13 +30,13 @@ bool CSquare::IsPointInside(Point P)
 	if (Hidden)
 		return false;
 
-	Point p1, p2;
-	p1.x = Center.x - SquareSize / 2;
-	p1.y = Center.y - SquareSize / 2;
-	p2.x = Center.x + SquareSize / 2;
-	p2.y = Center.y + SquareSize / 2;
-	bool cond1 = (p1.x <= P.x) && (P.x <= p2.x);
-	bool cond2 = (p1.y <= P.y) && (P.y <= p2.y);
+	Point P1, P2;
+	P1.x = Center.x - SquareSize / 2;
+	P1.y = Center.y - SquareSize / 2;
+	P2.x = Center.x + SquareSize / 2;
+	P2.y = Center.y + SquareSize / 2;
+	bool cond1 = (P1.x <= P.x) && (P.x <= P2.x);
+	bool cond2 = (P1.y <= P.y) && (P.y <= P2.y);
 	return cond1 && cond2;
 }
 Point CSquare::GetCenter() const
@@ -52,31 +52,33 @@ void CSquare::Save(ofstream &FileOutputStream)
 {
 	if (FileOutputStream.is_open())
 	{
-		FileOutputStream << "SQUARE" << " " << ID << " " << Center.x << " " << Center.y << " " << SquareSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl; // added figure size to handle resized figures
+		FileOutputStream << "SQUARE"
+						 << " " << ID << " " << Center.x << " " << Center.y << " " << SquareSize << " " << FigGfxInfo.DrawColor << " " << FigGfxInfo.FillColor << endl; // added figure size to handle resized figures
 		return;
 	}
 }
 
-void CSquare::Load(ifstream &fin)
+void CSquare::Load(ifstream &FileInputStream)
 {
-	if (fin.is_open())
+	if (FileInputStream.is_open())
 	{
-		fin >> ID >> Center.x >> Center.y >> SquareSize >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
-		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
+		FileInputStream >> ID >> Center.x >> Center.y >> SquareSize >> FigGfxInfo.DrawColor >> FigGfxInfo.FillColor;
+		if (FigGfxInfo.FillColor == TRANSPARENT_COLOR)
 			FigGfxInfo.IsFilled = false;
 		FigGfxInfo.BorderWidth = 3;
 		return;
 	}
 }
 
-void CSquare::PrintInfo(Output* pOut) {
-	string info = "Square: ID = " + to_string(ID);
-	info += ", Center = (" + to_string(Center.x) + ", " + to_string(Center.y) + ")";
-	info += ", SideLength = " + to_string(SquareSize);
-	info += ", Outline Color: " + FigGfxInfo.DrawClr.ReturnColor();
-	info += ", Fill Color: " + FigGfxInfo.FillClr.ReturnColor();
+void CSquare::PrintInfo(Output *pOut)
+{
+	std::string Info = "Square: ID = " + to_string(ID);
+	Info += ", Center = (" + to_string(Center.x) + ", " + to_string(Center.y) + ")";
+	Info += ", SideLength = " + to_string(SquareSize);
+	Info += ", Outline Color: " + FigGfxInfo.DrawColor.ReturnColor();
+	Info += ", Fill Color: " + FigGfxInfo.FillColor.ReturnColor();
 
-	pOut->PrintMessage(info);
+	pOut->PrintMessage(Info);
 }
 
 bool CSquare::GetCorner(Point &p, int &index)

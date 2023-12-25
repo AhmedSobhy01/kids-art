@@ -7,9 +7,10 @@
 class LoadAction : public Action
 {
 private:
-	string FileName;
+	std::string FileName;
+
 public:
-	LoadAction(ApplicationManager*);
+	LoadAction(ApplicationManager *);
 	void ReadActionParameters();
 	bool Execute();
 

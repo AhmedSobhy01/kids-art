@@ -23,9 +23,9 @@ void AddTriangleAction::ReadActionParameters()
 	pIn->GetPointClicked(P3.x, P3.y);
 
 	// Get drawing, filling colors and pen width from the interface
-	TriangleGfxInfo.DrawClr = pOut->GetCurrentDrawColor();
-	TriangleGfxInfo.FillClr = pOut->GetCurrentFillColor();
-	TriangleGfxInfo.IsFilled = (TriangleGfxInfo.FillClr != TRANSPARENT_COLOR);
+	TriangleGfxInfo.DrawColor = pOut->GetCurrentDrawColor();
+	TriangleGfxInfo.FillColor = pOut->GetCurrentFillColor();
+	TriangleGfxInfo.IsFilled = (TriangleGfxInfo.FillColor != TRANSPARENT_COLOR);
 	TriangleGfxInfo.BorderWidth = pOut->GetCurrentPenWidth();
 	pOut->ClearStatusBar();
 }

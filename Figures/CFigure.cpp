@@ -1,6 +1,5 @@
 #include "CFigure.h"
 #include <string>
-using namespace std;
 
 int CFigure::LastID = 0;
 
@@ -14,9 +13,8 @@ CFigure::CFigure()
 }
 
 CFigure::CFigure(GfxInfo FigureGfxInfo) : CFigure()
-{ 
-	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
-
+{
+	FigGfxInfo = FigureGfxInfo; // Default status is non-filled.
 }
 
 void CFigure::SetSelected(bool s)
@@ -31,12 +29,12 @@ bool CFigure::IsSelected() const
 
 color CFigure::GetDrawColor() const
 {
-	return FigGfxInfo.DrawClr;
+	return FigGfxInfo.DrawColor;
 }
 
 color CFigure::GetFillColor() const
 {
-	return FigGfxInfo.FillClr;
+	return FigGfxInfo.FillColor;
 }
 
 int CFigure::GetBorderWidth() const
@@ -46,13 +44,13 @@ int CFigure::GetBorderWidth() const
 
 void CFigure::ChangeDrawColor(color Dclr)
 {
-	FigGfxInfo.DrawClr = Dclr;
+	FigGfxInfo.DrawColor = Dclr;
 }
 
 void CFigure::ChangeFillColor(color Fclr)
 {
 	FigGfxInfo.IsFilled = Fclr != TRANSPARENT_COLOR;
-	FigGfxInfo.FillClr = Fclr;
+	FigGfxInfo.FillColor = Fclr;
 }
 
 void CFigure::ChangeBorderWidth(int BWidth)
@@ -90,7 +88,7 @@ void CFigure::ResetID()
 	LastID = 0;
 }
 
-string CFigure::Type()
+std::string CFigure::Type()
 {
 	return TypeName;
 }

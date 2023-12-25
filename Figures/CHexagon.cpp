@@ -71,17 +71,17 @@ void CHexagon::Save(ofstream &FileOutputStream)
 	if (FileOutputStream.is_open())
 	{
 		FileOutputStream << "HEXAGON"
-						 << " " << ID << " " << Center.x << " " << Center.y << " " << HexagonSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl; // added figure size to handle resized figures
+						 << " " << ID << " " << Center.x << " " << Center.y << " " << HexagonSize << " " << FigGfxInfo.DrawColor << " " << FigGfxInfo.FillColor << endl; // added figure size to handle resized figures
 		return;
 	}
 }
 
-void CHexagon::Load(ifstream &fin)
+void CHexagon::Load(ifstream &FileInputStream)
 {
-	if (fin.is_open())
+	if (FileInputStream.is_open())
 	{
-		fin >> ID >> Center.x >> Center.y >> HexagonSize >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
-		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
+		FileInputStream >> ID >> Center.x >> Center.y >> HexagonSize >> FigGfxInfo.DrawColor >> FigGfxInfo.FillColor;
+		if (FigGfxInfo.FillColor == TRANSPARENT_COLOR)
 			FigGfxInfo.IsFilled = false;
 		FigGfxInfo.BorderWidth = 3;
 
@@ -91,12 +91,12 @@ void CHexagon::Load(ifstream &fin)
 
 void CHexagon::PrintInfo(Output *pOut)
 {
-	string info = "Hexagon: ID = " + to_string(ID);
-	info += ", Center = (" + to_string(Center.x) + ", " + to_string(Center.y) + ")";
-	info += ", SideLength = " + to_string(HexagonSize);
-	info += ", Outline Color: " + FigGfxInfo.DrawClr.ReturnColor();
-	info += ", Fill Color: " + FigGfxInfo.FillClr.ReturnColor();
-	pOut->PrintMessage(info);
+	std::string Info = "Hexagon: ID = " + to_string(ID);
+	Info += ", Center = (" + to_string(Center.x) + ", " + to_string(Center.y) + ")";
+	Info += ", SideLength = " + to_string(HexagonSize);
+	Info += ", Outline Color: " + FigGfxInfo.DrawColor.ReturnColor();
+	Info += ", Fill Color: " + FigGfxInfo.FillColor.ReturnColor();
+	pOut->PrintMessage(Info);
 }
 
 bool CHexagon::GetCorner(Point &p, int &index)

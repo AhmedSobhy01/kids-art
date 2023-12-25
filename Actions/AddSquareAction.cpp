@@ -21,9 +21,9 @@ void AddSquareAction::ReadActionParameters()
 	pIn->GetPointClicked(Center.x, Center.y);
 
 	// Get drawing, filling colors and pen width from the interface
-	SquareGfxInfo.DrawClr = pOut->GetCurrentDrawColor();
-	SquareGfxInfo.FillClr = pOut->GetCurrentFillColor();
-	SquareGfxInfo.IsFilled = (SquareGfxInfo.FillClr != TRANSPARENT_COLOR);
+	SquareGfxInfo.DrawColor = pOut->GetCurrentDrawColor();
+	SquareGfxInfo.FillColor = pOut->GetCurrentFillColor();
+	SquareGfxInfo.IsFilled = (SquareGfxInfo.FillColor != TRANSPARENT_COLOR);
 	SquareGfxInfo.BorderWidth = pOut->GetCurrentPenWidth();
 	pOut->ClearStatusBar();
 }
@@ -48,10 +48,10 @@ void AddSquareAction::PlayRecord()
 	Figure->ChangeFillColor(UI.FillColor);
 	Figure->ChangeDrawColor(UI.DrawColor);
 	Figure->ChangeBorderWidth(UI.PenWidth);
-	int size = CSquare::GetDefaultSquareSize();
-	Point p1;
-	p1.x = Center.x + size;
-	p1.y = Center.y;
-	Figure->SetCorner(p1, 0);
+	int Size = CSquare::GetDefaultSquareSize();
+	Point P1;
+	P1.x = Center.x + Size;
+	P1.y = Center.y;
+	Figure->SetCorner(P1, 0);
 	pManager->AddFigure(Figure);
 }

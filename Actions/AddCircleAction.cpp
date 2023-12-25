@@ -20,9 +20,9 @@ void AddCircleAction::ReadActionParameters()
 	pIn->GetPointClicked(Radius.x, Radius.y);
 
 	// Get drawing, filling colors and pen width from the interface
-	CircleGfxInfo.DrawClr = pOut->GetCurrentDrawColor();
-	CircleGfxInfo.FillClr = pOut->GetCurrentFillColor();
-	CircleGfxInfo.IsFilled = (CircleGfxInfo.FillClr != TRANSPARENT_COLOR);
+	CircleGfxInfo.DrawColor = pOut->GetCurrentDrawColor();
+	CircleGfxInfo.FillColor = pOut->GetCurrentFillColor();
+	CircleGfxInfo.IsFilled = (CircleGfxInfo.FillColor != TRANSPARENT_COLOR);
 	CircleGfxInfo.BorderWidth = pOut->GetCurrentPenWidth();
 	pOut->ClearStatusBar();
 }

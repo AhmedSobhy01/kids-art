@@ -20,29 +20,27 @@ bool LoadAction::Execute()
 {
 	Output *pOut = pManager->GetOutput();
 	ReadActionParameters();
-	ifstream fin;
-	fin.open("Saved Graphs/" + FileName); // save graph to Saved Graphs \ FileName
-	if (fin.is_open())
+	ifstream FileInputStream;
+	FileInputStream.open("Saved Graphs/" + FileName); // save graph to Saved Graphs \ FileName
+	if (FileInputStream.is_open())
 	{
-		Action *pAct;
-		pAct = new ClearAllAction(pManager);
-		pAct->Execute();
-		delete pAct;
-		pAct = NULL;
+		Action *pClearAllAction = new ClearAllAction(pManager);
+		pClearAllAction->Execute();
+		delete pClearAllAction;
 
 		pOut->PrintMessage("Opened Load File Successfully");
-		string x;
+		std::string x;
 		CFigure *Figure;
 		UI.PenWidth = 3;
 		pOut->CreateDrawToolBar(); // To update border width icon
-		while (!fin.eof())
+		while (!FileInputStream.eof())
 		{
-			fin >> UI.DrawColor >> UI.FillColor >> UI.BkGrndColor;
+			FileInputStream >> UI.DrawColor >> UI.FillColor >> UI.BackgroundColor;
 			int count;
-			fin >> count;
+			FileInputStream >> count;
 			for (int i = 0; i <= count; i++) // load all figures
 			{
-				fin >> x;
+				FileInputStream >> x;
 				if (x == "RECTANGLE")
 					Figure = new CRectangle();
 				else if (x == "SQUARE")
@@ -53,12 +51,12 @@ bool LoadAction::Execute()
 					Figure = new CHexagon();
 				else if (x == "TRIANGLE")
 					Figure = new CTriangle();
-				Figure->Load(fin);
+				Figure->Load(FileInputStream);
 				Figure->Draw(pOut);
 				pManager->AddFigure(Figure);
 			}
 		}
-		fin.close();
+		FileInputStream.close();
 		return 1;
 	}
 	pOut->PrintMessage("Please Enter a Valid File Name");

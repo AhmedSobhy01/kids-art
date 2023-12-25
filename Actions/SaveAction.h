@@ -7,7 +7,7 @@
 class SaveAction : public Action
 {
 private:
-	string FileName;
+	std::string FileName;
 
 public:
 	SaveAction(ApplicationManager *);

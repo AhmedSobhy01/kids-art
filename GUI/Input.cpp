@@ -29,12 +29,12 @@ bool Input::GetLeftClickState(int &x, int &y) const
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
-string Input::GetString(Output *pO) const
+std::string Input::GetString(Output *pO) const
 {
 	pWind->FlushKeyQueue();
 	pWind->FlushMouseQueue();
 
-	string Label;
+	std::string Label;
 	char Key;
 	while (1)
 	{
