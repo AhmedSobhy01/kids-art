@@ -250,14 +250,10 @@
     <ClCompile Include="Actions\PlayRecordingAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Actions\PlayMode.cpp" />
+    <ClCompile Include="Actions\ChangeBorderWidthAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\ChangeBorderWidthAction.cpp">
-=======
     <ClCompile Include="Actions\PlayMode.cpp">
->>>>>>> 6b19941987787e878d3be092f17d77847c99b09b
       <Filter>Action Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -452,14 +448,10 @@
     <ClInclude Include="Actions\PlayRecordingAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Actions\PlayMode.h" />
-          <Filter>Action Classes</Filter>
-    </ClInclude>
     <ClInclude Include="Actions\ChangeBorderWidthAction.h">
-=======
+      <Filter>Action Classes</Filter>
+    </ClInclude>
     <ClInclude Include="Actions\PlayMode.h">
->>>>>>> 6b19941987787e878d3be092f17d77847c99b09b
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>
