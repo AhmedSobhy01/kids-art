@@ -3,7 +3,7 @@
 #include "..\GUI\Output.h"
 #include "..\GUI\UI_Info.h"
 
-ChangeBackgroundColorAction::ChangeBackgroundColorAction(ApplicationManager* pApp) :Action(pApp) {}
+ChangeBackgroundColorAction::ChangeBackgroundColorAction(ApplicationManager* pApp) :UndoableAction(pApp) {}
 
 void ChangeBackgroundColorAction::ReadActionParameters()
 {
@@ -19,8 +19,9 @@ bool ChangeBackgroundColorAction::Execute()
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
 
-	BkGrndColor = pIn->GetSelectedColor(pOut);
-	UI.BkGrndColor = BkGrndColor;
+	OldColor = UI.BkGrndColor;
+	NewColor = pIn->GetSelectedColor(pOut);
+	UI.BkGrndColor = NewColor;
 	pOut->ClearStatusBar();
 
 	return true;
@@ -28,5 +29,15 @@ bool ChangeBackgroundColorAction::Execute()
 
 void ChangeBackgroundColorAction::PlayRecord()
 {
-	UI.BkGrndColor = BkGrndColor;
+	UI.BkGrndColor = NewColor;
+}
+
+void ChangeBackgroundColorAction::Undo()
+{
+	UI.BkGrndColor = OldColor;
+}
+
+void ChangeBackgroundColorAction::Redo()
+{
+	UI.BkGrndColor = NewColor;
 }
