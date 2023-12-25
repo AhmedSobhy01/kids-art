@@ -465,7 +465,7 @@ void ApplicationManager::UpdateInterface() const
 		if (!FigList[i]->isHidden())
 			FigList[i]->Draw(pOut); // Call Draw function (virtual member fn)
 	}
-	pOut->UpdateBuffer();
+	pOut->UpdateInterface();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // Return a pointer to the input

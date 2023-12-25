@@ -9,7 +9,8 @@ private:
 	window *pWind;		   // Pointer to the Graphics Window
 	window *colorMenuWind; // Pointer to the Color Menu Window
 	string lastMessage;
-
+	bool updateToolBar;
+	bool updateStatusBar;
 	bool IsPlayingRecording;
 	bool PlayActionSoundEnabled;
 public:
@@ -46,10 +47,8 @@ public:
 	color GetCurrentDrawColor() const; // Get current drawing color
 	color GetCurrentFillColor() const; // Get current filling color
 	int GetCurrentPenWidth() const;	   // Get current pen width
-	void UpdateBuffer();
+	void UpdateInterface();
 
-	void UpdateStatusBar();
-	void UpdateToolBar();
 
 	~Output();
 };
