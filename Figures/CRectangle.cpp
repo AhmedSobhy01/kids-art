@@ -93,7 +93,6 @@ bool CRectangle::GetCorner(Point p, int& index) {
 	return false;
 }
 void CRectangle::SetCorner(Point p, int index) {
-	Point Center = { (Corner1.x + Corner2.x) / 2, (Corner1.y + Corner2.y) / 2 };
 	int* Xarr[2] = { &Corner1.x ,&Corner2.x };
 	int* Yarr[2] = { &Corner1.y ,&Corner2.y };
 	*Xarr[index % 2] = p.x;

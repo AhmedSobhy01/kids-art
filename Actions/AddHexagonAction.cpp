@@ -5,6 +5,7 @@
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
+#include "..\Figures\CHexagon.h"
 
 AddHexagonAction::AddHexagonAction(ApplicationManager* pApp) : UndoableFigureAction(pApp)
 {
@@ -46,6 +47,10 @@ void AddHexagonAction::PlayRecord()
 	Figure->ChngFillClr(UI.FillColor);
 	Figure->ChngDrawClr(UI.DrawColor);
 	Figure->ChngBorderWidth(UI.PenWidth);
-
+	int size = CHexagon::GetDefaultHexagonSize();
+	Point p1;
+	p1.x = center.x + size;
+	p1.y = center.y;
+	Figure->SetCorner(p1, 0);
 	pManager->AddFigure(Figure);
 }

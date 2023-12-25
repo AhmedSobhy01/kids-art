@@ -5,6 +5,7 @@
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
+#include "..\Figures\CSquare.h"
 
 AddSquareAction::AddSquareAction(ApplicationManager* pApp) : UndoableFigureAction(pApp)
 {}
@@ -45,6 +46,10 @@ void AddSquareAction::PlayRecord()
 	Figure->ChngFillClr(UI.FillColor);
 	Figure->ChngDrawClr(UI.DrawColor);
 	Figure->ChngBorderWidth(UI.PenWidth);
-
+	int size = CSquare::GetDefaultSquareSize();
+	Point p1;
+	p1.x = center.x + size;
+	p1.y = center.y;
+	Figure->SetCorner(p1, 0);
 	pManager->AddFigure(Figure);
 }
