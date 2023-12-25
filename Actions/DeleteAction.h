@@ -4,22 +4,21 @@
 #include "UndoableAction.h"
 #include "..\Figures\CFigure.h"
 
-class DeleteAction: public UndoableAction
+class DeleteAction : public UndoableAction
 {
-	CFigure* Figure;
+	CFigure *Figure;
 	int RemovedFromIndex;
 
-	public:
-		DeleteAction(ApplicationManager* pApp);
-		virtual void ReadActionParameters();
-		virtual bool Execute();
-		virtual void PlayRecord();
+public:
+	DeleteAction(ApplicationManager *);
+	virtual void ReadActionParameters();
+	virtual bool Execute();
+	virtual void PlayRecord();
 
-		virtual void Undo();
-		virtual void Redo();
+	virtual void Undo();
+	virtual void Redo();
 
-		~DeleteAction();
+	~DeleteAction();
 };
 
 #endif
-

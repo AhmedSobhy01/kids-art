@@ -47,7 +47,7 @@ void AddRectAction::PlayRecord()
 {
 	Point Center = {(P1.x + P2.x) / 2, (P1.y + P2.y) / 2};
 	Figure->SetCenter(Center);
-	Figure->ChngFillClr(UI.FillColor);
-	Figure->ChngDrawClr(UI.DrawColor);
+	Figure->ChangeFillColor(UI.FillColor);
+	Figure->ChangeDrawColor(UI.DrawColor);
 	pManager->AddFigure(Figure);
 }

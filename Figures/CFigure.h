@@ -24,25 +24,25 @@ protected:
 
 public:
 	CFigure();
-	CFigure(GfxInfo FigureGfxInfo);
+	CFigure(GfxInfo);
 
-	void SetSelected(bool s); // select/unselect the figure
-	bool IsSelected() const;  // check whether fig is selected
+	void SetSelected(bool);	 // select/unselect the figure
+	bool IsSelected() const; // check whether fig is selected
 
-	virtual void Draw(Output *pOut) = 0; // Draw the figure
+	virtual void Draw(Output *) = 0; // Draw the figure
 
-	color GetDrawClr() const;	// returns the figure's drawing color
-	color GetFillClr() const;	// returns the figure's filling color
+	color GetDrawColor() const; // returns the figure's drawing color
+	color GetFillColor() const; // returns the figure's filling color
 	int GetBorderWidth() const; // returns the figure's Border Width
 
-	void ChngDrawClr(color Dclr);	  // changes the figure's drawing color
-	void ChngFillClr(color Fclr);	  // changes the figure's filling color
-	void ChngBorderWidth(int BWidth); // changes the figure's Border Width
+	void ChangeDrawColor(color); // changes the figure's drawing color
+	void ChangeFillColor(color); // changes the figure's filling color
+	void ChangeBorderWidth(int); // changes the figure's Border Width
 
 	///				Play Mode Functions			///
-	bool isHidden(); // Checks if a shape is hidden
+	bool IsHidden(); // Checks if a shape is hidden
 	void Hide();	 // Hides the shape
-	void UnHide();	 // Unhides the shape
+	void Unhide();	 // Unhides the shape
 	string Type();	 // Returns the type of a shape
 	bool IsFilled();
 	bool operator==(CFigure &);

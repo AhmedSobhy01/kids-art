@@ -313,7 +313,7 @@ int ApplicationManager::CountFigColor(CFigure *Fig)
 	int Counter = 0;
 	for (int i = 0; i < FigList.Size(); i++)
 	{
-		if (FigList[i]->Type() == Fig->Type() && FigList[i]->GetFillClr() == Fig->GetFillClr())
+		if (FigList[i]->Type() == Fig->Type() && FigList[i]->GetFillColor() == Fig->GetFillColor())
 			Counter++;
 	}
 	return Counter;
@@ -342,7 +342,7 @@ int ApplicationManager::CountColor(color RandomColor)
 	int Counter = 0;
 	for (int i = 0; i < FigList.Size(); i++)
 	{
-		if (FigList[i]->GetFillClr() == RandomColor)
+		if (FigList[i]->GetFillColor() == RandomColor)
 			Counter++;
 	}
 	return Counter;
@@ -356,7 +356,7 @@ int ApplicationManager::FiguresCount()
 void ApplicationManager::UnhideFigures()
 {
 	for (int i = 0; i < FigList.Size(); i++)
-		FigList[i]->UnHide();
+		FigList[i]->Unhide();
 }
 
 void ApplicationManager::PlayActionSound(ActionType ActType) const
@@ -462,7 +462,7 @@ void ApplicationManager::UpdateInterface() const
 	pOut->ClearDrawArea();
 	for (int i = 0; i < FigList.Size(); i++)
 	{
-		if (!FigList[i]->isHidden())
+		if (!FigList[i]->IsHidden())
 			FigList[i]->Draw(pOut); // Call Draw function (virtual member fn)
 	}
 	pOut->UpdateInterface();

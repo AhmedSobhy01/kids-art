@@ -47,7 +47,7 @@ void AddTriangleAction::PlayRecord()
 {
 	Point Center = {(P1.x + P2.x + P3.x) / 3, (P1.y + P2.y + P3.y) / 3};
 	Figure->SetCenter(Center);
-	Figure->ChngFillClr(UI.FillColor);
-	Figure->ChngDrawClr(UI.DrawColor);
+	Figure->ChangeFillColor(UI.FillColor);
+	Figure->ChangeDrawColor(UI.DrawColor);
 	pManager->AddFigure(Figure);
 }
