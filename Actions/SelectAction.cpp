@@ -18,20 +18,23 @@ void SelectAction::ReadActionParameters() {
 
 bool SelectAction::Execute() {
 	ReadActionParameters();
-	pManager->SetSelected(NULL);
 
 	CFigure* Figure = pManager->GetFigure(P.x, P.y);
 	if (Figure == NULL)
 		return false;
 
 	CFigure* S = pManager->GetSelected();
-	if(S != NULL)
+	if (S != NULL) {
 		S->SetSelected(false);
+		cout << S->IsSelected();
+	}
 
+	pManager->SetSelected(NULL);
 	if (Figure != S) {
 		Figure->SetSelected(true);
 		pManager->SetSelected(Figure);
 		Figure->PrintInfo(pManager->GetOutput());
 	}
+
 	return true;
 }
