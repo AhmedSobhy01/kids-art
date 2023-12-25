@@ -22,7 +22,7 @@ void PlayMode::SetCorrectCondition() {							// Sets the correct condition depen
 	if(ClickedFigure!=NULL)
 	switch (Mode) {
 	case PICK_BY_COLOR:
-		CorrectCondition = ClickedFigure->GetFillClr() == RandomFigure->GetFillClr();
+		CorrectCondition = ClickedFigure->GetFillColor() == RandomFigure->GetFillColor();
 		break;
 	case PICK_BY_SHAPE:
 		CorrectCondition = ClickedFigure->Type() == RandomFigure->Type();
@@ -45,7 +45,7 @@ void PlayMode::GetClickedAction(bool& ChangedAction, bool& EmptyClick) {
 	else {
 		ClickedFigure = pManager->GetFigure(P.x, P.y);
 		SetCorrectCondition();
-		if (ClickedFigure == NULL || ClickedFigure->isHidden()) {
+		if (ClickedFigure == NULL || ClickedFigure->IsHidden()) {
 			EmptyClick = true;
 			return;
 		}

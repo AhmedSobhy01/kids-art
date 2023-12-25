@@ -1,6 +1,6 @@
 #include "PickByShapeAction.h"
 
-PickByShapeAction::PickByShapeAction(ApplicationManager* pApp) : Action(pApp)
+PickByShapeAction::PickByShapeAction(ApplicationManager* pApp) : PlayMode(pApp)
 {
 	RecordEnabled = false;
 }

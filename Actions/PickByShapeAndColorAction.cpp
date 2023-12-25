@@ -1,6 +1,7 @@
 #include "PickByShapeAndColorAction.h"
+#include "PlayMode.h"
 
-PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager* pApp) : Action(pApp)
+PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager* pApp) : PlayMode(pApp)
 {
 	RecordEnabled = false;
 }
@@ -8,7 +9,7 @@ PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager* pApp) :
 void PickByShapeAndColorAction::StartingMessage() {		// Displays the starting message
 	Output* pOut = pManager->GetOutput();
 	Target = pManager->CountFigure(RandomFigure);
-	pOut->PrintMessage("Pick all the " + RandomFigure->GetFillClr().ReturnColor() +" " + RandomFigure->Type() + "s. " + to_string(Target) + " exist.");
+	pOut->PrintMessage("Pick all the " + RandomFigure->GetFillColor().ReturnColor() +" " + RandomFigure->Type() + "s. " + to_string(Target) + " exist.");
 }
 
 bool PickByShapeAndColorAction::Execute() {
