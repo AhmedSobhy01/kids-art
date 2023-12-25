@@ -15,12 +15,12 @@ void ClearAllAction::ReadActionParameters() {
 bool ClearAllAction::Execute() {
 	pManager->ClearUndoableActionsStack();
 	pManager->ClearRedoableActionsStack();
-	pManager->SetRecordingState(false);
 	pManager->ResetColors();
 	pManager->ClearFigures();
 	pManager->GetOutput()->ClearStatusBar();
 
 	if (!pManager->IsCurrentlyPlayingRecording()) {
+		pManager->SetRecordingState(false);
 		pManager->ClearRecordedActionsList();
 		CFigure::ResetID();
 	}
