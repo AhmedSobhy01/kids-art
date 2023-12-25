@@ -189,8 +189,8 @@ ActionType Input::GetAction(Point &P)
 {
 	if (P.y >= 0 && P.y <= UI.StatusBarHeight)
 	{
-		int clickeditem = P.x / UI.MenuItemWidth;
-		switch (clickeditem)
+		int ClickedItem = P.x / UI.MenuItemWidth;
+		switch (ClickedItem)
 		{
 		case ITM_DRAW_MODE:
 			return TO_DRAW;

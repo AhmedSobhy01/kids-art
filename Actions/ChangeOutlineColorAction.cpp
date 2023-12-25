@@ -32,10 +32,10 @@ bool ChangeOutlineColorAction::Execute()
 
 	if (Figure != NULL)
 	{
-		OldColor = Figure->GetDrawClr();
+		OldColor = Figure->GetDrawColor();
 		NewColor = pIn->GetSelectedColor(pOut);
 		UI.DrawColor = NewColor;
-		Figure->ChngDrawClr(NewColor);
+		Figure->ChangeDrawColor(NewColor);
 		UI.DrawColor = NewColor;
 		pOut->ClearStatusBar();
 		Figure->SetSelected(false);
@@ -51,7 +51,7 @@ void ChangeOutlineColorAction::PlayRecord()
 {
 	if (Figure)
 	{
-		Figure->ChngDrawClr(NewColor);
+		Figure->ChangeDrawColor(NewColor);
 		UI.DrawColor = NewColor;
 	}
 }
@@ -60,7 +60,7 @@ void ChangeOutlineColorAction::Undo()
 {
 	if (Figure)
 	{
-		Figure->ChngDrawClr(OldColor);
+		Figure->ChangeDrawColor(OldColor);
 		UI.DrawColor = OldColor;
 	}
 }
@@ -69,7 +69,7 @@ void ChangeOutlineColorAction::Redo()
 {
 	if (Figure)
 	{
-		Figure->ChngDrawClr(NewColor);
+		Figure->ChangeDrawColor(NewColor);
 		UI.DrawColor = NewColor;
 	}
 }

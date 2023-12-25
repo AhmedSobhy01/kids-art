@@ -33,12 +33,12 @@ bool CFigure::IsSelected() const
 	return Selected;
 }
 
-color CFigure::GetDrawClr() const
+color CFigure::GetDrawColor() const
 {
 	return FigGfxInfo.DrawClr;
 }
 
-color CFigure::GetFillClr() const
+color CFigure::GetFillColor() const
 {
 	return FigGfxInfo.FillClr;
 }
@@ -48,23 +48,23 @@ int CFigure::GetBorderWidth() const
 	return FigGfxInfo.BorderWidth;
 }
 
-void CFigure::ChngDrawClr(color Dclr)
+void CFigure::ChangeDrawColor(color Dclr)
 {
 	FigGfxInfo.DrawClr = Dclr;
 }
 
-void CFigure::ChngFillClr(color Fclr)
+void CFigure::ChangeFillColor(color Fclr)
 {
 	FigGfxInfo.IsFilled = Fclr != TRANSPARENT_COLOR;
 	FigGfxInfo.FillClr = Fclr;
 }
 
-void CFigure::ChngBorderWidth(int BWidth)
+void CFigure::ChangeBorderWidth(int BWidth)
 {
 	FigGfxInfo.BorderWidth = BWidth;
 }
 
-bool CFigure::isHidden()
+bool CFigure::IsHidden()
 {
 	return Hidden;
 }
@@ -74,7 +74,7 @@ void CFigure::Hide()
 	Hidden = true;
 }
 
-void CFigure::UnHide()
+void CFigure::Unhide()
 {
 	Hidden = false;
 }
@@ -86,7 +86,7 @@ bool CFigure::IsFilled()
 
 bool CFigure::operator==(CFigure &Fig2)
 {
-	return (Type() == Fig2.Type()) && (GetFillClr() == Fig2.GetFillClr());
+	return (Type() == Fig2.Type()) && (GetFillColor() == Fig2.GetFillColor());
 }
 
 void CFigure::ResetID()

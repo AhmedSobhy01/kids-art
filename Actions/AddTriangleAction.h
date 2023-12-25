@@ -4,15 +4,16 @@
 #include "Action.h"
 #include "UndoableFigureAction.h"
 
-class AddTriangleAction: public UndoableFigureAction
+class AddTriangleAction : public UndoableFigureAction
 {
 private:
 	Point P1;
 	Point P2;
 	Point P3;
 	GfxInfo TriangleGfxInfo;
+
 public:
-	AddTriangleAction(ApplicationManager* pApp);
+	AddTriangleAction(ApplicationManager *);
 
 	virtual void ReadActionParameters();
 	virtual bool Execute();

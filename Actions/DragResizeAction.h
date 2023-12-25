@@ -2,15 +2,15 @@
 #define DRAGRESIZEACTION_H
 #include "UndoableAction.h"
 #include "../Figures/CFigure.h"
-class DragResizeAction :
-    public UndoableAction
+class DragResizeAction : public UndoableAction
 {
     Point NewCorner;
     Point OldCorner;
     int PointIndex;
-    CFigure* Figure;
+    CFigure *Figure;
+
 public:
-    DragResizeAction(ApplicationManager* pApp);
+    DragResizeAction(ApplicationManager *);
     virtual void ReadActionParameters();
     virtual bool Execute();
     virtual void PlayRecord();
@@ -19,7 +19,6 @@ public:
     virtual void Redo();
 
     ~DragResizeAction();
-
 };
 
 #endif

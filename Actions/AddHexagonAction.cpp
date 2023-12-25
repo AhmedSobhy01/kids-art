@@ -43,7 +43,7 @@ bool AddHexagonAction::Execute() {
 void AddHexagonAction::PlayRecord()
 {
 	Figure->SetCenter(Center);
-	Figure->ChngFillClr(UI.FillColor);
-	Figure->ChngDrawClr(UI.DrawColor);
+	Figure->ChangeFillColor(UI.FillColor);
+	Figure->ChangeDrawColor(UI.DrawColor);
 	pManager->AddFigure(Figure);
 }

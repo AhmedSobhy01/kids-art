@@ -7,7 +7,7 @@
 class StopRecordingAction : public Action
 {
 public:
-	StopRecordingAction(ApplicationManager* pApp);
+	StopRecordingAction(ApplicationManager *);
 
 	virtual void ReadActionParameters();
 	virtual bool Execute();

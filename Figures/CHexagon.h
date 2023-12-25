@@ -28,14 +28,14 @@ private:
 public:
 	CHexagon();
 	CHexagon(Point, GfxInfo);
-	void Draw(Output *pOut);
+	void Draw(Output *);
 	static int GetDefaultHexagonSize();
 	bool IsPointInside(Point);
 	Point GetCenter() const;
 	void SetCenter(Point);
 	void Save(ofstream &);
 	void Load(ifstream &);
-	void PrintInfo(Output *pOut);
+	void PrintInfo(Output *);
 	bool GetCorner(Point &, int &);
 	void SetCorner(Point, int);
 };

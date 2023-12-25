@@ -4,14 +4,15 @@
 #include "Action.h"
 #include "UndoableFigureAction.h"
 
-class AddCircleAction: public UndoableFigureAction
+class AddCircleAction : public UndoableFigureAction
 {
 private:
     Point Center;
     Point Radius;
     GfxInfo CircleGfxInfo;
+
 public:
-    AddCircleAction(ApplicationManager* pApp);
+    AddCircleAction(ApplicationManager *);
 
     virtual void ReadActionParameters();
     virtual bool Execute();
