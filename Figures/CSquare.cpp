@@ -48,7 +48,7 @@ void CSquare::Save(ofstream& fout)
 {
 	if (fout.is_open())
 	{
-		fout << "SQUARE" << " " << ID << " " << center.x << " " << center.y << " " << squareSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
+		fout << "SQUARE" << " " << ID << " " << center.x << " " << center.y << " " << squareSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl; // added figure size to handle resized figures
 		return;
 	}
 }

@@ -30,15 +30,15 @@ bool PlayRecordingAction::Execute()
 		delete pClearAction;
 
 		pManager->UpdateInterface();
-		UI.PenWidth = 3;
+		UI.PenWidth = 3;									// Default border width
 		pOut->PrintMessage("Playing Recording");
 
 		for (int i = 0; i < RecordedActionsList.size(); i++)
 		{
-			if (!dynamic_cast<UndoAction*>(RecordedActionsList[i]) && !dynamic_cast<RedoAction*>(RecordedActionsList[i]))
+			if (!dynamic_cast<UndoAction*>(RecordedActionsList[i]) && !dynamic_cast<RedoAction*>(RecordedActionsList[i]))		// handle undo & redo
 				pManager->ClearRedoableActionsStack();
 
-			bool b = pManager->AddActionToUndoables(RecordedActionsList[i], 1);
+			pManager->AddActionToUndoables(RecordedActionsList[i], 1);
 
 			RecordedActionsList[i]->PlayRecord();
 			Pause(1000);

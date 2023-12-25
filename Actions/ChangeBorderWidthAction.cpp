@@ -22,7 +22,7 @@ bool ChangeBorderWidthAction::Execute()
 	if (Figure != NULL)
 	{
 		OldWidth = Figure->GetBorderWidth();
-		if (UI.PenWidth < 4)
+		if (UI.PenWidth < 4)					// if width == maximum -> width = minimum else width++
 			UI.PenWidth++;
 		else
 			UI.PenWidth = 2;
@@ -41,30 +41,21 @@ bool ChangeBorderWidthAction::Execute()
 
 void ChangeBorderWidthAction::PlayRecord()		
 {
-	if (Figure)
-	{
-		UI.PenWidth = NewWidth;
-		Figure->ChngBorderWidth(NewWidth);
-		pOut->CreateDrawToolBar(); // To update border width icon
-	}
+	UI.PenWidth = NewWidth;
+	Figure->ChngBorderWidth(NewWidth);
+	pOut->CreateDrawToolBar(); // To update border width icon
 }
 
 void ChangeBorderWidthAction::Undo()
 {
-	if (Figure)
-	{
-		UI.PenWidth = OldWidth;
-		Figure->ChngBorderWidth(OldWidth);
-		pOut->CreateDrawToolBar(); // To update border width icon
-	}
+	UI.PenWidth = OldWidth;
+	Figure->ChngBorderWidth(OldWidth);
+	pOut->CreateDrawToolBar(); // To update border width icon
 }
 
 void ChangeBorderWidthAction::Redo()	//we could just call PlayRecord() insted of writing the same code but for the sake of readability we left it as it is
 {
-	if (Figure)
-	{
-		UI.PenWidth = NewWidth;
-		Figure->ChngBorderWidth(NewWidth);
-		pOut->CreateDrawToolBar(); // To update border width icon
-	}
+	UI.PenWidth = NewWidth;
+	Figure->ChngBorderWidth(NewWidth);
+	pOut->CreateDrawToolBar(); // To update border width icon
 }

@@ -65,7 +65,7 @@ void CHexagon::Save(ofstream& fout)
 {
 	if (fout.is_open())
 	{
-		fout << "HEXAGON" << " " << ID << " " << center.x << " " << center.y << " " << hexagonSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
+		fout << "HEXAGON" << " " << ID << " " << center.x << " " << center.y << " " << hexagonSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl; // added figure size to handle resized figures
 		return;
 	}
 }

@@ -47,27 +47,18 @@ bool ChangeOutlineColorAction::Execute()
 
 void ChangeOutlineColorAction::PlayRecord()
 {
-	if (Figure)
-	{
-		Figure->ChngDrawClr(NewColor);
-		UI.DrawColor = NewColor;
-	}
+	Figure->ChngDrawClr(NewColor);
+	UI.DrawColor = NewColor;
 }
 
 void ChangeOutlineColorAction::Undo()
 {
-	if (Figure)
-	{
-		Figure->ChngDrawClr(OldColor);
-		UI.DrawColor = OldColor;
-	}
+	Figure->ChngDrawClr(OldColor);
+	UI.DrawColor = OldColor;
 }
 
-void ChangeOutlineColorAction::Redo()
+void ChangeOutlineColorAction::Redo()			//we could just call PlayRecord() insted of writing the same code but for the sake of readability we left it as it is
 {
-	if (Figure)
-	{
-		Figure->ChngDrawClr(NewColor);
-		UI.DrawColor = NewColor;
-	}
+	Figure->ChngDrawClr(NewColor);
+	UI.DrawColor = NewColor;
 }
