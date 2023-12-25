@@ -51,7 +51,7 @@ void AddSquareAction::PlayRecord()
 	int Size = CSquare::GetDefaultSquareSize();
 	Point P1;
 	P1.x = Center.x + Size;
-	P1.y = Center.y;
+	P1.y = Center.y + Size;
 	Figure->SetCorner(P1, 0);
 	pManager->AddFigure(Figure);
 }
