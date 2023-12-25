@@ -1,7 +1,9 @@
 #include "PickByColorAction.h"
 
-PickByColorAction::PickByColorAction(ApplicationManager* pApp): PlayMode(pApp)
-{ }
+PickByColorAction::PickByColorAction(ApplicationManager* pApp) : Action(pApp)
+{
+	RecordEnabled = false;
+}
 
 void PickByColorAction::StartingMessage() {		// Displays the starting message
 	Output* pOut = pManager->GetOutput();

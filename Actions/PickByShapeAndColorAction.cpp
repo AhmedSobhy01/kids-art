@@ -1,7 +1,9 @@
 #include "PickByShapeAndColorAction.h"
 
-PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager* pApp) : PlayMode(pApp)
-{ }
+PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager* pApp) : Action(pApp)
+{
+	RecordEnabled = false;
+}
 
 void PickByShapeAndColorAction::StartingMessage() {		// Displays the starting message
 	Output* pOut = pManager->GetOutput();

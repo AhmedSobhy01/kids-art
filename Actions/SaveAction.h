@@ -16,8 +16,6 @@ public:
 	SaveAction(ApplicationManager *);
 	void ReadActionParameters();
 	bool Execute();
-
-	virtual bool ShouldRecord() const;
 };
 
 #endif

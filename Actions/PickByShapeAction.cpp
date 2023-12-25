@@ -1,7 +1,9 @@
 #include "PickByShapeAction.h"
 
-PickByShapeAction::PickByShapeAction(ApplicationManager* pApp) : PlayMode(pApp)
-{ }
+PickByShapeAction::PickByShapeAction(ApplicationManager* pApp) : Action(pApp)
+{
+	RecordEnabled = false;
+}
 
 void PickByShapeAction::StartingMessage() {			// Displays the starting message
 	Output* pOut = pManager->GetOutput();

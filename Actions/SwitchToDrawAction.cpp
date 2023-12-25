@@ -6,6 +6,7 @@
 
 SwitchToDrawAction::SwitchToDrawAction(ApplicationManager* pApp): Action(pApp) 
 {
+	RecordEnabled = false;
 }
 
 void SwitchToDrawAction::ReadActionParameters() 
@@ -17,8 +18,4 @@ bool SwitchToDrawAction::Execute() {
 	pOut->ClearStatusBar();
 
 	return true;
-}
-
-bool SwitchToDrawAction::ShouldRecord() const {
-	return false;
 }
