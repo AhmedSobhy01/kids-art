@@ -3,9 +3,10 @@
 
 #include "Action.h"
 
-class SwitchToPlayAction: public Action {
+class SwitchToPlayAction : public Action
+{
 public:
-	SwitchToPlayAction(ApplicationManager* pApp);
+	SwitchToPlayAction(ApplicationManager *);
 
 	virtual void ReadActionParameters();
 

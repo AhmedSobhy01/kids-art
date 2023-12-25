@@ -3,19 +3,20 @@
 #include "Action.h"
 #include "..\ApplicationManager.h"
 
-class PickByColorAction: public Action {
+class PickByColorAction : public Action
+{
 private:
 	Point P;
-	CFigure* RandomFigure;
+	CFigure *RandomFigure;
 	int CorrectPicks;
-	int Counter;							// Counter for total picks made
-	int RandomColorNumber;					// Integer to store how many instances for the random color to be picked
+	int Counter;		   // Counter for total picks made
+	int RandomColorNumber; // Integer to store how many instances for the random color to be picked
 public:
-	PickByColorAction(ApplicationManager*);
+	PickByColorAction(ApplicationManager *);
 	virtual void ReadActionParameters();
 	virtual bool Execute();
-	void StartingMessage();					// Prints the starting message
-	void GetClickedAction(bool&, bool&);	// Gets the user action
-	void FinalMsg(bool&);
+	void StartingMessage();				   // Prints the starting message
+	void GetClickedAction(bool &, bool &); // Gets the user action
+	void FinalMsg(bool &);
 };
 #endif

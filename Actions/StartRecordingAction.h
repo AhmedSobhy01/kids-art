@@ -4,10 +4,10 @@
 #include "Action.h"
 #include "../ApplicationManager.h"
 
-class StartRecordingAction: public Action
+class StartRecordingAction : public Action
 {
 public:
-	StartRecordingAction(ApplicationManager* pApp);
+	StartRecordingAction(ApplicationManager *);
 
 	virtual void ReadActionParameters();
 	virtual bool Execute();

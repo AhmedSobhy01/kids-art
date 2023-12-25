@@ -8,32 +8,32 @@
 #include "..\Figures\CTriangle.h"
 #include "ClearAllAction.h"
 
-LoadAction::LoadAction(ApplicationManager* pApp) : Action(pApp) {}
+LoadAction::LoadAction(ApplicationManager *pApp) : Action(pApp) {}
 
 void LoadAction::ReadActionParameters()
 {
-	Input* pIn = pManager->GetInput();
-	Output* pOut = pManager->GetOutput();
+	Input *pIn = pManager->GetInput();
+	Output *pOut = pManager->GetOutput();
 	pOut->PrintMessage("Loading File: Enter File Name or Press esc to Cancel");
-	fName = pIn->GetString(pOut);
+	FileName = pIn->GetString(pOut);
 }
 
 bool LoadAction::Execute()
 {
-	Output* pOut = pManager->GetOutput();
+	Output *pOut = pManager->GetOutput();
 	ReadActionParameters();
 	ifstream fin;
-	fin.open("Saved Graphs/" + fName);
+	fin.open("Saved Graphs/" + FileName);
 	if (fin.is_open())
 	{
-		Action* pAct;
+		Action *pAct;
 		pAct = new ClearAllAction(pManager);
 		pAct->Execute();
 		delete pAct;
 		pAct = NULL;
 		pOut->PrintMessage("Opened Load File Successfully");
 		string x;
-		CFigure* Figure;
+		CFigure *Figure;
 		while (!fin.eof())
 		{
 			fin >> UI.DrawColor >> UI.FillColor >> UI.BkGrndColor;

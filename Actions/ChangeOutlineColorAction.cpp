@@ -4,14 +4,15 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-ChangeOutlineColorAction::ChangeOutlineColorAction(ApplicationManager* pApp): UndoableAction(pApp) {}
+ChangeOutlineColorAction::ChangeOutlineColorAction(ApplicationManager *pApp) : UndoableAction(pApp) {}
 
 void ChangeOutlineColorAction::ReadActionParameters()
 {
-	CFigure* F = pManager->GetSelected();
-	Input* pIn = pManager->GetInput();
-	Output* pOut = pManager->GetOutput();
-	if (F == NULL) {
+	CFigure *Figure = pManager->GetSelected();
+	Input *pIn = pManager->GetInput();
+	Output *pOut = pManager->GetOutput();
+	if (Figure == NULL)
+	{
 		int x, y;
 		pOut->PrintMessage("Error:Please select a shape to change it's outline color. Click anywhere to continue.");
 		pIn->GetPointClicked(x, y);
@@ -26,15 +27,15 @@ bool ChangeOutlineColorAction::Execute()
 {
 	ReadActionParameters();
 	Figure = pManager->GetSelected();
-	Input* pIn = pManager->GetInput();
-	Output* pOut = pManager->GetOutput();
+	Input *pIn = pManager->GetInput();
+	Output *pOut = pManager->GetOutput();
 
 	if (Figure != NULL)
 	{
-		OldColor = Figure->GetDrawClr();
+		OldColor = Figure->GetDrawColor();
 		NewColor = pIn->GetSelectedColor(pOut);
 		UI.DrawColor = NewColor;
-		Figure->ChngDrawClr(NewColor);
+		Figure->ChangeDrawColor(NewColor);
 		UI.DrawColor = NewColor;
 		pOut->ClearStatusBar();
 		Figure->SetSelected(false);
@@ -50,7 +51,7 @@ void ChangeOutlineColorAction::PlayRecord()
 {
 	if (Figure)
 	{
-		Figure->ChngDrawClr(NewColor);
+		Figure->ChangeDrawColor(NewColor);
 		UI.DrawColor = NewColor;
 	}
 }
@@ -59,7 +60,7 @@ void ChangeOutlineColorAction::Undo()
 {
 	if (Figure)
 	{
-		Figure->ChngDrawClr(OldColor);
+		Figure->ChangeDrawColor(OldColor);
 		UI.DrawColor = OldColor;
 	}
 }
@@ -68,7 +69,7 @@ void ChangeOutlineColorAction::Redo()
 {
 	if (Figure)
 	{
-		Figure->ChngDrawClr(NewColor);
+		Figure->ChangeDrawColor(NewColor);
 		UI.DrawColor = NewColor;
 	}
 }

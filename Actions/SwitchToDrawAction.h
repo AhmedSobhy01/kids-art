@@ -3,9 +3,10 @@
 
 #include "Action.h"
 
-class SwitchToDrawAction: public Action {
+class SwitchToDrawAction : public Action
+{
 public:
-	SwitchToDrawAction(ApplicationManager* pApp);
+	SwitchToDrawAction(ApplicationManager *);
 
 	virtual void ReadActionParameters();
 

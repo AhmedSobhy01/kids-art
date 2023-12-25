@@ -14,7 +14,7 @@ void PickByShapeAndColorAction::ReadActionParameters() {			// Initializes data m
 
 void PickByShapeAndColorAction::StartingMessage() {
 	Output* pOut = pManager->GetOutput();
-	pOut->PrintMessage("Pick all the " + RandomFigure->GetFillClr().ReturnColor() + " " + RandomFigure->Type() + "s. " + to_string(RandomColorFigNumber) + " exist");
+	pOut->PrintMessage("Pick all the " + RandomFigure->GetFillColor().ReturnColor() + " " + RandomFigure->Type() + "s. " + to_string(RandomColorFigNumber) + " exist");
 }
 
 void PickByShapeAndColorAction::FinalMsg(bool& ChangedAction) {
@@ -35,7 +35,7 @@ void PickByShapeAndColorAction::GetClickedAction(bool& ChangedAction, bool& Empt
 		ChangedAction = true;
 	else {
 		CFigure* ClickedFigure = pManager->GetFigure(P.x, P.y);
-		if (ClickedFigure == NULL || ClickedFigure->isHidden()) {
+		if (ClickedFigure == NULL || ClickedFigure->IsHidden()) {
 			EmptyClick = true;
 			return;
 		}

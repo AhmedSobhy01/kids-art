@@ -9,12 +9,12 @@ UndoableActionStack::UndoableActionStack(int _MaxSize) : ItemsCount(0), MaxSize(
 		items[i] = NULL;
 }
 
-int UndoableActionStack::size() const
+int UndoableActionStack::Size() const
 {
 	return ItemsCount;
 }
 
-void UndoableActionStack::push(UndoableAction *item)
+void UndoableActionStack::Push(UndoableAction *item)
 {
 	if (item)
 	{
@@ -36,9 +36,9 @@ void UndoableActionStack::push(UndoableAction *item)
 	}
 }
 
-UndoableAction *UndoableActionStack::pop()
+UndoableAction *UndoableActionStack::Pop()
 {
-	if (!empty())
+	if (!Empty())
 	{
 		UndoableAction *item = items[ItemsCount - 1];
 
@@ -52,20 +52,20 @@ UndoableAction *UndoableActionStack::pop()
 	return NULL;
 }
 
-UndoableAction *UndoableActionStack::top() const
+UndoableAction *UndoableActionStack::Top() const
 {
-	if (!empty())
+	if (!Empty())
 		return items[ItemsCount - 1];
 
 	return NULL;
 }
 
-bool UndoableActionStack::empty() const
+bool UndoableActionStack::Empty() const
 {
 	return ItemsCount == 0;
 }
 
-void UndoableActionStack::clear()
+void UndoableActionStack::Clear()
 {
 	for (int i = 0; i < ItemsCount; i++)
 		items[i] = NULL;
@@ -75,7 +75,7 @@ void UndoableActionStack::clear()
 
 UndoableActionStack::~UndoableActionStack()
 {
-	clear();
+	Clear();
 
 	delete items;
 }
