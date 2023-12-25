@@ -4,8 +4,8 @@
 #include "UndoableAction.h"
 #include "..\Figures\CFigure.h"
 
-ClearAllAction::ClearAllAction(ApplicationManager* pApp): Action(pApp) {
-	RecordEnabled = false;
+ClearAllAction::ClearAllAction(ApplicationManager* pApp): Action(pApp)
+{
 }
 
 void ClearAllAction::ReadActionParameters() {
@@ -17,13 +17,17 @@ bool ClearAllAction::Execute() {
 	pManager->ClearRedoableActionsStack();
 	pManager->ResetColors();
 	pManager->ClearFigures();
-	pManager->GetOutput()->ClearStatusBar();
 
-	if (!pManager->IsCurrentlyPlayingRecording()) {
+	if (!pManager->IsCurrentlyPlayingRecording() && !pManager->IsCurrentlyRecording()) {
 		pManager->SetRecordingState(false);
 		pManager->ClearRecordedActionsList();
 		CFigure::ResetID();
+		pManager->GetOutput()->ClearStatusBar();
 	}
 
 	return true;
+}
+
+void ClearAllAction::PlayRecord() {
+	Execute();
 }
