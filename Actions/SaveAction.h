@@ -7,13 +7,12 @@
 class SaveAction : public Action
 {
 private:
-	string fName;
+	string FileName;
+
 public:
-	SaveAction(ApplicationManager*);
+	SaveAction(ApplicationManager *);
 	void ReadActionParameters();
 	bool Execute();
-
-	virtual bool ShouldRecord() const;
 };
 
 #endif

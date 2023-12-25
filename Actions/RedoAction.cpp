@@ -4,6 +4,7 @@
 
 RedoAction::RedoAction(ApplicationManager* pApp) : Action(pApp)
 {
+	RecordEnabled = false;
 }
 
 void RedoAction::ReadActionParameters()
@@ -12,9 +13,9 @@ void RedoAction::ReadActionParameters()
 
 bool RedoAction::Execute()
 {
-	UndoableActionStack& redoableActions = pManager->GetRedoableActionsStack();
+	UndoableActionStack& RedoableActions = pManager->GetRedoableActionsStack();
 
-	if (redoableActions.empty()) {
+	if (RedoableActions.Empty()) {
 		Output* pOut = pManager->GetOutput();
 		Input* pIn = pManager->GetInput();
 		int x, y;
@@ -26,12 +27,12 @@ bool RedoAction::Execute()
 		return false;
 	}
 
-	UndoableActionStack& undoableActions = pManager->GetUndoableActionsStack();
+	UndoableActionStack& UndoableActions = pManager->GetUndoableActionsStack();
 
-	UndoableAction* pAct = redoableActions.pop();
+	UndoableAction* pAct = RedoableActions.Pop();
 
 	pAct->Redo();
-	undoableActions.push(pAct);
+	UndoableActions.Push(pAct);
 
 	return true;
 }

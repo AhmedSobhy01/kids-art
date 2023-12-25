@@ -14,9 +14,9 @@ void PlayRecordingAction::ReadActionParameters()
 bool PlayRecordingAction::Execute()
 {
 	Output *pOut = pManager->GetOutput();
-	List<Action>& RecordedActionsList = pManager->GetRecordedActionsList();
+	List<Action> &RecordedActionsList = pManager->GetRecordedActionsList();
 
-	if (RecordedActionsList.empty())
+	if (RecordedActionsList.Empty())
 	{
 		pOut->PrintMessage("No Recording to be Played");
 		return false;
@@ -25,15 +25,15 @@ bool PlayRecordingAction::Execute()
 	{
 		pManager->SetPlayingRecordingState(true);
 
-		Action* pClearAction = new ClearAllAction(pManager);
-		pClearAction->Execute();
-		delete pClearAction;
+		Action *pClearAllAction = new ClearAllAction(pManager);
+		pClearAllAction->Execute();
+		delete pClearAllAction;
 
 		pManager->UpdateInterface();
 		UI.PenWidth = 3;									// Default border width
 		pOut->PrintMessage("Playing Recording");
 
-		for (int i = 0; i < RecordedActionsList.size(); i++)
+		for (int i = 0; i < RecordedActionsList.Size(); i++)
 		{
 			if (!dynamic_cast<UndoAction*>(RecordedActionsList[i]) && !dynamic_cast<RedoAction*>(RecordedActionsList[i]))		// handle undo & redo
 				pManager->ClearRedoableActionsStack();

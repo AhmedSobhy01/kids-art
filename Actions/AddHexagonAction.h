@@ -7,10 +7,11 @@
 class AddHexagonAction : public UndoableFigureAction
 {
 private:
-	Point center;
+	Point Center;
 	GfxInfo HexagonGfxInfo;
+
 public:
-	AddHexagonAction(ApplicationManager* pApp);
+	AddHexagonAction(ApplicationManager *);
 
 	virtual void ReadActionParameters();
 	virtual bool Execute();

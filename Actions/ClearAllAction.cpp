@@ -4,8 +4,8 @@
 #include "UndoableAction.h"
 #include "..\Figures\CFigure.h"
 
-ClearAllAction::ClearAllAction(ApplicationManager* pApp) :Action(pApp) {
-
+ClearAllAction::ClearAllAction(ApplicationManager* pApp): Action(pApp) {
+	RecordEnabled = false;
 }
 
 void ClearAllAction::ReadActionParameters() {
@@ -26,9 +26,4 @@ bool ClearAllAction::Execute() {
 	}
 
 	return true;
-}
-
-bool ClearAllAction::ShouldRecord() const
-{
-	return false;
 }

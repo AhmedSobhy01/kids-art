@@ -5,7 +5,7 @@
 #include "..\GUI\Output.h"
 
 SelectAction::SelectAction(ApplicationManager* pApp): Action(pApp) {
-
+	RecordEnabled = false;
 }
 
 void SelectAction::ReadActionParameters() {
@@ -18,31 +18,20 @@ void SelectAction::ReadActionParameters() {
 
 bool SelectAction::Execute() {
 	ReadActionParameters();
+	pManager->SetSelected(NULL);
 
-	CFigure* F = pManager->GetFigure(P.x, P.y);
-	if (F == NULL)
+	CFigure* Figure = pManager->GetFigure(P.x, P.y);
+	if (Figure == NULL)
 		return false;
 
 	CFigure* S = pManager->GetSelected();
 	if(S != NULL)
 		S->SetSelected(false);
 
-	F->SetSelected(true);
-
-	pManager->SetSelected(F);
-
-	if (F == S) {
-		F->SetSelected(false);
-		pManager->SetSelected(NULL);
+	if (Figure != S) {
+		Figure->SetSelected(true);
+		pManager->SetSelected(Figure);
+		Figure->PrintInfo(pManager->GetOutput());
 	}
-
-	F->PrintInfo(pManager->GetOutput());
-
 	return true;
-
-}
-
-bool SelectAction::ShouldRecord() const
-{
-	return false;
 }

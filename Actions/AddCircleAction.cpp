@@ -14,14 +14,14 @@ void AddCircleAction::ReadActionParameters() {
 
 	//Getting Coordinates for the shape position
 	pOut->PrintMessage("New Circle: Click at the center");
-	pIn->GetPointClicked(center.x, center.y);
+	pIn->GetPointClicked(Center.x, Center.y);
 	pOut->PrintMessage("New Circle: Click at the radius");
-	pIn->GetPointClicked(radius.x, radius.y);
+	pIn->GetPointClicked(Radius.x, Radius.y);
 
 	//Get drawing, filling colors and pen width from the interface
 	CircleGfxInfo.DrawClr = pOut->GetCurrentDrawColor(); 
 	CircleGfxInfo.FillClr = pOut->GetCurrentFillColor(); 
-	CircleGfxInfo.isFilled = (CircleGfxInfo.FillClr != TRANSPARENT_COLOR); 
+	CircleGfxInfo.IsFilled = (CircleGfxInfo.FillClr != TRANSPARENT_COLOR); 
 	CircleGfxInfo.BorderWidth = pOut->GetCurrentPenWidth(); 
 	pOut->ClearStatusBar();
 }
@@ -30,7 +30,7 @@ bool AddCircleAction::Execute() {
 	ReadActionParameters();
 
 	//Create a circle with the parameters read from the user
-	Figure = new CCircle(center, radius, CircleGfxInfo);
+	Figure = new CCircle(Center, Radius, CircleGfxInfo);
 	Figure->IncrementReference();
 
 	//Add the circle to the list of figures

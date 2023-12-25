@@ -4,6 +4,7 @@
 
 StopRecordingAction::StopRecordingAction(ApplicationManager* pApp) : Action(pApp)
 {
+	RecordEnabled = false;
 }
 
 void StopRecordingAction::ReadActionParameters()
@@ -17,16 +18,12 @@ bool StopRecordingAction::Execute()
 	if (pManager->IsCurrentlyRecording()) {
 		pManager->SetRecordingState(false);
 
-		pOut->PrintMessage("Recording stopped (operations: " + to_string(pManager->GetRecordedActionsList().size()) + ").");
+		pOut->PrintMessage("Recording stopped (operations: " + to_string(pManager->GetRecordedActionsList().Size()) + ").");
 
 		return true;
 	}
 
 	pOut->PrintMessage("No running recording to stop.");
 
-	return false;
-}
-
-bool StopRecordingAction::ShouldRecord() const {
 	return false;
 }

@@ -3,11 +3,10 @@
 
 #include "Action.h"
 #include "../ApplicationManager.h"
-class ExitAction :
-    public Action
+class ExitAction : public Action
 {
 public:
-    ExitAction(ApplicationManager* pApp);
+    ExitAction(ApplicationManager *);
     void ReadActionParameters();
     bool Execute();
 };

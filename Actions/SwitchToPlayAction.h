@@ -3,15 +3,14 @@
 
 #include "Action.h"
 
-class SwitchToPlayAction: public Action {
+class SwitchToPlayAction : public Action
+{
 public:
-	SwitchToPlayAction(ApplicationManager* pApp);
+	SwitchToPlayAction(ApplicationManager *);
 
 	virtual void ReadActionParameters();
 
 	virtual bool Execute();
-
-	virtual bool ShouldRecord() const;
 };
 
 #endif

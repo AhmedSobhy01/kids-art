@@ -1,6 +1,5 @@
 #include "Output.h"
 #include <cmath>
-
 Output::Output()
 {
 	// Initialize user interface parameters
@@ -33,7 +32,7 @@ Output::Output()
 	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
 
 	// Initialize Color Menu Window Pointer
-	colorMenuWind = NULL;
+	pColorMenuWind = NULL;
 
 	IsPlayingRecording = false;
 	PlayActionSoundEnabled = true;
@@ -41,7 +40,9 @@ Output::Output()
 	CreateDrawToolBar();
 	CreateStatusBar();
 	pWind->UpdateBuffer();
-	lastMessage = "";
+	LastMessage = "";
+	UpdateToolBar = false;
+	UpdateStatusBar = false;
 }
 
 Input *Output::CreateInput() const
@@ -54,8 +55,19 @@ Input *Output::CreateInput() const
 //								Interface Functions										//
 //======================================================================================//
 
-
-void Output::UpdateBuffer() {
+void Output::UpdateInterface()
+{
+	if (UpdateToolBar)
+	{
+		if (UI.InterfaceMode == MODE_DRAW)
+			CreateDrawToolBar();
+		else
+			CreatePlayToolBar();
+	}
+	if (UpdateStatusBar)
+		PrintMessage(LastMessage, false);
+	UpdateToolBar = false;
+	UpdateStatusBar = false;
 	pWind->UpdateBuffer();
 }
 
@@ -78,8 +90,8 @@ void Output::CreateColorMenuWind(int x, bool withTransparent)
 	if ((xPos + UI.ColorMenuWidth) > UI.width || x < UI.wx)
 		xPos = (UI.width - UI.ColorMenuWidth) / 2;
 
-	colorMenuWind = new window(UI.ColorMenuWidth, UI.ColorMenuHeight, xPos, UI.wy + UI.ToolBarHeight + 35);
-	colorMenuWind->ChangeTitle("Colors");
+	pColorMenuWind = new window(UI.ColorMenuWidth, UI.ColorMenuHeight, xPos, UI.wy + UI.ToolBarHeight + 35);
+	pColorMenuWind->ChangeTitle("Colors");
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -88,12 +100,13 @@ void Output::DrawColorMenuItems(bool withTransparent) const
 	const int arraySize = COLOR_MENU_ITM_COUNT - 1;
 	color colors[arraySize] = {PINK, RED, ORANGE, YELLOW, GREEN, SKY, BLUE, LAVENDER, BASE, BLACK};
 
-	colorMenuWind->DrawRectangle(0, 0, UI.ColorMenuWidth, UI.ColorMenuHeight);
-	for (int i = 0; i < arraySize; i++)
+
+	pColorMenuWind->DrawRectangle(0, 0, UI.ColorMenuWidth, UI.ColorMenuHeight);
+	for (int i = 0; i < ArraySize; i++)
 	{
-		colorMenuWind->SetBrush(colors[i]);
-		colorMenuWind->SetPen(BLACK, 1);
-		colorMenuWind->DrawCircle(i * UI.ColorMenuItemWidth + (UI.ColorMenuItemWidth / 2), UI.ColorMenuItemWidth / 2, UI.ColorMenuItemWidth / 2 - 4, FILLED);
+		pColorMenuWind->SetBrush(colors[i]);
+		pColorMenuWind->SetPen(BLACK, 1);
+		pColorMenuWind->DrawCircle(i * UI.ColorMenuItemWidth + (UI.ColorMenuItemWidth / 2), UI.ColorMenuItemWidth / 2, UI.ColorMenuItemWidth / 2 - 4, FILLED);
 	}
 	if (withTransparent)
 	{
@@ -103,12 +116,12 @@ void Output::DrawColorMenuItems(bool withTransparent) const
 		{
 			xArray[i] *= 0.9;
 			yArray[i] *= 0.9;
-			xArray[i] += (arraySize)*UI.ColorMenuItemWidth + (UI.ColorMenuItemWidth / 2) - 2;
+			xArray[i] += (ArraySize)*UI.ColorMenuItemWidth + (UI.ColorMenuItemWidth / 2) - 2;
 			yArray[i] += (UI.ColorMenuItemWidth / 2);
 		}
-		colorMenuWind->SetBrush(BLACK);
-		colorMenuWind->SetPen(BLACK, 1);
-		colorMenuWind->DrawPolygon(xArray, yArray, 12, FILLED);
+		pColorMenuWind->SetBrush(BLACK);
+		pColorMenuWind->SetPen(BLACK, 1);
+		pColorMenuWind->DrawPolygon(xArray, yArray, 12, FILLED);
 	}
 	pWind->UpdateBuffer();
 }
@@ -126,17 +139,17 @@ void Output::OpenColorMenuWind(int x, bool withTransparent)
 
 void Output::CloseColorMenuWind()
 {
-	if (colorMenuWind)
+	if (pColorMenuWind)
 	{
-		delete colorMenuWind;
-		colorMenuWind = NULL;
+		delete pColorMenuWind;
+		pColorMenuWind = NULL;
 	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
 window *Output::GetColorMenuWind() const
 {
-	return colorMenuWind;
+	return pColorMenuWind;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -151,7 +164,7 @@ void Output::CreateStatusBar() const
 void Output::ClearStatusBar()
 {
 	// Clear Status bar by drawing a filled white rectangle
-	lastMessage = "";
+	LastMessage = "";
 	CreateStatusBar();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -162,14 +175,13 @@ void Output::CreateDrawToolBar() const
 	pWind->SetPen(SURFACE0, 1);
 	pWind->SetBrush(SURFACE0);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
-
-	// Draw mode toolbar images
 	string MenuItemImages[DRAW_ITM_COUNT];
+	// Draw mode toolbar images
 	MenuItemImages[ITM_PLAY_MODE] = "images\\DrawMode\\PlayMode.jpg";
 	MenuItemImages[ITM_RECT] = "images\\DrawMode\\Rectangle.jpg";
-	MenuItemImages[ITM_CIRCLE] = "images\\DrawMode\\Circle.jpg";
 	MenuItemImages[ITM_SQUARE] = "images\\DrawMode\\Square.jpg";
 	MenuItemImages[ITM_TRIANGLE] = "images\\DrawMode\\Triangle.jpg";
+	MenuItemImages[ITM_CIRCLE] = "images\\DrawMode\\Circle.jpg";
 	MenuItemImages[ITM_HEXAGON] = "images\\DrawMode\\Hexagon.jpg";
 	MenuItemImages[ITM_BORDER_WIDTH] = "images\\DrawMode\\BorderWidth" + to_string(UI.PenWidth - 1) + ".jpg";
 	MenuItemImages[ITM_OUTLINE_COLOR] = "images\\DrawMode\\ForegroundColor.jpg";
@@ -182,18 +194,19 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_PLAY_RECORDING] = "images\\DrawMode\\PlayRecording.jpg";
 	MenuItemImages[ITM_UNDO] = "images\\DrawMode\\Undo.jpg";
 	MenuItemImages[ITM_REDO] = "images\\DrawMode\\Redo.jpg";
-	MenuItemImages[ITM_CLEAR_ALL] = "images\\DrawMode\\ClearAll.jpg";
 	MenuItemImages[ITM_BACKGROUND_COLOR] = "images\\DrawMode\\ArtboardBackground.jpg";
+	MenuItemImages[ITM_CLEAR_ALL] = "images\\DrawMode\\ClearAll.jpg";
 	MenuItemImages[ITM_OPEN] = "images\\DrawMode\\Open.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\DrawMode\\Save.jpg";
 	MenuItemImages[ITM_TOGGLE_SOUND] = PlayActionSoundEnabled ? "images\\DrawMode\\ToggleSoundOn.jpg" : "images\\DrawMode\\ToggleSoundOff.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\DrawMode\\Exit.jpg";
-
-	if (IsPlayingRecording) {
+	if (IsPlayingRecording)
+	{
 		MenuItemImages[ITM_START_RECORDING] = "images\\DrawMode\\StartRecordingFaded.jpg";
 		MenuItemImages[ITM_STOP_RECORDING] = "images\\DrawMode\\StopRecording.jpg";
 	}
-	else {
+	else
+	{
 		MenuItemImages[ITM_START_RECORDING] = "images\\DrawMode\\StartRecording.jpg";
 		MenuItemImages[ITM_STOP_RECORDING] = "images\\DrawMode\\StopRecordingFaded.jpg";
 	}
@@ -203,16 +216,16 @@ void Output::CreateDrawToolBar() const
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 }
 
-void Output::SetPlayActionState(bool state)
+void Output::SetPlayActionState(bool State)
 {
-	PlayActionSoundEnabled = state;
-	UpdateToolBar();
+	PlayActionSoundEnabled = State;
+	UpdateToolBar = true;
 }
 
-void Output::SetRecordingState(bool state)
+void Output::SetRecordingState(bool State)
 {
-	IsPlayingRecording = state;
-	UpdateToolBar();
+	IsPlayingRecording = State;
+	UpdateToolBar = true;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -246,15 +259,14 @@ void Output::ClearDrawArea() const
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::PrintMessage(string msg,bool update) // Prints a message on status bar
+void Output::PrintMessage(string Message, bool Update) // Prints a message on status bar
 {
-	
-	lastMessage = msg;
+	LastMessage = Message;
 	CreateStatusBar(); // First clear the status bar
 	pWind->SetPen(UI.MsgColor, 50);
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
-	pWind->DrawString(10, UI.height - int(UI.StatusBarHeight / 1.2), msg);
-	if(update)
+	pWind->DrawString(10, UI.height - int(UI.StatusBarHeight / 1.2), Message);
+	if (Update)
 		pWind->UpdateBuffer();
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -276,66 +288,57 @@ int Output::GetCurrentPenWidth() const // Get current pen width
 	return UI.PenWidth;
 }
 
-void Output::UpdateStatusBar() {
-	PrintMessage(lastMessage,false);
-}
-
-void Output::UpdateToolBar() {
-	if (UI.InterfaceMode == MODE_DRAW)CreateDrawToolBar();
-	else CreatePlayToolBar();
-}
-
 //======================================================================================//
 //								Figures Drawing Functions								//
 //======================================================================================//
 
-void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) // Drawing Rectangle
+void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool Selected) // Drawing Rectangle
 {
-	color DrawingClr;
-	if (selected)
-		DrawingClr = UI.HighlightColor; // Figure should be drawn highlighted
+	color DrawingColor;
+	if (Selected)
+		DrawingColor = UI.HighlightColor; // Figure should be drawn highlighted
 	else
-		DrawingClr = RectGfxInfo.DrawClr;
+		DrawingColor = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWidth);
-	drawstyle style;
-	if (RectGfxInfo.isFilled)
+	pWind->SetPen(DrawingColor, RectGfxInfo.BorderWidth);
+	drawstyle Style;
+	if (RectGfxInfo.IsFilled)
 	{
-		style = FILLED;
+		Style = FILLED;
 		pWind->SetBrush(RectGfxInfo.FillClr);
 	}
 	else
-		style = FRAME;
+		Style = FRAME;
 
-	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
+	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, Style);
 	int MinY = min(P1.y, P2.y);
 	int MaxY = max(P1.y, P2.y);
 	if (MinY <= UI.ToolBarHeight)
-		UpdateToolBar();
-	
+		UpdateToolBar = true;
+
 	if (MaxY >= UI.height - UI.StatusBarHeight)
-		UpdateStatusBar();
+		UpdateStatusBar = true;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawSquare(Point P1, int DefaultSquareSize, GfxInfo SquareGfxInfo, bool selected) // Drawing square
+void Output::DrawSquare(Point P1, int DefaultSquareSize, GfxInfo SquareGfxInfo, bool Selected) // Drawing square
 {
-	color DrawingClr;
-	if (selected)
-		DrawingClr = UI.HighlightColor;
+	color DrawingColor;
+	if (Selected)
+		DrawingColor = UI.HighlightColor;
 	else
-		DrawingClr = SquareGfxInfo.DrawClr;
+		DrawingColor = SquareGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, SquareGfxInfo.BorderWidth);
-	drawstyle style;
+	pWind->SetPen(DrawingColor, SquareGfxInfo.BorderWidth);
+	drawstyle Style;
 
-	if (SquareGfxInfo.isFilled)
+	if (SquareGfxInfo.IsFilled)
 	{
-		style = FILLED;
+		Style = FILLED;
 		pWind->SetBrush(SquareGfxInfo.FillClr);
 	}
 	else
-		style = FRAME;
+		Style = FRAME;
 
 	Point p1, p2;
 	p1.x = P1.x + DefaultSquareSize / 2;
@@ -343,91 +346,89 @@ void Output::DrawSquare(Point P1, int DefaultSquareSize, GfxInfo SquareGfxInfo, 
 	p2.x = P1.x - DefaultSquareSize / 2;
 	p2.y = P1.y - DefaultSquareSize / 2;
 
-	pWind->DrawRectangle(p1.x, p1.y, p2.x, p2.y, style);
+	pWind->DrawRectangle(p1.x, p1.y, p2.x, p2.y, Style);
 	if (p2.y <= UI.ToolBarHeight)
-		UpdateToolBar();
+		UpdateToolBar = true;
 	if (p1.y >= UI.height - UI.StatusBarHeight)
-		UpdateStatusBar();
+		UpdateStatusBar = true;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected) // Drawing Triangle
+void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool Selected) // Drawing Triangle
 {
-	color DrawingClr;
-	drawstyle style;
-	if (selected)
-		DrawingClr = UI.HighlightColor;
+	color DrawingColor;
+	drawstyle Style;
+	if (Selected)
+		DrawingColor = UI.HighlightColor;
 	else
-		DrawingClr = TriangleGfxInfo.DrawClr;
+		DrawingColor = TriangleGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, TriangleGfxInfo.BorderWidth);
-	if (TriangleGfxInfo.isFilled)
+	pWind->SetPen(DrawingColor, TriangleGfxInfo.BorderWidth);
+	if (TriangleGfxInfo.IsFilled)
 	{
 		pWind->SetBrush(TriangleGfxInfo.FillClr);
-		style = FILLED;
+		Style = FILLED;
 	}
 	else
-		style = FRAME;
+		Style = FRAME;
 
-	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
+	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, Style);
 	int MinY = min(P1.y, P2.y);
 	MinY = min(MinY, P3.y);
 	int MaxY = max(P1.y, P2.y);
 	MaxY = max(MaxY, P3.y);
-	if (MinY <= UI.ToolBarHeight)
-		UpdateToolBar();
-	if (MaxY >= (UI.height - UI.StatusBarHeight))
-		UpdateStatusBar();
+	if (MinY - ((UI.PenWidth + 1) / 2) <= UI.ToolBarHeight)
+		UpdateToolBar = true;
+	if (MaxY + ((UI.PenWidth + 1) / 2) >= (UI.height - UI.StatusBarHeight))
+		UpdateStatusBar = true;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected)
+void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool Selected)
 {
-	color drawcolor;
-	drawstyle style;
-	if (selected)
-		drawcolor = UI.HighlightColor; 
+	color DrawColor;
+	drawstyle Style;
+	if (Selected)
+		DrawColor = UI.HighlightColor;
 	else
-		drawcolor = CircleGfxInfo.DrawClr;
+		DrawColor = CircleGfxInfo.DrawClr;
 
-	pWind->SetPen(drawcolor, CircleGfxInfo.BorderWidth);
-	if (CircleGfxInfo.isFilled)
+	pWind->SetPen(DrawColor, CircleGfxInfo.BorderWidth);
+	if (CircleGfxInfo.IsFilled)
 	{
-		style = FILLED;
+		Style = FILLED;
 		pWind->SetBrush(CircleGfxInfo.FillClr);
 	}
 	else
-		style = FRAME;
-	int radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
-	pWind->DrawCircle(P1.x, P1.y, radius, style);
-	if ((P1.y - radius) <= UI.ToolBarHeight)
-		UpdateToolBar();
-	
-	if ((P1.y + radius) >= (UI.height - UI.StatusBarHeight)) 
-		UpdateStatusBar();
-	
+		Style = FRAME;
+	int Radius = sqrt(pow(P1.x - P2.x, 2) + pow(P1.y - P2.y, 2));
+	pWind->DrawCircle(P1.x, P1.y, Radius, Style);
+	if ((P1.y - Radius) <= UI.ToolBarHeight)
+		UpdateToolBar = true;
 
+	if ((P1.y + Radius) >= (UI.height - UI.StatusBarHeight))
+		UpdateStatusBar = true;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::DrawHexagon(Point P1, int hexagonSize, GfxInfo HexagonGfxInfo, bool selected)
+void Output::DrawHexagon(Point P1, int HexagonSize, GfxInfo HexagonGfxInfo, bool Selected)
 {
 
-	color drawcolor;
-	drawstyle style;
-	if (selected)
-		drawcolor = UI.HighlightColor;
+	color DrawColor;
+	drawstyle Style;
+	if (Selected)
+		DrawColor = UI.HighlightColor;
 	else
-		drawcolor = HexagonGfxInfo.DrawClr;
+		DrawColor = HexagonGfxInfo.DrawClr;
 
-	pWind->SetPen(drawcolor, HexagonGfxInfo.BorderWidth);
-	if (HexagonGfxInfo.isFilled)
+	pWind->SetPen(DrawColor, HexagonGfxInfo.BorderWidth);
+	if (HexagonGfxInfo.IsFilled)
 	{
-		style = FILLED;
+		Style = FILLED;
 		pWind->SetBrush(HexagonGfxInfo.FillClr);
 	}
 	else
-		style = FRAME;
+		Style = FRAME;
 
 	int xPointsArray[6];
 	int yPointsArray[6];
@@ -436,16 +437,15 @@ void Output::DrawHexagon(Point P1, int hexagonSize, GfxInfo HexagonGfxInfo, bool
 
 	for (int i = 0; i < 6; i++)
 	{
-		xPointsArray[i] = P1.x + hexagonSize * cos(i * angle);
-		yPointsArray[i] = P1.y + hexagonSize * sin(i * angle);
+		xPointsArray[i] = P1.x + HexagonSize * cos(i * angle);
+		yPointsArray[i] = P1.y + HexagonSize * sin(i * angle);
 	}
-	pWind->DrawPolygon(xPointsArray, yPointsArray, 6, style);
-	if ((P1.y - hexagonSize / 2 * sqrt(3) - 2) <= UI.ToolBarHeight) 
-		UpdateToolBar();
-	
-	if ((P1.y + hexagonSize / 2 * sqrt(3) + 2) >= (UI.height - UI.StatusBarHeight)) 
-		UpdateStatusBar();
-	
+	pWind->DrawPolygon(xPointsArray, yPointsArray, 6, Style);
+	if ((P1.y - HexagonSize / 2 * sqrt(3) - ((UI.PenWidth + 1) / 2)) <= UI.ToolBarHeight)
+		UpdateToolBar = true;
+
+	if ((P1.y + HexagonSize / 2 * sqrt(3) + ((UI.PenWidth + 1) / 2)) >= (UI.height - UI.StatusBarHeight))
+		UpdateStatusBar = true;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -453,6 +453,6 @@ Output::~Output()
 {
 	delete pWind;
 
-	if (colorMenuWind)
-		delete colorMenuWind;
+	if (pColorMenuWind)
+		delete pColorMenuWind;
 }

@@ -3,15 +3,14 @@
 
 #include "Action.h"
 
-class SwitchToDrawAction: public Action {
+class SwitchToDrawAction : public Action
+{
 public:
-	SwitchToDrawAction(ApplicationManager* pApp);
+	SwitchToDrawAction(ApplicationManager *);
 
 	virtual void ReadActionParameters();
 
 	virtual bool Execute();
-
-	virtual bool ShouldRecord() const;
 };
 
 #endif

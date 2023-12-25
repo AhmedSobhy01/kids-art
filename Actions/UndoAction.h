@@ -4,16 +4,17 @@
 #include "Action.h"
 #include "../ApplicationManager.h"
 
-class UndoAction: public Action
+class UndoAction : public Action
 {
 public:
-	UndoAction(ApplicationManager*);
+	UndoAction(ApplicationManager *);
 
 	virtual void ReadActionParameters();
 
 	virtual bool Execute();
 
 	virtual void PlayRecord();
+
 };
 
 #endif

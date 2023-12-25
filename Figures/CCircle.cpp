@@ -2,51 +2,53 @@
 #include "..\GUI\Output.h"
 #include "..\ApplicationManager.h"
 
-CCircle::CCircle() :CFigure()
+CCircle::CCircle() : CFigure()
 {
-	type = "Circle";
+	TypeName = "Circle";
 }
 
-CCircle::CCircle(Point center, Point radius, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo) {
-	this->center = center;
-	this->radius = radius;
-	type = "Circle";
+CCircle::CCircle(Point Center, Point Radius, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
+{
+	this->Center = Center;
+	this->Radius = Radius;
+	TypeName = "Circle";
 }
 
-void CCircle::Draw(Output* pOut) {
-	pOut->DrawCircle(center, radius, FigGfxInfo, Selected);
+void CCircle::Draw(Output *pOut)
+{
+	pOut->DrawCircle(Center, Radius, FigGfxInfo, Selected);
 }
-bool CCircle::IsPointInside(Point P) {
-	return !Hidden && (sqrt(pow(center.x - P.x, 2) + pow(center.y - P.y, 2)) <= sqrt(pow(center.x - radius.x, 2) + pow(center.y - radius.y, 2)));
+bool CCircle::IsPointInside(Point P)
+{
+	return !Hidden && (sqrt(pow(Center.x - P.x, 2) + pow(Center.y - P.y, 2)) <= sqrt(pow(Center.x - Radius.x, 2) + pow(Center.y - Radius.y, 2)));
 }
 
 Point CCircle::GetCenter() const
 {
-	return center;
+	return Center;
 }
 
-void CCircle::SetCenter(Point c) {
-	//if (!Validate(c))return;
-	this->radius.x += (c.x - this->center.x);
-	this->radius.y += (c.y - this->center.y);
-	this->center = c;
-}
-
-
-void CCircle::Save(ofstream& fout)
+void CCircle::SetCenter(Point c)
 {
-	if (fout.is_open())
+	this->Radius.x += (c.x - this->Center.x);
+	this->Radius.y += (c.y - this->Center.y);
+	this->Center = c;
+}
+
+void CCircle::Save(ofstream &FileOutputStream)
+{
+	if (FileOutputStream.is_open())
 	{
 		fout << "CIRCLE" << " " << ID << " " << center.x << " " << center.y << " " << radius.x << " " << radius.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl; // added figure size to handle resized figures
 		return;
 	}
 }
 
-void CCircle::Load(ifstream& fin)
+void CCircle::Load(ifstream &fin)
 {
 	if (fin.is_open())
 	{
-		fin >> ID >> center.x >> center.y >> radius.x >> radius.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
+		fin >> ID >> Center.x >> Center.y >> Radius.x >> Radius.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
 		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
 			FigGfxInfo.isFilled = false;
 		FigGfxInfo.BorderWidth = 3;
@@ -62,17 +64,23 @@ void CCircle::PrintInfo(Output* pOut) {
 	info += ", Radius = " + to_string(radius);
 	info += ", Outline Color: " + FigGfxInfo.DrawClr.ReturnColor();
 	info += ", Fill Color: " + FigGfxInfo.FillClr.ReturnColor();
+
 	pOut->PrintMessage(info);
 }
-bool CCircle::GetCorner(Point p, int& index) {
-	int CurrentRadius = sqrt(pow(center.x - this->radius.x, 2) + pow(center.y - this->radius.y, 2));
-	int PointRadius = sqrt(pow(center.x - p.x, 2) + pow(center.y - p.y, 2));
-	if (abs(CurrentRadius - PointRadius) < 6) {
+bool CCircle::GetCorner(Point &p, int &index)
+{
+	//check if the point is on the circle circumeference
+	int CurrentRadius = sqrt(pow(Center.x - this->Radius.x, 2) + pow(Center.y - this->Radius.y, 2));
+	int PointRadius = sqrt(pow(Center.x - p.x, 2) + pow(Center.y - p.y, 2));
+	if (abs(CurrentRadius - PointRadius) < 6)
+	{
 		index = 0;
+		p = Radius;
 		return true;
 	}
 	return false;
 }
-void CCircle::SetCorner(Point p, int) {
-	this->radius = p;
+void CCircle::SetCorner(Point p, int)
+{
+	this->Radius = p;
 }

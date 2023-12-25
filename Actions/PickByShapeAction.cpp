@@ -1,7 +1,9 @@
 #include "PickByShapeAction.h"
 
 PickByShapeAction::PickByShapeAction(ApplicationManager* pApp) : Action(pApp)
-{ }
+{
+	RecordEnabled = false;
+}
 
 void PickByShapeAction::ReadActionParameters() {				// Initializes the data members
 	CorrectPicks = 0;
@@ -33,7 +35,7 @@ void PickByShapeAction::GetClickedAction(bool& ChangedAction, bool& EmptyClick) 
 		ChangedAction = true;
 	else {
 		CFigure* ClickedFigure = pManager->GetFigure(P.x, P.y);
-		if (ClickedFigure == NULL || ClickedFigure->isHidden()) {
+		if (ClickedFigure == NULL || ClickedFigure->IsHidden()) {
 			EmptyClick = true;
 			return;
 		}
@@ -73,9 +75,4 @@ bool PickByShapeAction::Execute() {
 	pManager->UpdateInterface();
 
 	return true;
-}
-
-bool PickByShapeAction::ShouldRecord() const
-{
-	return false;
 }

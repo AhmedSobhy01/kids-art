@@ -3,20 +3,22 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-DragMoveAction::DragMoveAction(ApplicationManager* pApp): UndoableAction(pApp) {
-
+DragMoveAction::DragMoveAction(ApplicationManager *pApp) : UndoableAction(pApp)
+{
 }
 
-void DragMoveAction::ReadActionParameters() {
-
+void DragMoveAction::ReadActionParameters()
+{
 }
 
-bool DragMoveAction::Execute() {
+bool DragMoveAction::Execute()
+{
 
-	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
+	Output *pOut = pManager->GetOutput();
+	Input *pIn = pManager->GetInput();
 	Figure = pManager->GetSelected();
-	if (Figure == NULL) {
+	if (Figure == NULL)
+	{
 		int x, y;
 		pOut->PrintMessage("Error: Select a shape before moving. Click anywhere to continue.");
 		pIn->GetPointClicked(x, y);
@@ -28,11 +30,13 @@ bool DragMoveAction::Execute() {
 
 	pOut->PrintMessage("DragMove: Drag the selected shape to move");
 
-	bool buttonDown = false;
-	while (!buttonDown) {
-		buttonDown = pIn->GetLeftClickState(NewCenter.x, NewCenter.y);
+	bool ButtonDown = false;
+	while (!ButtonDown)
+	{
+		ButtonDown = pIn->GetLeftClickState(NewCenter.x, NewCenter.y);
 	}
-	if (!Figure->IsPointInside(NewCenter)) { 
+	if (!Figure->IsPointInside(NewCenter))
+	{
 		pOut->ClearStatusBar();
 		return false;
 	}
@@ -41,15 +45,17 @@ bool DragMoveAction::Execute() {
 	Point CurrentCenter = OldCenter;
 	int dx = OldCenter.x - NewCenter.x;
 	int dy = OldCenter.y - NewCenter.y;
-	int err = 0;
-  
-	while (buttonDown) {
-		buttonDown = pIn->GetLeftClickState(NewCenter.x, NewCenter.y);
+	int Err = 0;
+
+	while (ButtonDown)
+	{
+		ButtonDown = pIn->GetLeftClickState(NewCenter.x, NewCenter.y);
 		NewCenter.x += dx;
 		NewCenter.y += dy;
 		Figure->SetCenter(NewCenter);
-		err = sqrt(pow(CurrentCenter.x - NewCenter.x, 2) + pow(CurrentCenter.y - NewCenter.y, 2));
-		if (err) { // check if it moved by a pixel before updating interface
+		Err = sqrt(pow(CurrentCenter.x - NewCenter.x, 2) + pow(CurrentCenter.y - NewCenter.y, 2));
+		if (Err)
+		{ // check if it moved by a pixel before updating interface
 			pManager->UpdateInterface();
 		}
 		CurrentCenter = NewCenter;
@@ -67,7 +73,6 @@ void DragMoveAction::PlayRecord()
 		Figure->SetCenter(NewCenter);
 }
 
-
 void DragMoveAction::Undo()
 {
 	if (Figure != NULL)
@@ -82,7 +87,8 @@ void DragMoveAction::Redo()
 
 DragMoveAction::~DragMoveAction()
 {
-	if (Figure != NULL) {
+	if (Figure != NULL)
+	{
 		Figure->DecrementReference();
 
 		if (Figure->CanBeDeleted())

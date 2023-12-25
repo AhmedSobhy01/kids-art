@@ -10,17 +10,17 @@ class Output; // forward declaration
 class Input // The application manager should have a pointer to this class
 {
 private:
-	window *pWind;		   // Pointer to the Graphics Window
+	window *pWind; // Pointer to the Graphics Window
 public:
 	Input(window *pW); // Constructor
 
-	void GetPointClicked(int& x, int& y) const; // Get coordinate where user clicks
-	void GetMouseCoord(int &x, int &y) const; // Get coordinate where user clicks
-	color GetSelectedColor(Output* pO) const;
-	string GetString(Output *pO) const; // Returns a string entered by the user
-	bool GetLeftClickState(int& x, int& y)const;
+	void GetPointClicked(int &, int &) const; // Get coordinate where user clicks
+	void GetMouseCoord(int &, int &) const;	  // Get coordinate where user clicks
+	color GetSelectedColor(Output *) const;
+	string GetString(Output *) const; // Returns a string entered by the user
+	bool GetLeftClickState(int &, int &) const;
 	ActionType GetUserAction(int * = NULL) const; // Read the user click and map to an action
-	ActionType GetAction(Point&);							// Gets the user action according to a given point
+	ActionType GetAction(Point &);				  // Gets the user action according to a given point
 
 	~Input();
 };

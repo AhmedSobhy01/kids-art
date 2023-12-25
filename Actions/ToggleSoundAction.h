@@ -4,16 +4,14 @@
 #include "Action.h"
 #include "../ApplicationManager.h"
 
-class ToggleSoundAction: public Action
+class ToggleSoundAction : public Action
 {
 public:
-	ToggleSoundAction(ApplicationManager* pApp);
+	ToggleSoundAction(ApplicationManager *);
 
 	virtual void ReadActionParameters();
 
 	virtual bool Execute();
-
-	virtual bool ShouldRecord() const;
 };
 
 #endif

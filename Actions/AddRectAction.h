@@ -4,19 +4,20 @@
 #include "Action.h"
 #include "UndoableFigureAction.h"
 
-//Add Rectangle Action class
-class AddRectAction: public UndoableFigureAction
+// Add Rectangle Action class
+class AddRectAction : public UndoableFigureAction
 {
 private:
-	Point P1, P2; //Rectangle Corners
+	Point P1, P2; // Rectangle Corners
 	GfxInfo RectGfxInfo;
+
 public:
-	AddRectAction(ApplicationManager *pApp);
-	//Reads rectangle parameters
+	AddRectAction(ApplicationManager *);
+	// Reads rectangle parameters
 	virtual void ReadActionParameters();
 	virtual void PlayRecord();
-	
-	//Add rectangle to the ApplicationManager
+
+	// Add rectangle to the ApplicationManager
 	virtual bool Execute();
 };
 

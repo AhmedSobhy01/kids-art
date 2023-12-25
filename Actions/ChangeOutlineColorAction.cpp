@@ -4,7 +4,7 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-ChangeOutlineColorAction::ChangeOutlineColorAction(ApplicationManager* pApp): UndoableAction(pApp) {}
+ChangeOutlineColorAction::ChangeOutlineColorAction(ApplicationManager *pApp) : UndoableAction(pApp) {}
 
 void ChangeOutlineColorAction::ReadActionParameters()
 {
@@ -12,6 +12,7 @@ void ChangeOutlineColorAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
 	if (Figure == NULL) {
+
 		int x, y;
 		pOut->PrintMessage("Error:Please select a shape to change it's outline color. Click anywhere to continue.");
 		pIn->GetPointClicked(x, y);
@@ -30,10 +31,10 @@ bool ChangeOutlineColorAction::Execute()
 
 	if (Figure != NULL)
 	{
-		OldColor = Figure->GetDrawClr();
+		OldColor = Figure->GetDrawColor();
 		NewColor = pIn->GetSelectedColor(pOut);
 		UI.DrawColor = NewColor;
-		Figure->ChngDrawClr(NewColor);
+		Figure->ChangeDrawColor(NewColor);
 		UI.DrawColor = NewColor;
 		pOut->ClearStatusBar();
 		Figure->SetSelected(false);
@@ -55,6 +56,7 @@ void ChangeOutlineColorAction::Undo()
 {
 	Figure->ChngDrawClr(OldColor);
 	UI.DrawColor = OldColor;
+
 }
 
 void ChangeOutlineColorAction::Redo()			//we could just call PlayRecord() insted of writing the same code but for the sake of readability we left it as it is

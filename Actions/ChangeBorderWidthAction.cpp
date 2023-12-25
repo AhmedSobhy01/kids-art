@@ -27,7 +27,7 @@ bool ChangeBorderWidthAction::Execute()
 		else
 			UI.PenWidth = 2;
 		NewWidth = UI.PenWidth;
-		Figure->ChngBorderWidth(NewWidth);
+		Figure->ChangeBorderWidth(NewWidth);
 		pOut->CreateDrawToolBar(); // To update border width icon
 		pOut->ClearStatusBar();
 		Figure->SetSelected(false);
