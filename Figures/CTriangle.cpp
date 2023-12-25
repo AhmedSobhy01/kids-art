@@ -71,7 +71,7 @@ void CTriangle::Save(ofstream &FileOutputStream)
 {
 	if (FileOutputStream.is_open())
 	{
-		fout << "TRIANGLE" << " " << ID << " " << P1.x << " " << P1.y << " " << P2.x << " " << P2.y << " " << P3.x << " " << P3.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl; // added figure size to handle resized figures
+		FileOutputStream << "TRIANGLE" << " " << ID << " " << P1.x << " " << P1.y << " " << P2.x << " " << P2.y << " " << P3.x << " " << P3.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl; // added figure size to handle resized figures
 		return;
 	}
 }
@@ -82,7 +82,7 @@ void CTriangle::Load(ifstream &fin)
 	{
 		fin >> ID >> P1.x >> P1.y >> P2.x >> P2.y >> P3.x >> P3.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
 		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
-			FigGfxInfo.isFilled = false;
+			FigGfxInfo.IsFilled = false;
 		FigGfxInfo.BorderWidth = 3;
 		return;
 	}

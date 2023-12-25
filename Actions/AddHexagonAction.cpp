@@ -18,7 +18,7 @@ void AddHexagonAction::ReadActionParameters() {
 	Input* pIn = pManager->GetInput();
 
 	//Getting Coordinates for the shape position
-	pOut->PrintMessage("New Hexagon: Click at the center");
+	pOut->PrintMessage("New Hexagon: Click at the Center");
 	pIn->GetPointClicked(Center.x, Center.y);
 
 	//Get drawing, filling colors and pen width from the interface
@@ -43,14 +43,14 @@ bool AddHexagonAction::Execute() {
 
 void AddHexagonAction::PlayRecord()
 {
-	Figure->SetCenter(center);
-	Figure->ChngFillClr(UI.FillColor);
-	Figure->ChngDrawClr(UI.DrawColor);
-	Figure->ChngBorderWidth(UI.PenWidth);
+	Figure->SetCenter(Center);
+	Figure->ChangeFillColor(UI.FillColor);
+	Figure->ChangeDrawColor(UI.DrawColor);
+	Figure->ChangeBorderWidth(UI.PenWidth);
 	int size = CHexagon::GetDefaultHexagonSize();
 	Point p1;
-	p1.x = center.x + size;
-	p1.y = center.y;
+	p1.x = Center.x + size;
+	p1.y = Center.y;
 	Figure->SetCorner(p1, 0);
 	pManager->AddFigure(Figure);
 }

@@ -21,7 +21,7 @@ bool LoadAction::Execute()
 	Output *pOut = pManager->GetOutput();
 	ReadActionParameters();
 	ifstream fin;
-	fin.open("Saved Graphs/" + fName);			// save graph to Saved Graphs \ fName
+	fin.open("Saved Graphs/" + FileName); // save graph to Saved Graphs \ FileName
 	if (fin.is_open())
 	{
 		Action *pAct;
@@ -32,7 +32,7 @@ bool LoadAction::Execute()
 
 		pOut->PrintMessage("Opened Load File Successfully");
 		string x;
-		CFigure* Figure;
+		CFigure *Figure;
 		UI.PenWidth = 3;
 		pOut->CreateDrawToolBar(); // To update border width icon
 		while (!fin.eof())
@@ -40,7 +40,7 @@ bool LoadAction::Execute()
 			fin >> UI.DrawColor >> UI.FillColor >> UI.BkGrndColor;
 			int count;
 			fin >> count;
-			for (int i = 0; i <= count; i++)		// load all figures
+			for (int i = 0; i <= count; i++) // load all figures
 			{
 				fin >> x;
 				if (x == "RECTANGLE")

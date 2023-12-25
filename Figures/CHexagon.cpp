@@ -70,7 +70,8 @@ void CHexagon::Save(ofstream &FileOutputStream)
 {
 	if (FileOutputStream.is_open())
 	{
-		fout << "HEXAGON" << " " << ID << " " << center.x << " " << center.y << " " << hexagonSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl; // added figure size to handle resized figures
+		FileOutputStream << "HEXAGON"
+						 << " " << ID << " " << Center.x << " " << Center.y << " " << HexagonSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl; // added figure size to handle resized figures
 		return;
 	}
 }
@@ -79,19 +80,20 @@ void CHexagon::Load(ifstream &fin)
 {
 	if (fin.is_open())
 	{
-		fin >> ID >> center.x >> center.y >> hexagonSize >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
+		fin >> ID >> Center.x >> Center.y >> HexagonSize >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
 		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
-			FigGfxInfo.isFilled = false;
+			FigGfxInfo.IsFilled = false;
 		FigGfxInfo.BorderWidth = 3;
 
 		return;
 	}
 }
 
-void CHexagon::PrintInfo(Output* pOut) {
+void CHexagon::PrintInfo(Output *pOut)
+{
 	string info = "Hexagon: ID = " + to_string(ID);
-	info += ", Center = (" + to_string(center.x) + ", " + to_string(center.y) + ")";
-	info += ", SideLength = " + to_string(hexagonSize);
+	info += ", Center = (" + to_string(Center.x) + ", " + to_string(Center.y) + ")";
+	info += ", SideLength = " + to_string(HexagonSize);
 	info += ", Outline Color: " + FigGfxInfo.DrawClr.ReturnColor();
 	info += ", Fill Color: " + FigGfxInfo.FillClr.ReturnColor();
 	pOut->PrintMessage(info);
@@ -104,12 +106,12 @@ bool CHexagon::GetCorner(Point &p, int &index)
 	int i = 0;
 	while (i < 6 && (ErrX >= 6 || ErrY >= 6))
 	{
-		//calculate the distance between the mouse and every vertex
+		// calculate the distance between the mouse and every vertex
 		ErrX = abs(p.x - (Center.x + HexagonSize * cos(i * angle)));
 		ErrY = abs(p.y - (Center.y + HexagonSize * sin(i * angle)));
 		++i;
 	}
-	//if the distance is less than 6 pixels: 
+	// if the distance is less than 6 pixels:
 	if (ErrX < 6 && ErrY < 6)
 	{
 		index = 0;

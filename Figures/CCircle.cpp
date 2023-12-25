@@ -39,7 +39,8 @@ void CCircle::Save(ofstream &FileOutputStream)
 {
 	if (FileOutputStream.is_open())
 	{
-		fout << "CIRCLE" << " " << ID << " " << center.x << " " << center.y << " " << radius.x << " " << radius.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl; // added figure size to handle resized figures
+		FileOutputStream << "CIRCLE"
+						 << " " << ID << " " << Center.x << " " << Center.y << " " << Radius.x << " " << Radius.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl; // added figure size to handle resized figures
 		return;
 	}
 }
@@ -50,18 +51,19 @@ void CCircle::Load(ifstream &fin)
 	{
 		fin >> ID >> Center.x >> Center.y >> Radius.x >> Radius.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
 		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
-			FigGfxInfo.isFilled = false;
+			FigGfxInfo.IsFilled = false;
 		FigGfxInfo.BorderWidth = 3;
 		return;
 	}
 }
 
-void CCircle::PrintInfo(Output* pOut) {
-	int radius = sqrt(pow(center.x - this->radius.x, 2) + pow(center.y - this->radius.y, 2));
+void CCircle::PrintInfo(Output *pOut)
+{
+	int Radius = sqrt(pow(Center.x - this->Radius.x, 2) + pow(Center.y - this->Radius.y, 2));
 
 	string info = "Circle: ID = " + to_string(ID);
-	info += ", Center = (" + to_string(center.x) + ", " + to_string(center.y) + ")";
-	info += ", Radius = " + to_string(radius);
+	info += ", Center = (" + to_string(Center.x) + ", " + to_string(Center.y) + ")";
+	info += ", Radius = " + to_string(Radius);
 	info += ", Outline Color: " + FigGfxInfo.DrawClr.ReturnColor();
 	info += ", Fill Color: " + FigGfxInfo.FillClr.ReturnColor();
 
@@ -69,7 +71,7 @@ void CCircle::PrintInfo(Output* pOut) {
 }
 bool CCircle::GetCorner(Point &p, int &index)
 {
-	//check if the point is on the circle circumeference
+	// check if the point is on the circle circumeference
 	int CurrentRadius = sqrt(pow(Center.x - this->Radius.x, 2) + pow(Center.y - this->Radius.y, 2));
 	int PointRadius = sqrt(pow(Center.x - p.x, 2) + pow(Center.y - p.y, 2));
 	if (abs(CurrentRadius - PointRadius) < 6)

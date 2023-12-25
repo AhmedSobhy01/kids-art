@@ -97,8 +97,8 @@ void Output::CreateColorMenuWind(int x, bool withTransparent)
 
 void Output::DrawColorMenuItems(bool withTransparent) const
 {
-	const int arraySize = COLOR_MENU_ITM_COUNT - 1;
-	color colors[arraySize] = {PINK, RED, ORANGE, YELLOW, GREEN, SKY, BLUE, LAVENDER, BASE, BLACK};
+	const int ArraySize = COLOR_MENU_ITM_COUNT - 1;
+	color colors[ArraySize] = {PINK, RED, ORANGE, YELLOW, GREEN, SKY, BLUE, LAVENDER, BASE, BLACK};
 
 
 	pColorMenuWind->DrawRectangle(0, 0, UI.ColorMenuWidth, UI.ColorMenuHeight);

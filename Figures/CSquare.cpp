@@ -52,7 +52,7 @@ void CSquare::Save(ofstream &FileOutputStream)
 {
 	if (FileOutputStream.is_open())
 	{
-		fout << "SQUARE" << " " << ID << " " << center.x << " " << center.y << " " << squareSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl; // added figure size to handle resized figures
+		FileOutputStream << "SQUARE" << " " << ID << " " << Center.x << " " << Center.y << " " << SquareSize << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl; // added figure size to handle resized figures
 		return;
 	}
 }
@@ -61,9 +61,9 @@ void CSquare::Load(ifstream &fin)
 {
 	if (fin.is_open())
 	{
-		fin >> ID >> center.x >> center.y >> squareSize >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
+		fin >> ID >> Center.x >> Center.y >> SquareSize >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
 		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
-			FigGfxInfo.isFilled = false;
+			FigGfxInfo.IsFilled = false;
 		FigGfxInfo.BorderWidth = 3;
 		return;
 	}
@@ -71,8 +71,8 @@ void CSquare::Load(ifstream &fin)
 
 void CSquare::PrintInfo(Output* pOut) {
 	string info = "Square: ID = " + to_string(ID);
-	info += ", Center = (" + to_string(center.x) + ", " + to_string(center.y) + ")";
-	info += ", SideLength = " + to_string(squareSize);
+	info += ", Center = (" + to_string(Center.x) + ", " + to_string(Center.y) + ")";
+	info += ", SideLength = " + to_string(SquareSize);
 	info += ", Outline Color: " + FigGfxInfo.DrawClr.ReturnColor();
 	info += ", Fill Color: " + FigGfxInfo.FillClr.ReturnColor();
 

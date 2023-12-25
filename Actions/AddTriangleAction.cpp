@@ -45,9 +45,9 @@ bool AddTriangleAction::Execute()
 
 void AddTriangleAction::PlayRecord()
 {
-	Figure->ChngFillClr(UI.FillColor);
-	Figure->ChngDrawClr(UI.DrawColor);
-	Figure->ChngBorderWidth(UI.PenWidth);
+	Figure->ChangeFillColor(UI.FillColor);
+	Figure->ChangeDrawColor(UI.DrawColor);
+	Figure->ChangeBorderWidth(UI.PenWidth);
 	Figure->SetCorner(P1, 0);
 	Figure->SetCorner(P2, 1);
 	Figure->SetCorner(P3, 2);

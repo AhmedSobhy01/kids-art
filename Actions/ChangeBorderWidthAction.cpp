@@ -42,20 +42,20 @@ bool ChangeBorderWidthAction::Execute()
 void ChangeBorderWidthAction::PlayRecord()		
 {
 	UI.PenWidth = NewWidth;
-	Figure->ChngBorderWidth(NewWidth);
+	Figure->ChangeBorderWidth(NewWidth);
 	pOut->CreateDrawToolBar(); // To update border width icon
 }
 
 void ChangeBorderWidthAction::Undo()
 {
 	UI.PenWidth = OldWidth;
-	Figure->ChngBorderWidth(OldWidth);
+	Figure->ChangeBorderWidth(OldWidth);
 	pOut->CreateDrawToolBar(); // To update border width icon
 }
 
 void ChangeBorderWidthAction::Redo()	//we could just call PlayRecord() insted of writing the same code but for the sake of readability we left it as it is
 {
 	UI.PenWidth = NewWidth;
-	Figure->ChngBorderWidth(NewWidth);
+	Figure->ChangeBorderWidth(NewWidth);
 	pOut->CreateDrawToolBar(); // To update border width icon
 }

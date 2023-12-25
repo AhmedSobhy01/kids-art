@@ -45,9 +45,9 @@ bool AddRectAction::Execute()
 
 void AddRectAction::PlayRecord()
 {
-	Figure->ChngFillClr(UI.FillColor);
-	Figure->ChngDrawClr(UI.DrawColor);
-	Figure->ChngBorderWidth(UI.PenWidth);
+	Figure->ChangeFillColor(UI.FillColor);
+	Figure->ChangeDrawColor(UI.DrawColor);
+	Figure->ChangeBorderWidth(UI.PenWidth);
 	Figure->SetCorner(P1, 0);
 	Figure->SetCorner(P2, 3);
 	pManager->AddFigure(Figure);

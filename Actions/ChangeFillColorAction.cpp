@@ -46,18 +46,18 @@ bool ChangeFillColorAction::Execute()
 
 void ChangeFillColorAction::PlayRecord()
 {
-	Figure->ChngFillClr(NewColor);
+	Figure->ChangeFillColor(NewColor);
 	UI.FillColor = NewColor;
 }
 
 void ChangeFillColorAction::Undo()
 {
-	Figure->ChngFillClr(OldColor);
+	Figure->ChangeFillColor(OldColor);
 	UI.FillColor = OldColor;
 }
 
 void ChangeFillColorAction::Redo()		//we could just call PlayRecord() insted of writing the same code but for the sake of readability we left it as it is
 {
-	Figure->ChngFillClr(NewColor);
+	Figure->ChangeFillColor(NewColor);
 	UI.FillColor = NewColor;
 }
