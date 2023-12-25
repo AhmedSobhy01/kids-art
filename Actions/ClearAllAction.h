@@ -7,5 +7,7 @@ public:
 	ClearAllAction(ApplicationManager *);
 	void ReadActionParameters();
 	virtual bool Execute();
+
+	virtual void PlayRecord();
 };
 #endif

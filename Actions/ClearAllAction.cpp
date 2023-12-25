@@ -28,3 +28,8 @@ bool ClearAllAction::Execute() {
 
 	return true;
 }
+
+void ClearAllAction::PlayRecord()
+{
+	Execute();
+}
