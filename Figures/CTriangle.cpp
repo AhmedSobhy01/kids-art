@@ -87,21 +87,12 @@ void CTriangle::Load(ifstream& fin)
 }
 
 void CTriangle::PrintInfo(Output* pOut) {
-	string info = "Triangle: ID = ";
-	info += to_string(ID);
-	info += ", Vertex1 = (";
-	info += to_string(P1.x);
-	info += ", ";
-	info += to_string(P1.y);
-	info += "), Vertex2 = (";
-	info += to_string(P2.x);
-	info += ", ";
-	info += to_string(P2.y);
-	info += "), Vertex3 = (";
-	info += to_string(P3.x);
-	info += ", ";
-	info += to_string(P3.y);
-	info += ")";
+	string info = "Triangle: ID = " + to_string(ID);
+	info += ", Vertex1 = (" + to_string(P1.x) + ", " + to_string(P1.y) + ")";
+	info += ", Vertex2 = (" + to_string(P2.x) + ", " + to_string(P2.y) + ")";
+	info += ", Vertex3 = (" + to_string(P3.x) + ", " + to_string(P3.y) + ")";
+	info += ", Outline Color: " + FigGfxInfo.DrawClr.ReturnColor();
+	info += ", Fill Color: " + FigGfxInfo.FillClr.ReturnColor();
 	pOut->PrintMessage(info);
 }
 

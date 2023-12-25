@@ -55,15 +55,13 @@ void CCircle::Load(ifstream& fin)
 }
 
 void CCircle::PrintInfo(Output* pOut) {
-	string info = "Circle: ID = ";
-	info += to_string(ID);
-	info += ", Center = (";
-	info += to_string(center.x);
-	info += ", ";
-	info += to_string(center.y);
-	info += "), Radius = ";
 	int radius = sqrt(pow(center.x - this->radius.x, 2) + pow(center.y - this->radius.y, 2));
-	info += to_string(radius);
+
+	string info = "Circle: ID = " + to_string(ID);
+	info += ", Center = (" + to_string(center.x) + ", " + to_string(center.y) + ")";
+	info += ", Radius = " + to_string(radius);
+	info += ", Outline Color: " + FigGfxInfo.DrawClr.ReturnColor();
+	info += ", Fill Color: " + FigGfxInfo.FillClr.ReturnColor();
 	pOut->PrintMessage(info);
 }
 bool CCircle::GetCorner(Point p, int& index) {

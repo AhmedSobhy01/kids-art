@@ -66,20 +66,13 @@ void CRectangle::Load(ifstream& fin)
 }
 
 void CRectangle::PrintInfo(Output* pOut) {
-	string info = "Rectangle: ID = ";
-	info += to_string(ID);
-	info += ", Corner1 = (";
-	info += to_string(Corner1.x);
-	info += ", ";
-	info += to_string(Corner1.y);
-	info += "), Corner2 = (";
-	info += to_string(Corner2.x);
-	info += ", ";
-	info += to_string(Corner2.y);
-	info += "), Vertical Length = ";
-	info += to_string(abs(Corner1.y - Corner2.y));
-	info += ", Horizontal Width = ";
-	info += to_string(abs(Corner1.x - Corner2.x));
+	string info = "Rectangle: ID = " + to_string(ID);
+	info += ", Start Point = (" + to_string(Corner1.x) + ", " + to_string(Corner1.y) + ")";
+	info += ", End Point = (" + to_string(Corner2.x) + ", " + to_string(Corner2.y) + ")";
+	info += ", Vertical Length = " + to_string(abs(Corner1.y - Corner2.y));
+	info += ", Horizontal Width = " + to_string(abs(Corner1.x - Corner2.x));
+	info += ", Outline Color: " + FigGfxInfo.DrawClr.ReturnColor();
+	info += ", Fill Color: " + FigGfxInfo.FillClr.ReturnColor();
 	pOut->PrintMessage(info);
 }
 

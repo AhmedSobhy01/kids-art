@@ -235,7 +235,7 @@ color Input::GetSelectedColor(Output* pO) const // This function reads the posit
 				selectedColor = LAVENDER;
 				break;
 			case COLOR_MENU_ITM_ORANGE:
-				selectedColor = PEACH;
+				selectedColor = ORANGE;
 				break;
 			case COLOR_MENU_ITM_PINK:
 				selectedColor = PINK;

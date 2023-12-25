@@ -11,8 +11,8 @@ ostream& operator<<(ostream& c, const color& col)
 		c << "PINK";
 	else if (col == RED)
 		c << "RED";
-	else if (col == PEACH)
-		c << "PEACH";
+	else if (col == ORANGE)
+		c << "ORANGE";
 	else if (col == YELLOW)
 		c << "YELLOW";
 	else if (col == GREEN)
@@ -24,7 +24,7 @@ ostream& operator<<(ostream& c, const color& col)
 	else if (col == LAVENDER)
 		c << "LAVENDER";
 	else if (col == BASE)
-		c << "BASE";
+		c << "WHITE";
 	else if (col == BLACK)
 		c << "BLACK";
 	else
@@ -46,15 +46,15 @@ istream& operator>>(istream& c, color& col)
 		col = GREEN;
 	else if (x == "PINK")
 		col = PINK;
-	else if (x == "PEACH")
-		col = PEACH;
+	else if (x == "ORANGE")
+		col = ORANGE;
 	else if (x == "SKY")
 		col = SKY;
 	else if (x == "LAVENDER")
 		col = LAVENDER;
 	else if (x == "YELLOW")
 		col = YELLOW;
-	else if (x == "BASE")
+	else if (x == "WHITE")
 		col = BASE;
 	else
 		col = TRANSPARENT_COLOR;
@@ -77,26 +77,26 @@ string color::ReturnColor()
 {
 	string c;
 	if (*this == BLACK)
-		c = "BLACK";
+		c = "Black";
 	else if (*this == RED)
-		c = "RED";
+		c = "Red";
 	else if (*this == BLUE)
-		c = "BLUE";
+		c = "Blue";
 	else if (*this == GREEN)
-		c = "GREEN";
+		c = "Green";
 	else if (*this == PINK)
-		c = "PINK";
-	else if (*this == PEACH)
-		c = "PEACH";
+		c = "Pink";
+	else if (*this == ORANGE)
+		c = "Orange";
 	else if (*this == SKY)
-		c = "SKY";
+		c = "Sky";
 	else if (*this == LAVENDER)
-		c = "LAVENDER";
+		c = "Lavender";
 	else if (*this == YELLOW)
-		c = "YELLOW";
+		c = "Yellow";
 	else if (*this == BASE)
-		c = "BASE";
+		c = "White";
 	else
-		c = "NO_FILL";
+		c = "Transparent";
 	return c;
 }

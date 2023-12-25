@@ -83,14 +83,11 @@ void CHexagon::Load(ifstream& fin)
 }
 
 void CHexagon::PrintInfo(Output* pOut) {
-	string info = "Hexagon: ID = ";
-	info += to_string(ID);
-	info += ", Center = (";
-	info += to_string(center.x);
-	info += ", ";
-	info += to_string(center.y);
-	info += "), SideLength = ";
-	info += to_string(hexagonSize);
+	string info = "Hexagon: ID = " + to_string(ID);
+	info += ", Center = (" + to_string(center.x) + ", " + to_string(center.y) + ")";
+	info += ", SideLength = " + to_string(hexagonSize);
+	info += ", Outline Color: " + FigGfxInfo.DrawClr.ReturnColor();
+	info += ", Fill Color: " + FigGfxInfo.FillClr.ReturnColor();
 	pOut->PrintMessage(info);
 }
 bool CHexagon::GetCorner(Point p, int& index) {

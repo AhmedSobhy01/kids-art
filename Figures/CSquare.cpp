@@ -66,14 +66,11 @@ void CSquare::Load(ifstream& fin)
 }
 
 void CSquare::PrintInfo(Output* pOut) {
-	string info = "Square: ID = ";
-	info += to_string(ID);
-	info += ", Center = (";
-	info += to_string(center.x);
-	info += ", ";
-	info += to_string(center.y);
-	info += "), Length = ";
-	info += to_string(squareSize);
+	string info = "Square: ID = " + to_string(ID);
+	info += ", Center = (" + to_string(center.x) + ", " + to_string(center.y) + ")";
+	info += ", SideLength = " + to_string(squareSize);
+	info += ", Outline Color: " + FigGfxInfo.DrawClr.ReturnColor();
+	info += ", Fill Color: " + FigGfxInfo.FillClr.ReturnColor();
 	pOut->PrintMessage(info);
 }
 
