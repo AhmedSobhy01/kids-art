@@ -24,10 +24,9 @@ bool SelectAction::Execute() {
 		return false;
 
 	CFigure* S = pManager->GetSelected();
-	if (S != NULL) {
+	if (S != NULL) 
 		S->SetSelected(false);
-		cout << S->IsSelected();
-	}
+	
 
 	pManager->SetSelected(NULL);
 	if (Figure != S) {
