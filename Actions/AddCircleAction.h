@@ -7,8 +7,8 @@
 class AddCircleAction: public UndoableFigureAction
 {
 private:
-    Point center;
-    Point radius;
+    Point Center;
+    Point Radius;
     GfxInfo CircleGfxInfo;
 public:
     AddCircleAction(ApplicationManager* pApp);

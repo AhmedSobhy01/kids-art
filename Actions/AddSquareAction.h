@@ -7,10 +7,11 @@
 class AddSquareAction : public UndoableFigureAction
 {
 private:
-	Point center;
+	Point Center;
 	GfxInfo SquareGfxInfo;
+
 public:
-	AddSquareAction(ApplicationManager* pApp);
+	AddSquareAction(ApplicationManager *pApp);
 	virtual void ReadActionParameters();
 	virtual bool Execute();
 	virtual void PlayRecord();

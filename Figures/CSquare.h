@@ -3,9 +3,9 @@
 class CSquare : public CFigure
 {
 private:
-	Point center;
+	Point Center;
 	static const int DefaultSquareSize;
-	int squareSize;
+	int SquareSize;
 public:
 	CSquare();
 	CSquare(Point, GfxInfo);

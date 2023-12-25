@@ -4,20 +4,20 @@
 class CCircle : public CFigure
 {
 private:
-	Point center;
-	Point radius;
+	Point Center;
+	Point Radius;
+
 public:
 	CCircle();
 	CCircle(Point, Point, GfxInfo);
-	void Draw(Output* pOut) ;
+	void Draw(Output *);
 	bool IsPointInside(Point);
 	Point GetCenter() const;
 	void SetCenter(Point);
-	void Save(ofstream&);
-	void Load(ifstream&);
-	void PrintInfo(Output* pOut);
-	bool GetCorner(Point&, int&);
+	void Save(ofstream &);
+	void Load(ifstream &);
+	void PrintInfo(Output *);
+	bool GetCorner(Point &, int &);
 	void SetCorner(Point, int);
 };
 #endif
-

@@ -50,7 +50,7 @@ struct GfxInfo // Graphical info of each figure
 {
 	color DrawClr;	 // Draw color of the figure
 	color FillClr;	 // Fill color of the figure
-	bool isFilled;	 // Figure Filled or not
+	bool IsFilled;	 // Figure Filled or not
 	int BorderWidth; // Width of figure borders
 };
 

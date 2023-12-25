@@ -12,18 +12,19 @@ Input::Input(window *pW)
 
 void Input::GetPointClicked(int &x, int &y) const
 {
-	
+
 	pWind->WaitMouseClick(x, y); // Wait for mouse click
 }
-void Input::GetMouseCoord(int& x, int& y) const
+void Input::GetMouseCoord(int &x, int &y) const
 {
 
 	pWind->GetMouseCoord(x, y); // get mouse current position
 }
 
-bool Input::GetLeftClickState(int& x, int& y)const {
+bool Input::GetLeftClickState(int &x, int &y) const
+{
 	button b = LEFT_BUTTON;
-	return pWind->GetButtonState(b,x, y) == BUTTON_DOWN;
+	return pWind->GetButtonState(b, x, y) == BUTTON_DOWN;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -38,14 +39,16 @@ string Input::GetString(Output *pO) const
 	while (1)
 	{
 		pWind->WaitKeyPress(Key);
-		if (Key == 27) { // ESCAPE key is pressed
+		if (Key == 27)
+		{ // ESCAPE key is pressed
 			pWind->FlushKeyQueue();
 			pWind->FlushMouseQueue();
 
 			return ""; // returns nothing as user has cancelled label
 		}
 
-		if (Key == 13) { // ENTER key is pressed
+		if (Key == 13)
+		{ // ENTER key is pressed
 			pWind->FlushKeyQueue();
 			pWind->FlushMouseQueue();
 
@@ -182,11 +185,13 @@ ActionType Input::GetUserAction(int *_ClickedItemOrder) const // This function r
 		return STATUS;
 	}
 }
-ActionType Input::GetAction(Point& P)
+ActionType Input::GetAction(Point &P)
 {
-	if (P.y >= 0 && P.y <= UI.StatusBarHeight) {
+	if (P.y >= 0 && P.y <= UI.StatusBarHeight)
+	{
 		int clickeditem = P.x / UI.MenuItemWidth;
-		switch (clickeditem) {
+		switch (clickeditem)
+		{
 		case ITM_DRAW_MODE:
 			return TO_DRAW;
 		case ITM_PICKBYSHAPE:
@@ -201,11 +206,12 @@ ActionType Input::GetAction(Point& P)
 			return EMPTY;
 		}
 	}
-	else return DRAWING_AREA;
+	else
+		return DRAWING_AREA;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-color Input::GetSelectedColor(Output* pO) const // This function reads the position where the user clicks to determine the selected color
+color Input::GetSelectedColor(Output *pO) const // This function reads the position where the user clicks to determine the selected color
 {
 	if (pO->GetColorMenuWind())
 	{
@@ -215,48 +221,48 @@ color Input::GetSelectedColor(Output* pO) const // This function reads the posit
 		if (y >= 0 && y < UI.ColorMenuHeight)
 		{
 			int ClickedColorOrder = (x / UI.ColorMenuItemWidth);
-			color selectedColor;
+			color SelectedColor;
 
 			switch (ClickedColorOrder)
 			{
 			case COLOR_MENU_ITM_BLACK:
-				selectedColor = BLACK;
+				SelectedColor = BLACK;
 				break;
 			case COLOR_MENU_ITM_RED:
-				selectedColor = RED;
+				SelectedColor = RED;
 				break;
 			case COLOR_MENU_ITM_BLUE:
-				selectedColor = BLUE;
+				SelectedColor = BLUE;
 				break;
 			case COLOR_MENU_ITM_GREEN:
-				selectedColor = GREEN;
+				SelectedColor = GREEN;
 				break;
 			case COLOR_MENU_ITM_LAVENDER:
-				selectedColor = LAVENDER;
+				SelectedColor = LAVENDER;
 				break;
 			case COLOR_MENU_ITM_ORANGE:
-				selectedColor = PEACH;
+				SelectedColor = PEACH;
 				break;
 			case COLOR_MENU_ITM_PINK:
-				selectedColor = PINK;
+				SelectedColor = PINK;
 				break;
 			case COLOR_MENU_ITM_SKY:
-				selectedColor = SKY;
+				SelectedColor = SKY;
 				break;
 			case COLOR_MENU_ITM_YELLOW:
-				selectedColor = YELLOW;
+				SelectedColor = YELLOW;
 				break;
 			case COLOR_MENU_ITM_BASE:
-				selectedColor = BASE;
+				SelectedColor = BASE;
 				break;
 
 			default:
-				selectedColor = TRANSPARENT_COLOR;
+				SelectedColor = TRANSPARENT_COLOR;
 				break;
 			}
 
 			pO->CloseColorMenuWind();
-			return selectedColor;
+			return SelectedColor;
 		}
 	}
 

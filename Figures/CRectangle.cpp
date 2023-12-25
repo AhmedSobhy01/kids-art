@@ -2,14 +2,14 @@
 
 CRectangle::CRectangle() :CFigure()
 {
-	type = "Rectangle";
+	TypeName = "Rectangle";
 }
 
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	Corner1 = P1;
 	Corner2 = P2;
-	type = "Rectangle";
+	TypeName = "Rectangle";
 }
 
 
@@ -32,9 +32,9 @@ Point CRectangle::GetCenter() const
 	return { (Corner1.x + Corner2.x) / 2, (Corner1.y + Corner2.y) / 2 };
 }
 void CRectangle::SetCenter(Point c) {
-	Point center = { (Corner1.x + Corner2.x) / 2,(Corner1.y + Corner2.y) / 2 };
-	int dy = c.y - center.y;
-	int dx = c.x - center.x;
+	Point Center = { (Corner1.x + Corner2.x) / 2,(Corner1.y + Corner2.y) / 2 };
+	int dy = c.y - Center.y;
+	int dx = c.x - Center.x;
 	Corner1.x += dx;
 	Corner2.x += dx;
 	Corner1.y += dy;
@@ -43,11 +43,11 @@ void CRectangle::SetCenter(Point c) {
 
 
 
-void CRectangle::Save(ofstream& fout)
+void CRectangle::Save(ofstream& FileOutputStream)
 {
-	if (fout.is_open())
+	if (FileOutputStream.is_open())
 	{
-		fout << "RECTANGLE" << " " << ID << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
+		FileOutputStream << "RECTANGLE" << " " << ID << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y << " " << FigGfxInfo.DrawClr << " " << FigGfxInfo.FillClr << endl;
 		return;
 	}
 }
@@ -58,7 +58,7 @@ void CRectangle::Load(ifstream& fin)
 	{
 		fin >> ID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> FigGfxInfo.DrawClr >> FigGfxInfo.FillClr;
 		if (FigGfxInfo.FillClr == TRANSPARENT_COLOR)
-			FigGfxInfo.isFilled = false;
+			FigGfxInfo.IsFilled = false;
 		return;
 	}
 }
@@ -92,15 +92,15 @@ bool CRectangle::GetCorner(Point& p, int& index) {
 
 	int Xarr[2] = { Corner1.x ,Corner2.x };
 	int Yarr[2] = { Corner1.y ,Corner2.y };
-	int errx = 100, erry = 100;
+	int ErrX = 100, ErrY = 100;
 	int i = 0;
-	while (i < 4 && (errx >= 6 || erry >= 6)) {
-		errx = abs(p.x - Xarr[i % 2]);
-		erry = abs(p.y - Yarr[i / 2]);
+	while (i < 4 && (ErrX >= 6 || ErrY >= 6)) {
+		ErrX = abs(p.x - Xarr[i % 2]);
+		ErrY = abs(p.y - Yarr[i / 2]);
 		++i;
 	}
 	--i;
-	if (errx < 6 && erry < 6) {
+	if (ErrX < 6 && ErrY < 6) {
 		index = i;
 		p = { Xarr[i % 2],Yarr[i / 2] };
 		return true;

@@ -10,7 +10,7 @@ using namespace std;
 class SaveAction : public Action
 {
 private:
-	string fName;
+	string FileName;
 public:
 	SaveAction(ApplicationManager*);
 	void ReadActionParameters();

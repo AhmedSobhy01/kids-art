@@ -1,19 +1,21 @@
 #include "DragResizeAction.h"
 #include "../ApplicationManager.h"
 
-DragResizeAction::DragResizeAction(ApplicationManager* pApp) :UndoableAction(pApp) {
-
+DragResizeAction::DragResizeAction(ApplicationManager *pApp) : UndoableAction(pApp)
+{
 }
 
-void DragResizeAction::ReadActionParameters() {
-
+void DragResizeAction::ReadActionParameters()
+{
 }
 
-bool DragResizeAction::Execute() {
-	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
+bool DragResizeAction::Execute()
+{
+	Output *pOut = pManager->GetOutput();
+	Input *pIn = pManager->GetInput();
 	Figure = pManager->GetSelected();
-	if (Figure == NULL) {
+	if (Figure == NULL)
+	{
 		int x, y;
 		pOut->PrintMessage("Error:Select a shape before moving. Click anywhere to continue.");
 		pIn->GetPointClicked(x, y);
@@ -24,22 +26,26 @@ bool DragResizeAction::Execute() {
 
 	pOut->PrintMessage("DragMove: Drag the selected shape to resize");
 
-	bool buttonDown = false;
-	while (!buttonDown) {
-		buttonDown = pIn->GetLeftClickState(NewCorner.x, NewCorner.y);
+	bool ButtonDown = false;
+	while (!ButtonDown)
+	{
+		ButtonDown = pIn->GetLeftClickState(NewCorner.x, NewCorner.y);
 	}
-	if (!Figure->GetCorner(NewCorner, PointIndex)) {
+	if (!Figure->GetCorner(NewCorner, PointIndex))
+	{
 		pOut->ClearStatusBar();
 		return false;
 	}
 	OldCorner = NewCorner;
 	Point CurrentCorner = OldCorner;
-	int err;
-	while (buttonDown) {
-		buttonDown = pIn->GetLeftClickState(NewCorner.x, NewCorner.y);
-		Figure->SetCorner(NewCorner,PointIndex);
-		err = sqrt(pow(CurrentCorner.x - NewCorner.x, 2) + pow(CurrentCorner.y - NewCorner.y, 2));
-		if (err) { // check if it moved by a pixel before updating interface
+	int Err;
+	while (ButtonDown)
+	{
+		ButtonDown = pIn->GetLeftClickState(NewCorner.x, NewCorner.y);
+		Figure->SetCorner(NewCorner, PointIndex);
+		Err = sqrt(pow(CurrentCorner.x - NewCorner.x, 2) + pow(CurrentCorner.y - NewCorner.y, 2));
+		if (Err)
+		{ // check if it moved by a pixel before updating interface
 			pManager->UpdateInterface();
 		}
 		CurrentCorner = NewCorner;
@@ -50,13 +56,11 @@ bool DragResizeAction::Execute() {
 	return true;
 }
 
-
 void DragResizeAction::PlayRecord()
 {
 	if (Figure != NULL)
-		Figure->SetCorner(NewCorner,PointIndex);
+		Figure->SetCorner(NewCorner, PointIndex);
 }
-
 
 void DragResizeAction::Undo()
 {
@@ -72,7 +76,8 @@ void DragResizeAction::Redo()
 
 DragResizeAction::~DragResizeAction()
 {
-	if (Figure != NULL) {
+	if (Figure != NULL)
+	{
 		Figure->DecrementReference();
 
 		if (Figure->CanBeDeleted())
@@ -81,4 +86,3 @@ DragResizeAction::~DragResizeAction()
 		Figure = NULL;
 	}
 }
-

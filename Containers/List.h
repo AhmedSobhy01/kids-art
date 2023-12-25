@@ -1,23 +1,23 @@
-#ifndef RECORDED_ACTION_LIST_H
-#define RECORDED_ACTION_LIST_H
+#ifndef LIST_H
+#define LIST_H
 
-template  <class T>
+template <class T>
 class List
 {
-	T** items;
+	T **items;
 	int ItemsCount;
 	int MaxSize;
 
 public:
 	List(int _MaxSize) : ItemsCount(0), MaxSize(_MaxSize)
 	{
-		items = new T * [MaxSize];
+		items = new T *[MaxSize];
 
 		for (int i = 0; i < MaxSize; i++)
 			items[i] = NULL;
 	}
 
-	T* operator[](int index) const
+	T *operator[](int index) const
 	{
 		if (index < ItemsCount && index >= 0)
 			return items[index];
@@ -25,16 +25,17 @@ public:
 		return NULL;
 	}
 
-	int size() const
+	int Size() const
 	{
 		return ItemsCount;
 	}
 
-	void push_back(T* item, int index)
+	void PushBack(T *item, int index)
 	{
 		if (item && ItemsCount < MaxSize && index >= 0 && index <= ItemsCount && index < MaxSize)
 		{
-			if (index == MaxSize - 1 && items[index] != NULL) return;
+			if (index == MaxSize - 1 && items[index] != NULL)
+				return;
 
 			for (int i = ItemsCount; i > index; --i)
 				items[i] = items[i - 1];
@@ -46,24 +47,24 @@ public:
 		}
 	}
 
-	void push_back(T* item)
+	void PushBack(T *item)
 	{
-		push_back(item, ItemsCount);
+		PushBack(item, ItemsCount);
 	}
 
-	T* pop_back()
+	T *PopBack()
 	{
-		if (!empty())
-			return remove(ItemsCount - 1);
+		if (!Empty())
+			return Remove(ItemsCount - 1);
 
 		return NULL;
 	}
 
-	T* remove(int index)
+	T *Remove(int index)
 	{
 		if (index < ItemsCount && index >= 0)
 		{
-			T* item = items[index];
+			T *item = items[index];
 
 			items[index] = NULL;
 			item->DecrementReference();
@@ -84,9 +85,9 @@ public:
 		return NULL;
 	}
 
-	int remove(T* item)
+	int Remove(T *item)
 	{
-		if (item && !empty())
+		if (item && !Empty())
 		{
 			int index = -1;
 
@@ -100,7 +101,7 @@ public:
 
 			if (index != -1)
 			{
-				remove(index);
+				Remove(index);
 				return index;
 			}
 		}
@@ -108,12 +109,12 @@ public:
 		return -1;
 	}
 
-	bool empty() const
+	bool Empty() const
 	{
 		return ItemsCount == 0;
 	}
 
-	void clear()
+	void Clear()
 	{
 		for (int i = 0; i < ItemsCount; i++)
 			items[i] = NULL;
@@ -123,7 +124,7 @@ public:
 
 	~List()
 	{
-		clear();
+		Clear();
 
 		delete items;
 	}
