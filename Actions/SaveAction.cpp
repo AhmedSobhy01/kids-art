@@ -2,7 +2,9 @@
 #include "..\GUI\Input.h"
 #include "..\GUI\Output.h"
 
-SaveAction::SaveAction(ApplicationManager *pApp) : Action(pApp) {}
+SaveAction::SaveAction(ApplicationManager* pApp) : Action(pApp) {
+	RecordEnabled = false;
+}
 
 void SaveAction::ReadActionParameters()
 {
@@ -27,9 +29,4 @@ bool SaveAction::Execute()
 	}
 	pOut->PrintMessage("Did not Create a File");
 	return 0;
-}
-
-bool SaveAction::ShouldRecord() const
-{
-	return false;
 }

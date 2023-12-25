@@ -4,6 +4,7 @@
 
 UndoAction::UndoAction(ApplicationManager *pApp) : Action(pApp)
 {
+	RecordEnabled = false;
 }
 
 void UndoAction::ReadActionParameters()
@@ -36,9 +37,4 @@ bool UndoAction::Execute()
 	RedoableActions.Push(pAct);
 
 	return true;
-}
-
-bool UndoAction::ShouldRecord() const
-{
-	return false;
 }

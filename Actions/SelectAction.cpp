@@ -5,7 +5,7 @@
 #include "..\GUI\Output.h"
 
 SelectAction::SelectAction(ApplicationManager* pApp): Action(pApp) {
-
+	RecordEnabled = false;
 }
 
 void SelectAction::ReadActionParameters() {
@@ -34,9 +34,4 @@ bool SelectAction::Execute() {
 		Figure->PrintInfo(pManager->GetOutput());
 	}
 	return true;
-}
-
-bool SelectAction::ShouldRecord() const
-{
-	return false;
 }

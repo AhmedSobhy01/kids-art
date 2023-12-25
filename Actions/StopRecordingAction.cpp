@@ -4,6 +4,7 @@
 
 StopRecordingAction::StopRecordingAction(ApplicationManager* pApp) : Action(pApp)
 {
+	RecordEnabled = false;
 }
 
 void StopRecordingAction::ReadActionParameters()
@@ -24,9 +25,5 @@ bool StopRecordingAction::Execute()
 
 	pOut->PrintMessage("No running recording to stop.");
 
-	return false;
-}
-
-bool StopRecordingAction::ShouldRecord() const {
 	return false;
 }

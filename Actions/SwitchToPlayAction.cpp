@@ -6,6 +6,7 @@
 
 SwitchToPlayAction::SwitchToPlayAction(ApplicationManager *pApp): Action(pApp)
 {
+	RecordEnabled = false;
 }
 
 void SwitchToPlayAction::ReadActionParameters() 
@@ -17,8 +18,4 @@ bool SwitchToPlayAction::Execute() {
 	pOut->ClearStatusBar();
 
 	return true;
-}
-
-bool SwitchToPlayAction::ShouldRecord() const {
-	return false;
 }

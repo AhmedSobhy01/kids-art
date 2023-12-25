@@ -1,7 +1,9 @@
 #include "PickByColorAction.h"
 
 PickByColorAction::PickByColorAction(ApplicationManager* pApp) : Action(pApp)
-{ }
+{
+	RecordEnabled = false;
+}
 
 void PickByColorAction::ReadActionParameters() {												// Initializes the data members
 	CorrectPicks = 0;
@@ -73,9 +75,4 @@ bool PickByColorAction::Execute() {
 	pManager->UpdateInterface();
 
 	return true;
-}
-
-bool PickByColorAction::ShouldRecord() const
-{
-	return false;
 }

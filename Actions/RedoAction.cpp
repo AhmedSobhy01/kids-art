@@ -4,6 +4,7 @@
 
 RedoAction::RedoAction(ApplicationManager* pApp) : Action(pApp)
 {
+	RecordEnabled = false;
 }
 
 void RedoAction::ReadActionParameters()
@@ -34,9 +35,4 @@ bool RedoAction::Execute()
 	UndoableActions.Push(pAct);
 
 	return true;
-}
-
-bool RedoAction::ShouldRecord() const
-{
-	return false;
 }
