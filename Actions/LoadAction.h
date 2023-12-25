@@ -10,7 +10,7 @@ using namespace std;
 class LoadAction : public Action
 {
 private:
-	string fName;
+	string FileName;
 public:
 	LoadAction(ApplicationManager*);
 	void ReadActionParameters();

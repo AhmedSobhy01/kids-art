@@ -29,10 +29,10 @@ bool ChangeFillColorAction::Execute()
 	Output* pOut = pManager->GetOutput();
 	if (Figure != NULL)
 	{
-		OldColor = Figure->GetFillClr();
+		OldColor = Figure->GetFillColor();
 		NewColor = pIn->GetSelectedColor(pOut);
 		UI.FillColor = NewColor;
-		Figure->ChngFillClr(NewColor);
+		Figure->ChangeFillColor(NewColor);
 		UI.FillColor = NewColor;
 		pOut->ClearStatusBar();
 		Figure->SetSelected(false);
@@ -48,7 +48,7 @@ void ChangeFillColorAction::PlayRecord()
 {
 	if (Figure)
 	{
-		Figure->ChngFillClr(NewColor);
+		Figure->ChangeFillColor(NewColor);
 		UI.FillColor = NewColor;
 	}
 }
@@ -57,7 +57,7 @@ void ChangeFillColorAction::Undo()
 {
 	if (Figure)
 	{
-		Figure->ChngFillClr(OldColor);
+		Figure->ChangeFillColor(OldColor);
 		UI.FillColor = OldColor;
 	}
 }
@@ -66,7 +66,7 @@ void ChangeFillColorAction::Redo()
 {
 	if (Figure)
 	{
-		Figure->ChngFillClr(NewColor);
+		Figure->ChangeFillColor(NewColor);
 		UI.FillColor = NewColor;
 	}
 }

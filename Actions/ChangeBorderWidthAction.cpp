@@ -29,7 +29,7 @@ bool ChangeBorderWidthAction::Execute()
 		else
 			UI.PenWidth = 2;
 		NewWidth = UI.PenWidth;
-		Figure->ChngBorderWidth(NewWidth);
+		Figure->ChangeBorderWidth(NewWidth);
 		pOut->CreateDrawToolBar(); // To update border width icon
 		pOut->ClearStatusBar();
 		Figure->SetSelected(false);
@@ -47,7 +47,7 @@ void ChangeBorderWidthAction::PlayRecord()
 	{
 		Output* pOut = pManager->GetOutput();
 		UI.PenWidth = NewWidth;
-		Figure->ChngBorderWidth(NewWidth);
+		Figure->ChangeBorderWidth(NewWidth);
 	}
 }
 
@@ -57,7 +57,7 @@ void ChangeBorderWidthAction::Undo()
 	{
 		Output* pOut = pManager->GetOutput();
 		UI.PenWidth = OldWidth;
-		Figure->ChngBorderWidth(OldWidth);
+		Figure->ChangeBorderWidth(OldWidth);
 		pOut->CreateDrawToolBar(); // To update border width icon
 	}
 }
@@ -68,7 +68,7 @@ void ChangeBorderWidthAction::Redo()
 	{
 		Output* pOut = pManager->GetOutput();
 		UI.PenWidth = NewWidth;
-		Figure->ChngBorderWidth(NewWidth);
+		Figure->ChangeBorderWidth(NewWidth);
 		pOut->CreateDrawToolBar(); // To update border width icon
 	}
 }

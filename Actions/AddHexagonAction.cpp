@@ -18,12 +18,12 @@ void AddHexagonAction::ReadActionParameters() {
 
 	//Getting Coordinates for the shape position
 	pOut->PrintMessage("New Hexagon: Click at the center");
-	pIn->GetPointClicked(center.x, center.y);
+	pIn->GetPointClicked(Center.x, Center.y);
 
 	//Get drawing, filling colors and pen width from the interface
 	HexagonGfxInfo.DrawClr = pOut->GetCurrentDrawColor();
 	HexagonGfxInfo.FillClr = pOut->GetCurrentFillColor();
-	HexagonGfxInfo.isFilled = (HexagonGfxInfo.FillClr != TRANSPARENT_COLOR);
+	HexagonGfxInfo.IsFilled = (HexagonGfxInfo.FillClr != TRANSPARENT_COLOR);
 	HexagonGfxInfo.BorderWidth = pOut->GetCurrentPenWidth();
 	pOut->ClearStatusBar();
 }
@@ -32,7 +32,7 @@ bool AddHexagonAction::Execute() {
 	ReadActionParameters();
 
 	//Create a hexagon with the parameters read from the user
-	Figure = new CHexagon(center, HexagonGfxInfo);
+	Figure = new CHexagon(Center, HexagonGfxInfo);
 	Figure->IncrementReference();
 
 	//Add the hexagon to the list of figures
@@ -42,8 +42,8 @@ bool AddHexagonAction::Execute() {
 
 void AddHexagonAction::PlayRecord()
 {
-	Figure->SetCenter(center);
-	Figure->ChngFillClr(UI.FillColor);
-	Figure->ChngDrawClr(UI.DrawColor);
+	Figure->SetCenter(Center);
+	Figure->ChangeFillColor(UI.FillColor);
+	Figure->ChangeDrawColor(UI.DrawColor);
 	pManager->AddFigure(Figure);
 }

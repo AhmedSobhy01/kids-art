@@ -78,7 +78,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\Release/graphics_prj.exe</OutputFile>
+      <OutputFile>.\Release/PT Project.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ProgramDatabaseFile>.\Release/graphics_prj.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>

@@ -33,7 +33,7 @@ void PickByShapeAction::GetClickedAction(bool& ChangedAction, bool& EmptyClick) 
 		ChangedAction = true;
 	else {
 		CFigure* ClickedFigure = pManager->GetFigure(P.x, P.y);
-		if (ClickedFigure == NULL || ClickedFigure->isHidden()) {
+		if (ClickedFigure == NULL || ClickedFigure->IsHidden()) {
 			EmptyClick = true;
 			return;
 		}

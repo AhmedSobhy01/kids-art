@@ -4,14 +4,14 @@
 #include "UndoableAction.h"
 #include "../Figures/CFigure.h"
 
-class MoveAction: public UndoableAction
+class MoveAction : public UndoableAction
 {
     Point NewCenter;
     Point OldCenter;
-    CFigure* Figure;
+    CFigure *Figure;
 
 public:
-    MoveAction(ApplicationManager* pApp);
+    MoveAction(ApplicationManager *);
     virtual void ReadActionParameters();
     virtual bool Execute();
     virtual void PlayRecord();
