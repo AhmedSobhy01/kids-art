@@ -2,32 +2,36 @@
 #include <string>
 using namespace std;
 
-int CFigure::last_ID = 0;
+int CFigure::LastID = 0;
 
 CFigure::CFigure()
 {
 	Selected = false;
 	Hidden = false;
-	last_ID++;
-	ID = last_ID;
+	LastID++;
+	ID = LastID;
 	ReferenceCount = 0;
 }
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
-{ 
+{
 	ReferenceCount = 0;
-	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
+	FigGfxInfo = FigureGfxInfo; // Default status is non-filled.
 	Selected = false;
 	Hidden = false;
-	last_ID++;
-	ID = last_ID;
+	LastID++;
+	ID = LastID;
 }
 
 void CFigure::SetSelected(bool s)
-{	Selected = s; }
+{
+	Selected = s;
+}
 
 bool CFigure::IsSelected() const
-{	return Selected; }
+{
+	return Selected;
+}
 
 color CFigure::GetDrawClr() const
 {
@@ -45,12 +49,14 @@ int CFigure::GetBorderWidth() const
 }
 
 void CFigure::ChngDrawClr(color Dclr)
-{	FigGfxInfo.DrawClr = Dclr; }
+{
+	FigGfxInfo.DrawClr = Dclr;
+}
 
 void CFigure::ChngFillClr(color Fclr)
 {
-	FigGfxInfo.isFilled = Fclr != TRANSPARENT_COLOR;
-	FigGfxInfo.FillClr = Fclr; 
+	FigGfxInfo.IsFilled = Fclr != TRANSPARENT_COLOR;
+	FigGfxInfo.FillClr = Fclr;
 }
 
 void CFigure::ChngBorderWidth(int BWidth)
@@ -58,34 +64,37 @@ void CFigure::ChngBorderWidth(int BWidth)
 	FigGfxInfo.BorderWidth = BWidth;
 }
 
-bool CFigure::isHidden() {
+bool CFigure::isHidden()
+{
 	return Hidden;
 }
 
-void CFigure::Hide() {
+void CFigure::Hide()
+{
 	Hidden = true;
 }
 
-void CFigure::UnHide() {
+void CFigure::UnHide()
+{
 	Hidden = false;
 }
 
-bool CFigure::isFilled()
+bool CFigure::IsFilled()
 {
-	return FigGfxInfo.isFilled;
+	return FigGfxInfo.IsFilled;
 }
 
-bool CFigure::operator==(CFigure& Fig2)
+bool CFigure::operator==(CFigure &Fig2)
 {
-	return (Type() == Fig2.Type())&& (GetFillClr() == Fig2.GetFillClr());
+	return (Type() == Fig2.Type()) && (GetFillClr() == Fig2.GetFillClr());
 }
 
 void CFigure::ResetID()
 {
-	last_ID = 0;
+	LastID = 0;
 }
 
-
-string CFigure::Type(){
-	return type;
+string CFigure::Type()
+{
+	return TypeName;
 }

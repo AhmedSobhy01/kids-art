@@ -12,9 +12,9 @@ void UndoAction::ReadActionParameters()
 
 bool UndoAction::Execute()
 {
-	UndoableActionStack &undoableActions = pManager->GetUndoableActionsStack();
+	UndoableActionStack &UndoableActions = pManager->GetUndoableActionsStack();
 
-	if (undoableActions.empty())
+	if (UndoableActions.Empty())
 	{
 		Output *pOut = pManager->GetOutput();
 		Input *pIn = pManager->GetInput();
@@ -27,13 +27,13 @@ bool UndoAction::Execute()
 		return false;
 	}
 
-	UndoableActionStack &redoableActions = pManager->GetRedoableActionsStack();
+	UndoableActionStack &RedoableActions = pManager->GetRedoableActionsStack();
 
-	UndoableAction *pAct = undoableActions.pop();
+	UndoableAction *pAct = UndoableActions.Pop();
 
 	pAct->Undo();
 
-	redoableActions.push(pAct);
+	RedoableActions.push(pAct);
 
 	return true;
 }
