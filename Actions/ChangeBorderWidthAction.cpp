@@ -30,8 +30,6 @@ bool ChangeBorderWidthAction::Execute()
 		Figure->ChangeBorderWidth(NewWidth);
 		pOut->CreateDrawToolBar(); // To update border width icon
 		pOut->ClearStatusBar();
-		Figure->SetSelected(false);
-		pManager->SetSelected(NULL);
 
 		return true;
 	}
