@@ -5,21 +5,26 @@
 
 class CCircle : public CFigure
 {
-private:
-	Point Center;
-	Point Radius;
+	Point Center; // Center of the circle
+	Point Radius; // Radius of the circle
 
 public:
 	CCircle();
 	CCircle(Point, Point, GfxInfo);
-	void Draw(Output *);
-	bool IsPointInside(Point);
-	Point GetCenter() const;
-	void SetCenter(Point);
-	void Save(ofstream &);
-	void Load(ifstream &);
-	void PrintInfo(Output *);
-	bool GetCorner(Point &, int &);
-	void SetCorner(Point, int);
+
+	void Draw(Output *); // Draw the figure
+
+	bool IsPointInside(Point); // Check whether the point is inside the figure or not
+
+	Point GetCenter() const; // Get the center of the figure
+	void SetCenter(Point);	 // Set the center of the figure
+
+	void Save(ofstream &); // Save the figure parameters to the file
+	void Load(ifstream &); // Load the figure parameters to the file
+
+	void PrintInfo(Output *); // Print all figure info on the status bar
+
+	bool GetCorner(Point &, int &); // Get the corner of the figure
+	void SetCorner(Point, int);		// Set the corner of the figure
 };
 #endif

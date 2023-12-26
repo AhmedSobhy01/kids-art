@@ -2,7 +2,8 @@
 #define MOVE_ACTION_H
 
 #include "UndoableAction.h"
-#include "../Figures/CFigure.h"
+#include "..\Figures\CFigure.h"
+#include "..\ApplicationManager.h"
 
 class MoveAction : public UndoableAction
 {
@@ -12,14 +13,16 @@ class MoveAction : public UndoableAction
 
 public:
     MoveAction(ApplicationManager *);
+
     virtual void ReadActionParameters();
     virtual bool Execute();
+
     virtual void PlayRecord();
 
     virtual void Undo();
     virtual void Redo();
 
-    ~MoveAction();
+    virtual ~MoveAction();
 };
 
 #endif

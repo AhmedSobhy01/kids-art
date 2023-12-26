@@ -84,13 +84,13 @@ __declspec(selectany) // This line to prevent "redefinition error"
 
 	int ColorMenuWidth, ColorMenuHeight, ColorMenuItemWidth;
 
-	color DrawColor;	  // Drawing color
-	color FillColor;	  // Filling color
-	color HighlightColor; // Highlighting color
-	color MsgColor;		  // Messages color
-	color BackgroundColor;	  // Background color
-	color StatusBarColor; // Status bar color
-	int PenWidth;		  // Width of the pen that draws shapes
-} UI;					  // Create a global object UI
+	color DrawColor;	   // Drawing color
+	color FillColor;	   // Filling color
+	color HighlightColor;  // Highlighting color
+	color MsgColor;		   // Messages color
+	color BackgroundColor; // Background color
+	color StatusBarColor;  // Status bar color
+	int PenWidth;		   // Width of the pen that draws shapes
+} UI;					   // Create a global object UI
 
 #endif

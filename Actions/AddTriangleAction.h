@@ -3,10 +3,10 @@
 
 #include "Action.h"
 #include "UndoableFigureAction.h"
+#include "..\ApplicationManager.h"
 
 class AddTriangleAction : public UndoableFigureAction
 {
-private:
 	Point P1;
 	Point P2;
 	Point P3;
@@ -17,6 +17,7 @@ public:
 
 	virtual void ReadActionParameters();
 	virtual bool Execute();
+
 	virtual void PlayRecord();
 };
 

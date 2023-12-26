@@ -31,14 +31,13 @@
 #include "Actions\DragResizeAction.h"
 #include "Actions\ChangeBorderWidthAction.h"
 
-// Constructor
 ApplicationManager::ApplicationManager() : FigList(MaxFigCount), RecordedActions(MaxRecordableActions), IsRecording(false), IsPlayingRecording(false), UndoableActions(MaxUndoableActions), RedoableActions(MaxUndoableActions), PlayActionSoundEnabled(true)
 {
 	// Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
 
-	SelectedFig = NULL;
+	SelectedFig = NULL; // Initialize the selected figure by NULL
 }
 
 //==================================================================================//
@@ -49,13 +48,12 @@ ActionType ApplicationManager::GetUserAction() const
 	// Ask the input to get the action from the user.
 	return pIn->GetUserAction();
 }
-////////////////////////////////////////////////////////////////////////////////////
-// Creates an action and executes it
+
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
 	Action *pAct = NULL;
 
-	// According to Action Type, create the corresponding action object
+	// According to action type, create the corresponding action object and execute it
 	switch (ActType)
 	{
 	case TO_PLAY:
@@ -143,67 +141,71 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new ToggleSoundAction(this);
 		break;
 	case EXIT:
-		/// create ExitAction here
 		pAct = new ExitAction(this);
 		break;
-	case STATUS: // a click on the status bar ==> no action
+	case STATUS: // a click on the status bar
 		return;
 	}
 
 	// Execute the created action
 	if (pAct != NULL)
 	{
-		if (ActType != UNDO && ActType != REDO)
+		if (ActType != UNDO && ActType != REDO) // If the action is not undo or redo, clear the redoable actions stack
 			ClearRedoableActionsStack();
 
-		bool result = pAct->Execute(); // Execute
+		bool result = pAct->Execute(); // Execute the action
 
 		if (result) // Play sound if action executed correctly
 			PlayActionSound(ActType);
 
-		bool a = AddActionToRecordings(pAct, result);
-		bool b = AddActionToUndoables(pAct, result);
+		bool a = AddActionToRecordings(pAct, result); // Add the action to the recorded actions list
+		bool b = AddActionToUndoables(pAct, result);  // Add the action to the undoable actions stack
 
-		if (!a && !b)
+		if (!a && !b) // If the action is not added to the recorded actions list or the undoable actions stack, delete it
 			delete pAct;
 
-		pAct = NULL;
+		pAct = NULL; // Reset the pointer to the action
 	}
 }
+
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
-
-// Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure *pFig)
 {
-	FigList.PushBack(pFig);
+	FigList.PushBack(pFig); // Add the figure to the end of the list
 }
+
 void ApplicationManager::AddFigure(CFigure *pFig, int Index)
 {
-	FigList.PushBack(pFig, Index);
+	FigList.PushBack(pFig, Index); // Add the figure to the end of the list at a specific index
 }
-///////s/////////////////////////////////////////////////////////////////////////////
+
 int ApplicationManager::RemoveFigure(CFigure *pFig)
 {
-	return FigList.Remove(pFig);
+	return FigList.Remove(pFig); // Remove the figure from the list and return its index
 }
+
 CFigure *ApplicationManager::GetSelected()
 {
-	return SelectedFig;
+	return SelectedFig; // Return the selected figure
 }
+
 void ApplicationManager::SetSelected(CFigure *c)
 {
-	SelectedFig = c;
+	SelectedFig = c; // Set the selected figure
 }
 
+//==================================================================================//
+//						Recording Actions Functions									//
+//==================================================================================//
 bool ApplicationManager::AddActionToRecordings(Action *pAct, bool Flag)
 {
-	if (IsCurrentlyRecording() && Flag && pAct->ShouldRecord())
+	if (IsCurrentlyRecording() && Flag && pAct->ShouldRecord()) // If the user is currently recording and the action should be recorded, add the action to the recorded actions list
 	{
-		RecordedActions.PushBack(pAct);
+		RecordedActions.PushBack(pAct); // Add the action to the end of the list
 
-		if (RecordedActions.Size() == MaxRecordableActions)
+		if (RecordedActions.Size() == MaxRecordableActions) // If the number of recorded actions reaches the maximum number of recordable actions, stop recording
 		{
 			SetRecordingState(false);
 
@@ -223,48 +225,56 @@ List<Action> &ApplicationManager::GetRecordedActionsList()
 
 void ApplicationManager::ClearRecordedActionsList()
 {
-	int Size = RecordedActions.Size();
+	int Size = RecordedActions.Size(); // Get the number of recorded actions
 
-	for (int i = 0; i < Size; i++)
+	for (int i = 0; i < Size; i++) // Delete all recorded actions
 	{
-		Action *pAct = RecordedActions.PopBack();
+		Action *pAct = RecordedActions.PopBack(); // Remove the last action from the list
 
-		if (pAct->CanBeDeleted())
+		if (pAct->CanBeDeleted()) // If the action can be deleted, delete it
 			delete pAct;
 	}
 }
+
 void ApplicationManager::SetRecordingState(bool State)
 {
-	IsRecording = State;
-	pOut->SetRecordingState(State);
+	IsRecording = State;			// Set recording state
+	pOut->SetRecordingState(State); // Set recording state in the output class as well (to change the color of the record button)
 }
+
 bool ApplicationManager::CanRecord() const
 {
-	return FigList.Empty() && UndoableActions.Empty() && RedoableActions.Empty();
+	return FigList.Empty() && UndoableActions.Empty() && RedoableActions.Empty(); // Return true if the FigList and the undoable and redoable actions stacks are empty
 }
+
 bool ApplicationManager::IsCurrentlyRecording() const
 {
-	return IsRecording;
+	return IsRecording; // Return true if the user is currently recording
 }
+
 void ApplicationManager::SetPlayingRecordingState(bool State)
 {
-	IsPlayingRecording = State;
+	IsPlayingRecording = State; // Set playing recording state
 }
+
 bool ApplicationManager::IsCurrentlyPlayingRecording() const
 {
-	return IsPlayingRecording;
+	return IsPlayingRecording; // Return true if the user is currently playing a recording
 }
-////////////////////////////////////////////////////////////////////////////////////
+
+//==================================================================================//
+//						Figures Play Model Helper Functions							//
+//==================================================================================//
 CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
-	// If a figure is found return a pointer to it.
-	// if this point (x,y) does not belong to any figure return NULL
-	Point P = {x, y};
-	bool Found = false;
-	int i = FigList.Size() - 1;
-	while (i >= 0 && !Found)
+	Point P = {x, y}; // Create a point with the given coordinates
+
+	bool Found = false;			// Flag to indicate whether a figure is found or not
+	int i = FigList.Size() - 1; // Start searching from the last figure in the list
+
+	while (i >= 0 && !Found) // Search for a figure until a figure is found or the end of the list is reached
 	{
-		if (FigList[i]->IsPointInside(P))
+		if (FigList[i]->IsPointInside(P)) // If the point is inside the figure, set the flag to true and stop searching
 		{
 			Found = true;
 		}
@@ -272,50 +282,42 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 			i--;
 	}
 
-	if (Found)
+	if (Found) // If a figure is found, return it
 		return FigList[i];
 
-	// Add your code here to search for a figure given a point x,y
-	// Remember that ApplicationManager only calls functions do NOT implement it.
-
-	return NULL;
+	return NULL; // If no figure is found, return NULL
 }
 
 CFigure *ApplicationManager::GetRandomFigure()
 {
-	int j = rand() % FigList.Size();
+	int j = rand() % FigList.Size(); // Generate a random number between 0 and the number of figures in the FigList
+
 	return FigList[j];
 }
 
 void ApplicationManager::ClearFigures()
 {
-	int Size = FigList.Size();
+	int Size = FigList.Size(); // Get the number of figures in the FigList
 
-	for (int i = 0; i < Size; i++)
+	for (int i = 0; i < Size; i++) // Delete all figures
 	{
-		CFigure *pFig = FigList.PopBack();
+		CFigure *pFig = FigList.PopBack(); // Remove the last figure from the list
 
-		if (pFig->CanBeDeleted())
+		if (pFig->CanBeDeleted()) // If the figure can be deleted, delete it
 			delete pFig;
 	}
 }
 
-void ApplicationManager::SaveAll(ofstream &FileOutputStream)
-{
-	FileOutputStream << UI.DrawColor << " " << UI.FillColor << " " << UI.BackgroundColor << " " << UI.PenWidth << endl;
-	FileOutputStream << FiguresCount() << endl;
-	for (int i = 0; i < FiguresCount(); i++)
-		FigList[i]->Save(FileOutputStream);
-}
-
 int ApplicationManager::CountFigColor(CFigure *Fig)
 {
-	int Counter = 0;
-	for (int i = 0; i < FigList.Size(); i++)
+	int Counter = 0; // Counter to count the number of figures with the same color and type
+
+	for (int i = 0; i < FigList.Size(); i++) // Loop on all figures in the FigList
 	{
-		if (FigList[i]->Type() == Fig->Type() && FigList[i]->GetFillColor() == Fig->GetFillColor())
+		if (FigList[i]->Type() == Fig->Type() && FigList[i]->GetFillColor() == Fig->GetFillColor()) // If the figure has the same type and color, increment the counter
 			Counter++;
 	}
+
 	return Counter;
 }
 
@@ -329,44 +331,62 @@ void ApplicationManager::ResetColors()
 
 int ApplicationManager::CountFigure(CFigure *fig)
 {
-	int Counter = 0;
-	for (int i = 0; i < FigList.Size(); i++)
+	int Counter = 0; // Counter to count the number of figures with the same type
+
+	for (int i = 0; i < FigList.Size(); i++) // Loop on all figures in the FigList
 	{
-		if (FigList[i]->Type() == fig->Type())
+		if (FigList[i]->Type() == fig->Type()) // If the figure has the same type, increment the counter
 			Counter++;
 	}
+
 	return Counter;
 }
 
 int ApplicationManager::CountColor(color RandomColor)
 {
-	int Counter = 0;
-	for (int i = 0; i < FigList.Size(); i++)
+	int Counter = 0; // Counter to count the number of figures with the same color
+
+	for (int i = 0; i < FigList.Size(); i++) // Loop on all figures in the FigList
 	{
-		if (FigList[i]->GetFillColor() == RandomColor)
+		if (FigList[i]->GetFillColor() == RandomColor) // If the figure has the same color, increment the counter
 			Counter++;
 	}
+
 	return Counter;
 }
 
 int ApplicationManager::FiguresCount()
 {
-	return FigList.Size();
+	return FigList.Size(); // Return the number of figures in the FigList
 }
 
 void ApplicationManager::UnhideFigures()
 {
-	for (int i = 0; i < FigList.Size(); i++)
+	for (int i = 0; i < FigList.Size(); i++) // Loop on all figures in the FigList and unhide them
 		FigList[i]->Unhide();
 }
 
+//==================================================================================//
+//						Save & Load Functions										//
+//==================================================================================//
+void ApplicationManager::SaveAll(ofstream &FileOutputStream)
+{
+	FileOutputStream << UI.DrawColor << " " << UI.FillColor << " " << UI.BackgroundColor << " " << UI.PenWidth << endl;
+	FileOutputStream << FiguresCount() << endl;
+	for (int i = 0; i < FiguresCount(); i++)
+		FigList[i]->Save(FileOutputStream);
+}
+
+//==================================================================================//
+//						Action Sound Functions										//
+//==================================================================================//
 void ApplicationManager::PlayActionSound(ActionType ActType) const
 {
-	if (ShouldPlayActionSound())
+	if (ShouldPlayActionSound()) // If the user wants to play action sounds, play the corresponding sound
 	{
-		char *Filename = NULL;
+		char *Filename = NULL; // Filename of the sound to be played
 
-		switch (ActType)
+		switch (ActType) // Set the filename according to the action type
 		{
 		case DRAW_RECT:
 			Filename = "sounds\\Rectangle.wav";
@@ -395,7 +415,7 @@ void ApplicationManager::PlayActionSound(ActionType ActType) const
 		}
 
 		if (Filename != NULL)
-			PlaySound(Filename, NULL, SND_FILENAME | SND_ASYNC);
+			PlaySound(Filename, NULL, SND_FILENAME | SND_ASYNC); // Play the sound
 	}
 }
 
@@ -406,83 +426,90 @@ bool ApplicationManager::ShouldPlayActionSound() const
 
 void ApplicationManager::SetPlayActionSoundState(bool State)
 {
-	PlayActionSoundEnabled = State;
-	pOut->SetPlayActionState(State);
+	PlayActionSoundEnabled = State;		  // Set the flag to indicate whether the user wants to play action sounds or not
+	pOut->SetPlayActionSoundState(State); // Set the flag in the output class as well (to change the color of the sound button)
 }
 
+//==================================================================================//
+//						Undo & Redo Functions										//
+//==================================================================================//
 bool ApplicationManager::AddActionToUndoables(Action *pAct, bool Flag)
 {
-	if (Flag && dynamic_cast<UndoableAction *>(pAct) != NULL)
+	if (Flag && dynamic_cast<UndoableAction *>(pAct) != NULL) // If the action is undoable and executed correctly, add it to the undoable actions stack
 	{
-		UndoableActions.Push(dynamic_cast<UndoableAction *>(pAct));
+		UndoableActions.Push(dynamic_cast<UndoableAction *>(pAct)); // Add the action to the end of the stack
 
 		return true;
 	}
 
-	return false;
+	return false; // Return false if the action is not undoable or not executed correctly
 }
+
 UndoableActionStack &ApplicationManager::GetUndoableActionsStack()
 {
 	return UndoableActions;
 }
+
 UndoableActionStack &ApplicationManager::GetRedoableActionsStack()
 {
 	return RedoableActions;
 }
+
 void ApplicationManager::ClearUndoableActionsStack()
 {
-	int Size = UndoableActions.Size();
+	int Size = UndoableActions.Size(); // Get the number of actions in the stack
 
-	for (int i = 0; i < Size; i++)
+	for (int i = 0; i < Size; i++) // Delete all actions
 	{
-		UndoableAction *pAct = UndoableActions.Pop();
+		UndoableAction *pAct = UndoableActions.Pop(); // Remove the last action from the stack
 
-		if (pAct->CanBeDeleted())
+		if (pAct->CanBeDeleted()) // If the action can be deleted, delete it
 			delete pAct;
 	}
 }
+
 void ApplicationManager::ClearRedoableActionsStack()
 {
-	int Size = RedoableActions.Size();
+	int Size = RedoableActions.Size(); // Get the number of actions in the stack
 
-	for (int i = 0; i < Size; i++)
+	for (int i = 0; i < Size; i++) // Delete all actions
 	{
-		UndoableAction *pAct = RedoableActions.Pop();
+		UndoableAction *pAct = RedoableActions.Pop(); // Remove the last action from the stack
 
-		if (pAct->CanBeDeleted())
+		if (pAct->CanBeDeleted()) // If the action can be deleted, delete it
 			delete pAct;
 	}
 }
+
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
-
-// Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
-	pOut->ClearDrawArea();
-	for (int i = 0; i < FigList.Size(); i++)
+	pOut->ClearDrawArea(); // Clear the drawing area
+
+	for (int i = 0; i < FigList.Size(); i++) // Loop on all figures in the FigList
 	{
-		if (!FigList[i]->IsHidden())
-			FigList[i]->Draw(pOut); // Call Draw function (virtual member fn)
+		if (!FigList[i]->IsHidden()) // If the figure is not hidden, draw it
+			FigList[i]->Draw(pOut);
 	}
-	pOut->UpdateInterface();
+
+	pOut->UpdateInterface(); // Update the interface
 }
-////////////////////////////////////////////////////////////////////////////////////
-// Return a pointer to the input
+
 Input *ApplicationManager::GetInput() const
 {
 	return pIn;
 }
-// Return a pointer to the output
+
 Output *ApplicationManager::GetOutput() const
 {
 	return pOut;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-// Destructor
+
 ApplicationManager::~ApplicationManager()
 {
-	delete pIn;
-	delete pOut;
+	delete pIn;	 // Delete the input
+	delete pOut; // Delete the output
 }

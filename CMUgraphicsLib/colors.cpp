@@ -5,105 +5,109 @@ This file was last modified on 05.16.1999
 
 #include "colors.h"
 
-ostream &operator<<(ostream &c, const color &col)
+ostream &operator<<(ostream &OutputStream, const color &Color)
 {
-	if (col == PINK)
-		c << "PINK";
-	else if (col == RED)
-		c << "RED";
-	else if (col == ORANGE)
-		c << "ORANGE";
-	else if (col == YELLOW)
-		c << "YELLOW";
-	else if (col == GREEN)
-		c << "GREEN";
-	else if (col == SKY)
-		c << "SKY";
-	else if (col == BLUE)
-		c << "BLUE";
-	else if (col == LAVENDER)
-		c << "LAVENDER";
-	else if (col == BASE)
-		c << "WHITE";
-	else if (col == BLACK)
-		c << "BLACK";
+	// Compare the color to each color and output the corresponding string
+	if (Color == PINK)
+		OutputStream << "PINK";
+	else if (Color == RED)
+		OutputStream << "RED";
+	else if (Color == ORANGE)
+		OutputStream << "ORANGE";
+	else if (Color == YELLOW)
+		OutputStream << "YELLOW";
+	else if (Color == GREEN)
+		OutputStream << "GREEN";
+	else if (Color == SKY)
+		OutputStream << "SKY";
+	else if (Color == BLUE)
+		OutputStream << "BLUE";
+	else if (Color == LAVENDER)
+		OutputStream << "LAVENDER";
+	else if (Color == BASE)
+		OutputStream << "WHITE";
+	else if (Color == BLACK)
+		OutputStream << "BLACK";
 	else
-		c << "NO_FILL";
-	return c;
+		OutputStream << "NO_FILL";
+
+	return OutputStream;
 }
 
-istream &operator>>(istream &c, color &col)
+istream &operator>>(istream &InputStream, color &Color)
 {
-	std::string x;
-	c >> x;
-	if (x == "BLACK")
-		col = BLACK;
-	else if (x == "RED")
-		col = RED;
-	else if (x == "BLUE")
-		col = BLUE;
-	else if (x == "GREEN")
-		col = GREEN;
-	else if (x == "PINK")
-		col = PINK;
-	else if (x == "ORANGE")
-		col = ORANGE;
-	else if (x == "SKY")
-		col = SKY;
-	else if (x == "LAVENDER")
-		col = LAVENDER;
-	else if (x == "YELLOW")
-		col = YELLOW;
-	else if (x == "WHITE")
-		col = BASE;
+	std::string X;
+	InputStream >> X; // Read the color as a string
+
+	// Compare the string to each color and set the color to the corresponding color
+	if (X == "BLACK")
+		Color = BLACK;
+	else if (X == "RED")
+		Color = RED;
+	else if (X == "BLUE")
+		Color = BLUE;
+	else if (X == "GREEN")
+		Color = GREEN;
+	else if (X == "PINK")
+		Color = PINK;
+	else if (X == "ORANGE")
+		Color = ORANGE;
+	else if (X == "SKY")
+		Color = SKY;
+	else if (X == "LAVENDER")
+		Color = LAVENDER;
+	else if (X == "YELLOW")
+		Color = YELLOW;
+	else if (X == "WHITE")
+		Color = BASE;
 	else
-		col = TRANSPARENT_COLOR;
-	return c;
+		Color = TRANSPARENT_COLOR;
+
+	return InputStream;
 }
 
 bool operator==(color a, color b)
 {
-
-	return ((a.ucRed == b.ucRed) && (a.ucGreen == b.ucGreen) && (a.ucBlue == b.ucBlue));
+	return ((a.ucRed == b.ucRed) && (a.ucGreen == b.ucGreen) && (a.ucBlue == b.ucBlue)); // Compare the RGB values of the two colors
 }
 
 bool operator!=(color a, color b)
 {
-
-	return !(a == b);
+	return !(a == b); // Use the == operator to determine if the colors are not equal
 }
 
-color color::operator-(unsigned char c) const {
+color color::operator-(unsigned char c) const
+{
 	unsigned char r = ucRed <= c ? 0 : ucRed - c;
 	unsigned char g = ucGreen <= c ? 0 : ucGreen - c;
 	unsigned char b = ucBlue <= c ? 0 : ucBlue - c;
-	return color(r,g,b);
+
+	return color(r, g, b);
 }
 
-std::string color::ReturnColor()
+std::string color::ReturnColor() const
 {
-	std::string c;
+	// Compare the color to each color and return the corresponding string
 	if (*this == BLACK)
-		c = "Black";
+		return "Black";
 	else if (*this == RED)
-		c = "Red";
+		return "Red";
 	else if (*this == BLUE)
-		c = "Blue";
+		return "Blue";
 	else if (*this == GREEN)
-		c = "Green";
+		return "Green";
 	else if (*this == PINK)
-		c = "Pink";
+		return "Pink";
 	else if (*this == ORANGE)
-		c = "Orange";
+		return "Orange";
 	else if (*this == SKY)
-		c = "Sky";
+		return "Sky";
 	else if (*this == LAVENDER)
-		c = "Lavender";
+		return "Lavender";
 	else if (*this == YELLOW)
-		c = "Yellow";
+		return "Yellow";
 	else if (*this == BASE)
-		c = "White";
+		return "White";
 	else
-		c = "Transparent";
-	return c;
+		return "Transparent";
 }

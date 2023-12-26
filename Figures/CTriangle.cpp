@@ -119,6 +119,7 @@ bool CTriangle::GetCorner(Point &p, int &Index)
 	}
 	return false;
 }
+
 void CTriangle::SetCorner(Point p, int Index)
 {
 	Point *Corners[3] = {&P1, &P2, &P3};

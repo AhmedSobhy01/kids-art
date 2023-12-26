@@ -1,5 +1,4 @@
 #include "DragResizeAction.h"
-#include "../ApplicationManager.h"
 
 DragResizeAction::DragResizeAction(ApplicationManager *pApp) : UndoableAction(pApp)
 {

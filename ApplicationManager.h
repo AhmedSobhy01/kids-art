@@ -15,85 +15,75 @@ class ApplicationManager
 {
 	enum
 	{
-		MaxFigCount = 200,
-		MaxRecordableActions = 20,
-		MaxUndoableActions = 5,
-	}; // Max no of figures
+		MaxFigCount = 200,		   // Max no of figures
+		MaxRecordableActions = 20, // Max no of actions that can be recorded
+		MaxUndoableActions = 5,	   // Max no of undoable actions
+	};
 
-private:
-	List<CFigure> FigList; // List of done figures
+	List<CFigure> FigList; // List of all figures (Array of pointers)
 
-	List<Action> RecordedActions; // List of recorded actions
-	bool IsRecording;
-	bool IsPlayingRecording;
+	List<Action> RecordedActions; // List of all recorded actions
+	bool IsRecording;			  // Flag to indicate whether the user is recording or not
+	bool IsPlayingRecording;	  // Flag to indicate whether the user is playing a recording or not
 
 	UndoableActionStack UndoableActions; // Stack of actions that can be undone
 	UndoableActionStack RedoableActions; // Stack of actions that can be redone
 
-	bool PlayActionSoundEnabled;
+	bool PlayActionSoundEnabled; // Flag to indicate whether the user wants to play action sounds or not
 
 	CFigure *SelectedFig; // Pointer to the selected figure
 
-	// Pointers to Input and Output classes
-	Input *pIn;
-	Output *pOut;
+	Input *pIn;	  // Pointer to the Input object
+	Output *pOut; // Pointer to the Output object
 
 public:
 	ApplicationManager();
 	~ApplicationManager();
 
-	// -- Action-Related Functions
-	// Reads the input command from the user and returns the corresponding action type
-	ActionType GetUserAction() const;
-	void ExecuteAction(ActionType); // Creates an action and executes it
+	ActionType GetUserAction() const; // Reads the input command from the user and returns the corresponding action type
+	void ExecuteAction(ActionType);	  // Creates an action and executes it
 
-	// -- Figures Management Functions
-	void AddFigure(CFigure*);			// Adds a new figure to the FigList
-	void AddFigure(CFigure*, int);			// Adds a new figure to the FigList at specific index
-	int RemoveFigure(CFigure*);		// Removes a figure from the FigList
-	CFigure *GetFigure(int, int) const; // Search for a figure given a point inside the figure
-	void ClearFigures();
-	void SaveAll(ofstream&);
+	void AddFigure(CFigure *);			// Adds a new figure to the FigList
+	void AddFigure(CFigure *, int);		// Adds a new figure to the FigList at a specific index
+	int RemoveFigure(CFigure *);		// Removes a figure from the FigList
+	CFigure *GetFigure(int, int) const; // Returns a pointer to the figure at a specific point
+	void ClearFigures();				// Deletes all figures in the FigList
+	void SaveAll(ofstream &);			// Saves all figures in the FigList to the file
 
-	CFigure* GetRandomFigure();				// Creates a random index and returns its corresponding figure in the FigList
-	int CountColor(color);
-	int CountFigure(CFigure*);				// Counts how many instances of a passed figure
-	int CountFigColor(CFigure*);
-	void ResetColors();
+	CFigure *GetRandomFigure();	  // Returns a pointer to a random figure in the FigList (used in Play Mode)
+	int CountColor(color);		  // Counts how many figures of a specific color are in the FigList
+	int CountFigure(CFigure *);	  // Counts how many figures of a specific type are in the FigList
+	int CountFigColor(CFigure *); // Counts how many figures of a specific color and type are in the FigList
+	void ResetColors();			  // Resets the colors of all figures in the FigList to their original colors
+	int FiguresCount();			  // Returns the number of figures in the FigList
+	void UnhideFigures();		  // Unhides all hidden figures in the FigList
 
-	int FiguresCount();						// Returns the number of figures in FigList
-	void UnhideFigures();					// Reveals the hidden figures during the Play Mode 
+	void PlayActionSound(ActionType) const; // Plays a sound when an action is executed
+	bool ShouldPlayActionSound() const;		// Returns whether the user wants to play action sounds or not
+	void SetPlayActionSoundState(bool);		// Sets whether the user wants to play action sounds or not
 
-	void PlayActionSound(ActionType) const;
-	bool ShouldPlayActionSound() const;
-	void SetPlayActionSoundState(bool);
+	CFigure *GetSelected();		 // Returns a pointer to the selected figure
+	void SetSelected(CFigure *); // Sets the selected figure
 
-	CFigure* GetSelected();
-	void SetSelected(CFigure*);
+	bool AddActionToRecordings(Action *, bool); // Adds an action to the recorded actions list
+	List<Action> &GetRecordedActionsList();		// Returns a reference to the recorded actions list
+	void ClearRecordedActionsList();			// Clears the recorded actions list
 
-	// -- Recorded Actions List
-	bool AddActionToRecordings(Action*, bool);
-	List<Action>& GetRecordedActionsList();
-	void ClearRecordedActionsList();
+	void SetRecordingState(bool);			  // Sets the recording state
+	bool CanRecord() const;					  // Returns whether the user can record or not
+	bool IsCurrentlyRecording() const;		  // Returns whether the user is currently recording or not
+	void SetPlayingRecordingState(bool);	  // Sets the playing recording state
+	bool IsCurrentlyPlayingRecording() const; // Returns whether the user is currently playing a recording or not
 
-	// -- Recorded State Management
-	void SetRecordingState(bool);
-	bool CanRecord() const;
-	bool IsCurrentlyRecording() const;
-	void SetPlayingRecordingState(bool);
-	bool IsCurrentlyPlayingRecording() const;
+	bool AddActionToUndoables(Action *, bool);		// Adds an action to the undoable actions stack
+	UndoableActionStack &GetUndoableActionsStack(); // Returns a reference to the undoable actions stack
+	UndoableActionStack &GetRedoableActionsStack(); // Returns a reference to the redoable actions stack
+	void ClearUndoableActionsStack();				// Clears the undoable actions stack
+	void ClearRedoableActionsStack();				// Clears the redoable actions stack
 
-	// -- Undo & Redo Stacks
-	bool AddActionToUndoables(Action*, bool);
-	UndoableActionStack &GetUndoableActionsStack();
-	UndoableActionStack &GetRedoableActionsStack();
-	void ClearUndoableActionsStack();
-	void ClearRedoableActionsStack();
-
-	// -- Interface Management Functions
 	Input *GetInput() const;	  // Return pointer to the input
 	Output *GetOutput() const;	  // Return pointer to the output
-	void UpdateInterface() const; // Redraws all the drawing window
+	void UpdateInterface() const; // Redraws all the drawing area
 };
 
 #endif

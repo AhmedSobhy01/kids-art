@@ -119,6 +119,7 @@ bool CHexagon::GetCorner(Point &p, int &index)
 
 	return false;
 }
+
 void CHexagon::SetCorner(Point p, int index)
 {
 	HexagonSize = sqrt(pow(p.x - Center.x, 2) + pow(p.y - Center.y, 2));

@@ -6,7 +6,10 @@
 #include "..\Figures\CTriangle.h"
 #include "ClearAllAction.h"
 
-LoadAction::LoadAction(ApplicationManager *pApp) : Action(pApp) {}
+LoadAction::LoadAction(ApplicationManager *pApp) : Action(pApp)
+{
+	RecordEnabled = false;
+}
 
 void LoadAction::ReadActionParameters()
 {
@@ -61,9 +64,4 @@ bool LoadAction::Execute()
 	}
 	pOut->PrintMessage("Please Enter a Valid File Name");
 	return 0;
-}
-
-bool LoadAction::ShouldRecord() const
-{
-	return false;
 }

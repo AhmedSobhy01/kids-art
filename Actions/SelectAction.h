@@ -3,12 +3,12 @@
 
 #include "Action.h"
 #include "..\Figures\CFigure.h"
+#include "..\ApplicationManager.h"
 
 class SelectAction : public Action
 {
-private:
     Point P;
-    CFigure* Figure;
+    CFigure *Figure;
 
 public:
     SelectAction(ApplicationManager *);

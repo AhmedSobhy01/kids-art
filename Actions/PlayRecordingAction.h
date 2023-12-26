@@ -2,14 +2,15 @@
 #define PLAY_RECORDING_ACTION_H
 
 #include "Action.h"
-#include "../ApplicationManager.h"
+#include "..\ApplicationManager.h"
 
-class PlayRecordingAction: public Action
+class PlayRecordingAction : public Action
 {
 public:
-	PlayRecordingAction(ApplicationManager*);
-	void ReadActionParameters();
-	bool Execute();
+	PlayRecordingAction(ApplicationManager *);
+
+	virtual void ReadActionParameters();
+	virtual bool Execute();
 };
 
 #endif

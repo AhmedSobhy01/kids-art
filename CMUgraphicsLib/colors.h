@@ -21,10 +21,12 @@ public:
 		ucGreen = Green;
 		ucBlue = Blue;
 	}
-	friend ostream &operator<<(ostream &, const color &);
-	friend istream &operator>>(istream &, color &);
-	std::string ReturnColor();
-	color operator-(unsigned char) const;
+
+	friend ostream &operator<<(ostream &, const color &); // Write a color to the user (as a string)
+	friend istream &operator>>(istream &, color &);		  // Read a color from the user (as a string)
+	color operator-(unsigned char) const;				  // Subtract a value from each color component
+
+	std::string ReturnColor() const; // Returns the color as a string
 
 	// Color components.  0 = no intensity, 255 = full intensity
 	unsigned char ucRed;
@@ -32,8 +34,8 @@ public:
 	unsigned char ucBlue;
 };
 
-bool operator==(color a, color b);
-bool operator!=(color a, color b);
+bool operator==(color a, color b); // Returns true if the colors are equal (same RGB values)
+bool operator!=(color a, color b); // Returns true if the colors are not equal (different RGB values)
 
 /*
 

@@ -1,6 +1,5 @@
 #include "CCircle.h"
 #include "..\GUI\Output.h"
-#include "..\ApplicationManager.h"
 
 CCircle::CCircle() : CFigure()
 {
@@ -18,6 +17,7 @@ void CCircle::Draw(Output *pOut)
 {
 	pOut->DrawCircle(Center, Radius, FigGfxInfo, Selected);
 }
+
 bool CCircle::IsPointInside(Point P)
 {
 	return !Hidden && (sqrt(pow(Center.x - P.x, 2) + pow(Center.y - P.y, 2)) <= sqrt(pow(Center.x - Radius.x, 2) + pow(Center.y - Radius.y, 2)));
@@ -68,6 +68,7 @@ void CCircle::PrintInfo(Output *pOut)
 
 	pOut->PrintMessage(Info);
 }
+
 bool CCircle::GetCorner(Point &p, int &index)
 {
 	// check if the point is on the circle circumeference
@@ -81,6 +82,7 @@ bool CCircle::GetCorner(Point &p, int &index)
 	}
 	return false;
 }
+
 void CCircle::SetCorner(Point P, int)
 {
 	this->Radius = P;

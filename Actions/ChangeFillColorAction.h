@@ -2,17 +2,20 @@
 #define CHANGE_FILL_COLOR_ACTION_H
 
 #include "UndoableAction.h"
+#include "..\ApplicationManager.h"
 
-class ChangeFillColorAction: public UndoableAction
+class ChangeFillColorAction : public UndoableAction
 {
 	color OldColor;
 	color NewColor;
-	CFigure* Figure;
+	CFigure *Figure;
 
 public:
-	ChangeFillColorAction(ApplicationManager*);
+	ChangeFillColorAction(ApplicationManager *);
+
 	virtual void ReadActionParameters();
 	virtual bool Execute();
+
 	virtual void PlayRecord();
 
 	virtual void Undo();

@@ -2,7 +2,7 @@
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 
-StopRecordingAction::StopRecordingAction(ApplicationManager* pApp) : Action(pApp)
+StopRecordingAction::StopRecordingAction(ApplicationManager *pApp) : Action(pApp)
 {
 	RecordEnabled = false;
 }
@@ -13,9 +13,10 @@ void StopRecordingAction::ReadActionParameters()
 
 bool StopRecordingAction::Execute()
 {
-	Output* pOut = pManager->GetOutput();
+	Output *pOut = pManager->GetOutput();
 
-	if (pManager->IsCurrentlyRecording()) {
+	if (pManager->IsCurrentlyRecording())
+	{
 		pManager->SetRecordingState(false);
 
 		pOut->PrintMessage("Recording stopped (operations: " + to_string(pManager->GetRecordedActionsList().Size()) + ").");

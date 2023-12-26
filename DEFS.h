@@ -46,10 +46,25 @@ struct Point // To be used for figures points
 	int x, y;
 };
 
+struct PointDouble // To be used for figures points
+{
+	double x, y;
+	PointDouble(Point P)
+	{
+		x = P.x;
+		y = P.y;
+	};
+	PointDouble()
+	{
+		x = 0;
+		y = 0;
+	}
+};
+
 struct GfxInfo // Graphical info of each figure
 {
-	color DrawColor;	 // Draw color of the figure
-	color FillColor;	 // Fill color of the figure
+	color DrawColor; // Draw color of the figure
+	color FillColor; // Fill color of the figure
 	bool IsFilled;	 // Figure Filled or not
 	int BorderWidth; // Width of figure borders
 };

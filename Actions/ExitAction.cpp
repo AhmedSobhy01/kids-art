@@ -4,6 +4,7 @@
 ExitAction::ExitAction(ApplicationManager *pApp) : Action(pApp)
 {
 }
+
 void ExitAction::ReadActionParameters(){};
 
 bool ExitAction::Execute()

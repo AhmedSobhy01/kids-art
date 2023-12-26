@@ -1,12 +1,17 @@
 #ifndef PICK_BY_SHAPE_ACTION_H
 #define PICK_BY_SHAPE_ACTION_H
-#include "PlayMode.h"
 
-class PickByShapeAction: public PlayMode
+#include "PlayMode.h"
+#include "../ApplicationManager.h"
+
+class PickByShapeAction : public PlayMode
 {
 public:
-	PickByShapeAction(ApplicationManager*);
+	PickByShapeAction(ApplicationManager *);
+
+	virtual bool Execute();
+
 	void StartingMessage();
-	bool Execute();
 };
+
 #endif

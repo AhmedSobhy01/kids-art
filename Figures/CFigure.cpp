@@ -73,12 +73,12 @@ void CFigure::Unhide()
 	Hidden = false;
 }
 
-bool CFigure::IsFilled()
+bool CFigure::IsFilled() const
 {
 	return FigGfxInfo.IsFilled;
 }
 
-bool CFigure::operator==(CFigure& Fig2)				// Compares the type and the color of the figures
+bool CFigure::operator==(CFigure &Fig2) // Compares the type and the color of the figures
 {
 	return (Type() == Fig2.Type()) && (GetFillColor() == Fig2.GetFillColor());
 }
@@ -88,7 +88,7 @@ void CFigure::ResetID()
 	LastID = 0;
 }
 
-std::string CFigure::Type()
+std::string CFigure::Type() const
 {
 	return TypeName;
 }

@@ -14,15 +14,11 @@ bool RedoAction::Execute()
 {
 	UndoableActionStack &RedoableActions = pManager->GetRedoableActionsStack();
 
-	if (RedoableActions.Empty())
+	if (RedoableActions.Empty()) // Nothing to redo
 	{
 		Output *pOut = pManager->GetOutput();
-		Input *pIn = pManager->GetInput();
-		int x, y;
 
-		pOut->PrintMessage("Nothing to redo ... click anywhere to continue");
-		pIn->GetPointClicked(x, y);
-		pOut->PrintMessage("");
+		pOut->PrintMessage("Nothing to redo.");
 
 		return false;
 	}

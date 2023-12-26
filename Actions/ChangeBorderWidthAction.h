@@ -7,19 +7,21 @@
 
 class ChangeBorderWidthAction : public UndoableAction
 {
-private:
 	int OldWidth;
 	int NewWidth;
-	CFigure* Figure;
-	Output* pOut;
+	CFigure *Figure;
+	Output *pOut;
+
 public:
-	ChangeBorderWidthAction(ApplicationManager*);
+	ChangeBorderWidthAction(ApplicationManager *);
+
 	virtual void ReadActionParameters();
 	virtual bool Execute();
+
 	virtual void PlayRecord();
 
 	virtual void Undo();
 	virtual void Redo();
 };
 
-#endif 
+#endif

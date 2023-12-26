@@ -1,6 +1,7 @@
 #include "SaveAction.h"
 
-SaveAction::SaveAction(ApplicationManager* pApp) : Action(pApp) {
+SaveAction::SaveAction(ApplicationManager *pApp) : Action(pApp)
+{
 	RecordEnabled = false;
 }
 

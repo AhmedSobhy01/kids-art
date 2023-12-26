@@ -3,6 +3,7 @@
 
 #include "UndoableAction.h"
 #include "..\Figures\CFigure.h"
+#include "..\ApplicationManager.h"
 
 class DeleteAction : public UndoableAction
 {
@@ -11,14 +12,16 @@ class DeleteAction : public UndoableAction
 
 public:
 	DeleteAction(ApplicationManager *);
+
 	virtual void ReadActionParameters();
 	virtual bool Execute();
+
 	virtual void PlayRecord();
 
 	virtual void Undo();
 	virtual void Redo();
 
-	~DeleteAction();
+	virtual ~DeleteAction();
 };
 
 #endif

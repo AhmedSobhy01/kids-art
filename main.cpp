@@ -2,24 +2,18 @@
 
 int main()
 {
-
-	ActionType ActType;
-	//Create an object of ApplicationManager
-	ApplicationManager AppManager;
+	ActionType ActType;			   // Type of the action selected by the user
+	ApplicationManager AppManager; // Create an object of ApplicationManager
 
 	do
-	{		
-		//Read user action
-		ActType = AppManager.GetUserAction();
+	{
+		ActType = AppManager.GetUserAction(); // Read the user action from the user
 
-		//Exexute the action
-		AppManager.ExecuteAction(ActType);
+		AppManager.ExecuteAction(ActType); // Execute the action (code depends on action type)
 
-		//Update the interface
-		AppManager.UpdateInterface();
+		AppManager.UpdateInterface(); // Update the user interface after executing the action
 
-	} while(ActType != EXIT);
-	
+	} while (ActType != EXIT); // If user selects exit, then exit the loop
+
 	return 0;
 }
-

@@ -2,16 +2,20 @@
 #define CHANGE_OUTLINE_COLOR_ACTION_H
 
 #include "UndoableAction.h"
+#include "..\ApplicationManager.h"
 
-class ChangeOutlineColorAction: public UndoableAction
+class ChangeOutlineColorAction : public UndoableAction
 {
 	color OldColor;
 	color NewColor;
-	CFigure* Figure;
+	CFigure *Figure;
+
 public:
-	ChangeOutlineColorAction(ApplicationManager*);
+	ChangeOutlineColorAction(ApplicationManager *);
+
 	virtual void ReadActionParameters();
 	virtual bool Execute();
+
 	virtual void PlayRecord();
 
 	virtual void Undo();

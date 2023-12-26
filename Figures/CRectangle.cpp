@@ -28,10 +28,12 @@ bool CRectangle::IsPointInside(Point P)
 	bool cond2 = Corner1.y + Corner2.y - length <= 2 * P.y && 2 * P.y <= Corner1.y + Corner2.y + length;
 	return cond1 && cond2;
 }
+
 Point CRectangle::GetCenter() const
 {
 	return {(Corner1.x + Corner2.x) / 2, (Corner1.y + Corner2.y) / 2};
 }
+
 void CRectangle::SetCenter(Point c)
 {
 	Point Center = {(Corner1.x + Corner2.x) / 2, (Corner1.y + Corner2.y) / 2};
@@ -104,6 +106,7 @@ bool CRectangle::GetCorner(Point &p, int &index)
 	}
 	return false;
 }
+
 void CRectangle::SetCorner(Point p, int index)
 {
 	int *Xarr[2] = {&Corner1.x, &Corner2.x};

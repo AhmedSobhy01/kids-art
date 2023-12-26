@@ -3,10 +3,10 @@
 
 #include "Action.h"
 #include "UndoableFigureAction.h"
+#include "..\ApplicationManager.h"
 
 class AddHexagonAction : public UndoableFigureAction
 {
-private:
 	Point Center;
 	GfxInfo HexagonGfxInfo;
 
@@ -15,6 +15,7 @@ public:
 
 	virtual void ReadActionParameters();
 	virtual bool Execute();
+
 	virtual void PlayRecord();
 };
 

@@ -1,9 +1,6 @@
 #include "AddRectAction.h"
 #include "..\Figures\CRectangle.h"
-
-#include "..\ApplicationManager.h"
-
-#include "..\GUI\input.h"
+#include "..\GUI\Input.h"
 #include "..\GUI\Output.h"
 
 AddRectAction::AddRectAction(ApplicationManager *pApp) : UndoableFigureAction(pApp)
