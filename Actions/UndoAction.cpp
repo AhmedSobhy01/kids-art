@@ -12,11 +12,12 @@ void UndoAction::ReadActionParameters()
 
 bool UndoAction::Execute()
 {
+	Output *pOut = pManager->GetOutput();
+
 	UndoableActionStack &UndoableActions = pManager->GetUndoableActionsStack();
 
 	if (UndoableActions.Empty()) // Nothing to undo
 	{
-		Output *pOut = pManager->GetOutput();
 		Input *pIn = pManager->GetInput();
 
 		pOut->PrintMessage("Nothing to undo.");

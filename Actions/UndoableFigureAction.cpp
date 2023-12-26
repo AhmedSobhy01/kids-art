@@ -8,11 +8,17 @@ UndoableFigureAction::UndoableFigureAction(ApplicationManager *pApp) : UndoableA
 void UndoableFigureAction::Undo()
 {
 	pManager->RemoveFigure(Figure); // Remove figure from list of figures
+
+	if (Figure->IsSelected())
+		pManager->GetOutput()->ClearStatusBar();
 }
 
 void UndoableFigureAction::Redo()
 {
 	pManager->AddFigure(Figure); // Add figure to list of figures
+
+	if (Figure->IsSelected())
+		Figure->PrintInfo(pManager->GetOutput());
 }
 
 UndoableFigureAction::~UndoableFigureAction()
