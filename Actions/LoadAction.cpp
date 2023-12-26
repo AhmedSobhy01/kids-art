@@ -59,6 +59,7 @@ bool LoadAction::Execute()
 			}
 			FileInputStream >> x;
 		}
+		if (UI.BackgroundColor == TRANSPARENT_COLOR)UI.BackgroundColor = BASE;
 		FileInputStream.close();
 		return 1;
 	}

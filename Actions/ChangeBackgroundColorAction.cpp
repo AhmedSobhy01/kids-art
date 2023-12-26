@@ -20,7 +20,7 @@ bool ChangeBackgroundColorAction::Execute()
 	Output* pOut = pManager->GetOutput();
 
 	OldColor = UI.BackgroundColor;
-	NewColor = pIn->GetSelectedColor(pOut) - 5;
+	NewColor = pIn->GetSelectedColor(pOut);
 	UI.BackgroundColor = NewColor;
 	pOut->ClearStatusBar();
 
