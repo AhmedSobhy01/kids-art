@@ -78,9 +78,11 @@ bool operator!=(color a, color b)
 
 color color::operator/(double c) const
 {
-	int r = ucRed / c >= 255 ? 255 : ucRed / c;
 	int g = ucGreen / c >= 255 ? 255 : ucGreen / c;
 	int b = ucBlue / c >= 255 ? 255 : ucBlue / c;
+	int r = ucRed / c >= 255 ? 255 : ucRed / c;
+	if (!r && !g && !b)
+		return color(30, 30, 30);
 
 	return color(r, g, b);
 }
