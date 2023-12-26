@@ -77,9 +77,8 @@ window *Output::CreateWind(int w, int h, int x, int y) const
 
 	pW->SetBuffering(true); // Enables double buffering
 
-	// Note: the Darken here is added to make the background color a little different
-	// From the figures' colors
-	pW->SetBrush(UI.BackgroundColor / Darken);  // Sets the brush color
+	// Note: we darken the background a little bit to distinguish it from the figures color
+	pW->SetBrush(UI.BackgroundColor / Darken);	// Sets the brush color
 	pW->SetPen(UI.BackgroundColor / Darken, 1); // Sets the pen color
 
 	pW->DrawRectangle(0, UI.ToolBarHeight, w, h); // Draws the drawing area rectangle
@@ -281,10 +280,9 @@ void Output::SetRecordingState(bool State)
 //======================================================================================//
 void Output::ClearDrawArea() const
 {
-	// Note: the Darken here is added to make the background color a little different
-	// From the figures' colors
-	pWind->SetPen(UI.BackgroundColor / Darken, 1);											 // Sets the pen color
-	pWind->SetBrush(UI.BackgroundColor / Darken);											 // Sets the brush color
+	// Note: we darken the background a little bit to distinguish it from the figures color
+	pWind->SetPen(UI.BackgroundColor / Darken, 1);										 // Sets the pen color
+	pWind->SetBrush(UI.BackgroundColor / Darken);										 // Sets the brush color
 	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight); // Draws the drawing area rectangle
 }
 
@@ -464,10 +462,11 @@ void Output::DrawHexagon(Point P1, int HexagonSize, GfxInfo HexagonGfxInfo, bool
 		xPointsArray[i] = P1.x + HexagonSize * cos(i * angle);
 		yPointsArray[i] = P1.y + HexagonSize * sin(i * angle);
 	}
+
 	pWind->DrawPolygon(xPointsArray, yPointsArray, 6, Style);
+
 	if ((P1.y - HexagonSize / 2 * sqrt(3) - ((UI.PenWidth + 1) / 2)) <= UI.ToolBarHeight)
 		UpdateToolBar = true;
-
 	if ((P1.y + HexagonSize / 2 * sqrt(3) + ((UI.PenWidth + 1) / 2)) >= (UI.height - UI.StatusBarHeight))
 		UpdateStatusBar = true;
 }

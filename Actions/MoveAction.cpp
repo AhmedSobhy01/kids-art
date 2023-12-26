@@ -10,8 +10,7 @@ void MoveAction::ReadActionParameters()
 	Input *pIn = pManager->GetInput();
 	Output *pOut = pManager->GetOutput();
 
-	//Checks if no figure is selected
-	if (Figure == NULL)
+	if (Figure == NULL) // Checks if no figure is selected
 	{
 		int x, y;
 		pOut->PrintMessage("Error:Select a shape before moving. Click anywhere to continue.");
@@ -32,8 +31,8 @@ bool MoveAction::Execute()
 		return false;
 
 	Figure->IncrementReference();
-	OldCenter = Figure->GetCenter();	//Save old center for undo and redo
-	Figure->SetCenter(NewCenter);		//Sets the new center
+	OldCenter = Figure->GetCenter(); // Save old center for undo and redo
+	Figure->SetCenter(NewCenter);	 // Sets the new center
 	return true;
 }
 
