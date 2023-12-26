@@ -302,7 +302,7 @@ void ApplicationManager::ClearFigures()
 
 void ApplicationManager::SaveAll(ofstream &FileOutputStream)
 {
-	FileOutputStream << UI.DrawColor << " " << UI.FillColor << " " << UI.BackgroundColor << endl;
+	FileOutputStream << UI.DrawColor << " " << UI.FillColor << " " << UI.BackgroundColor << " " << UI.PenWidth << endl;
 	FileOutputStream << FiguresCount() << endl;
 	for (int i = 0; i < FiguresCount(); i++)
 		FigList[i]->Save(FileOutputStream);
