@@ -2,6 +2,7 @@
 #define CHANGE_OUTLINE_COLOR_ACTION_H
 
 #include "UndoableAction.h"
+#include "..\ApplicationManager.h"
 
 class ChangeOutlineColorAction : public UndoableAction
 {

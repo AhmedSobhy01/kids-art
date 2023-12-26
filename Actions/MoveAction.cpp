@@ -1,16 +1,16 @@
 #include "MoveAction.h"
-#include "..\ApplicationManager.h"
-#include "..\Figures\CFigure.h"
-#include "..\GUI\input.h"
+#include "..\GUI\Input.h"
 #include "..\GUI\Output.h"
 
-MoveAction::MoveAction(ApplicationManager* pApp) : UndoableAction(pApp) {}
+MoveAction::MoveAction(ApplicationManager *pApp) : UndoableAction(pApp) {}
 
-void MoveAction::ReadActionParameters() {
+void MoveAction::ReadActionParameters()
+{
 	Figure = pManager->GetSelected();
-	Input* pIn = pManager->GetInput();
-	Output* pOut = pManager->GetOutput();
-	if (Figure == NULL) {
+	Input *pIn = pManager->GetInput();
+	Output *pOut = pManager->GetOutput();
+	if (Figure == NULL)
+	{
 		int x, y;
 		pOut->PrintMessage("Error:Select a shape before moving. Click anywhere to continue.");
 		pIn->GetPointClicked(x, y);
@@ -21,10 +21,13 @@ void MoveAction::ReadActionParameters() {
 	pIn->GetPointClicked(NewCenter.x, NewCenter.y);
 	pOut->ClearStatusBar();
 }
-bool MoveAction::Execute() {
+
+bool MoveAction::Execute()
+{
 	ReadActionParameters();
 
-	if (Figure == NULL)return false;
+	if (Figure == NULL)
+		return false;
 
 	Figure->IncrementReference();
 	OldCenter = Figure->GetCenter();
@@ -52,7 +55,8 @@ void MoveAction::Redo()
 
 MoveAction::~MoveAction()
 {
-	if (Figure != NULL) {
+	if (Figure != NULL)
+	{
 		Figure->DecrementReference();
 
 		if (Figure->CanBeDeleted())

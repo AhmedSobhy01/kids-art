@@ -1,7 +1,6 @@
 #include "ChangeBackgroundColorAction.h"
-#include "..\GUI\input.h"
+#include "..\GUI\Input.h"
 #include "..\GUI\Output.h"
-#include "..\GUI\UI_Info.h"
 
 ChangeBackgroundColorAction::ChangeBackgroundColorAction(ApplicationManager *pApp) : UndoableAction(pApp) {}
 

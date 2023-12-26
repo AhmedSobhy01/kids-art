@@ -2,6 +2,7 @@
 #define PICK_BY_SHAPE_AND_COLOR_ACTION_H
 
 #include "PlayMode.h"
+#include "../ApplicationManager.h"
 
 class PickByShapeAndColorAction : public PlayMode
 {

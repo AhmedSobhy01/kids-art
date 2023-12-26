@@ -2,6 +2,7 @@
 #define CLEAR_ALL_ACTION_H
 
 #include "Action.h"
+#include "..\ApplicationManager.h"
 
 class ClearAllAction : public Action
 {

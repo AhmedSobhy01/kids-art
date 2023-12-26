@@ -1,19 +1,18 @@
 #include "SwitchToPlayAction.h"
-
 #include "..\GUI\Output.h"
-#include "..\ApplicationManager.h"
 
-
-SwitchToPlayAction::SwitchToPlayAction(ApplicationManager *pApp): Action(pApp)
+SwitchToPlayAction::SwitchToPlayAction(ApplicationManager *pApp) : Action(pApp)
 {
 	RecordEnabled = false;
 }
 
-void SwitchToPlayAction::ReadActionParameters() 
-{}
+void SwitchToPlayAction::ReadActionParameters()
+{
+}
 
-bool SwitchToPlayAction::Execute() {
-	Output* pOut = pManager->GetOutput();
+bool SwitchToPlayAction::Execute()
+{
+	Output *pOut = pManager->GetOutput();
 	pOut->CreatePlayToolBar();
 	pOut->ClearStatusBar();
 

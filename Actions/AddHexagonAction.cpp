@@ -1,9 +1,6 @@
 #include "AddHexagonAction.h"
 #include "..\Figures\CHexagon.h"
-
-#include "..\ApplicationManager.h"
-
-#include "..\GUI\input.h"
+#include "..\GUI\Input.h"
 #include "..\GUI\Output.h"
 #include "..\Figures\CHexagon.h"
 

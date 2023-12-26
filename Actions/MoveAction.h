@@ -2,7 +2,8 @@
 #define MOVE_ACTION_H
 
 #include "UndoableAction.h"
-#include "../Figures/CFigure.h"
+#include "..\Figures\CFigure.h"
+#include "..\ApplicationManager.h"
 
 class MoveAction : public UndoableAction
 {

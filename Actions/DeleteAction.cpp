@@ -1,17 +1,19 @@
 #include "DeleteAction.h"
-#include "..\ApplicationManager.h"
-#include "..\GUI\input.h"
+#include "..\GUI\Input.h"
 #include "..\GUI\Output.h"
 
-DeleteAction::DeleteAction(ApplicationManager* pApp) : UndoableAction(pApp), RemovedFromIndex(0) {
+DeleteAction::DeleteAction(ApplicationManager *pApp) : UndoableAction(pApp), RemovedFromIndex(0)
+{
 	Figure = NULL;
 }
 
-void DeleteAction::ReadActionParameters() {
+void DeleteAction::ReadActionParameters()
+{
 	Figure = pManager->GetSelected();
-	Input* pIn = pManager->GetInput();
-	Output* pOut = pManager->GetOutput();
-	if (Figure == NULL) {
+	Input *pIn = pManager->GetInput();
+	Output *pOut = pManager->GetOutput();
+	if (Figure == NULL)
+	{
 		int x, y;
 		pOut->PrintMessage("Error: Select a shape before deleting. Click anywhere to continue.");
 		pIn->GetPointClicked(x, y);
@@ -20,10 +22,12 @@ void DeleteAction::ReadActionParameters() {
 	return;
 }
 
-bool DeleteAction::Execute() {
+bool DeleteAction::Execute()
+{
 	ReadActionParameters();
 
-	if (Figure == NULL)return false;
+	if (Figure == NULL)
+		return false;
 	Figure->IncrementReference();
 	RemovedFromIndex = pManager->RemoveFigure(Figure);
 	Figure->SetSelected(false);
@@ -51,7 +55,8 @@ void DeleteAction::Redo()
 
 DeleteAction::~DeleteAction()
 {
-	if (Figure != NULL) {
+	if (Figure != NULL)
+	{
 		Figure->DecrementReference();
 
 		if (Figure->CanBeDeleted())

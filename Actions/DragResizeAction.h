@@ -2,7 +2,8 @@
 #define DRAG_RESIZE_ACTION_H
 
 #include "UndoableAction.h"
-#include "../Figures/CFigure.h"
+#include "..\Figures\CFigure.h"
+#include "..\ApplicationManager.h"
 
 class DragResizeAction : public UndoableAction
 {

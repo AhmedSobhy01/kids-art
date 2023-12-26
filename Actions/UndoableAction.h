@@ -2,8 +2,8 @@
 #define UNDOABLE_ACTION_H
 
 #include "Action.h"
-#include "../Figures/CFigure.h"
-#include "../ApplicationManager.h"
+#include "..\Figures\CFigure.h"
+#include "..\ApplicationManager.h"
 
 class UndoableAction : public Action
 {

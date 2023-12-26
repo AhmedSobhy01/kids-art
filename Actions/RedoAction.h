@@ -2,7 +2,7 @@
 #define REDO_ACTION_H
 
 #include "Action.h"
-#include "../ApplicationManager.h"
+#include "..\ApplicationManager.h"
 
 class RedoAction : public Action
 {

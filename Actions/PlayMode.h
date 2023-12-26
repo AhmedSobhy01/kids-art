@@ -1,8 +1,8 @@
 #ifndef PLAY_MODE_H
 #define PLAY_MODE_H
 
-#include "..\ApplicationManager.h"
 #include "Action.h"
+#include "..\ApplicationManager.h"
 
 class PlayMode : public Action
 {

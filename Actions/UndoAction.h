@@ -2,7 +2,7 @@
 #define UNDO_ACTION_H
 
 #include "Action.h"
-#include "../ApplicationManager.h"
+#include "..\ApplicationManager.h"
 
 class UndoAction : public Action
 {

@@ -1,5 +1,4 @@
 #include "DragMoveAction.h"
-#include "../ApplicationManager.h"
 #include "../GUI/Input.h"
 #include "../GUI/Output.h"
 

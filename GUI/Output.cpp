@@ -2,52 +2,49 @@
 #include <cmath>
 Output::Output()
 {
-	// Initialize user interface parameters
-	UI.InterfaceMode = MODE_DRAW;
+	UI.InterfaceMode = MODE_DRAW; // Sets the interface mode to draw mode
 
-	UI.width = 1250;
-	UI.height = 650;
-	UI.wx = 5;
-	UI.wy = 5;
+	UI.width = 1250; // Sets the width of the window
+	UI.height = 650; // Sets the height of the window
+	UI.wx = 5;		 // Sets the x position of the window
+	UI.wy = 5;		 // Sets the y position of the window
 
-	UI.StatusBarHeight = 50;
-	UI.ToolBarHeight = 49;
-	UI.MenuItemWidth = 49;
+	UI.StatusBarHeight = 50; // Sets the height of the status bar
+	UI.ToolBarHeight = 49;	 // Sets the height of the toolbar
+	UI.MenuItemWidth = 49;	 // Sets the width of the toolbar icons
 
-	UI.ColorMenuItemWidth = 40;
-	UI.ColorMenuWidth = COLOR_MENU_ITM_COUNT * UI.ColorMenuItemWidth + 40;
-	UI.ColorMenuHeight = UI.ColorMenuItemWidth + 16;
+	UI.ColorMenuItemWidth = 40;											   // Sets the width of the color menu items
+	UI.ColorMenuWidth = COLOR_MENU_ITM_COUNT * UI.ColorMenuItemWidth + 40; // Sets the width of the color menu window
+	UI.ColorMenuHeight = UI.ColorMenuItemWidth + 16;					   // Sets the height of the color menu window
 
 	UI.DrawColor = BLUE;				// Drawing color
 	UI.FillColor = TRANSPARENT_COLOR;	// Filling color
 	UI.MsgColor = TEXT;					// Messages color
-	UI.BackgroundColor = BASE;		// Background color
+	UI.BackgroundColor = BASE;			// Background color
 	UI.HighlightColor = HIGHLIGHTCOLOR; // This color should NOT be used to draw figures, use if for highlight only
 	UI.StatusBarColor = SURFACE0;		// Status bar background color
 	UI.PenWidth = 3;					// Width of the figures frames
 
-	// Create the output window
-	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
-	// Change the title
-	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
+	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);				   // Creates the window
+	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project"); // Changes the title of the window
 
-	// Initialize Color Menu Window Pointer
-	pColorMenuWind = NULL;
+	pColorMenuWind = NULL; // Initializes the color menu window pointer
 
-	IsPlayingRecording = false;
-	PlayActionSoundEnabled = true;
+	IsPlayingRecording = false;	   // Initializes the recording state to false
+	PlayActionSoundEnabled = true; // Initializes the play action sound state to true
 
-	CreateDrawToolBar();
-	CreateStatusBar();
-	pWind->UpdateBuffer();
-	LastMessage = "";
-	UpdateToolBar = false;
-	UpdateStatusBar = false;
+	CreateDrawToolBar();   // Creates the draw toolbar
+	CreateStatusBar();	   // Creates the status bar
+	pWind->UpdateBuffer(); // Updates the buffer
+
+	LastMessage = "";		 // Initializes the last message to an empty string
+	UpdateToolBar = false;	 // Initializes the update toolbar flag to false
+	UpdateStatusBar = false; // Initializes the update status bar flag to false
 }
 
-Input* Output::CreateInput() const
+Input *Output::CreateInput() const
 {
-	Input* pIn = new Input(pWind);
+	Input *pIn = new Input(pWind); // Creates a new input object
 	return pIn;
 }
 
@@ -57,28 +54,36 @@ Input* Output::CreateInput() const
 
 void Output::UpdateInterface()
 {
-	if (UpdateToolBar)
+	if (UpdateToolBar) // If the toolbar should be updated
 	{
-		if (UI.InterfaceMode == MODE_DRAW)
-			CreateDrawToolBar();
+		if (UI.InterfaceMode == MODE_DRAW) // If the interface mode is draw mode
+			CreateDrawToolBar();		   // Creates the draw toolbar
 		else
-			CreatePlayToolBar();
+			CreatePlayToolBar(); // Creates the play toolbar
 	}
-	if (UpdateStatusBar)
-		PrintMessage(LastMessage, false);
-	UpdateToolBar = false;
-	UpdateStatusBar = false;
-	pWind->UpdateBuffer();
+
+	if (UpdateStatusBar)				  // If the status bar should be updated
+		PrintMessage(LastMessage, false); // Prints the last message on the status bar
+
+	UpdateToolBar = false;	 // Resets the update toolbar flag
+	UpdateStatusBar = false; // Resets the update status bar flag
+
+	pWind->UpdateBuffer(); // Updates the buffer
 }
 
-window* Output::CreateWind(int w, int h, int x, int y) const
+window *Output::CreateWind(int w, int h, int x, int y) const
 {
-	window* pW = new window(w, h, x, y);
-	pW->SetBuffering(true);
-	pW->SetBrush(UI.BackgroundColor - 5);
-	pW->SetPen(UI.BackgroundColor - 5, 1);
-	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);
-	pW->UpdateBuffer();
+	window *pW = new window(w, h, x, y); // Creates a new window object
+
+	pW->SetBuffering(true); // Enables double buffering
+
+	pW->SetBrush(UI.BackgroundColor - 5);  // Sets the brush color
+	pW->SetPen(UI.BackgroundColor - 5, 1); // Sets the pen color
+
+	pW->DrawRectangle(0, UI.ToolBarHeight, w, h); // Draws the drawing area rectangle
+
+	pW->UpdateBuffer(); // Updates the buffer
+
 	return pW;
 }
 
@@ -149,7 +154,7 @@ void Output::CloseColorMenuWind()
 	}
 }
 
-window* Output::GetColorMenuWind() const
+window *Output::GetColorMenuWind() const
 {
 	return pColorMenuWind; // Returns the pointer to the color menu window
 }
@@ -279,8 +284,8 @@ void Output::SetRecordingState(bool State)
 
 void Output::ClearDrawArea() const
 {
-	pWind->SetPen(UI.BackgroundColor - 5, 1);												 // Sets the pen color
-	pWind->SetBrush(UI.BackgroundColor - 5);												 // Sets the brush color
+	pWind->SetPen(UI.BackgroundColor - 5, 1);											 // Sets the pen color
+	pWind->SetBrush(UI.BackgroundColor - 5);											 // Sets the brush color
 	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight); // Draws the drawing area rectangle
 }
 

@@ -2,6 +2,7 @@
 #define CHANGE_FILL_COLOR_ACTION_H
 
 #include "UndoableAction.h"
+#include "..\ApplicationManager.h"
 
 class ChangeFillColorAction : public UndoableAction
 {

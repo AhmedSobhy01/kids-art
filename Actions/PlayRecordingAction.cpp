@@ -39,7 +39,7 @@ bool PlayRecordingAction::Execute()
 		pManager->UpdateInterface();
 		UI.PenWidth = 3; // Default border width
 		pOut->PrintMessage("Playing Recording");
-		CFigure* S = pManager->GetSelected();
+		CFigure *S = pManager->GetSelected();
 		if (S != NULL)
 			S->SetSelected(false);
 		pManager->SetSelected(NULL);

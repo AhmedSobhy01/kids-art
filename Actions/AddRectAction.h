@@ -3,6 +3,7 @@
 
 #include "Action.h"
 #include "UndoableFigureAction.h"
+#include "..\ApplicationManager.h"
 
 class AddRectAction : public UndoableFigureAction
 {

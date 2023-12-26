@@ -2,7 +2,7 @@
 #define STOP_RECORDING_ACTION_H
 
 #include "Action.h"
-#include "../ApplicationManager.h"
+#include "..\ApplicationManager.h"
 
 class StopRecordingAction : public Action
 {

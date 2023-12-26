@@ -2,7 +2,7 @@
 #define CHANGE_BACKGROUND_COLOR_ACTION_H
 
 #include "UndoableAction.h"
-#include "../ApplicationManager.h"
+#include "..\ApplicationManager.h"
 
 class ChangeBackgroundColorAction : public UndoableAction
 {

@@ -1,17 +1,17 @@
 #include "ChangeFillColorAction.h"
-#include "..\ApplicationManager.h"
 #include "..\Figures\CFigure.h"
-#include "..\GUI\input.h"
+#include "..\GUI\Input.h"
 #include "..\GUI\Output.h"
 
-ChangeFillColorAction::ChangeFillColorAction(ApplicationManager* pApp): UndoableAction(pApp) {}
+ChangeFillColorAction::ChangeFillColorAction(ApplicationManager *pApp) : UndoableAction(pApp) {}
 
 void ChangeFillColorAction::ReadActionParameters()
 {
 	Figure = pManager->GetSelected();
-	Input* pIn = pManager->GetInput();
-	Output* pOut = pManager->GetOutput();
-	if (Figure == NULL) {
+	Input *pIn = pManager->GetInput();
+	Output *pOut = pManager->GetOutput();
+	if (Figure == NULL)
+	{
 		int x, y;
 		pOut->PrintMessage("Error:Please select a shape to change it's fill color. Click anywhere to continue.");
 		pIn->GetPointClicked(x, y);
@@ -25,8 +25,8 @@ void ChangeFillColorAction::ReadActionParameters()
 bool ChangeFillColorAction::Execute()
 {
 	ReadActionParameters();
-	Input* pIn = pManager->GetInput();
-	Output* pOut = pManager->GetOutput();
+	Input *pIn = pManager->GetInput();
+	Output *pOut = pManager->GetOutput();
 	if (Figure != NULL)
 	{
 		OldColor = Figure->GetFillColor();
@@ -54,7 +54,7 @@ void ChangeFillColorAction::Undo()
 	UI.FillColor = OldColor;
 }
 
-void ChangeFillColorAction::Redo()		//we could just call PlayRecord() insted of writing the same code but for the sake of readability we left it as it is
+void ChangeFillColorAction::Redo() // we could just call PlayRecord() insted of writing the same code but for the sake of readability we left it as it is
 {
 	Figure->ChangeFillColor(NewColor);
 	UI.FillColor = NewColor;

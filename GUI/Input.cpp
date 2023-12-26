@@ -3,7 +3,7 @@
 
 Input::Input(window *pW)
 {
-	pWind = pW; // point to the passed window
+	pWind = pW; // Point to the passed window
 }
 
 //======================================================================================//
@@ -15,6 +15,7 @@ void Input::GetPointClicked(int &x, int &y) const
 
 	pWind->WaitMouseClick(x, y); // Wait for mouse click
 }
+
 void Input::GetMouseCoord(int &x, int &y) const
 {
 
@@ -26,8 +27,6 @@ bool Input::GetLeftClickState(int &x, int &y) const
 	button b = LEFT_BUTTON;
 	return pWind->GetButtonState(b, x, y) == BUTTON_DOWN; // Gets the state of the left mouse button
 }
-
-//////////////////////////////////////////////////////////////////////////////////////////
 
 std::string Input::GetString(Output *pO) const // Returns a string entered by the user
 {
@@ -65,8 +64,10 @@ std::string Input::GetString(Output *pO) const // Returns a string entered by th
 			pO->PrintMessage(Label); // Print the label on the status bar
 	}
 }
-//////////////////////////////////////////////////////////////////////////////////////////
 
+//======================================================================================//
+//								User Action Functions									//
+//======================================================================================//
 ActionType Input::GetUserAction(int *_ClickedItemOrder) const // This function reads the position where the user clicks to determine the desired action
 {
 	pWind->FlushMouseQueue(); // Clear all previous mouse events
@@ -212,8 +213,10 @@ ActionType Input::GetAction(Point &P)
 	else
 		return DRAWING_AREA; // User clicks on the drawing area
 }
-//////////////////////////////////////////////////////////////////////////////////////////
 
+//======================================================================================//
+//								Color Menu Functions									//
+//======================================================================================//
 color Input::GetSelectedColor(Output *pO) const // This function reads the position where the user clicks to determine the selected color
 {
 	if (pO->GetColorMenuWind()) // If the color menu window is already open

@@ -39,10 +39,12 @@ bool CSquare::IsPointInside(Point P)
 	bool cond2 = (P1.y <= P.y) && (P.y <= P2.y);
 	return cond1 && cond2;
 }
+
 Point CSquare::GetCenter() const
 {
 	return Center;
 }
+
 void CSquare::SetCenter(Point Center)
 {
 	this->Center = Center;
@@ -101,6 +103,7 @@ bool CSquare::GetCorner(Point &p, int &index)
 	}
 	return false;
 }
+
 void CSquare::SetCorner(Point p, int index)
 {
 	SquareSize = sqrt((pow(p.x - Center.x, 2) + pow(p.y - Center.y, 2)) * 2);

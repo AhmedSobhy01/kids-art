@@ -3,6 +3,7 @@
 
 #include "UndoableAction.h"
 #include "..\Figures\CFigure.h"
+#include "..\ApplicationManager.h"
 
 class DeleteAction : public UndoableAction
 {
