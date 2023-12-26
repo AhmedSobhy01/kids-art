@@ -5,8 +5,7 @@
 #include "../Figures/CFigure.h"
 #include "../ApplicationManager.h"
 
-// Base class for all undoable actions that are related to a figure since they all add & remove a figure from the list of figures
-class UndoableFigureAction : public UndoableAction
+class UndoableFigureAction : public UndoableAction // Base class for all undoable actions that are related to a figure since they all add & remove a figure from the list of figures
 {
 protected:
 	CFigure *Figure;
