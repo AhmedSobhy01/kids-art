@@ -239,6 +239,8 @@ FodyWeavers.xsd
 Saved Graphs/*
 !Saved Graphs/.gitkeep
 cmake-build-debug
+cmake-build-release
 .idea
 build
 .vscode
+*.psd
