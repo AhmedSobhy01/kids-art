@@ -41,11 +41,11 @@ bool AddSquareAction::Execute()
 
 void AddSquareAction::PlayRecord()
 {
-	Figure->SetCenter(Center);					//Sets the square center
-	Figure->ChangeFillColor(UI.FillColor);		//Update it's fill color
-	Figure->ChangeDrawColor(UI.DrawColor);		//Update it's outline color
-	Figure->ChangeBorderWidth(UI.PenWidth);		//Update it's outline thickness
-	int Size = CSquare::GetDefaultSquareSize();	//Get the default square size
+	Figure->SetCenter(Center);					// Reset Position to initial position
+	Figure->ChangeFillColor(UI.FillColor);		// Reset Fill color to initial color
+	Figure->ChangeDrawColor(UI.DrawColor);		// Reset Outline color to initial color
+	Figure->ChangeBorderWidth(UI.PenWidth);		// Reset Border Width to initial Width
+	int Size = CSquare::GetDefaultSquareSize();
 	Point P1;
 	P1.x = Center.x + Size / 2;
 	P1.y = Center.y + Size / 2;					//Calcuate the corner to set the size
