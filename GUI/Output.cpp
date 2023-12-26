@@ -21,7 +21,7 @@ Output::Output()
 	UI.DrawColor = BLUE;			  // Drawing color
 	UI.FillColor = TRANSPARENT_COLOR; // Filling color
 	UI.MsgColor = TEXT;				  // Messages color
-	UI.BackgroundColor = BASE - 5;		  // Background color
+	UI.BackgroundColor = BASE;		  // Background color
 	UI.HighlightColor = HIGHLIGHTCOLOR;		  // This color should NOT be used to draw figures, use if for highlight only
 	UI.StatusBarColor = SURFACE0;	  // Status bar background color
 	UI.PenWidth = 3;				  // Width of the figures frames
@@ -75,8 +75,8 @@ window* Output::CreateWind(int w, int h, int x, int y) const
 {
 	window* pW = new window(w, h, x, y);
 	pW->SetBuffering(true);
-	pW->SetBrush(UI.BackgroundColor);
-	pW->SetPen(UI.BackgroundColor, 1);
+	pW->SetBrush(UI.BackgroundColor - 5);
+	pW->SetPen(UI.BackgroundColor - 5, 1);
 	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);
 	pW->UpdateBuffer();
 	return pW;
@@ -251,8 +251,8 @@ void Output::CreatePlayToolBar() const
 
 void Output::ClearDrawArea() const
 {
-	pWind->SetPen(UI.BackgroundColor, 1);
-	pWind->SetBrush(UI.BackgroundColor);
+	pWind->SetPen(UI.BackgroundColor - 5, 1);
+	pWind->SetBrush(UI.BackgroundColor - 5);
 	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
