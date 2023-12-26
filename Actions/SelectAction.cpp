@@ -23,11 +23,16 @@ bool SelectAction::Execute()
 	if (Figure == NULL)
 		return false;
 
+	//Checks if there is a selected figure and unselect it
 	CFigure *S = pManager->GetSelected();
 	if (S != NULL)
 		S->SetSelected(false);
 
+	//Unselect from the application manager
 	pManager->SetSelected(NULL);
+
+	//Checks if the current figure is not the previously selected one
+	//And selects the new figure
 	if (Figure != S)
 	{
 		Figure->SetSelected(true);
@@ -35,7 +40,7 @@ bool SelectAction::Execute()
 		Figure->PrintInfo(pManager->GetOutput());
 	}
 	else
-		Figure = NULL;
+		Figure = NULL; //To made the play record action simpler
 
 	return true;
 }

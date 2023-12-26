@@ -9,6 +9,8 @@ void MoveAction::ReadActionParameters()
 	Figure = pManager->GetSelected();
 	Input *pIn = pManager->GetInput();
 	Output *pOut = pManager->GetOutput();
+
+	//Checks if no figure is selected
 	if (Figure == NULL)
 	{
 		int x, y;
@@ -30,8 +32,8 @@ bool MoveAction::Execute()
 		return false;
 
 	Figure->IncrementReference();
-	OldCenter = Figure->GetCenter();
-	Figure->SetCenter(NewCenter);
+	OldCenter = Figure->GetCenter();	//Save old center for undo and redo
+	Figure->SetCenter(NewCenter);		//Sets the new center
 	return true;
 }
 

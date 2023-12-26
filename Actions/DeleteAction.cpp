@@ -30,8 +30,8 @@ bool DeleteAction::Execute()
 		return false;
 	Figure->IncrementReference();
 	RemovedFromIndex = pManager->RemoveFigure(Figure);
-	Figure->SetSelected(false);
-	pManager->SetSelected(NULL);
+	Figure->SetSelected(false);		//Unselect the deleted figure
+	pManager->SetSelected(NULL);	//Unselect from the application manager
 	return true;
 }
 
