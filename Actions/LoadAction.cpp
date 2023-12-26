@@ -37,7 +37,7 @@ bool LoadAction::Execute()
 			FileInputStream >> UI.DrawColor >> UI.FillColor >> UI.BackgroundColor >> UI.PenWidth;
 			int count;
 			FileInputStream >> count;
-			for (int i = 0; i <= count; i++) // load all figures
+			for (int i = 0; i < count; i++) // load all figures
 			{
 				FileInputStream >> x;
 				if (x == "RECTANGLE")
@@ -54,6 +54,7 @@ bool LoadAction::Execute()
 				Figure->Draw(pOut);
 				pManager->AddFigure(Figure);
 			}
+			FileInputStream >> x;
 		}
 		FileInputStream.close();
 		return 1;
