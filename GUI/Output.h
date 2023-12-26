@@ -13,6 +13,7 @@ class Output // The application manager should have a pointer to this class
 	bool UpdateStatusBar;		 // Indicates whether the status bar should be updated or not
 	bool IsPlayingRecording;	 // Indicates whether the program is playing a recording or not
 	bool PlayActionSoundEnabled; // Indicates whether the program should play an action sound or not
+	double Darken;				 // Indicate how darker the canvas is than the figures
 
 	void CreateColorMenuWind(int, bool); // Creates the color menu window
 	void DrawColorMenuItems(bool) const; // Draws color images to color menu window

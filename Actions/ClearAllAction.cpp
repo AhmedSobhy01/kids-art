@@ -1,5 +1,4 @@
 #include "ClearAllAction.h"
-#include "..\Figures\CFigure.h"
 #include "UndoableAction.h"
 #include "..\Figures\CFigure.h"
 
@@ -13,6 +12,10 @@ void ClearAllAction::ReadActionParameters()
 
 bool ClearAllAction::Execute()
 {
+	CFigure* S = pManager->GetSelected();
+	if (S != NULL)
+		S->SetSelected(false);
+	pManager->SetSelected(NULL);
 	pManager->ClearUndoableActionsStack();
 	pManager->ClearRedoableActionsStack();
 	pManager->ResetColors();
