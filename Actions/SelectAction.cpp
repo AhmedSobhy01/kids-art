@@ -31,19 +31,14 @@ bool SelectAction::Execute() {
 		pManager->SetSelected(Figure);
 		Figure->PrintInfo(pManager->GetOutput());
 	}
+	else Figure = NULL;
 
 	return true;
 }
 
 void SelectAction::PlayRecord() {
-
 	CFigure* S = pManager->GetSelected();
-	if (S != NULL)
-		S->SetSelected(false);
-
-	pManager->SetSelected(NULL);
-	if (Figure != S) {
-		Figure->SetSelected(true);
-		pManager->SetSelected(Figure);
-	}
+	if (S != NULL)S->SetSelected(false);
+	pManager->SetSelected(Figure);
+	if (Figure != NULL)Figure->SetSelected(true);
 }
