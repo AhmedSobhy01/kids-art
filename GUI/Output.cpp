@@ -22,7 +22,7 @@ Output::Output()
 	UI.FillColor = TRANSPARENT_COLOR; // Filling color
 	UI.MsgColor = TEXT;				  // Messages color
 	UI.BackgroundColor = BASE-5;		  // Background color
-	UI.HighlightColor = MAUVE;		  // This color should NOT be used to draw figures, use if for highlight only
+	UI.HighlightColor = HIGHLIGHTCOLOR;		  // This color should NOT be used to draw figures, use if for highlight only
 	UI.StatusBarColor = SURFACE0;	  // Status bar background color
 	UI.PenWidth = 3;				  // Width of the figures frames
 

@@ -206,5 +206,6 @@ const color SURFACE2 = color(172, 176, 190);
 const color BASE = color(239, 241, 245);
 const color MANTLE = color(230, 233, 239);
 const color CRUST = color(220, 224, 232);
+const color HIGHLIGHTCOLOR = color(255, 0, 255);
 
 #endif // COLOR_H
