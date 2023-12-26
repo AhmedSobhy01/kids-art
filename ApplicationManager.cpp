@@ -324,6 +324,7 @@ void ApplicationManager::ResetColors()
 	UI.DrawColor = BLUE;
 	UI.BackgroundColor = BASE;
 	UI.FillColor = TRANSPARENT_COLOR;
+	UI.PenWidth = 3;
 }
 
 int ApplicationManager::CountFigure(CFigure *fig)
