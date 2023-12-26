@@ -28,7 +28,7 @@ bool DragMoveAction::Execute()
 
 	Figure->IncrementReference();
 
-	pOut->PrintMessage("Dra gMove: Drag the selected shape to move");
+	pOut->PrintMessage("Drag Move: Drag the selected shape to move");
 
 	bool ButtonDown = false;
 	while (!ButtonDown)
