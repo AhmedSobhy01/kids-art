@@ -26,30 +26,35 @@ bool DragResizeAction::Execute()
 	pOut->PrintMessage("Drag Resize: Drag the selected shape to resize");
 
 	bool ButtonDown = false;
-	while (!ButtonDown)
+	while (!ButtonDown) //Waits till there is a button click
 	{
 		ButtonDown = pIn->GetLeftClickState(NewCorner.x, NewCorner.y);
 	}
+
+	//Check if the cursor is inside the figure
 	if (!Figure->GetCorner(NewCorner, PointIndex))
 	{
 		pOut->ClearStatusBar();
 		return false;
 	}
-	OldCorner = NewCorner;
+	OldCorner = NewCorner; //Saves the original corner for undo and redo
 	Point CurrentCorner = OldCorner;
-	int Err;
+	int Err = 0; //The distance between the current figure center and the new center
 	while (ButtonDown)
 	{
 		ButtonDown = pIn->GetLeftClickState(NewCorner.x, NewCorner.y);
 		Figure->SetCorner(NewCorner, PointIndex);
 		Err = sqrt(pow(CurrentCorner.x - NewCorner.x, 2) + pow(CurrentCorner.y - NewCorner.y, 2));
+		//Check if it moved by a pixel before updating interface
+		//To prevent unnecessary interface update
 		if (Err)
-		{ // check if it moved by a pixel before updating interface
 			pManager->UpdateInterface();
-		}
+		
 		CurrentCorner = NewCorner;
 	}
+
 	pOut->ClearStatusBar();
+
 	return true;
 }
 

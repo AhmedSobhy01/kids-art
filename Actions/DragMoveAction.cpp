@@ -30,21 +30,23 @@ bool DragMoveAction::Execute()
 	pOut->PrintMessage("Drag Move: Drag the selected shape to move");
 
 	bool ButtonDown = false;
-	while (!ButtonDown)
+	while (!ButtonDown) //Waits till there is a button click
 	{
 		ButtonDown = pIn->GetLeftClickState(NewCenter.x, NewCenter.y);
 	}
+
+	//Check if the cursor is inside the figure
 	if (!Figure->IsPointInside(NewCenter))
 	{
 		pOut->ClearStatusBar();
 		return false;
 	}
 
-	OldCenter = Figure->GetCenter();
+	OldCenter = Figure->GetCenter(); //Saves the original center for undo and redo
 	Point CurrentCenter = OldCenter;
-	int dx = OldCenter.x - NewCenter.x;
-	int dy = OldCenter.y - NewCenter.y;
-	int Err = 0;
+	int dx = OldCenter.x - NewCenter.x; //The distance between the mouse and the center
+	int dy = OldCenter.y - NewCenter.y; 
+	int Err = 0; //The distance between the current figure center and the new center
 
 	while (ButtonDown)
 	{
@@ -53,12 +55,14 @@ bool DragMoveAction::Execute()
 		NewCenter.y += dy;
 		Figure->SetCenter(NewCenter);
 		Err = sqrt(pow(CurrentCenter.x - NewCenter.x, 2) + pow(CurrentCenter.y - NewCenter.y, 2));
+		//Check if it moved by a pixel before updating interface
+		//To prevent unnecessary interface update
 		if (Err)
-		{ // check if it moved by a pixel before updating interface
 			pManager->UpdateInterface();
-		}
+		
 		CurrentCenter = NewCenter;
 	}
+
 	pOut->ClearStatusBar();
 
 	return true;
