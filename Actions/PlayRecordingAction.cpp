@@ -14,6 +14,13 @@ void PlayRecordingAction::ReadActionParameters()
 bool PlayRecordingAction::Execute()
 {
 	Output *pOut = pManager->GetOutput();
+
+	if (pManager->IsCurrentlyRecording()) // Check if recording is in progress
+	{
+		pOut->PrintMessage("Cannot play recording while recording. Please stop recording first.");
+		return false;
+	}
+
 	List<Action> &RecordedActionsList = pManager->GetRecordedActionsList();
 
 	if (RecordedActionsList.Empty())
@@ -30,12 +37,12 @@ bool PlayRecordingAction::Execute()
 		delete pClearAllAction;
 
 		pManager->UpdateInterface();
-		UI.PenWidth = 3;									// Default border width
+		UI.PenWidth = 3; // Default border width
 		pOut->PrintMessage("Playing Recording");
 
 		for (int i = 0; i < RecordedActionsList.Size(); i++)
 		{
-			if (!dynamic_cast<UndoAction*>(RecordedActionsList[i]) && !dynamic_cast<RedoAction*>(RecordedActionsList[i]))		// handle undo & redo
+			if (!dynamic_cast<UndoAction *>(RecordedActionsList[i]) && !dynamic_cast<RedoAction *>(RecordedActionsList[i])) // handle undo & redo
 				pManager->ClearRedoableActionsStack();
 
 			pManager->AddActionToUndoables(RecordedActionsList[i], 1);
