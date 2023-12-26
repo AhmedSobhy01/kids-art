@@ -9,7 +9,7 @@ PickByShapeAndColorAction::PickByShapeAndColorAction(ApplicationManager *pApp) :
 void PickByShapeAndColorAction::StartingMessage() // Displays the starting message
 {
 	Output *pOut = pManager->GetOutput();
-	Target = pManager->CountFigure(RandomFigure);
+	Target = pManager->CountFigColor(RandomFigure);
 	pOut->PrintMessage("Pick all the " + RandomFigure->GetFillColor().ReturnColor() + " " + RandomFigure->Type() + "s. " + to_string(Target) + " exist.");
 }
 
