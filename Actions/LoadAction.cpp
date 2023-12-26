@@ -54,7 +54,6 @@ bool LoadAction::Execute()
 				else if (x == "TRIANGLE")
 					Figure = new CTriangle();
 				Figure->Load(FileInputStream);
-				Figure->Draw(pOut);
 				pManager->AddFigure(Figure);
 			}
 			FileInputStream >> x;
