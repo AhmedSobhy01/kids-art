@@ -225,35 +225,35 @@ color Input::GetSelectedColor(Output *pO) const // This function reads the posit
 
 			switch (ClickedColorOrder)
 			{
-			case COLOR_MENU_ITM_BLACK:
-				SelectedColor = BLACK;
+			case COLOR_MENU_ITM_PINK:
+				SelectedColor = PINK;
 				break;
 			case COLOR_MENU_ITM_RED:
 				SelectedColor = RED;
 				break;
-			case COLOR_MENU_ITM_BLUE:
-				SelectedColor = BLUE;
-				break;
-			case COLOR_MENU_ITM_GREEN:
-				SelectedColor = GREEN;
-				break;
-			case COLOR_MENU_ITM_LAVENDER:
-				SelectedColor = LAVENDER;
-				break;
 			case COLOR_MENU_ITM_ORANGE:
 				SelectedColor = ORANGE;
-				break;
-			case COLOR_MENU_ITM_PINK:
-				SelectedColor = PINK;
-				break;
-			case COLOR_MENU_ITM_SKY:
-				SelectedColor = SKY;
 				break;
 			case COLOR_MENU_ITM_YELLOW:
 				SelectedColor = YELLOW;
 				break;
+			case COLOR_MENU_ITM_GREEN:
+				SelectedColor = GREEN;
+				break;
+			case COLOR_MENU_ITM_SKY:
+				SelectedColor = SKY;
+				break;
+			case COLOR_MENU_ITM_BLUE:
+				SelectedColor = BLUE;
+				break;
+			case COLOR_MENU_ITM_LAVENDER:
+				SelectedColor = LAVENDER;
+				break;
 			case COLOR_MENU_ITM_BASE:
 				SelectedColor = BASE;
+				break;
+			case COLOR_MENU_ITM_BLACK:
+				SelectedColor = BLACK;
 				break;
 
 			default:

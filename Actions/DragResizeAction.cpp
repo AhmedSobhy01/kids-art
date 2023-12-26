@@ -24,7 +24,7 @@ bool DragResizeAction::Execute()
 	}
 	Figure->IncrementReference();
 
-	pOut->PrintMessage("DragMove: Drag the selected shape to resize");
+	pOut->PrintMessage("Drag Resize: Drag the selected shape to resize");
 
 	bool ButtonDown = false;
 	while (!ButtonDown)

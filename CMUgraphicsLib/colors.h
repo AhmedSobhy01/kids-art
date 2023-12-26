@@ -24,6 +24,7 @@ public:
 	friend ostream &operator<<(ostream &, const color &);
 	friend istream &operator>>(istream &, color &);
 	std::string ReturnColor();
+	color operator-(unsigned char) const;
 
 	// Color components.  0 = no intensity, 255 = full intensity
 	unsigned char ucRed;
@@ -186,7 +187,7 @@ const color MAUVE = color(136, 57, 239);
 const color RED = color(210, 15, 57);
 const color MAROON = color(230, 69, 83);
 const color ORANGE = color(254, 100, 11);
-const color YELLOW = color(223, 142, 29);
+const color YELLOW = color(247, 247, 45);
 const color GREEN = color(64, 160, 43);
 const color TEAL = color(23, 146, 153);
 const color SKY = color(4, 165, 229);
@@ -205,5 +206,6 @@ const color SURFACE2 = color(172, 176, 190);
 const color BASE = color(239, 241, 245);
 const color MANTLE = color(230, 233, 239);
 const color CRUST = color(220, 224, 232);
+const color HIGHLIGHTCOLOR = color(255, 0, 255);
 
 #endif // COLOR_H
