@@ -59,6 +59,7 @@ bool LoadAction::Execute()
 		FileInputStream.close();
 		return 1;
 	}
+	UI.BackgroundColor = UI.BackgroundColor - 5;
 	pOut->PrintMessage("Please Enter a Valid File Name");
 	return 0;
 }

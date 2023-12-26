@@ -30,12 +30,16 @@ add_executable(kids_art
         Actions/ChangeFillColorAction.h
         Actions/ChangeOutlineColorAction.cpp
         Actions/ChangeOutlineColorAction.h
+        Actions/ChangeBorderWidthAction.cpp
+        Actions/ChangeBorderWidthAction.h
         Actions/ClearAllAction.cpp
         Actions/ClearAllAction.h
         Actions/DeleteAction.cpp
         Actions/DeleteAction.h
         Actions/DragMoveAction.cpp
         Actions/DragMoveAction.h
+        Actions/DragResizeAction.cpp
+        Actions/DragResizeAction.h
         Actions/ExitAction.cpp
         Actions/ExitAction.h
         Actions/LoadAction.cpp
@@ -48,6 +52,8 @@ add_executable(kids_art
         Actions/PickByShapeAction.h
         Actions/PickByShapeAndColorAction.cpp
         Actions/PickByShapeAndColorAction.h
+        Actions/PlayMode.cpp
+        Actions/PlayMode.h
         Actions/PlayRecordingAction.cpp
         Actions/PlayRecordingAction.h
         Actions/RedoAction.cpp
