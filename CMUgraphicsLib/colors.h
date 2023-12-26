@@ -24,7 +24,7 @@ public:
 
 	friend ostream &operator<<(ostream &, const color &); // Write a color to the user (as a string)
 	friend istream &operator>>(istream &, color &);		  // Read a color from the user (as a string)
-	color operator-(unsigned char) const;				  // Subtract a value from each color component
+	color operator/(double) const;				  // Subtract a value from each color component
 
 	std::string ReturnColor() const; // Returns the color as a string
 

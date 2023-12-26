@@ -5,7 +5,7 @@ This file was last modified on 05.16.1999
 
 #include "colors.h"
 
-ostream &operator<<(ostream &OutputStream, const color &Color)
+ostream& operator<<(ostream& OutputStream, const color& Color)
 {
 	// Compare the color to each color and output the corresponding string
 	if (Color == PINK)
@@ -34,7 +34,7 @@ ostream &operator<<(ostream &OutputStream, const color &Color)
 	return OutputStream;
 }
 
-istream &operator>>(istream &InputStream, color &Color)
+istream& operator>>(istream& InputStream, color& Color)
 {
 	std::string X;
 	InputStream >> X; // Read the color as a string
@@ -76,11 +76,11 @@ bool operator!=(color a, color b)
 	return !(a == b); // Use the == operator to determine if the colors are not equal
 }
 
-color color::operator-(unsigned char c) const
+color color::operator/(double c) const
 {
-	unsigned char r = ucRed <= c ? 0 : ucRed - c;
-	unsigned char g = ucGreen <= c ? 0 : ucGreen - c;
-	unsigned char b = ucBlue <= c ? 0 : ucBlue - c;
+	int r = ucRed / c >= 255 ? 255 : ucRed / c;
+	int g = ucGreen / c >= 255 ? 255 : ucGreen / c;
+	int b = ucBlue / c >= 255 ? 255 : ucBlue / c;
 
 	return color(r, g, b);
 }
