@@ -314,7 +314,7 @@ int ApplicationManager::CountFigColor(CFigure *Fig)
 
 	for (int i = 0; i < FigList.Size(); i++) // Loop on all figures in the FigList
 	{
-		if (FigList[i]->Type() == Fig->Type() && FigList[i]->GetFillColor() == Fig->GetFillColor()) // If the figure has the same type and color, increment the counter
+		if (*(FigList[i]) == *Fig) // If the figure has the same type and color, increment the counter
 			Counter++;
 	}
 
