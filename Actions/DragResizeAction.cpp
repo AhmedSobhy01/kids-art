@@ -50,8 +50,6 @@ bool DragResizeAction::Execute()
 		}
 		CurrentCorner = NewCorner;
 	}
-	Figure->SetSelected(false);
-	pManager->SetSelected(NULL);
 	pOut->ClearStatusBar();
 	return true;
 }

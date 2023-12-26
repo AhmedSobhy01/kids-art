@@ -60,8 +60,6 @@ bool DragMoveAction::Execute()
 		}
 		CurrentCenter = NewCenter;
 	}
-	Figure->SetSelected(false);
-	pManager->SetSelected(NULL);
 	pOut->ClearStatusBar();
 
 	return true;

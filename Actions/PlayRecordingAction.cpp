@@ -32,7 +32,10 @@ bool PlayRecordingAction::Execute()
 		pManager->UpdateInterface();
 		UI.PenWidth = 3;									// Default border width
 		pOut->PrintMessage("Playing Recording");
-
+		CFigure* S = pManager->GetSelected();
+		if (S != NULL)
+			S->SetSelected(false);
+		pManager->SetSelected(NULL);
 		for (int i = 0; i < RecordedActionsList.Size(); i++)
 		{
 			if (!dynamic_cast<UndoAction*>(RecordedActionsList[i]) && !dynamic_cast<RedoAction*>(RecordedActionsList[i]))		// handle undo & redo

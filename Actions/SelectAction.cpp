@@ -1,11 +1,10 @@
 #include "SelectAction.h"
 #include "..\ApplicationManager.h"
-#include "..\Figures\CFigure.h"
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
 SelectAction::SelectAction(ApplicationManager* pApp): Action(pApp) {
-	RecordEnabled = false;
+	RecordEnabled = true;
 }
 
 void SelectAction::ReadActionParameters() {
@@ -13,20 +12,18 @@ void SelectAction::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	pOut->PrintMessage("Select: Click on a shape to select.");
 	pIn->GetPointClicked(P.x, P.y);
+	Figure = pManager->GetFigure(P.x, P.y);
 	pOut->ClearStatusBar();
 }
 
 bool SelectAction::Execute() {
 	ReadActionParameters();
-
-	CFigure* Figure = pManager->GetFigure(P.x, P.y);
 	if (Figure == NULL)
 		return false;
 
 	CFigure* S = pManager->GetSelected();
-	if (S != NULL) 
+	if (S != NULL)
 		S->SetSelected(false);
-	
 
 	pManager->SetSelected(NULL);
 	if (Figure != S) {
@@ -36,4 +33,17 @@ bool SelectAction::Execute() {
 	}
 
 	return true;
+}
+
+void SelectAction::PlayRecord() {
+
+	CFigure* S = pManager->GetSelected();
+	if (S != NULL)
+		S->SetSelected(false);
+
+	pManager->SetSelected(NULL);
+	if (Figure != S) {
+		Figure->SetSelected(true);
+		pManager->SetSelected(Figure);
+	}
 }
