@@ -50,8 +50,8 @@ void AddSquareAction::PlayRecord()
 	Figure->ChangeBorderWidth(UI.PenWidth);
 	int Size = CSquare::GetDefaultSquareSize();
 	Point P1;
-	P1.x = Center.x + Size;
-	P1.y = Center.y + Size;
+	P1.x = Center.x + Size / 2;
+	P1.y = Center.y + Size / 2;
 	Figure->SetCorner(P1, 0);
 	pManager->AddFigure(Figure);
 }
