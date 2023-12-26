@@ -2,7 +2,7 @@
 #include <cmath>
 Output::Output()
 {
-	Darken = 1.05;
+	Darken = 1.08;
 	UI.InterfaceMode = MODE_DRAW; // Sets the interface mode to draw mode
 
 	UI.width = 1250; // Sets the width of the window
