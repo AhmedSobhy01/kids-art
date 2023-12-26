@@ -71,8 +71,8 @@ void CRectangle::PrintInfo(Output *pOut)
 	std::string Info = "Rectangle: ID = " + to_string(ID);
 	Info += ", Start Point = (" + to_string(Corner1.x) + ", " + to_string(Corner1.y) + ")";
 	Info += ", End Point = (" + to_string(Corner2.x) + ", " + to_string(Corner2.y) + ")";
-	Info += ", Vertical Length = " + to_string(abs(Corner1.y - Corner2.y));
-	Info += ", Horizontal Width = " + to_string(abs(Corner1.x - Corner2.x));
+	Info += ", Length = " + to_string(abs(Corner1.y - Corner2.y));
+	Info += ", Width = " + to_string(abs(Corner1.x - Corner2.x));
 	Info += ", Outline Color: " + FigGfxInfo.DrawColor.ReturnColor();
 	Info += ", Fill Color: " + FigGfxInfo.FillColor.ReturnColor();
 	pOut->PrintMessage(Info);

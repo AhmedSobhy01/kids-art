@@ -37,8 +37,6 @@ bool ChangeOutlineColorAction::Execute()
 		Figure->ChangeDrawColor(NewColor);
 		UI.DrawColor = NewColor;
 		pOut->ClearStatusBar();
-		Figure->SetSelected(false);
-		pManager->SetSelected(NULL);
 
 		return true;
 	}
