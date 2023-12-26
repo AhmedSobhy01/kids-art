@@ -9,7 +9,6 @@ public:
 	SwitchToDrawAction(ApplicationManager *);
 
 	virtual void ReadActionParameters();
-
 	virtual bool Execute();
 };
 

@@ -8,14 +8,17 @@ class ChangeBackgroundColorAction : public UndoableAction
 {
 	color OldColor;
 	color NewColor;
+
 public:
-	ChangeBackgroundColorAction(ApplicationManager*);
+	ChangeBackgroundColorAction(ApplicationManager *);
+
 	virtual void ReadActionParameters();
 	virtual bool Execute();
+
 	virtual void PlayRecord();
 
 	virtual void Undo();
 	virtual void Redo();
 };
 
-#endif 
+#endif

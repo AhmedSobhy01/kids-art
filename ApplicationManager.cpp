@@ -236,7 +236,7 @@ void ApplicationManager::ClearRecordedActionsList()
 void ApplicationManager::SetRecordingState(bool State)
 {
 	IsRecording = State;
-	pOut->SetRecordingState(State);
+	pOut->SetRecordingState(State); // Set recording state in output class to change the record button icon
 }
 bool ApplicationManager::CanRecord() const
 {

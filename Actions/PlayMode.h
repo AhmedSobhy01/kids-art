@@ -4,24 +4,32 @@
 #include "..\ApplicationManager.h"
 #include "Action.h"
 
-class PlayMode: public Action {
-protected:
-	CFigure* RandomFigure;
-	ActionType Mode;
-	int Target;			// Target number of choices
-private:
-	CFigure* ClickedFigure;
+class PlayMode : public Action
+{
+
+	CFigure *ClickedFigure;
 	Point P;
 	bool CorrectCondition;
-	int Counter;		// Counts how many picks are made
-	int CorrectPicks;	// Counts how many correct picks are made
+	int Counter;	  // Counts how many picks are made
+	int CorrectPicks; // Counts how many correct picks are made
+
+protected:
+	CFigure *RandomFigure;
+	ActionType Mode;
+	int Target; // Target number of choices
+
 public:
-	PlayMode(ApplicationManager*);
-	bool Execute();
-	void ReadActionParameters();
-	virtual void StartingMessage() =0;
-	void FinalMessage(bool&);
-	void GetClickedAction(bool&, bool&);
+	PlayMode(ApplicationManager *);
+
+	virtual bool Execute();
+	virtual void ReadActionParameters();
+
+	virtual void StartingMessage() = 0;
+	void FinalMessage(bool &);
+
+	void GetClickedAction(bool &, bool &);
+
 	void SetCorrectCondition();
 };
+
 #endif

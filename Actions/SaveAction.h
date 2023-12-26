@@ -6,13 +6,13 @@
 
 class SaveAction : public Action
 {
-private:
 	std::string FileName;
 
 public:
 	SaveAction(ApplicationManager *);
-	void ReadActionParameters();
-	bool Execute();
+
+	virtual void ReadActionParameters();
+	virtual bool Execute();
 };
 
 #endif

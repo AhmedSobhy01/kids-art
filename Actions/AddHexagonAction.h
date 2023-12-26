@@ -6,7 +6,6 @@
 
 class AddHexagonAction : public UndoableFigureAction
 {
-private:
 	Point Center;
 	GfxInfo HexagonGfxInfo;
 
@@ -15,6 +14,7 @@ public:
 
 	virtual void ReadActionParameters();
 	virtual bool Execute();
+
 	virtual void PlayRecord();
 };
 

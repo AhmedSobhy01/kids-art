@@ -6,7 +6,6 @@
 
 class AddCircleAction : public UndoableFigureAction
 {
-private:
     Point Center;
     Point Radius;
     GfxInfo CircleGfxInfo;
@@ -16,6 +15,7 @@ public:
 
     virtual void ReadActionParameters();
     virtual bool Execute();
+
     virtual void PlayRecord();
 };
 

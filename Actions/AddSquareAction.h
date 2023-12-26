@@ -6,14 +6,15 @@
 
 class AddSquareAction : public UndoableFigureAction
 {
-private:
 	Point Center;
 	GfxInfo SquareGfxInfo;
 
 public:
 	AddSquareAction(ApplicationManager *);
+
 	virtual void ReadActionParameters();
 	virtual bool Execute();
+
 	virtual void PlayRecord();
 };
 

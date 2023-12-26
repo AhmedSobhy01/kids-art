@@ -1,13 +1,17 @@
 #ifndef CLEAR_ALL_ACTION_H
 #define CLEAR_ALL_ACTION_H
+
 #include "Action.h"
+
 class ClearAllAction : public Action
 {
 public:
 	ClearAllAction(ApplicationManager *);
-	void ReadActionParameters();
+
+	virtual void ReadActionParameters();
 	virtual bool Execute();
 
 	virtual void PlayRecord();
 };
+
 #endif

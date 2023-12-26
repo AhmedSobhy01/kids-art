@@ -9,7 +9,6 @@ public:
 	SwitchToPlayAction(ApplicationManager *);
 
 	virtual void ReadActionParameters();
-
 	virtual bool Execute();
 };
 

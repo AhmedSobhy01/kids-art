@@ -10,7 +10,6 @@ public:
 	ToggleSoundAction(ApplicationManager *);
 
 	virtual void ReadActionParameters();
-
 	virtual bool Execute();
 };
 

@@ -11,14 +11,16 @@ class DeleteAction : public UndoableAction
 
 public:
 	DeleteAction(ApplicationManager *);
+
 	virtual void ReadActionParameters();
 	virtual bool Execute();
+
 	virtual void PlayRecord();
 
 	virtual void Undo();
 	virtual void Redo();
 
-	~DeleteAction();
+	virtual ~DeleteAction();
 };
 
 #endif

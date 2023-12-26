@@ -5,6 +5,7 @@
 #include "../Figures/CFigure.h"
 #include "../ApplicationManager.h"
 
+// Base class for all undoable actions that are related to a figure since they all add & remove a figure from the list of figures
 class UndoableFigureAction : public UndoableAction
 {
 protected:
@@ -16,7 +17,7 @@ public:
 	virtual void Undo();
 	virtual void Redo();
 
-	~UndoableFigureAction();
+	virtual ~UndoableFigureAction();
 };
 
 #endif

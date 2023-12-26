@@ -2,9 +2,9 @@
 #define SELECT_ACTION_H
 
 #include "Action.h"
+
 class SelectAction : public Action
 {
-private:
     Point P;
 
 public:
