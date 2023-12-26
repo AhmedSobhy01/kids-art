@@ -43,11 +43,13 @@ bool AddTriangleAction::Execute()
 
 void AddTriangleAction::PlayRecord()
 {
-	Figure->ChangeFillColor(UI.FillColor);
-	Figure->ChangeDrawColor(UI.DrawColor);
-	Figure->ChangeBorderWidth(UI.PenWidth);
-	Figure->SetCorner(P1, 0);
-	Figure->SetCorner(P2, 1);
-	Figure->SetCorner(P3, 2);
-	pManager->AddFigure(Figure);
+	//Note: Here we don't need to set the center of the triangle
+	//as the three verticies is being set
+	Figure->ChangeFillColor(UI.FillColor);	//Update the Triangle fill color
+	Figure->ChangeDrawColor(UI.DrawColor);	//Update it's outline color
+	Figure->ChangeBorderWidth(UI.PenWidth);	//Update it's outline thickness
+	Figure->SetCorner(P1, 0);				//Sets the first vertex
+	Figure->SetCorner(P2, 1);				//Sets the second vertex
+	Figure->SetCorner(P3, 2);				//Sets the thrid vertex
+	pManager->AddFigure(Figure);			//Add the triangle to the figure list
 }

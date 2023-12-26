@@ -54,7 +54,7 @@ bool DragMoveAction::Execute()
 		Figure->SetCenter(NewCenter);
 		Err = sqrt(pow(CurrentCenter.x - NewCenter.x, 2) + pow(CurrentCenter.y - NewCenter.y, 2));
 		if (Err)
-		{ // check if it moved by a pixel before updating interface
+		{ // Check if it moved by a pixel before updating interface
 			pManager->UpdateInterface();
 		}
 		CurrentCenter = NewCenter;
