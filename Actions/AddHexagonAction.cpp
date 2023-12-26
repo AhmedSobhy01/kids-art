@@ -40,14 +40,14 @@ bool AddHexagonAction::Execute()
 
 void AddHexagonAction::PlayRecord()
 {
-	Figure->SetCenter(Center);
-	Figure->ChangeFillColor(UI.FillColor);
-	Figure->ChangeDrawColor(UI.DrawColor);
-	Figure->ChangeBorderWidth(UI.PenWidth);
-	int Size = CHexagon::GetDefaultHexagonSize();
-	Point P1;
+	Figure->SetCenter(Center);						//Sets the position of the hexagon
+	Figure->ChangeFillColor(UI.FillColor);			//Update it's fill color
+	Figure->ChangeDrawColor(UI.DrawColor);			//Update it's outline color
+	Figure->ChangeBorderWidth(UI.PenWidth);			//Update it's outline thickness
+	int Size = CHexagon::GetDefaultHexagonSize();	//Get the default hexagon size
+	Point P1;			
 	P1.x = Center.x + Size;
-	P1.y = Center.y;
-	Figure->SetCorner(P1, 0);
-	pManager->AddFigure(Figure);
+	P1.y = Center.y;								//Calcuate the corner to set the size
+	Figure->SetCorner(P1, 0);						//Sets the hexagon to the default size
+	pManager->AddFigure(Figure);					//Add the hexagon to the figure list
 }

@@ -41,14 +41,14 @@ bool AddSquareAction::Execute()
 
 void AddSquareAction::PlayRecord()
 {
-	Figure->SetCenter(Center);
-	Figure->ChangeFillColor(UI.FillColor);
-	Figure->ChangeDrawColor(UI.DrawColor);
-	Figure->ChangeBorderWidth(UI.PenWidth);
-	int Size = CSquare::GetDefaultSquareSize();
+	Figure->SetCenter(Center);					//Sets the square center
+	Figure->ChangeFillColor(UI.FillColor);		//Update it's fill color
+	Figure->ChangeDrawColor(UI.DrawColor);		//Update it's outline color
+	Figure->ChangeBorderWidth(UI.PenWidth);		//Update it's outline thickness
+	int Size = CSquare::GetDefaultSquareSize();	//Get the default square size
 	Point P1;
 	P1.x = Center.x + Size / 2;
-	P1.y = Center.y + Size / 2;
-	Figure->SetCorner(P1, 0);
-	pManager->AddFigure(Figure);
+	P1.y = Center.y + Size / 2;					//Calcuate the corner to set the size
+	Figure->SetCorner(P1, 0);					//Sets the square to the default size
+	pManager->AddFigure(Figure);				//Add the square to the figure list
 }

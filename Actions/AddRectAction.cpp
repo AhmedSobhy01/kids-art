@@ -42,10 +42,13 @@ bool AddRectAction::Execute()
 
 void AddRectAction::PlayRecord()
 {
-	Figure->ChangeFillColor(UI.FillColor);
-	Figure->ChangeDrawColor(UI.DrawColor);
-	Figure->ChangeBorderWidth(UI.PenWidth);
-	Figure->SetCorner(P1, 0);
-	Figure->SetCorner(P2, 3);
-	pManager->AddFigure(Figure);
+
+	//Note: Here we don't need to set the center of the rectangle
+	//as the two corners is being set
+	Figure->ChangeFillColor(UI.FillColor);	//Update the Rectangle fill color
+	Figure->ChangeDrawColor(UI.DrawColor);	//Update it's outline color
+	Figure->ChangeBorderWidth(UI.PenWidth);	//Update it's outline thickness
+	Figure->SetCorner(P1, 0);				//Sets the rectangle first corner
+	Figure->SetCorner(P2, 3);				//Sets the rectangle second corner
+	pManager->AddFigure(Figure);			//Add the rectangle to the figure list
 }
