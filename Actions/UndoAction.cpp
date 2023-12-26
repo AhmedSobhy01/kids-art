@@ -14,12 +14,12 @@ bool UndoAction::Execute()
 {
 	UndoableActionStack &UndoableActions = pManager->GetUndoableActionsStack();
 
-	if (UndoableActions.Empty()) // If there are no actions to undo
+	if (UndoableActions.Empty()) // Nothing to undo
 	{
 		Output *pOut = pManager->GetOutput();
 		Input *pIn = pManager->GetInput();
 
-		pOut->PrintMessage("No actions to undo.");
+		pOut->PrintMessage("Nothing to undo.");
 
 		return false;
 	}
