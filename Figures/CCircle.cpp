@@ -40,7 +40,7 @@ void CCircle::Save(ofstream &FileOutputStream)
 	if (FileOutputStream.is_open())
 	{
 		FileOutputStream << "CIRCLE"
-						 << " " << ID << " " << Center.x << " " << Center.y << " " << Radius.x << " " << Radius.y << " " << FigGfxInfo.DrawColor << " " << FigGfxInfo.FillColor << endl; // added figure size to handle resized figures
+						 << " " << ID << " " << Center.x << " " << Center.y << " " << Radius.x << " " << Radius.y << " " << FigGfxInfo.DrawColor << " " << FigGfxInfo.FillColor << " " << FigGfxInfo.BorderWidth << endl; // added figure size to handle resized figures
 		return;
 	}
 }
@@ -49,10 +49,9 @@ void CCircle::Load(ifstream &FileInputStream)
 {
 	if (FileInputStream.is_open())
 	{
-		FileInputStream >> ID >> Center.x >> Center.y >> Radius.x >> Radius.y >> FigGfxInfo.DrawColor >> FigGfxInfo.FillColor;
+		FileInputStream >> ID >> Center.x >> Center.y >> Radius.x >> Radius.y >> FigGfxInfo.DrawColor >> FigGfxInfo.FillColor >> FigGfxInfo.BorderWidth;
 		if (FigGfxInfo.FillColor == TRANSPARENT_COLOR)
 			FigGfxInfo.IsFilled = false;
-		FigGfxInfo.BorderWidth = 3;
 		return;
 	}
 }

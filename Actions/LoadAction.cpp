@@ -31,11 +31,10 @@ bool LoadAction::Execute()
 		pOut->PrintMessage("Opened Load File Successfully");
 		std::string x;
 		CFigure *Figure;
-		UI.PenWidth = 3;
 		pOut->CreateDrawToolBar(); // To update border width icon
 		while (!FileInputStream.eof())
 		{
-			FileInputStream >> UI.DrawColor >> UI.FillColor >> UI.BackgroundColor;
+			FileInputStream >> UI.DrawColor >> UI.FillColor >> UI.BackgroundColor >> UI.PenWidth;
 			int count;
 			FileInputStream >> count;
 			for (int i = 0; i <= count; i++) // load all figures
