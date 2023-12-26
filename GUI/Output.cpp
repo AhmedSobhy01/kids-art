@@ -51,7 +51,6 @@ Input *Output::CreateInput() const
 //======================================================================================//
 //								Interface Functions										//
 //======================================================================================//
-
 void Output::UpdateInterface()
 {
 	if (UpdateToolBar) // If the toolbar should be updated
@@ -90,7 +89,6 @@ window *Output::CreateWind(int w, int h, int x, int y) const
 //======================================================================================//
 //								Color Menu Functions									//
 //======================================================================================//
-
 void Output::CreateColorMenuWind(int x, bool withTransparent)
 {
 	int xPos = UI.wx + x; // x position of the color menu window
@@ -162,7 +160,6 @@ window *Output::GetColorMenuWind() const
 //======================================================================================//
 //								Toolbar Functions										//
 //======================================================================================//
-
 void Output::CreatePlayToolBar() const
 {
 	UI.InterfaceMode = MODE_PLAY; // Sets the interface mode to play mode
@@ -235,7 +232,6 @@ void Output::CreateDrawToolBar() const
 //======================================================================================//
 //								Status Bar Functions									//
 //======================================================================================//
-
 void Output::CreateStatusBar() const
 {
 	pWind->SetPen(UI.StatusBarColor, 1);										  // Sets the pen color
@@ -265,7 +261,6 @@ void Output::ClearStatusBar()
 //======================================================================================//
 //								Play Action Sound Functions								//
 //======================================================================================//
-
 void Output::SetPlayActionSoundState(bool State)
 {
 	PlayActionSoundEnabled = State; // Sets the state of the play action sound
@@ -281,7 +276,6 @@ void Output::SetRecordingState(bool State)
 //======================================================================================//
 //								UI Manipulation Functions								//
 //======================================================================================//
-
 void Output::ClearDrawArea() const
 {
 	pWind->SetPen(UI.BackgroundColor - 5, 1);											 // Sets the pen color
@@ -292,7 +286,6 @@ void Output::ClearDrawArea() const
 //======================================================================================//
 //								UI Getter Functions										//
 //======================================================================================//
-
 color Output::GetCurrentDrawColor() const // Get current drawing color
 {
 	return UI.DrawColor;
@@ -311,7 +304,6 @@ int Output::GetCurrentPenWidth() const // Get current pen width
 //======================================================================================//
 //								Figures Drawing Functions								//
 //======================================================================================//
-
 void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool Selected)
 {
 	color DrawingColor;
