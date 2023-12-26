@@ -35,29 +35,34 @@ bool LoadAction::Execute()
 		std::string x;
 		CFigure *Figure;
 		pOut->CreateDrawToolBar(); // To update border width icon
+		UI.PenWidth = 3;
+		UI.BackgroundColor = BASE;
 		while (!FileInputStream.eof())
 		{
-			FileInputStream >> UI.DrawColor >> UI.FillColor >> UI.BackgroundColor >> UI.PenWidth;
+			FileInputStream >> UI.DrawColor >> UI.FillColor;
+			if (FileInputStream.peek() != '\n') FileInputStream >> UI.BackgroundColor;
+			if (FileInputStream.peek() != '\n') FileInputStream >> UI.PenWidth;
 			int count;
 			FileInputStream >> count;
 			for (int i = 0; i < count; i++) // load all figures
 			{
 				FileInputStream >> x;
-				if (x == "RECTANGLE")
+				if (x == "RECTANGLE" || x == "RECT")
 					Figure = new CRectangle();
 				else if (x == "SQUARE")
 					Figure = new CSquare();
-				else if (x == "CIRCLE")
+				else if (x == "CIRCLE" || x == "CIRC")
 					Figure = new CCircle();
-				else if (x == "HEXAGON")
+				else if (x == "HEXAGON" || x == "HEXA")
 					Figure = new CHexagon();
-				else if (x == "TRIANGLE")
+				else if (x == "TRIANGLE" || x == "TRIANG")
 					Figure = new CTriangle();
 				Figure->Load(FileInputStream);
 				pManager->AddFigure(Figure);
 			}
 			FileInputStream >> x;
 		}
+		if (UI.BackgroundColor == TRANSPARENT_COLOR)UI.BackgroundColor = BASE;
 		FileInputStream.close();
 		return 1;
 	}

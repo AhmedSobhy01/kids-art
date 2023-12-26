@@ -47,9 +47,11 @@ void CCircle::Save(ofstream &FileOutputStream)
 
 void CCircle::Load(ifstream &FileInputStream)
 {
+	FigGfxInfo.BorderWidth = 3;
 	if (FileInputStream.is_open())
 	{
-		FileInputStream >> ID >> Center.x >> Center.y >> Radius.x >> Radius.y >> FigGfxInfo.DrawColor >> FigGfxInfo.FillColor >> FigGfxInfo.BorderWidth;
+		FileInputStream >> ID >> Center.x >> Center.y >> Radius.x >> Radius.y >> FigGfxInfo.DrawColor >> FigGfxInfo.FillColor;
+		if (FileInputStream.peek() != '\n')FileInputStream >> FigGfxInfo.BorderWidth;
 		if (FigGfxInfo.FillColor == TRANSPARENT_COLOR)
 			FigGfxInfo.IsFilled = false;
 		return;
