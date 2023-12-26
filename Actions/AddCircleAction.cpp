@@ -41,10 +41,10 @@ bool AddCircleAction::Execute()
 
 void AddCircleAction::PlayRecord()
 {
-	Figure->SetCenter(Center);				//Sets the position of the circle
-	Figure->ChangeFillColor(UI.FillColor);	//Update it's fill color
-	Figure->ChangeDrawColor(UI.DrawColor);	//Update it's outline color
-	Figure->ChangeBorderWidth(UI.PenWidth);	//Update it's outline thicknes
-	Figure->SetCorner(Radius, 0);			//Sets the original size of the circle
-	pManager->AddFigure(Figure);			//Add the circle to the figure list
+	Figure->SetCenter(Center);				// Reset Position to initial position
+	Figure->ChangeFillColor(UI.FillColor);	// Reset Fill color to initial color
+	Figure->ChangeDrawColor(UI.DrawColor);	// Reset Outline color to initial color
+	Figure->ChangeBorderWidth(UI.PenWidth);	// Reset Border Width to initial Width
+	Figure->SetCorner(Radius, 0);			// Reset Size to initial Size
+	pManager->AddFigure(Figure);			// Add the circle to the figure list
 }
