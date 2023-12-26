@@ -335,7 +335,7 @@ int ApplicationManager::CountFigure(CFigure *fig)
 
 	for (int i = 0; i < FigList.Size(); i++) // Loop on all figures in the FigList
 	{
-		if (FigList[i] == fig) // If the figure has the same type, increment the counter
+		if (FigList[i]->Type() == fig->Type()) // If the figure has the same type, increment the counter
 			Counter++;
 	}
 
