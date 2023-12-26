@@ -79,9 +79,11 @@ void CTriangle::Save(ofstream &FileOutputStream)
 
 void CTriangle::Load(ifstream &FileInputStream)
 {
+	FigGfxInfo.BorderWidth = 3;
 	if (FileInputStream.is_open())
 	{
-		FileInputStream >> ID >> P1.x >> P1.y >> P2.x >> P2.y >> P3.x >> P3.y >> FigGfxInfo.DrawColor >> FigGfxInfo.FillColor >> FigGfxInfo.BorderWidth;
+		FileInputStream >> ID >> P1.x >> P1.y >> P2.x >> P2.y >> P3.x >> P3.y >> FigGfxInfo.DrawColor >> FigGfxInfo.FillColor;
+		if (FileInputStream.peek() != '\n')FileInputStream >> FigGfxInfo.BorderWidth;
 		if (FigGfxInfo.FillColor == TRANSPARENT_COLOR)
 			FigGfxInfo.IsFilled = false;
 		return;

@@ -15,7 +15,7 @@ CHexagon::CHexagon(Point Center, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 	TypeName = "Hexagon";
 }
 
-void CHexagon::Draw(Output *pOut)
+void CHexagon::Draw(Output* pOut)
 {
 	pOut->DrawHexagon(Center, HexagonSize, FigGfxInfo, Selected);
 }
@@ -66,28 +66,31 @@ void CHexagon::SetCenter(Point c)
 	this->Center = c;
 }
 
-void CHexagon::Save(ofstream &FileOutputStream)
+void CHexagon::Save(ofstream& FileOutputStream)
 {
 	if (FileOutputStream.is_open())
 	{
 		FileOutputStream << "HEXAGON"
-						 << " " << ID << " " << Center.x << " " << Center.y << " " << HexagonSize << " " << FigGfxInfo.DrawColor << " " << FigGfxInfo.FillColor << " " << FigGfxInfo.BorderWidth << endl; // added figure size to handle resized figures
+			<< " " << ID << " " << Center.x << " " << Center.y << " " << FigGfxInfo.DrawColor << " " << FigGfxInfo.FillColor << " " << HexagonSize << " " << FigGfxInfo.BorderWidth << endl; // added figure size to handle resized figures
 		return;
 	}
 }
 
-void CHexagon::Load(ifstream &FileInputStream)
+void CHexagon::Load(ifstream& FileInputStream)
 {
+	FigGfxInfo.BorderWidth = 3;
 	if (FileInputStream.is_open())
 	{
-		FileInputStream >> ID >> Center.x >> Center.y >> HexagonSize >> FigGfxInfo.DrawColor >> FigGfxInfo.FillColor >> FigGfxInfo.BorderWidth;
+		FileInputStream >> ID >> Center.x >> Center.y >> FigGfxInfo.DrawColor >> FigGfxInfo.FillColor;
+		if (FileInputStream.peek() != '\n')FileInputStream >> HexagonSize;
+		if (FileInputStream.peek() != '\n')FileInputStream >> FigGfxInfo.BorderWidth;
 		if (FigGfxInfo.FillColor == TRANSPARENT_COLOR)
 			FigGfxInfo.IsFilled = false;
 		return;
 	}
 }
 
-void CHexagon::PrintInfo(Output *pOut)
+void CHexagon::PrintInfo(Output* pOut)
 {
 	std::string Info = "Hexagon: ID = " + to_string(ID);
 	Info += ", Center = (" + to_string(Center.x) + ", " + to_string(Center.y) + ")";
@@ -97,7 +100,7 @@ void CHexagon::PrintInfo(Output *pOut)
 	pOut->PrintMessage(Info);
 }
 
-bool CHexagon::GetCorner(Point &p, int &index)
+bool CHexagon::GetCorner(Point& p, int& index)
 {
 	double angle = 2.0 * cdPi / 6.0;
 	double ErrX = 100, ErrY = 100;
@@ -113,7 +116,7 @@ bool CHexagon::GetCorner(Point &p, int &index)
 	if (ErrX < 6 && ErrY < 6)
 	{
 		index = 0;
-		p = {Center.x + HexagonSize, Center.y};
+		p = { Center.x + HexagonSize, Center.y };
 		return true;
 	}
 

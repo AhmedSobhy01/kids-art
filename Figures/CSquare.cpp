@@ -53,16 +53,19 @@ void CSquare::Save(ofstream &FileOutputStream)
 	if (FileOutputStream.is_open())
 	{
 		FileOutputStream << "SQUARE"
-						 << " " << ID << " " << Center.x << " " << Center.y << " " << SquareSize << " " << FigGfxInfo.DrawColor << " " << FigGfxInfo.FillColor << " " << FigGfxInfo.BorderWidth << endl; // added figure size to handle resized figures
+						 << " " << ID << " " << Center.x << " " << Center.y << " " << FigGfxInfo.DrawColor << " " << FigGfxInfo.FillColor << " " << SquareSize <<" " << FigGfxInfo.BorderWidth << endl; // added figure size to handle resized figures
 		return;
 	}
 }
 
 void CSquare::Load(ifstream &FileInputStream)
 {
+	FigGfxInfo.BorderWidth = 3;
 	if (FileInputStream.is_open())
 	{
-		FileInputStream >> ID >> Center.x >> Center.y >> SquareSize >> FigGfxInfo.DrawColor >> FigGfxInfo.FillColor >> FigGfxInfo.BorderWidth;
+		FileInputStream >> ID >> Center.x >> Center.y >> FigGfxInfo.DrawColor >> FigGfxInfo.FillColor;
+		if (FileInputStream.peek() != '\n')FileInputStream >> SquareSize;
+		if (FileInputStream.peek() != '\n')FileInputStream >> FigGfxInfo.BorderWidth;
 		if (FigGfxInfo.FillColor == TRANSPARENT_COLOR)
 			FigGfxInfo.IsFilled = false;
 		return;
