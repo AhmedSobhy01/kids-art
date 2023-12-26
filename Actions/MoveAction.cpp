@@ -29,8 +29,6 @@ bool MoveAction::Execute() {
 	Figure->IncrementReference();
 	OldCenter = Figure->GetCenter();
 	Figure->SetCenter(NewCenter);
-	Figure->SetSelected(false);
-	pManager->SetSelected(NULL);
 	return true;
 }
 
